@@ -25,9 +25,6 @@
       };
 
       configuration = { pkgs, ... }: {
-        services.nix-daemon.enable = true;
-        nix.package = pkgs.nix;
-
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
         system.stateVersion = 4;
@@ -35,11 +32,20 @@
     in
     {
       darwinConfigurations = {
-        personal = darwin.lib.darwinSystem {
+        private = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          inherit specialArgs;
 
           modules = [
             configuration
+            ./modules/overlays.nix
+            ./hosts/aoba
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.users.aoba = import ./home/darwin;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
           ];
         };
 

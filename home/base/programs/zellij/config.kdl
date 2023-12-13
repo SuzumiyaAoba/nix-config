@@ -1,0 +1,6 @@
+default_shell "nu"
+
+keybinds {
+  normal clear-defaults=true {
+  }
+}

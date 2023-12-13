@@ -1,0 +1,4 @@
+[tasks.format]
+description = "Run formatter"
+command = "nix"
+args = ["fmt"]
