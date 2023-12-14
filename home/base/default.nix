@@ -5,6 +5,7 @@
     ./shell
     ./terminal
     ./programs
+    ./fonts.nix
   ];
 
   home = {
