@@ -21,8 +21,8 @@
 
       options = {
         navigatge = true;
-        light = true;
-        syntax-theme = "GitHub";
+        light = false;
+        syntax-theme = "gruvbox-dark";
         side-by-side = true;
         line-numbers = true;
         hyperlinks = true;

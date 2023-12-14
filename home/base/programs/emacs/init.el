@@ -17,6 +17,10 @@
 
 (use-package emacs
   :init
+  (scroll-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
@@ -88,10 +92,15 @@
 ;; 	doom-themes-enable-italic t)
 ;;   (load-theme 'doom-one t))
 
-(use-package one-themes
+;; (use-package one-themes
+;;   :straight t
+;;   :config
+;;   (load-theme 'one-light t))
+
+(use-package gruvbox-theme
   :straight t
   :config
-  (load-theme 'one-light t))
+  (load-theme 'gruvbox-dark-hard t))
 
 (use-package doom-modeline
   :straight t

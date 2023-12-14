@@ -4,3 +4,5 @@ keybinds {
   normal clear-defaults=true {
   }
 }
+
+theme "gruvbox-dark"

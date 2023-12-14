@@ -3,11 +3,12 @@
 {
   imports = [
     ./zellij
-    ./starship.nix
+    ./starship
     
     ./emacs
 
     ./git
+    ./fzf
     ./ghq.nix
     ./eza.nix
     ./bat.nix

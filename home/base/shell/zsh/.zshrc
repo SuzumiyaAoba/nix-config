@@ -7,3 +7,4 @@ fi
 eval "$(starship init zsh)"
 
 source "$HOME/.config/zsh/alias.zsh"
+source "$HOME/.config/zsh/keybinds.zsh"

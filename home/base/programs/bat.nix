@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  programs.zsh.enable = true;
+  programs.bat.enable = true;
 }
