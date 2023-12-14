@@ -13,5 +13,9 @@
     ./eza.nix
     ./bat.nix
     ./ripgrep.nix
+
+    ./volta.nix
+    ./bun.nix
+    ./deno.nix
   ];
 }
