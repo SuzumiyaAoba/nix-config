@@ -6,6 +6,7 @@
     ./starship
     
     ./emacs
+    ./vscode
 
     ./git
     ./fzf
@@ -13,9 +14,13 @@
     ./eza.nix
     ./bat.nix
     ./ripgrep.nix
+    ./fd.nix
+    ./bottom.nix
+    ./jq.nix
+    ./xsv.nix
+    ./csview.nix
+    ./tig
 
-    ./volta.nix
-    ./bun.nix
-    ./deno.nix
+    ./languages
   ];
 }
