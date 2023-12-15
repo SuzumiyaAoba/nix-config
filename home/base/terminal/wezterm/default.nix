@@ -17,5 +17,6 @@
 
   home.file = {
     ".config/wezterm/config.lua".source = ./config.lua;
+    ".config/wezterm/keybinds.lua".source = ./keybinds.lua;
   };
 }
