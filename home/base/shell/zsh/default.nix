@@ -32,8 +32,7 @@
       [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
       source "''${ZINIT_HOME}/zinit.zsh"
 
-      source "$HOME/.config/zsh/alias.zsh"
-      source "$HOME/.config/zsh/keybinds.zsh"
+      source "$HOME/.config/zsh/init.zsh"
     '';
   };
 
