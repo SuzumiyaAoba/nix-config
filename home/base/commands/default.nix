@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ./starship
-    
     ./git
     ./fzf
     ./ghq.nix

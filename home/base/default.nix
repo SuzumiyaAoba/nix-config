@@ -5,7 +5,8 @@
     ./shell
     ./terminal
     ./commands
-    ./programs
+    ./languages
+    ./editor
     ./fonts.nix
   ];
 
