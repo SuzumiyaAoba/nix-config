@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./gui
+    ./jetbrains.nix
   ];
 }

@@ -7,6 +7,7 @@
     ./commands
     ./languages
     ./editor
+    ./ide
     ./fonts.nix
   ];
 
