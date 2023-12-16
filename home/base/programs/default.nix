@@ -21,6 +21,10 @@
     ./xsv.nix
     ./csview.nix
     ./tig
+    ./silicon.nix
+    ./sd.nix
+    ./zoxide.nix
+    ./dust.nix
 
     ./languages
   ];
