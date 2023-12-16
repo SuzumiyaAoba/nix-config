@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.zsh = {
@@ -25,18 +25,13 @@
       enable = true;
     };
     autocd = true;
-    
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; }
-        { name = "zdharma/fast-syntax-highlighting"; }
-        { name = "agkozak/zsh-z"; }
-        { name = "plugins/git"; tags = [ from:oh-my-zsh ]; }
-      ];
-    };
 
     initExtra = ''
+      ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
+      [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+      [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+      source "''${ZINIT_HOME}/zinit.zsh"
+
       source "$HOME/.config/zsh/alias.zsh"
       source "$HOME/.config/zsh/keybinds.zsh"
     '';
