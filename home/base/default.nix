@@ -4,6 +4,7 @@
   imports = [
     ./shell
     ./terminal
+    ./commands
     ./programs
     ./fonts.nix
   ];
