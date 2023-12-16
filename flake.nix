@@ -39,6 +39,7 @@
           modules = [
             configuration
             ./modules/overlays.nix
+            ./modules/darwin
             ./hosts/aoba
             home-manager.darwinModules.home-manager
             {
