@@ -10,6 +10,7 @@ fi
 ## grep
 if [[ $(command -v rg) ]]; then
   alias grep='rg'
+  alias rg="rg --hidden --glob '!.git'"
 fi
 
 ## cat

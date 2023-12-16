@@ -184,7 +184,9 @@
   :straight t
   :defer t
   :commands (consult-ghq-find)
-  :bind (("C-c C-g" . consult-ghq-find)))
+  :bind (("C-c C-g" . consult-ghq-switch-project-function))
+  :custom
+  (consult-ghq-switch-project-function #'projectile-switch-project))
 
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
