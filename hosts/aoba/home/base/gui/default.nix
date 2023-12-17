@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./programs
-    ./gui
+    ./1password.nix
   ];
 }
