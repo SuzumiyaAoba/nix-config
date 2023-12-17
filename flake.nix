@@ -61,7 +61,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.aoba = import ./hosts/work/home;
+              home-manager.users.work = import ./hosts/work/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/work
