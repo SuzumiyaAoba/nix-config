@@ -25,6 +25,7 @@
       "homebrew/cask-fonts"
       "homebrew/services"
       "homebrew/cask-versions"
+      "sdkman/tap"
     ];
   };
 

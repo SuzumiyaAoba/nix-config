@@ -32,6 +32,10 @@
       [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
       source "''${ZINIT_HOME}/zinit.zsh"
 
+     if [[ $(uname -m) == 'arm64' ]]; then
+       eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
+
       source "$HOME/.config/zsh/init.zsh"
     '';
   };
