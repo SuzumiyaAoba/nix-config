@@ -50,6 +50,24 @@
           ];
         };
 
+        work = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          inherit specialArgs;
+
+          modules = [
+            configuration
+            ./modules/overlays.nix
+            ./modules/darwin
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.users.aoba = import ./hosts/work/home;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+            ./hosts/work
+          ];
+        };
+
         darwinPackages = self.darwinConfigurations.personal.pkgs;
       };
     };

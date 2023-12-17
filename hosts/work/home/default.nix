@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ./sdkman.nix
+    ../../../home/darwin
   ];
 }
