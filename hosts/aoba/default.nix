@@ -1,5 +1,7 @@
 { pkgs, ... }: {
-  imports = [ ../../modules/darwin ];
+  imports = [
+    ../../modules/darwin
+  ];
 
   users.users.aoba = {
     home = "/Users/aoba";

@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./coreutils.nix
     ./git
     ./fzf
     ./ghq.nix
