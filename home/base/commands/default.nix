@@ -13,12 +13,8 @@
     ./tree.nix
     ./bottom.nix
     ./jq.nix
-    ./xsv.nix
-    ./csview.nix
     ./tig
-    ./silicon.nix
     ./sd.nix
     ./zoxide.nix
-    ./dust.nix
   ];
 }
