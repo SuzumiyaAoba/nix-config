@@ -6,6 +6,7 @@ source "$HOME/.config/zsh/keybinds.zsh"
 bin=(
     "volta"
     "sdkman"
+    "rancher"
 )
 
 for filename in $bin; do
