@@ -4,7 +4,7 @@ local keybind = require "keybinds"
 
 return {
   font = wezterm.font("HackGen Console NF"),
-  font_size = 16,
+  font_size = 18,
 
   default_prog = { "zellij" },
 
