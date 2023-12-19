@@ -18,7 +18,14 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, nixpkgs, darwin, home-manager, emacs-overlay, ... }@inputs:
+  outputs =
+    { self
+    , nixpkgs
+    , darwin
+    , home-manager
+    , emacs-overlay
+    , ...
+    }@inputs:
     let
       specialArgs = {
         inherit emacs-overlay;
@@ -43,10 +50,10 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.aoba = import ./hosts/aoba/home;
+              home-manager.users.private = import ./hosts/private/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
-            ./hosts/aoba
+            ./hosts/private
           ];
         };
 
