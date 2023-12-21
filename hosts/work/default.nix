@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, USERNAME, ... }: {
   imports = [
     ../../modules/darwin
   ];
 
-  users.users.work = {
-    home = "/Users/${builtins.getEnv "USER"}";
+  users.users.${USERNAME} = {
+    home = "/Users/${USERNAME}";
   };
 }

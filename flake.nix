@@ -27,8 +27,11 @@
     , ...
     }@inputs:
     let
+      USERNAME = builtins.getEnv "USER";
+      
       specialArgs = {
         inherit emacs-overlay;
+        inherit USERNAME;
       };
 
       configuration = { pkgs, ... }: {
@@ -50,7 +53,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.private = import ./hosts/private/home;
+              home-manager.users.${USERNAME} = import ./hosts/private/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/private
@@ -68,7 +71,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.work = import ./hosts/work/home;
+              home-manager.users.${USERNAME} = import ./hosts/work/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/work
