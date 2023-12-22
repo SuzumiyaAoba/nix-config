@@ -38,9 +38,12 @@
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
         system.stateVersion = 4;
+
+        nix.settings = {
+          experimental-features = [ "nix-command" "flakes" ];
+        };
       };
-    in
-    {
+    in {
       darwinConfigurations = {
         private = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -77,26 +80,7 @@
             ./hosts/work
           ];
         };
-
-        darwinPackages = self.darwinConfigurations.personal.pkgs;
       };
     };
-
-  nixConfig = {
-    experimental-features = [ "nix-command" "flakes" ];
-    auto-optimize-store = true;
-
-    eval-cache = true;
-
-    substituters = [
-      "https://cache.nixos.org/"
-    ];
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
 }
 
