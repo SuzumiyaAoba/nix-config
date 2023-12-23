@@ -27,11 +27,14 @@
     , ...
     }@inputs:
     let
-      USERNAME = builtins.getEnv "USER";
-      
+      systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      username = builtins.getEnv "USER";
+
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+
       specialArgs = {
         inherit emacs-overlay;
-        inherit USERNAME;
+        inherit username;
       };
 
       configuration = { pkgs, ... }: {
@@ -43,7 +46,8 @@
           experimental-features = [ "nix-command" "flakes" ];
         };
       };
-    in {
+    in
+    {
       darwinConfigurations = {
         private = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -56,7 +60,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.${USERNAME} = import ./hosts/private/home;
+              home-manager.users.${username} = import ./hosts/private/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/private
@@ -74,13 +78,15 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.${USERNAME} = import ./hosts/work/home;
+              home-manager.users.${username} = import ./hosts/work/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/work
           ];
         };
       };
+
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
     };
 }
 
