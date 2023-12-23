@@ -16,5 +16,6 @@
     ./tig
     ./sd.nix
     ./zoxide.nix
+    ./cargo-make.nix
   ];
 }
