@@ -2,3 +2,16 @@
 description = "Run formatter"
 command = "nix"
 args = ["fmt"]
+
+[tasks."work:apply"]
+extend = "darwin:apply"
+env = { NIX_DARWIN_CONFIG = "work" }
+
+[tasks."private:apply"]
+extend = "darwin:apply"
+env = { NIX_DARWIN_CONFIG = "private" }
+
+[tasks."darwin:apply"]
+script = '''
+nix run nix-darwin -- switch --flake .#${NIX_DARWIN_CONFIG} --impure
+'''
