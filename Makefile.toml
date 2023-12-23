@@ -15,3 +15,14 @@ env = { NIX_DARWIN_CONFIG = "private" }
 script = '''
 nix run nix-darwin -- switch --flake .#${NIX_DARWIN_CONFIG} --impure
 '''
+
+[tasks.update]
+command = "nix"
+args = ["flake", "lock", "--update-input", "nixpkgs"]
+
+[tasks.gc]
+script = '''
+sudo nix profile wipe-history --extra-experimental-features 'nix-command flakes' --profile /nix/var/nix/profiles/system --older-than 7d
+
+sudo nix store gc --debug --extra-experimental-features 'nix-command flakes'
+'''
