@@ -15,8 +15,34 @@
 (straight-use-package 'use-package)
 (straight-use-package 'org)
 
+;; see: https://minosjp.hatenablog.com/entry/2020/12/03/221536
+(defvar my-gui-setup-hook nil
+  "List of functions to call at initializing Emacs as GUI.")
+
+(defun my-func-called-at-gui-initialization (&optional frame)
+  "Function called at GUI initialization."
+  (unless frame (setq frame (selected-frame)))
+  (with-selected-frame frame
+    (when (display-graphic-p)
+      (run-hooks 'my-gui-setup-hook)
+      (modify-frame-parameters frame default-frame-alist)
+      (remove-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization))))
+
+(defun my-gui-setup ()
+  "Setup if Emacs is running on GUI."
+  (add-hook 'my-gui-setup-hook
+	    (lambda()
+              (scroll-bar-mode -1)
+	      (tool-bar-mode -1)
+              (menu-bar-mode -1)
+))
+  (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization t)
+  (my-func-called-at-gui-initialization))
+
 (use-package emacs
   :init
+  (add-hook 'after-init-hook '#my-gui-setup)
+  
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
