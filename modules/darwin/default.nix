@@ -31,5 +31,6 @@
 
   imports = [
     ./base
+    ./keyboard.nix
   ];
 }
