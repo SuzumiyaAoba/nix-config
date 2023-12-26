@@ -7,13 +7,13 @@ My Nix configuration.
 ### for Private
 
 ```shell
-nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .#private --impure
+makers private:apply
 ```
 
 ### for Work
 
 ```shell
-nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch --flake .#work --impure
+makers private:apply
 ```
 
 ### format

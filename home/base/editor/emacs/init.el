@@ -36,12 +36,12 @@
 	      (tool-bar-mode -1)
               (menu-bar-mode -1)
 ))
-  (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization t)
+  (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization)
   (my-func-called-at-gui-initialization))
 
 (use-package emacs
   :init
-  (add-hook 'after-init-hook '#my-gui-setup)
+  (add-hook 'after-init-hook #'my-gui-setup)
   
   (scroll-bar-mode -1)
   (tool-bar-mode -1)
