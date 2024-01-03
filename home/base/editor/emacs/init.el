@@ -345,7 +345,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package projectile
   :straight t
   :bind (:map projectile-mode-map
-	      ("M-p" . projectile-command-map))
+	      ("C-c p" . projectile-command-map))
   :hook ((emacs-startup . projectile-mode))
   :custom
   (projectile-generic-dommand "fd . -0 --type f --color=never"))
@@ -416,6 +416,9 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 ;; modes
 ;;
 
+(use-package aggressive-indent
+  :straight t)
+
 (use-package markdown-mode
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
@@ -425,7 +428,8 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package paredit
   :straight t
-  :hook ((emacs-lisp-mode . enable-paredit-mode)))
+  :hook ((emacs-lisp-mode . enable-paredit-mode)
+         (clojure-mode . enable-paredit-mode)))
 
 (use-package typescript-mode
   :straight t
@@ -450,6 +454,13 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package zig-mode
   :straight t
   :mode (("\\.zig\\'" . zig-mode)))
+
+(use-package clojure-mode
+  :straight t
+  :hook ((clojure-mode . aggressive-indent-mode)))
+
+(use-package cider
+  :straight t)
 
 (use-package scala-mode
   :straight t
