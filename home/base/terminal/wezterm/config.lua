@@ -13,6 +13,8 @@ return {
 
   enable_tab_bar = false,
 
+  audible_bell = "Disabled",
+
   disable_default_key_bindings = true,
   keys = keybind.keys,
 }
