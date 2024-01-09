@@ -1,5 +1,6 @@
 setopt no_beep
 
+source "$HOME/.config/zsh/plugins.zsh"
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"
 
