@@ -7,9 +7,9 @@ args = ["fmt"]
 extend = "darwin:apply"
 env = { NIX_DARWIN_CONFIG = "work" }
 
-[tasks."private:apply"]
+[tasks."private-aarch64:apply"]
 extend = "darwin:apply"
-env = { NIX_DARWIN_CONFIG = "private" }
+env = { NIX_DARWIN_CONFIG = "private-aarch64" }
 
 [tasks."darwin:apply"]
 script = '''

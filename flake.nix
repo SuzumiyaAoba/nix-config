@@ -49,7 +49,7 @@
     in
     {
       darwinConfigurations = {
-        private = darwin.lib.darwinSystem {
+        private-aarch64 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
 
@@ -57,8 +57,24 @@
             configuration
             ./modules/overlays.nix
             ./modules/darwin
-            home-manager.darwinModules.home-manager
-            {
+            home-manager.darwinModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.users.${username} = import ./hosts/private/home/aarch64;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+            ./hosts/private/aarch64.nix
+          ];
+        };
+
+        private-x86_64 = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          inherit specialArgs;
+
+          modules = [
+            configuration
+            ./modules/overlays.nix
+            ./modules/darwin
+            home-manager.darwinModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.users.${username} = import ./hosts/private/home;
               home-manager.extraSpecialArgs = specialArgs;

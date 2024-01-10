@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ../../base
+
     ./gui
   ];
 }

@@ -1,8 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ../../../home/darwin
-    ./base
-  ];
-}

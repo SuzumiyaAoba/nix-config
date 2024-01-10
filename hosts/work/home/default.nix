@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ../../../home/darwin
+    ../../../home/darwin/aarch64
   ];
 }

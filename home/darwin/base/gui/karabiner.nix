@@ -1,7 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  programs."karabiner-elements" = {
-    enable = true;
-  };
+  home.packages = with pkgs; [
+    karabiner-elements
+  ];
 }
