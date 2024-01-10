@@ -62,7 +62,7 @@
               home-manager.users.${username} = import ./hosts/private/home/aarch64;
               home-manager.extraSpecialArgs = specialArgs;
             }
-            ./hosts/private/aarch64.nix
+            ./hosts/private
           ];
         };
 
@@ -76,7 +76,7 @@
             ./modules/darwin
             home-manager.darwinModules.home-manager {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.${username} = import ./hosts/private/home;
+              home-manager.users.${username} = import ./hosts/private/home/x86_64;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/private
