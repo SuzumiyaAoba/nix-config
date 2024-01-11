@@ -1,6 +1,16 @@
 { ... }:
 
 {
+  imports = [
+    ./shell
+    ./terminal
+    ./commands
+    ./languages
+    ./editor
+    ./ide
+    ./fonts.nix
+  ];
+
   home = {
     stateVersion = "23.11";
 
@@ -11,13 +21,10 @@
 
   programs.home-manager.enable = true;
 
-  imports = [
-    ./shell
-    ./terminal
-    ./commands
-    ./languages
-    ./editor
-    ./ide
-    ./fonts.nix
-  ];
+  # Workaround for "unable to download 'https://git.sr.ht/~rycee": https://github.com/nix-community/home-manager/issues/4879#issuecomment-1884851745
+  manual = {
+    html.enable = false;
+    manpages.enable = false;
+    json.enable = false;
+  };
 }
