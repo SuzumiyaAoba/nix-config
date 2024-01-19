@@ -74,6 +74,7 @@
               };
             }
             ./hosts/private
+            ./hosts/private/modules/darwin
           ];
         };
 
