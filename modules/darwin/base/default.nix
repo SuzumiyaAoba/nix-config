@@ -4,6 +4,6 @@
   imports = [
     ./gui
     ./commands
-    ./ime
+    ./ime.nix
   ];
 }
