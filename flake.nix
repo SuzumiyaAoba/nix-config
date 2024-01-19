@@ -15,6 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
@@ -23,6 +25,7 @@
     , nixpkgs
     , darwin
     , home-manager
+    , nix-homebrew
     , emacs-overlay
     , ...
     }@inputs:
@@ -61,6 +64,14 @@
               home-manager.useGlobalPkgs = true;
               home-manager.users.${username} = import ./hosts/private/home/aarch64;
               home-manager.extraSpecialArgs = specialArgs;
+            }
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = false;
+                user = "${username}";
+              };
             }
             ./hosts/private
           ];
