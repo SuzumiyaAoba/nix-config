@@ -31,6 +31,7 @@
 
   imports = [
     ./base
+    ./security.nix
     ./keyboard.nix
     ./dock.nix
   ];
