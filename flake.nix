@@ -60,7 +60,8 @@
             configuration
             ./modules/overlays.nix
             ./modules/darwin
-            home-manager.darwinModules.home-manager {
+            home-manager.darwinModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.users.${username} = import ./hosts/private/home/aarch64;
               home-manager.extraSpecialArgs = specialArgs;
@@ -86,7 +87,8 @@
             configuration
             ./modules/overlays.nix
             ./modules/darwin
-            home-manager.darwinModules.home-manager {
+            home-manager.darwinModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.users.${username} = import ./hosts/private/home/x86_64;
               home-manager.extraSpecialArgs = specialArgs;
