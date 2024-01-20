@@ -27,6 +27,8 @@
       "homebrew/cask-versions"
       "sdkman/tap"
     ];
+
+    caskArgs.language = "ja";
   };
 
   imports = [
