@@ -12,7 +12,8 @@ let
   ];
   defaultsPersistentApp = path:
     ''
-      sudo -u ${username} defaults write com.apple.dock persistent-apps -array-add "<dict>
+      sudo -u ${username} defaults -currentHost delete com.apple.dock persistent-apps
+      sudo -u ${username} defaults -currentHost write com.apple.dock persistent-apps -array-add "<dict>
         <key>tile-data</key>
         <dict>
           <key>file-data</key>
