@@ -459,6 +459,9 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :hook ((clojure-mode . aggressive-indent-mode)))
 
+(use-package clojure-ts-mode
+  :straight t)
+
 (use-package cider
   :straight t)
 
@@ -568,3 +571,6 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :defer t
   :config
   (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
+
+(use-package sqlite-mode
+  :straight t)
