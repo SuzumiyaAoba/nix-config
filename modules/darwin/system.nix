@@ -28,7 +28,9 @@
     };
 
     activationScripts.postActivation.text = ''
-      sudo -u ${username} defaults -currentHost write com.apple.controlcenter.plist Bluetooth -int 18
+      sudo -u ${username} defaults write com.apple.controlcenter.plist Bluetooth -int 18
+      sudo -u ${username} defaults write com.apple.controlcenter.plist Sound -int 18
+      sudo -u ${username} defaults write com.apple.controlcenter.plist BatteryShowPercentage -bool true
     '';
   };
 }
