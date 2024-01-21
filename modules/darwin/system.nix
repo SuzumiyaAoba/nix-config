@@ -12,6 +12,7 @@
         ShowPathbar = true;
         FXDefaultSearchScope = "SCcf";
         AppleShowAllFiles = true;
+        AppleShowAllExtensions = true;
       };
     };
 
