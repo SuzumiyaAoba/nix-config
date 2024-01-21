@@ -12,7 +12,6 @@ let
   ];
   defaultsPersistentApp = path:
     ''
-      sudo -u ${username} defaults -currentHost delete com.apple.dock persistent-apps
       sudo -u ${username} defaults -currentHost write com.apple.dock persistent-apps -array-add "<dict>
         <key>tile-data</key>
         <dict>
@@ -31,6 +30,7 @@ in
 {
   system = {
     activationScripts.postActivation.text = ''
+      sudo -u ${username} defaults -currentHost delete com.apple.dock persistent-apps
       sudo -u ${username} defaults delete com.apple.dock persistent-apps
       ${builtins.concatStringsSep "\n" defaultsPersistentApps}
 
