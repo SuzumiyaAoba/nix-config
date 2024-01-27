@@ -8,6 +8,7 @@
     ./ghq.nix
     ./eza.nix
     ./bat.nix
+    ./hurl.nix
     ./ripgrep.nix
     ./fd.nix
     ./tree.nix
