@@ -6,5 +6,6 @@
     ./rust.nix
     ./clojure.nix
     ./python.nix
+    ./go.nix
   ];
 }
