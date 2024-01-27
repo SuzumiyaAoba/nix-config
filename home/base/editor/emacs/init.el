@@ -448,7 +448,8 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package javascript-mode
   :straight t
-  :mode (("\\.mjs\\'" . js-ts-mode))
+  :mode (("\\.mjs\\'" . js-ts-mode)
+         ("\\.cjs\\'" . js-ts-mode))
   :custom
   (js-indent-level 2))
 
