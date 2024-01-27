@@ -495,6 +495,9 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package nix-mode
   :straight t)
 
+(use-package astro-ts-mode
+  :straight t)
+
 (use-package org
   :straight t
   :custom
@@ -547,7 +550,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :hook ((emacs-startup . global-org-modern-mode))
   :custom
-  (org-modern-hide-stars nil)
+  (org-modern-hidE-stars nil)
   (org-modern-list
    '((?- . "-")
      (?* . "•")
