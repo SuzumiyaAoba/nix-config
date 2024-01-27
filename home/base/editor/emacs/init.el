@@ -61,6 +61,10 @@
 	scroll-preserve-screen-position t)
   (setq scroll-preserve-screen-position t)
 
+  (set-language-environment "Japanese")
+  (prefer-coding-system 'utf-8)
+  (set-default 'buffer-file-coding-system 'utf-8-with-signature)
+
   (setq global-auto-revert-non-file-buffers t)
   (global-auto-revert-mode)
 
@@ -428,8 +432,10 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package paredit
   :straight t
-  :hook ((emacs-lisp-mode . enable-paredit-mode)
-         (clojure-mode . enable-paredit-mode)))
+  :hook ((emacs-lisp-mode . paredit-mode)
+         (clojure-mode . paredit-mode))
+  :config
+  (define-key paredit-mode-map (kbd "C-j") nil))
 
 (use-package typescript-mode
   :straight t

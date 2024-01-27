@@ -1,5 +1,7 @@
 setopt no_beep
 
+export LANG=ja_JP.UTF-8
+
 source "$HOME/.config/zsh/plugins.zsh"
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"
