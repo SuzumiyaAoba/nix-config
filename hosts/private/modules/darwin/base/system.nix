@@ -30,8 +30,7 @@ in
 {
   system = {
     activationScripts.postActivation.text = ''
-      sudo -u ${username} defaults -currentHost delete com.apple.dock persistent-apps
-      sudo -u ${username} defaults delete com.apple.dock persistent-apps
+      sudo -u ${username} defaults -currentHost delete com.apple.dock persistent-apps || true
       ${builtins.concatStringsSep "\n" defaultsPersistentApps}
 
       killall Dock
