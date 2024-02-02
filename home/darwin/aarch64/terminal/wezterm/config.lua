@@ -3,8 +3,14 @@ local wezterm = require "wezterm"
 local keybind = require "keybinds"
 
 return {
-  font = wezterm.font("HackGen Console NF"),
-  font_size = 18,
+  font = wezterm.font_with_fallback {
+    "Monaspace Radon",
+    -- "Monospace Xenon",
+    -- "Monospace Krypton",
+    -- "Monospace Neon",
+    "HackGen Console NF"
+  },
+  font_size = 16,
 
   default_prog = { "zellij" },
 
