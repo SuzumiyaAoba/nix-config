@@ -12,7 +12,7 @@ return {
     "0xProto",
     "HackGen Console NF"
   },
-  font_size = 16,
+  font_size = 14,
 
   default_prog = { "zellij" },
 
