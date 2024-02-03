@@ -385,7 +385,9 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :defer t
   :commands (magit)
-  :bind (("C-x g" . magit)))
+  :bind (("C-x g" . magit))
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 ;;
 ;; programming
