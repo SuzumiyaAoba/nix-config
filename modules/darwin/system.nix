@@ -14,6 +14,10 @@
         AppleShowAllFiles = true;
         AppleShowAllExtensions = true;
       };
+
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+      };
     };
 
     keyboard = {
