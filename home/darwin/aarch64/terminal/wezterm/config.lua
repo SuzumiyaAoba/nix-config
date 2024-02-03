@@ -4,10 +4,11 @@ local keybind = require "keybinds"
 
 return {
   font = wezterm.font_with_fallback {
-    "Monaspace Radon",
+    -- "Monaspace Radon",
     -- "Monospace Xenon",
     -- "Monospace Krypton",
     -- "Monospace Neon",
+    "Monaspace Argon",
     "HackGen Console NF"
   },
   font_size = 16,
