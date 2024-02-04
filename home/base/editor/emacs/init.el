@@ -286,12 +286,17 @@
   (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-mode)
   (vhl/install-extension 'undo-tree))
 
+(use-package indent-guide
+  :straight t
+  :config
+  (indent-guide-global-mode))
+
 (use-package highlight-indent-guides
   :disabled t
   :straight t
   :init
   (defun my/highlight-indent-guides--bitmap-line (width height crep zrep)
-   "Defines a solid guide line, one pixel wide.
+    "Defines a solid guide line, one pixel wide.
 Use WIDTH, HEIGHT, CREP, and ZREP as described in
 `highlight-indent-guides-bitmap-function'."
     (let* ((left (/ (- width 1) 2))
@@ -418,6 +423,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   (lsp-ui-doc-header t)
   (lsp-ui-doc-include-signature t)
   (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-use-childframe t)
   (lsp-ui-doc-use-webkit t)
 
@@ -432,12 +438,16 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   (lsp-ui-imenu-kind-position 'top)
 
   (lsp-ui-peek-enable t)
+  (lsp-ui-peek-show-directory t)
+  (lsp-ui-peek-always-show t)
   (lsp-ui-peek-fontify 'on-demand)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-lens-mode)
-         (scala-mode . lsp))
+         (scala-mode . lsp)
+         (typescript-ts-mode . lsp)
+         (tsx-ts-mode . lsp))
   :commands lsp
   :config
   (with-eval-after-load 'lsp-mode
@@ -475,7 +485,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package typescript-ts-mode
   :straight t
-  :hook (("\\.ts\\'" . typescript-ts-mode)
+  :mode (("\\.ts\\'" . typescript-ts-mode)
          ("\\.tsx\\'" . tsx-ts-mode))
   :custom
   (typescript-indent-level 2)

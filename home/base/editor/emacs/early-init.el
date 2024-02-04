@@ -12,5 +12,4 @@
 
 (add-to-list 'default-frame-alist '(font . "0xProto-16"))
 
-(add-to-list 'face-remapping-alist
-             '(:family "HackGen Console NF"))
+(add-to-list 'face-remapping-alist '(:family "HackGen Console NF"))
