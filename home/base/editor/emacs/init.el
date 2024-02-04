@@ -396,23 +396,57 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package yasnippet
   :straight t
   :config
-  :config
   (yas-global-mode 1))
 
-(use-package treesit-auto
+(use-package tree-sitter-langs
   :straight t
+  :after tree-sitter
   :config
-  (setq treesit-auto-install 'prompt)
-  (global-treesit-auto-mode))
+  (tree-sitter-require 'tsx)
+  (add-to-list 'tree-sitter-major-mode-language-alist '(tsx-ts-mode . tsx)))
+
+(use-package tree-sitter
+  :straight t
+  :defer t
+  :hook ((typescript-mode . tree-sitter-hl-mode)
+	 (tsx-ts-mode . tree-sitter-hl-mode)))
 
 (use-package lsp-mode
   :straight t
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-header t)
+  (lsp-ui-doc-include-signature t)
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-use-childframe t)
+  (lsp-ui-doc-use-webkit t)
+
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-ignore-duplicate t)
+  (lsp-ui-sideline-show-symbol t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-sideline-show-diagnostics nil)
+  (lsp-ui-sideline-show-code-actions nil)
+
+  (lsp-ui-imenu-enable nil)
+  (lsp-ui-imenu-kind-position 'top)
+
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-fontify 'on-demand)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-lens-mode)
          (scala-mode . lsp))
-  :commands lsp)
+  :commands lsp
+  :config
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-completion-provider :none))
+
+  (defun corfu-lsp-setup ()
+    (setq-local completion-styles '(orderless)
+                completion-category-defaults nil))
+  (add-hook 'lsp-mode-hook #'corfu-lsp-setup))
 
 (use-package lsp-ui
   :straight t
@@ -439,14 +473,13 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :config
   (define-key paredit-mode-map (kbd "C-j") nil))
 
-(use-package typescript-mode
+(use-package typescript-ts-mode
   :straight t
-  :mode (("\\.ts\\'" . typescript-mode)
-	 ("\\.tsx\\'" . tsx-ts-mode))
+  :hook (("\\.ts\\'" . typescript-ts-mode)
+         ("\\.tsx\\'" . tsx-ts-mode))
   :custom
   (typescript-indent-level 2)
-  (typescript-tsx-indent-offset 2)
-  (typescript-ts-mode typescript-mode-hook))
+  (typescript-tsx-indent-offset 2))
 
 (use-package javascript-mode
   :straight t
