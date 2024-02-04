@@ -10,6 +10,6 @@
 ;; ツールバーを無効
 (push '(tool-bar-lines . 0) default-frame-alist)
 
-(add-to-list 'default-frame-alist '(font . "0xProto-16"))
+(add-to-list 'default-frame-alist '(font . "0xProto-14"))
 
 (add-to-list 'face-remapping-alist '(:family "HackGen Console NF"))

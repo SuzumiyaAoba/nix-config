@@ -418,6 +418,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package lsp-mode
   :straight t
+  :commands lsp
   :custom
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header t)
@@ -448,7 +449,6 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
          (scala-mode . lsp)
          (typescript-ts-mode . lsp)
          (tsx-ts-mode . lsp))
-  :commands lsp
   :config
   (with-eval-after-load 'lsp-mode
     (setq lsp-completion-provider :none))
@@ -461,6 +461,12 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package lsp-ui
   :straight t
   :commands lsp-ui-mode)
+
+(use-package lsp-treemacs
+  :commands lsp-treemacs-errors-list)
+
+(use-package dap-mode
+  :straight t)
 
 ;;
 ;; modes
