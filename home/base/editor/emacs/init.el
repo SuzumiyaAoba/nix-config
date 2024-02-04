@@ -15,6 +15,10 @@
 (straight-use-package 'use-package)
 (straight-use-package 'org)
 
+(use-package diminish
+  :straight t
+  :demand t)
+
 ;; see: https://minosjp.hatenablog.com/entry/2020/12/03/221536
 (defvar my-gui-setup-hook nil
   "List of functions to call at initializing Emacs as GUI.")
@@ -130,12 +134,27 @@
 (use-package gruvbox-theme
   :straight t
   :config
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'gruvbox-dark-hard t)
 
-(use-package doom-modeline
+  (let ((line (face-attribute 'mode-line :underline)))
+    (set-face-attribute 'mode-line          nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :underline  line)
+    (set-face-attribute 'mode-line          nil :box        nil)
+    (set-face-attribute 'mode-line-inactive nil :box        nil)))
+
+;; (use-package doom-modeline
+;;   :straight t
+;;   :init
+;;   (doom-modeline-mode 1))
+
+(use-package moody
   :straight t
-  :init
-  (doom-modeline-mode 1))
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode)
+  (moody-replace-eldoc-minibuffer-message-function))
 
 (use-package nerd-icons
   :straight t)
@@ -162,6 +181,7 @@
 
 (use-package undo-tree
   :straight t
+  :diminish undo-tree-mode
   :custom
   (undo-tree-auto-save-history nil)
   :config
@@ -175,6 +195,7 @@
 
 (use-package flymake-popon
   :straight (flymake-popon :type git :repo "https://codeberg.org/akib/emacs-flymake-popon.git")
+  :diminish flymake-popon-mode
   :config
   (global-flymake-popon-mode))
 
@@ -267,6 +288,7 @@
 (use-package anzu
   :straight t
   :defer 1
+  :diminish anzu-mode
   :commands (anzu-query-replace anzu-query-replace-regex anzu-mode-line)
   :bind (([remap query-replace] . anzu-query-replace)
 	 ([remap query-replace-regexp] . anzu-query-replace-regex))
@@ -278,6 +300,7 @@
 
 (use-package volatile-highlights
   :straight t
+  :diminish volatile-highlights-mode
   :custom-face
   (vhl/default-face ((nil (:foreground "#FF3333" :background "#FFCDCD"))))
   :config
@@ -288,6 +311,7 @@
 
 (use-package indent-guide
   :straight t
+  :diminish indent-guide-mode
   :config
   (indent-guide-global-mode))
 
@@ -340,6 +364,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package smartparens
   :straight t
+  :diminish smartparens-mode
   :config
   (require 'smartparens-config)
 
@@ -347,12 +372,14 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package which-key
   :straight t
+  :diminish which-key-mode
   :config
   (which-key-mode)
   (which-key-setup-side-window-bottom))
 
 (use-package projectile
   :straight t
+  :diminish projectile-mode
   :bind (:map projectile-mode-map
 	      ("C-c p" . projectile-command-map))
   :hook ((emacs-startup . projectile-mode))
@@ -374,6 +401,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package git-gutter
   :straight t
+  :diminish git-gutter-mode
   :custom ((git-gutter:unchaged-sign " ")
 	   (git-gutter:modified-sign " ")
 	   (git-gutter:added-sign " ")
@@ -398,8 +426,12 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 ;; programming
 ;;
 
+(use-package eldoc
+  :diminish eldoc-mode)
+
 (use-package yasnippet
   :straight t
+  :diminish yas-minor-mode
   :config
   (yas-global-mode 1))
 
@@ -413,11 +445,19 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package tree-sitter
   :straight t
   :defer t
+  :diminish tree-sitter-mode
   :hook ((typescript-mode . tree-sitter-hl-mode)
 	 (tsx-ts-mode . tree-sitter-hl-mode)))
 
+(use-package treesit-auto
+  :straight t
+  :config
+  (setq treesit-auto-install 'prompt)
+  (global-treesit-auto-mode))
+
 (use-package lsp-mode
   :straight t
+  :diminish (lsp-lens-mode)
   :commands lsp
   :custom
   (lsp-ui-doc-enable t)
@@ -484,6 +524,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package paredit
   :straight t
+  :diminish paredit-mode
   :hook ((emacs-lisp-mode . paredit-mode)
          (clojure-mode . paredit-mode))
   :config
