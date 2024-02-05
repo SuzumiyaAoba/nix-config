@@ -457,7 +457,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package lsp-mode
   :straight t
-  :diminish (lsp-lens-mode)
+  :diminish lsp-lens-mode
   :commands lsp
   :custom
   (lsp-ui-doc-enable t)
