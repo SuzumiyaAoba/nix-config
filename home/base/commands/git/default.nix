@@ -14,6 +14,7 @@
       "*~"
       "*.swp"
       ".DS_Store"
+      ".dir-locals.el"
     ];
 
     extraConfig = {
