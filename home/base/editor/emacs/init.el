@@ -552,8 +552,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :hook ((groovy-mode . (lambda ()
                           (setq indent-tabs-mode t)
-                          (setq indent-line-function 'insert-tab)
-                          (setq tab-width 2)))))
+                          (setq tab-width 1)))))
 
 (use-package zig-mode
   :straight t
