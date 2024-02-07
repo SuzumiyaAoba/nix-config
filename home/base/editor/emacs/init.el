@@ -512,9 +512,6 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 ;; modes
 ;;
 
-(use-package aggressive-indent
-  :straight t)
-
 (use-package markdown-mode
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
@@ -552,7 +549,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :hook ((groovy-mode . (lambda ()
                           (setq indent-tabs-mode t)
-                          (setq tab-width 1)))))
+                          (setq tab-width 4)))))
 
 (use-package zig-mode
   :straight t
