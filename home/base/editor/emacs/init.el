@@ -435,6 +435,11 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :config
   (yas-global-mode 1))
 
+(use-package editorconfig
+  :straight t
+  :config
+  (editorconfig-mode))
+
 (use-package tree-sitter-langs
   :straight t
   :after tree-sitter
