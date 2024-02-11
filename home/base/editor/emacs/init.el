@@ -150,6 +150,8 @@
 
 (use-package moody
   :straight t
+  :custom
+  (moody-mode-line-height 24)
   :config
   (setq x-underline-at-descent-line t)
   (moody-replace-mode-line-buffer-identification)
@@ -164,6 +166,45 @@
   :after nerd-icons
   :commands (nerd-icons-dired-mode)
   :hook ((dired-mode . nerd-icons-dired-mode)))
+
+(use-package tab-bar
+  :custom
+  (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-select-tab-modifiers '(super))
+  (tab-bar-tab-hints t)
+  (tab-bar-new-button-show nil)
+  (tab-bar-close-button-show nil)
+  (tab-bar-format '(tab-bar-format-tabs tab-bar-separator))
+  :config
+  (tab-bar-mode +1)
+
+  ;; see: https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/
+  (defvar tb/circle-numbers-alist
+    '((0 . "⓪")
+      (1 . "①")
+      (2 . "②")
+      (3 . "③")
+      (4 . "④")
+      (5 . "⑤")
+      (6 . "⑥")
+      (7 . "⑦")
+      (8 . "⑧")
+      (9 . "⑨"))
+    "Alist of integers to strings of circled unicode numbers.")
+  (defun tb/tab-bar-tab-name-format-hints (name _tab i)
+    "Show absolute numbers on tabs in the tab bar before the tab name.
+It has effect when `tab-bar-tab-hints' is non-nil."
+    (if tab-bar-tab-hints
+        (format "%s %s"
+                (if (<= i 9)
+                    (alist-get i tb/circle-numbers-alist)
+                  (number-to-string i))
+                name)
+      name))
+  (setq tab-bar-tab-name-format-functions
+        '(tb/tab-bar-tab-name-format-hints
+          tab-bar-tab-name-format-close-button
+          tab-bar-tab-name-format-face)))
 
 (use-package ddskk
   :straight t
@@ -437,6 +478,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
 (use-package editorconfig
   :straight t
+  :diminish editorconfig-mode
   :config
   (editorconfig-mode))
 
@@ -546,6 +588,21 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
          ("\\.cjs\\'" . js-ts-mode))
   :custom
   (js-indent-level 2))
+
+(use-package mmm-mode
+  :straight t)
+
+(use-package css-in-js-mode
+  :straight '(css-in-js-mode :type git
+                             :host github
+                             :repo "orzechowskid/tree-sitter-css-in-js")
+  :hook ((tsx-ts-mode . css-in-js-mode))
+  :config
+  (css-in-js-mode-fetch-shared-library))
+
+(use-package css-mode
+  :config
+  (setq-default css-indent-offset 2))
 
 (use-package yaml-mode
   :straight t)
