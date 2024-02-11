@@ -327,6 +327,14 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :config
   (treemacs-load-theme "nerd-icons"))
 
+(use-package treemacs-projectile
+  :straight t
+  :after (treemacs projectile))
+
+(use-package treemacs-magit
+  :straight t
+  :after (treemacs magit))
+
 (use-package treemacs-tab-bar
   :straight t
   :after treemacs
