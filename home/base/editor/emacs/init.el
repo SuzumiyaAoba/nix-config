@@ -164,6 +164,7 @@
 (use-package nerd-icons-dired
   :straight t
   :after nerd-icons
+  :diminish nerd-icons-dired-mode
   :commands (nerd-icons-dired-mode)
   :hook ((dired-mode . nerd-icons-dired-mode)))
 
@@ -325,6 +326,11 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :after treemacs
   :config
   (treemacs-load-theme "nerd-icons"))
+
+(use-package treemacs-tab-bar
+  :straight t
+  :after treemacs
+  :config (treemacs-set-scope-type 'Tabs))
 
 (use-package anzu
   :straight t
