@@ -319,7 +319,8 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   (treemacs-indent-guide-mode t)
   (treemacs-fringe-indicator-mode t)
   (treemacs-filewatch-mode t)
-  (treemacs-git-commit-diff-mode t))
+  (treemacs-git-commit-diff-mode t)
+  (treemacs-git-mode 'deferred))
 
 (use-package treemacs-nerd-icons
   :straight t
