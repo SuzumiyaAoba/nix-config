@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Conditional operator
+# key: ?:
+# binding: direct-keybinding
+# --
+${1:condition}
+  ? ${2:true}
+  : ${3:false}

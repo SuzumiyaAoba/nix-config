@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: TSDoc: function
+# key: doc-func
+# binding: direct-keybinding
+# --
+/**
+ * ${1:description}
+ *
+ * @param ${2:name} - ${3:desc}
+ * @returns ${3:return}
+ */

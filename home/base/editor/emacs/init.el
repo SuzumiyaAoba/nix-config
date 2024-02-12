@@ -279,6 +279,9 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :commands (consult-ghq-switch-project)
   :bind (("C-c C-g" . consult-ghq-switch-project)))
 
+(use-package consult-yasnippet
+  :straight t)
+
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
   :custom
@@ -315,6 +318,7 @@ It has effect when `tab-bar-tab-hints' is non-nil."
 (use-package treemacs
   :straight t
   :defer t
+  :bind (("C-\\" . treemacs))
   :config
   (treemacs-indent-guide-mode t)
   (treemacs-fringe-indicator-mode t)
@@ -488,8 +492,15 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package yasnippet
   :straight t
   :diminish yas-minor-mode
+  :bind (("C-x y i" . yas-insert-snippet)
+         ("C-x y t" . yas-describe-tables))
+  :custom
+  (yas-snippet-dirs `(,(locate-user-emacs-file "yasnippets")))
   :config
   (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :straight t)
 
 (use-package editorconfig
   :straight t
