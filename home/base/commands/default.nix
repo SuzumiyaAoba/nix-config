@@ -19,5 +19,6 @@
     ./zoxide.nix
     ./cargo-make.nix
     ./kustomize.nix
+    ./gh-dash.nix
   ];
 }
