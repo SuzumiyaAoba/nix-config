@@ -323,6 +323,10 @@ It has effect when `tab-bar-tab-hints' is non-nil."
 (use-package corfu-prescient
   :straight t)
 
+;;
+;; File Explorer
+;;
+
 (use-package treemacs
   :straight t
   :defer t
@@ -353,6 +357,10 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :after treemacs
   :config (treemacs-set-scope-type 'Tabs))
 
+;;
+;; Search/Replace
+;;
+
 (use-package anzu
   :straight t
   :defer 1
@@ -366,6 +374,20 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :config
   (copy-face 'mode-line 'anzu-mode-line))
 
+(use-package migemo
+  :straight t
+  :custom
+  (migemo-command "cmigemo")
+  (migemo-options '("-q" "--emacs"))
+  (migemo-coding-system 'utf-8-unix)
+  (migemo-dictionary (file-truename "~/.nix-profile/share/migemo/utf-8/migemo-dict"))
+  :config
+  (migemo-init))
+
+;;
+;; Highlights
+;;
+
 (use-package volatile-highlights
   :straight t
   :diminish volatile-highlights-mode
@@ -376,12 +398,6 @@ It has effect when `tab-bar-tab-hints' is non-nil."
 
   (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-mode)
   (vhl/install-extension 'undo-tree))
-
-(use-package indent-guide
-  :straight t
-  :diminish indent-guide-mode
-  :config
-  (indent-guide-global-mode))
 
 (use-package highlight-indent-guides
   :disabled t
@@ -416,6 +432,12 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   (dimmer-configure-hydra)
   (dimmer-configure-posframe)
   (dimmer-configure-magit))
+
+(use-package indent-guide
+  :straight t
+  :diminish indent-guide-mode
+  :config
+  (indent-guide-global-mode))
 
 (use-package ace-window
   :straight t

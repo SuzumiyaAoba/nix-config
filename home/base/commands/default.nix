@@ -21,5 +21,6 @@
     ./kustomize.nix
     ./gh-dash.nix
     ./ditaa.nix
+    ./cmigemo.nix
   ];
 }
