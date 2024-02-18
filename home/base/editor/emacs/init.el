@@ -51,6 +51,8 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
 
+  (setq ring-bell-function 'ignore)
+
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
