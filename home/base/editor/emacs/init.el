@@ -761,7 +761,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
      'user
      `(org-quote ((t (:inherit org-block :slant italic :foreground ,comment-color))))))
 
-  (setq org-ditaa-jar-path "/opt/homebrew/Cellar/ditaa/0.11.0_1/libexec/ditaa-0.11.0-standalone.jar")
+  (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((ditaa . t)))
