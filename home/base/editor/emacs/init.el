@@ -248,12 +248,18 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :config
   (global-undo-tree-mode))
 
+;;
+;; Flymake
+;;
+
 (use-package flymake
   :straight t
   :diminish flymake-mode)
 
 (use-package flymake-diagnostic-at-point
-  :straight t)
+  :straight t
+  :disabled t
+  :hook ((flymake-mode . flymake-diagnostic-at-point-mode)))
 
 (use-package flymake-popon
   :straight (flymake-popon :type git :repo "https://codeberg.org/akib/emacs-flymake-popon.git")
@@ -389,11 +395,23 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :straight t
   :custom
   (migemo-command "cmigemo")
-  (migemo-options '("-q" "--emacs"))
+  (migemo-options '("-q" "--nonewline" "--emacs"))
   (migemo-coding-system 'utf-8-unix)
   (migemo-dictionary (file-truename "~/.nix-profile/share/migemo/utf-8/migemo-dict"))
+  (migemo-user-dictionaly nil)
+  (migemo-regex-dictionaly nil)
   :config
-  (migemo-init))
+  (migemo-init)
+
+  (defvar consult--migemo-regexp "")
+  (defun consult--migemo-regexp-compiler (input type ignore-case)
+    (setq consult--migemo-regexp
+          (mapcar #'migemo-get-pattern (consult--split-escaped input)))
+    (cons (mapcar (lambda (x) (consult--convert-regexp x type))
+                  consult--migemo-regexp)
+          (lambda (str)
+            (consult--highlight-regexps consult--migemo-regexp t str))))
+  (setq consult--regexp-compiler #'consult--migemo-regexp-compiler))
 
 ;;
 ;; Highlights
