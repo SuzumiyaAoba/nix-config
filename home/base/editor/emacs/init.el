@@ -119,6 +119,10 @@
   :config
   (exec-path-from-shell-initialize))
 
+;;
+;; Look & Feel
+;;
+
 ;; (use-package doom-themes
 ;;   :straight t
 ;;   :config
@@ -215,12 +219,19 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :straight t
   :defer t
   :commands (skk-mode skk-latin-mode)
+  :custom
+  (default-input-method "japanese-skk")
   :init
   (defun my/enable-skk-latin-mode ()
     (skk-mode 1)
     (skk-latin-mode 1))
   :bind (("C-x C-j" . skk-mode))
   :hook ((after-change-major-mode . my/enable-skk-latin-mode)))
+
+(use-package ddskk-posframe
+  :straight t
+  :custom
+  (ddskk-posframe-mode t))
 
 ;;
 ;; Undo/Redo
