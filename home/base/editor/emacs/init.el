@@ -298,6 +298,11 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   (consult-customize
    consult-buffer :preview-key "M-."))
 
+(use-package nerd-icons-completion
+  :straight t
+  :config
+  (nerd-icons-completion-mode))
+
 (use-package consult-ghq
   :straight t
   :defer t
@@ -403,6 +408,7 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :config
   (migemo-init)
 
+  ;; see: https://tam5917.hatenablog.com/entry/2022/02/10/004535
   (defvar consult--migemo-regexp "")
   (defun consult--migemo-regexp-compiler (input type ignore-case)
     (setq consult--migemo-regexp
@@ -570,6 +576,10 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :diminish editorconfig-mode
   :config
   (editorconfig-mode))
+
+;;
+;; tree-sitter
+;;
 
 (use-package tree-sitter-langs
   :straight t
