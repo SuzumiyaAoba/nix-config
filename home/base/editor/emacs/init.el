@@ -38,8 +38,7 @@
 	    (lambda()
               (scroll-bar-mode -1)
 	      (tool-bar-mode -1)
-              (menu-bar-mode -1)
-))
+              (menu-bar-mode -1)))
   (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization)
   (my-func-called-at-gui-initialization))
 
@@ -608,6 +607,10 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :diminish lsp-lens-mode
   :commands lsp
   :custom
+  ;; performance
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024))
+  
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header t)
   (lsp-ui-doc-include-signature t)
