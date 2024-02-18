@@ -143,10 +143,11 @@
     (set-face-attribute 'mode-line          nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :box        nil)))
 
-;; (use-package doom-modeline
-;;   :straight t
-;;   :init
-;;   (doom-modeline-mode 1))
+(use-package doom-modeline
+  :straight t
+  :disabled t
+  :init
+  (doom-modeline-mode 1))
 
 (use-package moody
   :straight t
@@ -157,6 +158,10 @@
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode)
   (moody-replace-eldoc-minibuffer-message-function))
+
+;;
+;; Icons
+;;
 
 (use-package nerd-icons
   :straight t)
@@ -202,6 +207,10 @@ It has effect when `tab-bar-tab-hints' is non-nil."
           tab-bar-tab-name-format-close-button
           tab-bar-tab-name-format-face)))
 
+;;
+;; IME
+;;
+
 (use-package ddskk
   :straight t
   :defer t
@@ -212,6 +221,10 @@ It has effect when `tab-bar-tab-hints' is non-nil."
     (skk-latin-mode 1))
   :bind (("C-x C-j" . skk-mode))
   :hook ((after-change-major-mode . my/enable-skk-latin-mode)))
+
+;;
+;; Undo/Redo
+;;
 
 (use-package undohist
   :straight t)
@@ -225,7 +238,8 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   (global-undo-tree-mode))
 
 (use-package flymake
-  :straight t)
+  :straight t
+  :diminish flymake-mode)
 
 (use-package flymake-diagnostic-at-point
   :straight t)
@@ -255,9 +269,8 @@ It has effect when `tab-bar-tab-hints' is non-nil."
 (use-package consult
   :straight t
   :defer t
-  :bind (:map isearch-mode-map
-	 ("M-l" . consult-line)
-	 ("M-g" . consult-ripgrep)
+  :bind (("s-g" . consult-ripgrep)
+         ("s-s" . consult-line)
 	 :map minibuffer-local-map
 	 ("M-s" . consult-hisotry)
 	 ("M-r" . consult-history))
@@ -407,7 +420,8 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package ace-window
   :straight t
   :defer t
-  :bind (("M-o" . ace-window))
+  :bind (("M-o" . other-window)
+         ("C-x o" . ace-window))
   :custom
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (aw-background nil)
@@ -440,6 +454,9 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :hook ((emacs-startup . projectile-mode))
   :custom
   (projectile-generic-dommand "fd . -0 --type f --color=never"))
+
+(use-package ripgrep
+  :straight t)
 
 ;;
 ;; git
