@@ -181,24 +181,19 @@
 
   ;; see: https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/
   (defvar tb/circle-numbers-alist
-    '((0 . "⓪")
-      (1 . "①")
-      (2 . "②")
-      (3 . "③")
-      (4 . "④")
-      (5 . "⑤")
-      (6 . "⑥")
-      (7 . "⑦")
-      (8 . "⑧")
-      (9 . "⑨"))
-    "Alist of integers to strings of circled unicode numbers.")
+    (concat "⓪"
+            "①②③④⑤⑥⑦⑧⑨⑩"
+            "⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
+            "㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚"
+            "㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵"
+            "㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿"))
   (defun tb/tab-bar-tab-name-format-hints (name _tab i)
     "Show absolute numbers on tabs in the tab bar before the tab name.
 It has effect when `tab-bar-tab-hints' is non-nil."
     (if tab-bar-tab-hints
         (format "%s %s"
-                (if (<= i 9)
-                    (alist-get i tb/circle-numbers-alist)
+                (if (< i (length tb/circle-numbers-alist))
+                    (substring tb/circle-numbers-alist i (+ i 1))
                   (number-to-string i))
                 name)
       name))
