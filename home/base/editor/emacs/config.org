@@ -2,22 +2,6 @@
 
 #+begin_src emacs-lisp
 ;; straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(straight-use-package 'use-package)
-(straight-use-package 'org)
-
 (use-package diminish
   :straight t
   :demand t)
@@ -38,9 +22,9 @@
 (defun my-gui-setup ()
   "Setup if Emacs is running on GUI."
   (add-hook 'my-gui-setup-hook
-          (lambda()
+            (lambda()
               (scroll-bar-mode -1)
-            (tool-bar-mode -1)
+              (tool-bar-mode -1)
               (menu-bar-mode -1)))
   (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization)
   (my-func-called-at-gui-initialization))
@@ -65,8 +49,8 @@
       (load custom-file))
 
   (setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position t)
+        scroll-conservatively 100000
+        scroll-preserve-screen-position t)
   (setq scroll-preserve-screen-position t)
 
   (set-language-environment "Japanese")
@@ -84,8 +68,8 @@
   (setq-default indent-tabs-mode nil)
 
   (setq make-backup-files nil
-      auto-save-default nil
-      delete-by-moving-to-trash t
+        auto-save-default nil
+        delete-by-moving-to-trash t
         vc-follow-symlinks t)
 
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -105,8 +89,8 @@
   (defun paste-to-osx (text &optional push)
     (let ((process-connection-type nil))
       (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-      (process-send-string proc text)
-      (process-send-eof proc))))
+        (process-send-string proc text)
+        (process-send-eof proc))))
 
   (when (eq system-type 'darwin)
     (setq interprogram-cut-function 'paste-to-osx)
@@ -202,7 +186,7 @@
             "㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿"))
   (defun tb/tab-bar-tab-name-format-hints (name _tab i)
     "Show absolute numbers on tabs in the tab bar before the tab name.
-It has effect when `tab-bar-tab-hints' is non-nil."
+  It has effect when `tab-bar-tab-hints' is non-nil."
     (if tab-bar-tab-hints
         (format "%s %s"
                 (if (< i (length tb/circle-numbers-alist))
@@ -292,9 +276,9 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :defer t
   :bind (("s-g" . consult-ripgrep)
          ("s-s" . consult-line)
-       :map minibuffer-local-map
-       ("M-s" . consult-hisotry)
-       ("M-r" . consult-history))
+         :map minibuffer-local-map
+         ("M-s" . consult-hisotry)
+         ("M-r" . consult-history))
   :custom
   (consult-preview-raw-size 1024000)
   (consult-preview-max-size 1024000)
@@ -393,9 +377,9 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :diminish anzu-mode
   :commands (anzu-query-replace anzu-query-replace-regex anzu-mode-line)
   :bind (([remap query-replace] . anzu-query-replace)
-       ([remap query-replace-regexp] . anzu-query-replace-regex))
+         ([remap query-replace-regexp] . anzu-query-replace-regex))
   :custom ((anzu-replace-threshold 1000)
-         (anzu-search-threshold 1000))
+           (anzu-search-threshold 1000))
   :hook ((emacs-startup . (lambda () (global-anzu-mode +1))))
   :config
   (copy-face 'mode-line 'anzu-mode-line))
@@ -444,20 +428,20 @@ It has effect when `tab-bar-tab-hints' is non-nil."
   :init
   (defun my/highlight-indent-guides--bitmap-line (width height crep zrep)
     "Defines a solid guide line, one pixel wide.
-Use WIDTH, HEIGHT, CREP, and ZREP as described in
-`highlight-indent-guides-bitmap-function'."
+  Use WIDTH, HEIGHT, CREP, and ZREP as described in
+  `highlight-indent-guides-bitmap-function'."
     (let* ((left (/ (- width 1) 2))
            (right (- width left 1))
            (row (append (make-list left zrep) (make-list 1 crep) (make-list right zrep)))
            rows)
       (dotimes (i height rows)
-      (setq rows (cons row rows)))))
+        (setq rows (cons row rows)))))
   :custom ((highlight-indent-guides-method 'character)
-         (highlight-indent-guides-bitmap-function #'my/highlight-indent-guides--bitmap-line)
-         (highlight-indent-guides-auto-character-face-perc 40)
-         (highlight-indent-guides-auto-top-character-face-perc 100)
-         (highlight-indent-guides-auto-enabled t)
-         (highlight-indent-guides-responsive t))
+           (highlight-indent-guides-bitmap-function #'my/highlight-indent-guides--bitmap-line)
+           (highlight-indent-guides-auto-character-face-perc 40)
+           (highlight-indent-guides-auto-top-character-face-perc 100)
+           (highlight-indent-guides-auto-enabled t)
+           (highlight-indent-guides-responsive t))
   :hook ((prog-mode . highlight-indent-guides-mode)))
 
 (use-package dimmer
@@ -511,7 +495,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :diminish projectile-mode
   :bind (:map projectile-mode-map
-            ("C-c p" . projectile-command-map))
+              ("C-c p" . projectile-command-map))
   :hook ((emacs-startup . projectile-mode))
   :custom
   (projectile-generic-dommand "fd . -0 --type f --color=never"))
@@ -536,9 +520,9 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t
   :diminish git-gutter-mode
   :custom ((git-gutter:unchaged-sign " ")
-         (git-gutter:modified-sign " ")
-         (git-gutter:added-sign " ")
-         (git-gutter:deleted-sign " "))
+           (git-gutter:modified-sign " ")
+           (git-gutter:added-sign " ")
+           (git-gutter:deleted-sign " "))
   :config
   (set-face-background 'git-gutter:unchanged (face-attribute 'line-number :background))
   (set-face-background 'git-gutter:modified "#f1fa8c")
@@ -597,7 +581,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :defer t
   :diminish tree-sitter-mode
   :hook ((typescript-mode . tree-sitter-hl-mode)
-       (tsx-ts-mode . tree-sitter-hl-mode)))
+         (tsx-ts-mode . tree-sitter-hl-mode)))
 
 (use-package treesit-auto
   :straight t
@@ -669,7 +653,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 (use-package markdown-mode
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
-       ("\\.mdx\\'" . markdown-mode))
+         ("\\.mdx\\'" . markdown-mode))
   :init
   (setq markdown-command "multimarkdown"))
 
@@ -760,7 +744,6 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   :straight t)
 
 (use-package org
-  :straight t
   :custom
   (system-time-locate nil)
   (org-startup-with-inline-images t)
@@ -768,9 +751,6 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   (org-ellipsis " ▼")
   (org-fontify-quote-and-verse-blocks t)
   (org-use-speed-commands t)
-
-  (org-src-preserve-indentation nil)
-  (org-edit-src-content-indentation 0)
 
   (org-display-custom-times t)
   (org-image-actual-width nil)
@@ -786,29 +766,29 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
 
   ;; see: https://misohena.jp/blog/2021-08-29-colorize-saturday-and-japanese-holidays-in-org-agenda.html
   (org-agenda-day-face-function (lambda (date)
-                                (let ((face (cond
-                                             ;; 土曜日
-                                             ((= (calendar-day-of-week date) 6)
-                                              '(:inherit org-agenda-date :foreground "#0df"))
-                                             ;; 日曜日か日本の祝日
-                                             ((or (= (calendar-day-of-week date) 0)
-                                                  (let ((calendar-holidays japanese-holidays))
-                                                    (calendar-check-holidays date)))
-                                              'org-agenda-date-weekend)
-                                             ;; 普通の日
-                                             (t 'org-agenda-date))))
-                                  ;; 今日は色を反転
-                                  (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face))))
+                                  (let ((face (cond
+                                               ;; 土曜日
+                                               ((= (calendar-day-of-week date) 6)
+                                                '(:inherit org-agenda-date :foreground "#0df"))
+                                               ;; 日曜日か日本の祝日
+                                               ((or (= (calendar-day-of-week date) 0)
+                                                    (let ((calendar-holidays japanese-holidays))
+                                                      (calendar-check-holidays date)))
+                                                'org-agenda-date-weekend)
+                                               ;; 普通の日
+                                               (t 'org-agenda-date))))
+                                    ;; 今日は色を反転
+                                    (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face))))
   :config
   (setq org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")))
 
 (use-package org-bars
   :straight (org-bars :type git
-                    :host github
-                    :repo "tonyaldon/org-bars")
+                      :host github
+                      :repo "tonyaldon/org-bars")
   :hook ((org-mode . (lambda ()
-                     (require 'org-bars)
-                     (org-bars-mode)))))
+                       (require 'org-bars)
+                       (org-bars-mode)))))
 
 (use-package org-modern
   :straight t
@@ -822,11 +802,11 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   (org-modern-timestamp '(" %Y年%m月%d日(%a) " . " %H時%M分 "))
   :init
   (setq org-modern-star (list #("󰎥" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                            #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                            #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                            #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                            #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                            ))
+                              #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              ))
   :config
   (let ((comment-color (face-attribute 'font-lock-comment-face :foreground)))
     (custom-theme-set-faces
@@ -836,8 +816,7 @@ Use WIDTH, HEIGHT, CREP, and ZREP as described in
   (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((ditaa . t)))
-  )
+   '((ditaa . t))))
 
 (use-package org-modern-indent
   :straight (org-modern-indent :type git
