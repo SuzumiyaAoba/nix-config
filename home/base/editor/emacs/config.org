@@ -757,8 +757,8 @@ https://emacs-lsp.github.io/lsp-mode/
          ("C-c s"   . lsp-ui-sideline-mode))
   :custom
   ;; performance
-  (setq gc-cons-threshold 100000000)
-  (setq read-process-output-max (* 1024 1024))
+  (gc-cons-threshold 100000000)
+  (read-process-output-max (* 1024 1024))
 
   ;; doc
   (lsp-ui-doc-enable t)
