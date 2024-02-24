@@ -341,7 +341,22 @@ https://github.com/hlissner/emacs-hide-mode-line
 (use-package vertico
   :straight t
   :init
-  (vertico-mode))
+  (vertico-mode)
+
+  ;; see: https://qiita.com/nobuyuki86/items/4150d5ec433e62757951
+  (defvar +vertico-current-arrow t)
+  (cl-defmethod vertico--format-candidate :around
+    (cand prefix suffix index start &context ((and +vertico-current-arrow
+                                                   (not (bound-and-true-p vertico-flat-mode)))
+                                              (eql t)))
+    (setq cand (cl-call-next-method cand prefix suffix index start))
+    (if (bound-and-true-p vertico-grid-mode)
+        (if (= vertico--index index)
+            (concat (nerd-icons-faicon "nf-fa-hand_o_right") " " cand)
+          (concat #("_" 0 1 (display " ")) cand))
+      (if (= vertico--index index)
+          (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") " " cand)
+        (concat "    " cand)))))
 
 (use-package vertico-prescient
   :straight t)
@@ -645,6 +660,8 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 *** LSP
 
+https://emacs-lsp.github.io/lsp-mode/
+
 #+begin_src emacs-lisp
 (use-package lsp-mode
   :straight t
@@ -655,6 +672,7 @@ https://github.com/hlissner/emacs-hide-mode-line
   (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 1024 1024))
 
+  ;; doc
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-header t)
   (lsp-ui-doc-include-signature t)
@@ -663,6 +681,7 @@ https://github.com/hlissner/emacs-hide-mode-line
   (lsp-ui-doc-use-childframe t)
   (lsp-ui-doc-use-webkit t)
 
+  ;; sideline
   (lsp-ui-sideline-enable nil)
   (lsp-ui-sideline-ignore-duplicate t)
   (lsp-ui-sideline-show-symbol t)
@@ -670,9 +689,11 @@ https://github.com/hlissner/emacs-hide-mode-line
   (lsp-ui-sideline-show-diagnostics nil)
   (lsp-ui-sideline-show-code-actions nil)
 
+  ;; imenu
   (lsp-ui-imenu-enable nil)
   (lsp-ui-imenu-kind-position 'top)
 
+  ;; peek
   (lsp-ui-peek-enable t)
   (lsp-ui-peek-show-directory t)
   (lsp-ui-peek-always-show t)
@@ -710,6 +731,8 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 *** Markdown
 
+https://jblevins.org/projects/markdown-mode/
+
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :straight t
@@ -720,6 +743,8 @@ https://github.com/hlissner/emacs-hide-mode-line
 #+end_src
 
 *** Lisp
+
+https://paredit.org/
 
 #+begin_src emacs-lisp
 (use-package paredit
