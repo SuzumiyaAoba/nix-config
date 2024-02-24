@@ -116,10 +116,11 @@
   (dired-isearch-filenames t))
 #+end_src
 
+https://github.com/Alexander-Miller/treemacs
+
 #+begin_src emacs-lisp
 (use-package treemacs
   :straight t
-  :defer t
   :bind (("C-\\" . treemacs))
   :custom
   (treemacs-user-mode-line-format 'none)
@@ -283,7 +284,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 #+begin_src emacs-lisp
 (use-package ddskk
   :straight t
-  :defer t
   :commands (skk-mode skk-latin-mode)
   :custom
   (default-input-method "japanese-skk")
@@ -353,7 +353,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 (use-package consult
   :straight t
-  :defer t
   :bind (("s-g" . consult-ripgrep)
          ("s-s" . consult-line)
          :map minibuffer-local-map
@@ -373,7 +372,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 (use-package consult-ghq
   :straight t
-  :defer t
   :commands (consult-ghq-switch-project)
   :bind (("C-c C-g" . consult-ghq-switch-project)))
 
@@ -408,7 +406,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 (use-package orderless
   :straight t
-  :defer t
   :custom
   (completion-styles '(orderless basic)))
 
@@ -421,7 +418,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 #+begin_src emacs-lisp
 (use-package anzu
   :straight t
-  :defer 1
   :diminish anzu-mode
   :commands (anzu-query-replace anzu-query-replace-regex anzu-mode-line)
   :bind (([remap query-replace] . anzu-query-replace)
@@ -431,7 +427,9 @@ https://github.com/hlissner/emacs-hide-mode-line
   :hook ((emacs-startup . (lambda () (global-anzu-mode +1))))
   :config
   (copy-face 'mode-line 'anzu-mode-line))
+#+end_src
 
+#+begin_src emacs-lisp
 (use-package migemo
   :straight t
   :custom
@@ -514,7 +512,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 #+begin_src emacs-lisp
 (use-package ace-window
   :straight t
-  :defer t
   :bind (("M-o" . other-window)
          ("C-x o" . ace-window))
   :custom
@@ -585,7 +582,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 (use-package magit
   :straight t
-  :defer t
   :commands (magit)
   :bind (("C-x g" . magit))
   :custom
@@ -634,7 +630,6 @@ https://github.com/hlissner/emacs-hide-mode-line
 
 (use-package tree-sitter
   :straight t
-  :defer t
   :diminish tree-sitter-mode
   :hook ((typescript-mode . tree-sitter-hl-mode)
          (tsx-ts-mode . tree-sitter-hl-mode)))
@@ -931,7 +926,6 @@ https://github.com/hlissner/emacs-hide-mode-line
   :straight (org-modern-indent :type git
                                :host github
                                :repo "jdtsmith/org-modern-indent")
-  :defer t
   :config
   (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
 #+end_src
