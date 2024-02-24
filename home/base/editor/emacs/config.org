@@ -780,6 +780,7 @@ https://emacs-lsp.github.io/lsp-mode/
   ;; imenu
   (lsp-ui-imenu-enable nil)
   (lsp-ui-imenu-kind-position 'top)
+  (lsp-ui-imenu-auto-refresh t)
 
   ;; peek
   (lsp-ui-peek-enable t)
