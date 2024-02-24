@@ -32,7 +32,7 @@
               (scroll-bar-mode -1)
               (tool-bar-mode -1)
               (menu-bar-mode -1)))
-  (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization)
+
   (my-func-called-at-gui-initialization))
 #+end_src
 
@@ -121,6 +121,8 @@
   :straight t
   :defer t
   :bind (("C-\\" . treemacs))
+  :custom
+  (treemacs-user-mode-line-format 'none)
   :config
   (treemacs-indent-guide-mode t)
   (treemacs-fringe-indicator-mode t)
@@ -162,17 +164,19 @@
 *** Themes
 
 #+begin_src emacs-lisp
-;; (use-package doom-themes
-;;   :straight t
-;;   :config
-;;   (setq doom-themes-enable-bold t
-;; 	doom-themes-enable-italic t)
-;;   (load-theme 'doom-one t))
+(use-package doom-themes
+  :disabled t
+  :straight t
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (load-theme 'doom-one t))
 
-;; (use-package one-themes
-;;   :straight t
-;;   :config
-;;   (load-theme 'one-light t))
+(use-package one-themes
+  :disabled t
+  :straight t
+  :config
+  (load-theme 'one-light t))
 
 (use-package gruvbox-theme
   :straight t
@@ -223,6 +227,17 @@
   :diminish nerd-icons-dired-mode
   :commands (nerd-icons-dired-mode)
   :hook ((dired-mode . nerd-icons-dired-mode)))
+#+end_src
+
+*** Hide
+
+https://github.com/hlissner/emacs-hide-mode-line
+
+#+begin_src emacs-lisp
+(use-package hide-mode-line
+  :straight t
+  :hook ((imenu-list-minor-mode . hide-mode-line-mode)
+         (minimap-mode          . hide-mode-line-mode)))
 #+end_src
 
 ** Tab
@@ -691,7 +706,9 @@
   :commands lsp-treemacs-errors-list)
 
 (use-package dap-mode
-  :straight t)
+  :straight t
+  :config
+  (dap-auto-configure-mode))
 #+end_src
 
 ** Languages
@@ -699,16 +716,12 @@
 *** Markdown
 
 #+begin_src emacs-lisp
-;;
-;; modes
-;;
-
 (use-package markdown-mode
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.mdx\\'" . markdown-mode))
-  :init
-  (setq markdown-command "multimarkdown"))
+  :command
+  (markdown-command "multimarkdown"))
 #+end_src
 
 *** Lisp
@@ -794,6 +807,16 @@
 (use-package zig-mode
   :straight t
   :mode (("\\.zig\\'" . zig-mode)))
+#+end_src
+
+*** Java
+
+#+begin_src emacs-lisp
+(use-package lsp-java
+  :straight t)
+
+(use-package dap-java
+  :ensure nil)
 #+end_src
 
 *** Scala
