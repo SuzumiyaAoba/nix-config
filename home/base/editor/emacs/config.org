@@ -295,11 +295,11 @@ https://github.com/purcell/exec-path-from-shell
 
 *** Icons
 
-#+begin_src emacs-lisp
-;;
-;; Icons
-;;
+- [[https://github.com/domtronn/all-the-icons.el][all-the-icons.el]]
+- [[https://github.com/rainstormstudio/nerd-icons.el][nerd-icons.el]]
+- [[https://github.com/sebastiencs/icons-in-terminal][icons-in-terminal]]
 
+#+begin_src emacs-lisp
 (use-package nerd-icons
   :straight t)
 
@@ -313,7 +313,7 @@ https://github.com/purcell/exec-path-from-shell
 
 *** Hide
 
-https://github.com/hlissner/emacs-hide-mode-line
+[[https://github.com/hlissner/emacs-hide-mode-line][hide-mode-line]]
 
 #+begin_src emacs-lisp
 (use-package hide-mode-line
@@ -323,6 +323,8 @@ https://github.com/hlissner/emacs-hide-mode-line
 #+end_src
 
 ** Tab
+
+[[https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/][記事]]を参考にタブ番号でアイコンを使うように設定する。
 
 #+begin_src emacs-lisp
 (use-package tab-bar
@@ -748,6 +750,11 @@ https://emacs-lsp.github.io/lsp-mode/
   :straight t
   :diminish lsp-lens-mode
   :commands lsp
+  :bind (("C-c C-r" . lsp-ui-peek-find-references)
+         ("C-c C-j" . lsp-ui-peek-find-definitions)
+         ("C-c i"   . lsp-ui-peek-find-implementation)
+         ("C-c m"   . lsp-ui-imenu)
+         ("C-c s"   . lsp-ui-sideline-mode))
   :custom
   ;; performance
   (setq gc-cons-threshold 100000000)
