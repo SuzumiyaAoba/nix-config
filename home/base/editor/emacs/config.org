@@ -1,15 +1,33 @@
 * SuzumiyaAoba's Emacs Configuration
 
-** Straight
+** straight.el/use-package
 
-#+begin_src emacs-lisp
-;; straight.el
-(use-package diminish
-  :straight t
-  :demand t)
-#+end_src
+=org-babel-load-file= で Emacs の設定ファイルを読み込む場合、
+org-mode のバージョンの不一致による警告、不具合が発生するため、
+straight.el/use-package の設定は =init.el= に記述して
+=org-babel-load-file= の呼び出しより前に straight.el でインストールした
+org-mode が読み込まれるように設定する。
 
+- https://github.com/radian-software/straight.el
+- https://jwiegley.github.io/use-package/
+  
 ** Emacs
+
+パッケージに依存しないEmacs に関する設定をする。
+
+*** Emacs Daemon
+
+Emacs デーモンを使っていると GUI/CUI で期待通りの設定が行えないことがある。
+Emacs デーモンを起動したとき =window-system= が =nil= になってしまっているため、
+=hook= を使わずに設定を記述すると GUI 用の設定が実行されない。
+
+そのため、こちらの[[https://minosjp.hatenablog.com/entry/2020/12/03/221536][記事]]を参考に、
+
+- =scroll-bar-mode=
+- =tool-bar-mode=
+- =menu-bar-mode=
+
+を無効化する設定を GUI で起動したときに走るように設定している。
 
 #+begin_src emacs-lisp
 ;; see: https://minosjp.hatenablog.com/entry/2020/12/03/221536
@@ -34,45 +52,62 @@
               (menu-bar-mode -1)))
 
   (my-func-called-at-gui-initialization))
+
+(add-hook 'after-init-hook #'my-gui-setup)
 #+end_src
+
+*** Basic
 
 #+begin_src emacs-lisp
 (use-package emacs
   :init
-  (add-hook 'after-init-hook #'my-gui-setup)
-
+  ;; スクロールバー非表示
   (scroll-bar-mode -1)
+  ;; ツールバー非表示
   (tool-bar-mode -1)
+  ;; メニューバー非表示
   (menu-bar-mode -1)
 
+  ;; ビープ音を消す
   (setq ring-bell-function 'ignore)
 
+  ;; プログラミング/テキストモードの場合に行番号表示
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
+  ;; ネイティブコンパイル時に発生したエラー・警告を無視
   (setq native-comp-async-report-warnings-errors nil)
 
+  ;; カスタムファイルの出力先を設定
   (setq custom-file "~/.emacs.d/custom.el")
   (if (file-exists-p "~/.emacs.d/custom.el")
       (load custom-file))
 
-  (setq scroll-margin 0
-        scroll-conservatively 100000
-        scroll-preserve-screen-position t)
-  (setq scroll-preserve-screen-position t)
+  ;; スクロールを滑らかにする
+  ;; (setq scroll-margin 0
+  ;;       scroll-conservatively 100000
+  ;;       scroll-preserve-screen-position t)
+  ;; (setq scroll-preserve-screen-position t)
+  (pixel-scroll-precision-mode t)
 
+  ;; 言語、文字コードを設定
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
   (set-default 'buffer-file-coding-system 'utf-8)
 
+  ;; ファイル変更をバッファに自動反映する
   (setq global-auto-revert-non-file-buffers t)
   (global-auto-revert-mode)
 
+  ;; ミニバッファの履歴を保存
   (savehist-mode)
+  ;; 最近使ったファイルを覚えていく
   (recentf-mode)
 
+  ;; 現在行をハイライト
   (global-hl-line-mode)
 
+  ;; インデントをスペースにする
   (setq-default indent-tabs-mode nil)
 
   (setq make-backup-files nil
@@ -80,6 +115,7 @@
         delete-by-moving-to-trash t
         vc-follow-symlinks t)
 
+  ;; ミニバッファの yes/no を y/n に変更
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   (setq completion-cycle-threshold 3)
@@ -108,6 +144,8 @@
 
 ** File Explorer
 
+*** Dired
+
 #+begin_src emacs-lisp
 (use-package dired
   :custom
@@ -115,6 +153,8 @@
   (dired-recursive-copies 'always)
   (dired-isearch-filenames t))
 #+end_src
+
+*** Treemacs
 
 https://github.com/Alexander-Miller/treemacs
 
@@ -152,6 +192,10 @@ https://github.com/Alexander-Miller/treemacs
 #+end_src
 
 ** Path
+
+シェルの環境変数を読み込む。
+
+https://github.com/purcell/exec-path-from-shell
 
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
@@ -194,14 +238,51 @@ https://github.com/Alexander-Miller/treemacs
 
 *** Modeline
 
+- https://github.com/seagle0128/doom-modeline
+- https://github.com/tarsius/moody
+
 #+begin_src emacs-lisp
 (use-package doom-modeline
   :straight t
-  :disabled t
+  :custom
+  (doom-modeline-support-imenu t)
+  (doom-modeline-height 26)
+  (doom-modeline-project-detection 'auto)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-major-mode-color-icon t)
+  (doom-modeline-buffer-state-icon t)
+  (doom-modeline-buffer-modification-icon t)
+  (doom-modeline-lsp-icon t)
+  (doom-modeline-time-icon t)
+  (doom-modeline-time-live-icon t)
+  (doom-modeline-buffer-name t)
+  (doom-modeline-highlight-modified-buffer-name t)
+  (doom-modeline-column-zero-based t)
+
+  (mode-line-percent-position nil)
+  (doom-modeline-position-line-format '("L%l"))
+  (doom-modeline-position-column-format '("C%c"))
+  (doom-modeline-position-column-line-format '("%l:%c"))  
+
+  (doom-modeline-buffer-encoding t)
+  (doom-modeline-total-line-number nil)
+
+  (doom-modeline-github t)
+  (doom-modeline-github-interval (* 30 60))
+
+  (doom-modeline-time t)
   :init
+  (column-number-mode)
   (doom-modeline-mode 1))
 
+(use-package nyan-mode
+  :straight t
+  :config
+  (nyan-mode))
+
 (use-package moody
+  :disabled t
   :straight t
   :custom
   (moody-mode-line-height 24)

@@ -14,6 +14,10 @@
 (straight-use-package 'use-package)
 (straight-use-package 'org)
 
+(use-package diminish
+  :straight t
+  :demand t)
+
 (use-package org
   :straight t
   :custom
