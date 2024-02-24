@@ -224,6 +224,7 @@ https://github.com/purcell/exec-path-from-shell
   (load-theme 'one-light t))
 
 (use-package gruvbox-theme
+  :disabled t
   :straight t
   :config
   (load-theme 'gruvbox-dark-hard t)
@@ -234,6 +235,17 @@ https://github.com/purcell/exec-path-from-shell
     (set-face-attribute 'mode-line-inactive nil :underline  line)
     (set-face-attribute 'mode-line          nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :box        nil)))
+
+(use-package modus-themes
+  :straight t
+  :config
+  ;; (load-theme 'modus-operandi t)
+  ;; (load-theme 'modus-operandi-tinted t)
+  ;; (load-theme 'modus-vivendi t)
+  (load-theme 'modus-vivendi-tinted t)
+  ;; (load-theme 'modus-vivendi-deuteranopia t)
+  ;; (load-theme 'modus-vivendi-tritanopia t)
+  )
 #+end_src
 
 *** Modeline
@@ -486,7 +498,9 @@ https://github.com/purcell/exec-path-from-shell
   (completion-styles '(basic))
   (corfu-popupinfo-delay nil)
   :config
-  (global-corfu-mode))
+  (global-corfu-mode)
+
+  (corfu-popupinfo-mode))
 
 (use-package corfu-terminal
   :straight t
@@ -626,9 +640,7 @@ https://github.com/purcell/exec-path-from-shell
   :hook
   (after-init . show-paren-mode)
   :custom
-  (show-paren-style 'mixed)
-  (show-paren-when-point-inside-paren t)
-  (show-paren-when-point-in-periphery t))
+  (show-paren-style 'mixed))
 
 (use-package smartparens
   :straight t
@@ -847,7 +859,7 @@ https://jblevins.org/projects/markdown-mode/
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.mdx\\'" . markdown-mode))
-  :command
+  :commands
   (markdown-command "multimarkdown"))
 #+end_src
 
