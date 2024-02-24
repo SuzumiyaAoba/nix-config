@@ -7,5 +7,6 @@
     ./clojure.nix
     ./python.nix
     ./go.nix
+    ./java.nix
   ];
 }

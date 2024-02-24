@@ -957,7 +957,11 @@ https://paredit.org/
 
 #+begin_src emacs-lisp
 (use-package lsp-java
-  :straight t)
+  :straight t
+  :config
+  (push (concat "-javaagent:"
+                (getenv "LOMBOK_JAR_PATH"))
+        lsp-java-vmargs))
 
 (use-package dap-java
   :ensure nil)

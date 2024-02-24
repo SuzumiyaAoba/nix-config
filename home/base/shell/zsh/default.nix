@@ -37,6 +37,8 @@
        fi
 
        source "$HOME/.config/zsh/init.zsh"
+
+       export LOMBOK_JAR_PATH=${pkgs.lombok}/share/java/lombok.jar
     '';
   };
 
