@@ -379,6 +379,21 @@ https://github.com/purcell/exec-path-from-shell
          :prefix-map tab-bar-prefix-map
          :prefix "C-t"
          ("C-t" . tabgo)))
+
+(use-package centaur-tabs
+  :disabled t
+  :straight t
+  :custom
+  (centaur-tabs-style "chamfer")
+  (centaur-tabs-plain-icons t)
+  (centaur-tabs-set-bar 'under)
+  (x-underline-at-descent-line t)
+  (centaur-tabs-set-modified-marker t)
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-icon-type 'nerd-icons)
+  :config
+  (centaur-tabs-mode t)
+  (centaur-tabs-headline-match))
 #+end_src
 
 ** IME
