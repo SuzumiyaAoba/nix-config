@@ -413,6 +413,7 @@ https://github.com/purcell/exec-path-from-shell
 
 (use-package ddskk-posframe
   :straight t
+  :after (ddskk)
   :custom
   (ddskk-posframe-mode t))
 #+end_src
