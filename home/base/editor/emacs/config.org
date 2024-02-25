@@ -876,7 +876,7 @@ https://emacs-lsp.github.io/lsp-mode/
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   :ensure t
-  :bind (("M-<tab>" . copilot-accept-completion))
+  :bind (("C-<tab>" . copilot-accept-completion))
   :hook ((prog-mode . copilot-mode)))
 #+end_src
 
