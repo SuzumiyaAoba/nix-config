@@ -454,9 +454,6 @@ https://github.com/purcell/exec-path-from-shell
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package prescient
-  :straight t)
-
 (use-package vertico
   :straight t
   :init
@@ -476,6 +473,18 @@ https://github.com/purcell/exec-path-from-shell
       (if (= vertico--index index)
           (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") " " cand)
         (concat "    " cand)))))
+
+(use-package extensions/vertico-directory
+  :straight (:type built-in)
+  :after vertico
+  :ensure nil
+  :bind (
+         :map vertico-map
+              ("C-l" . vertico-directory-up)
+              ("DEL" . vertico-directory-delete-char)))
+
+(use-package prescient
+  :straight t)
 
 (use-package vertico-prescient
   :straight t)
