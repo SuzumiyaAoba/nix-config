@@ -8,5 +8,6 @@
     ./python.nix
     ./go.nix
     ./java.nix
+    ./ruby.nix
   ];
 }
