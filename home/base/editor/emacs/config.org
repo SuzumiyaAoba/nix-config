@@ -900,7 +900,7 @@ https://jblevins.org/projects/markdown-mode/
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.mdx\\'" . markdown-mode))
-  :commands
+  :config
   (markdown-command "multimarkdown"))
 #+end_src
 
