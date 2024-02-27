@@ -306,13 +306,6 @@ https://github.com/purcell/exec-path-from-shell
   (moody-replace-eldoc-minibuffer-message-function))
 #+end_src
 
-#+begin_src emacs-lisp
-(use-package keycast
-  :straight t
-  :config
-  (keycast-tab-bar-mode))
-#+end_src
-
 *** Icons
 
 - [[https://github.com/domtronn/all-the-icons.el][all-the-icons.el]]
@@ -402,6 +395,13 @@ https://github.com/purcell/exec-path-from-shell
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-headline-match))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package keycast
+  :straight t
+  :config
+  (keycast-tab-bar-mode))
 #+end_src
 
 ** IME
