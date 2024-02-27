@@ -309,20 +309,8 @@ https://github.com/purcell/exec-path-from-shell
 #+begin_src emacs-lisp
 (use-package keycast
   :straight t
-  :bind ("C-c t k" . +toggle-keycast)
   :config
-
-  (defun +toggle-keycast()
-    (interactive)
-    (if (member '("" keycast-mode-line " ") global-mode-string)
-        (progn (setq global-mode-string (delete '("" keycast-mode-line " ") global-mode-string))
-               (remove-hook 'pre-command-hook 'keycast--update)
-               (message "Keycast disabled"))
-      (add-to-list 'global-mode-string '("" keycast-mode-line " "))
-      (add-hook 'pre-command-hook 'keycast--update t)
-      (message "Keycast enabled")))
-
-  (+toggle-keycast))
+  (keycast-tab-bar-mode))
 #+end_src
 
 *** Icons
