@@ -306,6 +306,25 @@ https://github.com/purcell/exec-path-from-shell
   (moody-replace-eldoc-minibuffer-message-function))
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package keycast
+  :straight t
+  :bind ("C-c t k" . +toggle-keycast)
+  :config
+
+  (defun +toggle-keycast()
+    (interactive)
+    (if (member '("" keycast-mode-line " ") global-mode-string)
+        (progn (setq global-mode-string (delete '("" keycast-mode-line " ") global-mode-string))
+               (remove-hook 'pre-command-hook 'keycast--update)
+               (message "Keycast disabled"))
+      (add-to-list 'global-mode-string '("" keycast-mode-line " "))
+      (add-hook 'pre-command-hook 'keycast--update t)
+      (message "Keycast enabled")))
+
+  (+toggle-keycast))
+#+end_src
+
 *** Icons
 
 - [[https://github.com/domtronn/all-the-icons.el][all-the-icons.el]]
@@ -900,7 +919,7 @@ https://jblevins.org/projects/markdown-mode/
   :straight t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.mdx\\'" . markdown-mode))
-  :config
+  :custom
   (markdown-command "multimarkdown"))
 #+end_src
 
