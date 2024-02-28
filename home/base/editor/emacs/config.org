@@ -647,6 +647,10 @@ https://github.com/purcell/exec-path-from-shell
   :straight t
   :bind (("s-g" . affe-grep)
          ("s-f" . affe-find))
+  :custom
+  (affe-highlight-function 'orderless-highlight-matches)
+  (affe-regexp-function 'orderless-pattern-compiler)
+  (affe-find-command "fd --color=never --full-path")
   :config
   (consult-customize affe-grep :preview-key "M-."))
 #+end_src
