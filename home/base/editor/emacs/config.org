@@ -503,8 +503,8 @@ https://github.com/purcell/exec-path-from-shell
 
 (use-package consult
   :straight t
-  :bind (("s-g" . consult-ripgrep)
-         ("s-s" . consult-line)
+  :bind (("s-s" . consult-line)
+         ("C-x b" . consult-buffer)
          :map minibuffer-local-map
          ("M-s" . consult-hisotry)
          ("M-r" . consult-history))
@@ -513,7 +513,8 @@ https://github.com/purcell/exec-path-from-shell
   (consult-preview-max-size 1024000)
   :config
   (consult-customize
-   consult-buffer :preview-key "M-."))
+   consult-buffer consult-recent-file
+   :preview-key "M-."))
 
 (use-package nerd-icons-completion
   :straight t
@@ -604,6 +605,15 @@ https://github.com/purcell/exec-path-from-shell
           (lambda (str)
             (consult--highlight-regexps consult--migemo-regexp t str))))
   (setq consult--regexp-compiler #'consult--migemo-regexp-compiler))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package affe
+  :straight t
+  :bind (("s-g" . affe-grep)
+         ("s-f" . affe-find))
+  :config
+  (consult-customize affe-grep :preview-key "M-."))
 #+end_src
 
 ** Hightlights
