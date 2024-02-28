@@ -505,15 +505,29 @@ https://github.com/purcell/exec-path-from-shell
 
 (use-package consult
   :straight t
-  :bind (("s-s" . consult-line)
+  :bind (("C-s" . consult-line-at)
          ("C-x b" . consult-buffer)
+         ([remap goto-line] . consult-goto-line)
          :map minibuffer-local-map
          ("M-s" . consult-hisotry)
-         ("M-r" . consult-history))
+         ("M-r" . consult-history)
+         :map vertico-map
+         ("C-r" . vertico-previous)
+         ("C-s" . vertico-next))
   :custom
   (consult-preview-raw-size 1024000)
   (consult-preview-max-size 1024000)
+
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref)
   :config
+  (defun consult-line-at (&optional at-point)
+    "Consult-line uses things-at-point if set C-u prefix."
+    (interactive "P")
+    (if at-point
+        (consult-line (thing-at-point 'symbol))
+      (consult-line)))
+
   (consult-customize
    consult-buffer consult-recent-file
    :preview-key "M-."))
@@ -566,6 +580,25 @@ https://github.com/purcell/exec-path-from-shell
 
 (use-package corfu-prescient
   :straight t)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package embark
+  :straight t
+  :bind (("C-." . embark-act)
+         ("C-:" . embark-dwin))
+  :custom
+  (embark-indicators '(embark-minimal-indicator))
+  :config
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :straight t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
 
 ** Search/Replace
