@@ -970,6 +970,13 @@ https://emacs-lsp.github.io/lsp-mode/
 
 ** Languages
 
+#+begin_src emacs-lisp
+(use-package valign
+  :straight t
+  :hook ((org-mode . valign-mode)
+         (markdown-mode . valign-mode)))
+#+end_src
+
 *** Markdown
 
 https://jblevins.org/projects/markdown-mode/
