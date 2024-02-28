@@ -463,9 +463,9 @@ https://github.com/purcell/exec-path-from-shell
 #+begin_src emacs-lisp
 (use-package vertico
   :straight t
+  :custom
+  (vertico-count 20)
   :init
-  (vertico-mode)
-
   ;; see: https://qiita.com/nobuyuki86/items/4150d5ec433e62757951
   (defvar +vertico-current-arrow t)
   (cl-defmethod vertico--format-candidate :around
@@ -479,7 +479,9 @@ https://github.com/purcell/exec-path-from-shell
           (concat #("_" 0 1 (display " ")) cand))
       (if (= vertico--index index)
           (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") " " cand)
-        (concat "    " cand)))))
+        (concat "    " cand))))
+  :config
+  (vertico-mode))
 
 (use-package extensions/vertico-directory
   :straight (:type built-in)
@@ -536,7 +538,7 @@ https://github.com/purcell/exec-path-from-shell
   :custom
   (corfu-auto t)
   (corfu-auto-delay 0)
-  (completion-styles '(basic))
+  (completion-styles '(orderless))
   (corfu-popupinfo-delay nil)
   :config
   (global-corfu-mode)
