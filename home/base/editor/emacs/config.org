@@ -1003,6 +1003,7 @@ https://paredit.org/
 #+begin_src emacs-lisp
 (use-package lsp-java
   :straight t
+  :hook ((java-mode . lsp))
   :config
   (push (concat "-javaagent:"
                 (getenv "LOMBOK_JAR_PATH"))
