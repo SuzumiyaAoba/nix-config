@@ -335,6 +335,25 @@ https://github.com/purcell/exec-path-from-shell
          (minimap-mode          . hide-mode-line-mode)))
 #+end_src
 
+*** Cusor
+
+#+begin_src emacs-lisp
+(use-package pulsar
+  :straight t
+  :hook ((consult-after-jump . pulsar-recenter-top)
+         (consult-after-jump . pulsar-recenter-entry))
+  :custom
+  (pulsar-pulse t)
+  (pulsar-delay 0.08)
+  (pulsar-iterations 10)
+  (pulsar-face 'pulsar-magenta)
+  (pulsar-highlight-face 'pulsar-yellow)
+  :config
+  (add-to-list 'pulsar-pulse-functions 'ace-window)
+
+  (pulsar-global-mode +1))
+#+end_src
+
 ** Tab
 
 [[https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/][記事]]を参考にタブ番号でアイコンを使うように設定する。
@@ -508,6 +527,8 @@ https://github.com/purcell/exec-path-from-shell
   :bind (("C-s" . consult-line-at)
          ("C-x b" . consult-buffer)
          ([remap goto-line] . consult-goto-line)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
          :map minibuffer-local-map
          ("M-s" . consult-hisotry)
          ("M-r" . consult-history)
