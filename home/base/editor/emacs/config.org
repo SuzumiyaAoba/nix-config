@@ -578,11 +578,14 @@ https://github.com/purcell/exec-path-from-shell
   (corfu-auto t)
   (corfu-auto-delay 0)
   (completion-styles '(orderless))
-  (corfu-popupinfo-delay nil)
+  (corfu-popupinfo-delay 0)
   :config
-  (global-corfu-mode)
+  (global-corfu-mode))
 
-  (corfu-popupinfo-mode))
+(use-package corfu-popupinfo
+  :straight nil
+  :after corfu
+  :hook (corfu-mode . corfu-popupinfo-mode))
 
 (use-package corfu-terminal
   :straight t
