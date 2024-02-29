@@ -10,6 +10,10 @@ org-mode が読み込まれるように設定する。
 
 - https://github.com/radian-software/straight.el
 - https://jwiegley.github.io/use-package/
+
+#+begin_src emacs-lisp
+(straight-use-package 'el-patch)
+#+end_src
   
 ** Emacs
 
@@ -341,7 +345,7 @@ https://github.com/purcell/exec-path-from-shell
 (use-package pulsar
   :straight t
   :hook ((consult-after-jump . pulsar-recenter-top)
-         (consult-after-jump . pulsar-recenter-entry))
+         (consult-after-jump . pulsar-reveal-entry))
   :custom
   (pulsar-pulse t)
   (pulsar-delay 0.08)
@@ -744,7 +748,11 @@ https://github.com/purcell/exec-path-from-shell
    '(aw-leading-char-face
      ((t
        (:foreground "deep sky blue" :bold t :height 3.0))))))
+#+end_src
 
+** Parens
+
+#+begin_src emacs-lisp
 (use-package paren
   :ensure nil
   :hook
@@ -772,6 +780,8 @@ https://github.com/purcell/exec-path-from-shell
   (which-key-setup-side-window-bottom))
 #+end_src
 
+** Project
+
 #+begin_src emacs-lisp
 (use-package projectile
   :straight t
@@ -791,6 +801,52 @@ https://github.com/purcell/exec-path-from-shell
   :straight t
   :hook ((git-commit-mode . fci-mode)))
 #+end_src
+
+#+begin_src emacs-lisp
+(use-package imenu-list
+  :straight t
+  :bind (("C-'" . imenu-list-smart-toggle))
+  :custom
+  (imenu-list-focus-after-activation t)
+  (imenu-list-auto-resize nil)
+  (org-imenu-depth 6)
+  :config
+  (defun entry-icon (entry)
+    (pcase entry
+      ("Variable" "")
+      ("Variables" "")
+      ("Constant" "")
+      ("Types" "")
+      ("Function" "")
+      ("Method" "")
+      ("Field" "")
+      ("Class" "")
+      ("Interface" "")
+      (_ "")))
+
+  :config/el-patch
+  (el-patch-defun imenu-list--insert-entry (entry depth)
+    "Insert a line for ENTRY with DEPTH."
+    (if (imenu--subalist-p entry)
+        (progn
+          (insert (imenu-list--depth-string depth))
+          (insert-button (format "%s %s" (entry-icon (car entry)) (car entry))
+                         'face (imenu-list--get-face depth t)
+                         'help-echo (format "Toggle: %s"
+                                            (car entry))
+                         'follow-link t
+                         'action ;; #'imenu-list--action-goto-entry
+                         #'imenu-list--action-toggle-hs)
+          (insert "\n"))
+      (insert (imenu-list--depth-string depth))
+      (insert-button (format "%s" (car entry))
+                     'face (imenu-list--get-face depth nil)
+                     'help-echo (format "Go to: %s"
+                                        (car entry))
+                     'follow-link t
+                     'action #'imenu-list--action-goto-entry)
+      (insert "\n"))))
+      #+end_src
 
 ** Git
 
@@ -1134,7 +1190,7 @@ https://paredit.org/
   :custom
   (system-time-locate nil)
   (org-startup-with-inline-images t)
-  (org-hide-leading-stars t)
+  ;; (org-hide-leading-stars t)
   (org-ellipsis " ▼")
   (org-fontify-quote-and-verse-blocks t)
   (org-use-speed-commands t)
@@ -1170,6 +1226,7 @@ https://paredit.org/
   (setq org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")))
 
 (use-package org-bars
+  :disabled t
   :straight (org-bars :type git
                       :host github
                       :repo "tonyaldon/org-bars")
@@ -1181,7 +1238,7 @@ https://paredit.org/
   :straight t
   :hook ((emacs-startup . global-org-modern-mode))
   :custom
-  (org-modern-hidE-stars nil)
+  (org-modern-hide-stars "")
   (org-modern-list
    '((?- . "-")
      (?* . "•")
