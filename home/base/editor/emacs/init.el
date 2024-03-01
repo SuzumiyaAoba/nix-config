@@ -25,6 +25,9 @@
   (org-edit-src-content-indentation 0)
   (org-src-tab-acts-natively t)
   :config
+  (if (file-exists-p (expand-file-name "config.el" user-emacs-directory))
+      (delete-file (expand-file-name "config.el" user-emacs-directory)))
+  
   (org-babel-load-file
    (expand-file-name "config.org"
                      user-emacs-directory)))
