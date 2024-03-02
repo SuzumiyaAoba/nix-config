@@ -561,8 +561,10 @@ https://github.com/purcell/exec-path-from-shell
       (consult-line)))
 
   (consult-customize
-   consult-buffer consult-recent-file
-   :preview-key "M-."))
+   consult-buffer
+   consult-recent-file
+   consult-xref
+   :preview-key '(:debounce 0.4 any)))
 
 (use-package nerd-icons-completion
   :straight t
@@ -1016,8 +1018,8 @@ https://emacs-lsp.github.io/lsp-mode/
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-lens-mode)
          (scala-mode . lsp)
-         (typescript-ts-mode . lsp)
-         (tsx-ts-mode . lsp))
+         (typescript-ts-mode . lsp-deferred)
+         (tsx-ts-mode . lsp-deferred))
   :config
   (with-eval-after-load 'lsp-mode
     (setq lsp-completion-provider :none))
@@ -1165,8 +1167,8 @@ https://paredit.org/
 #+begin_src emacs-lisp
 (use-package lsp-java
   :straight t
-  :hook ((java-mode . lsp)
-         (java-ts-mode . lsp)
+  :hook ((java-mode . lsp-deferred)
+         (java-ts-mode . lsp-deferred)
          (java-mode . (lambda ()
                         (setq c-basic-offset 2)))
          (java-ts-mode . (lambda ()
