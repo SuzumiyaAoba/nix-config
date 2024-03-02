@@ -939,9 +939,30 @@ https://github.com/purcell/exec-path-from-shell
 #+begin_src emacs-lisp
 (use-package consult-gh
   :straight (consult-gh :type git :host github :repo "armindarvish/consult-gh")
-  :after consult)
+  :after (consult forge)
+  :custom
+  (consult-gh-preview-key "M-.")
+  (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
+  (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
+  :config
+  (require 'consult-gh-embark)
+  (require 'consult-gh-forge))
   #+END_src
 
+**** Notification
+
+#+begin_src emacs-lisp
+(use-package gh-notify
+  :straight t)
+#+end_src
+
+
+**** Review
+
+#+begin_src emacs-lisp
+(use-package github-review
+  :straight t)
+#+end_src
 
 ** Programming
 
