@@ -22,5 +22,6 @@
     ./gh-dash.nix
     ./ditaa.nix
     ./cmigemo.nix
+    ./gnupg.nix
   ];
 }
