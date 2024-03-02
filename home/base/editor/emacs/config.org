@@ -668,6 +668,7 @@ https://github.com/purcell/exec-path-from-shell
 
 #+begin_src emacs-lisp
 (use-package migemo
+  :disabled t
   :straight t
   :custom
   (migemo-command "cmigemo")
@@ -907,14 +908,16 @@ https://github.com/purcell/exec-path-from-shell
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 #+end_src
 
-*** ghub
+*** GitHub
+
+**** ghub
 
 #+begin_src emacs-lisp
 (use-package ghub
   :straight t)
 #+end_src
 
-*** forge
+**** forge
 
 #+begin_src emacs-lisp
 (use-package forge
@@ -923,6 +926,22 @@ https://github.com/purcell/exec-path-from-shell
   :config
   (require 'forge))
 #+end_src
+
+**** gh
+
+#+begin_src emacs-lisp
+(use-package gh
+  :straight t)
+#+end_src
+
+**** consult-gh
+
+#+begin_src emacs-lisp
+(use-package consult-gh
+  :straight (consult-gh :type git :host github :repo "armindarvish/consult-gh")
+  :after consult)
+  #+END_src
+
 
 ** Programming
 

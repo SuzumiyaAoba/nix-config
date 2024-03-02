@@ -19,6 +19,7 @@
     ./zoxide.nix
     ./cargo-make.nix
     ./kustomize.nix
+    ./gh.nix
     ./gh-dash.nix
     ./ditaa.nix
     ./cmigemo.nix
