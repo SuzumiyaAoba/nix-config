@@ -1074,6 +1074,8 @@ https://emacs-lsp.github.io/lsp-mode/
          (markdown-mode . valign-mode)))
 #+end_src
 
+** Writing
+
 *** Markdown
 
 https://jblevins.org/projects/markdown-mode/
@@ -1085,6 +1087,13 @@ https://jblevins.org/projects/markdown-mode/
          ("\\.mdx\\'" . markdown-mode))
   :custom
   (markdown-command "multimarkdown"))
+#+end_src
+
+*** writeroom-mode
+
+#+begin_src emacs-lisp
+(use-package writeroom-mode
+  :straight t)
 #+end_src
 
 *** Lisp
