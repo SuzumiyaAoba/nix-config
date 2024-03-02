@@ -1110,6 +1110,11 @@ https://paredit.org/
   (define-key paredit-mode-map (kbd "C-j") nil))
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package slime
+  :straight t)
+#+end_src
+
 **** Clojure
 
 #+begin_src emacs-lisp
