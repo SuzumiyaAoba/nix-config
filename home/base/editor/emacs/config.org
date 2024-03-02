@@ -346,7 +346,7 @@ https://github.com/purcell/exec-path-from-shell
          (minimap-mode          . hide-mode-line-mode)))
 #+end_src
 
-*** Cusor
+*** Cursor
 
 #+begin_src emacs-lisp
 (use-package pulsar
@@ -363,6 +363,19 @@ https://github.com/purcell/exec-path-from-shell
   (add-to-list 'pulsar-pulse-functions 'ace-window)
 
   (pulsar-global-mode +1))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package mwim
+  :straight t
+  :bind (("C-a" . mwim-beginning)
+         ("C-e" . mwim-end)))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package avy
+  :straight t
+  :bind (("C-:" . avy-goto-char)))
 #+end_src
 
 ** Tab
@@ -634,8 +647,7 @@ https://github.com/purcell/exec-path-from-shell
 #+begin_src emacs-lisp
 (use-package embark
   :straight t
-  :bind (("C-." . embark-act)
-         ("C-:" . embark-dwin))
+  :bind (("C-." . embark-act))
   :custom
   (embark-indicators '(embark-minimal-indicator))
   :config
