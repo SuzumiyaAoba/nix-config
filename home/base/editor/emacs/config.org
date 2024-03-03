@@ -1090,6 +1090,12 @@ https://github.com/purcell/exec-path-from-shell
   :bind (("C-x g" . magit))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+
+(use-package magit-todos
+  :straight t
+  :after magit
+  :config
+  (magit-todos-mode 1))
 #+end_src
 
 *** GitHub
