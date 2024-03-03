@@ -213,6 +213,7 @@ https://github.com/Alexander-Miller/treemacs
 
 #+begin_src emacs-lisp
 (use-package treemacs
+  :disabled t
   :straight t
   :bind (("C-\\" . treemacs))
   :custom
@@ -225,23 +226,57 @@ https://github.com/Alexander-Miller/treemacs
   (treemacs-git-mode 'deferred))
 
 (use-package treemacs-nerd-icons
+  :disabled t
   :straight t
   :after treemacs
   :config
   (treemacs-load-theme "nerd-icons"))
 
 (use-package treemacs-projectile
+  :disabled t
   :straight t
   :after (treemacs projectile))
 
 (use-package treemacs-magit
+  :disabled t
   :straight t
   :after (treemacs magit))
 
 (use-package treemacs-tab-bar
+  :disabled t
   :straight t
   :after treemacs
   :config (treemacs-set-scope-type 'Tabs))
+#+end_src
+
+*** dirvish
+
+#+begin_src emacs-lisp
+(use-package dirvish
+  :straight t
+  :bind (("C-\\" . dirvish-side)
+         :map dirvish-mode-map
+         ("TAB" . dirvish-subtree-toggle))
+  :custom
+  (dirvish-attributes
+   '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size))
+  (dirvish-subtree-state-style 'nerd)
+  (dirvish-use-header-line 'global)
+  (delete-by-moving-to-trash t)
+  (dired-listing-switches
+   "-l --almost-all --human-readable --group-directories-first --no-group")
+  :config
+  (dirvish-override-dired-mode +1)
+  (dirvish-peek-mode +1)
+  (dirvish-side-follow-mode +1))
+
+(use-package diredfl
+  :straight t
+  :hook ((dired-mode . diredfl-mode)
+   ;; highlight parent and directory preview as well
+   (dirvish-directory-view-mode . diredfl-mode))
+  :config
+  (set-face-attribute 'diredfl-dir-name nil :bold t))
 #+end_src
 
 ** Path
@@ -377,7 +412,8 @@ https://github.com/purcell/exec-path-from-shell
   :after nerd-icons
   :diminish nerd-icons-dired-mode
   :commands (nerd-icons-dired-mode)
-  :hook ((dired-mode . nerd-icons-dired-mode)))
+  ;; :hook ((dired-mode . nerd-icons-dired-mode))
+  )
 #+end_src
 
 *** Hide
