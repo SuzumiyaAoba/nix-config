@@ -24,5 +24,6 @@
     ./ditaa.nix
     ./cmigemo.nix
     ./gnupg.nix
+    ./ast-grep.nix
   ];
 }
