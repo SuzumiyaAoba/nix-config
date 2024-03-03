@@ -25,5 +25,6 @@
     ./cmigemo.nix
     ./gnupg.nix
     ./ast-grep.nix
+    ./hexyl.nix
   ];
 }
