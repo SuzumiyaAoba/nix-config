@@ -967,7 +967,7 @@ https://github.com/purcell/exec-path-from-shell
 #+begin_src emacs-lisp
 (use-package dashboard
   :straight t
-  :aftger (nerd-icons)
+  :after (nerd-icons)
   :custom
   (dashboard-startup-banner nil)
 
@@ -1410,6 +1410,7 @@ https://emacs-lsp.github.io/lsp-mode/
   :bind (([remap xref-find-apropos] . consult-lsp-symbols))
   :straight t)
 #+end_src
+
 ** GitHub Copilot
 
 #+begin_src emacs-lisp
@@ -1422,6 +1423,16 @@ https://emacs-lsp.github.io/lsp-mode/
   :hook ((prog-mode . copilot-mode))
   :custom
   (copilot-indent-offset-warning-disable t))
+#+end_src
+
+** Refactoring
+
+*** DONE Emacs Refactor (EMR)
+
+#+begin_src emacs-lisp
+(use-package emr
+  :straight t
+  :bind (("M-RET" . emr-show-refactor-menu)))
 #+end_src
 
 ** Languages
