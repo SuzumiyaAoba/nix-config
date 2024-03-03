@@ -322,6 +322,10 @@ https://github.com/purcell/exec-path-from-shell
 
 (use-package nyan-mode
   :straight t
+  :custom
+  (nyan-cat-face-number 4)
+  (nyan-animate-nyancat t)
+  (nyan-wavy-trail nil)
   :config
   (nyan-mode))
 
