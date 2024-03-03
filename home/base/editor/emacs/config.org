@@ -183,29 +183,6 @@ https://ladicle.com/post/config/#change-smart-kill-word
 (global-set-key (kbd "C-w")  'backward-kill-word-or-region)
 #+end_src
 
-** TODO Dashboard
-
-[[https://github.com/emacs-dashboard/emacs-dashboard][dashboard]]
-
-#+begin_src emacs-lisp
-(use-package dashboard
-  :straight t
-  :custom
-  (dashboard-startup-banner nil)
-
-  (dashboard-icon-type 'nerd-icons)
-  (dashboard-display-icons-p t)
-
-  (initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-    (dashboard-center-content t)
-  (dashboard-items '((recents . 15)
-                     (agenda . 5)
-                     (projects . 5)
-                     (bookmarks . 5)))
-  :config
-  (dashboard-setup-startup-hook))
-#+end_src
-
 ** File Explorer
 
 ファイル操作関連の設定。
@@ -982,6 +959,36 @@ https://github.com/purcell/exec-path-from-shell
   (which-key-setup-side-window-bottom))
 #+end_src
 
+
+** TODO Dashboard
+
+[[https://github.com/emacs-dashboard/emacs-dashboard][dashboard]]
+
+#+begin_src emacs-lisp
+(use-package dashboard
+  :straight t
+  :aftger (nerd-icons)
+  :custom
+  (dashboard-startup-banner nil)
+
+  (dashboard-display-icons-p t)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-icon-type 'nerd-icons)
+
+  (initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (dashboard-center-content t)
+  (dashboard-items '((recents . 15)
+                     (agenda . 5)
+                     (projects . 5)
+                     (bookmarks . 5)))
+  :config
+  (dashboard-modify-heading-icons '((recents   . "nf-oct-file")
+                                    (bookmarks . "nf-oct-book")))
+
+  (dashboard-setup-startup-hook))
+#+end_src
+
 ** Project
 
 #+begin_src emacs-lisp
@@ -1160,6 +1167,8 @@ https://jblevins.org/projects/markdown-mode/
 
 #+begin_src emacs-lisp
 (use-package org
+  :hook ((org-mode . (lambda ()
+                       (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
   :custom
   (org-src-fontify-natively t)
 
