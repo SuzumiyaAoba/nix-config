@@ -832,6 +832,14 @@ https://github.com/purcell/exec-path-from-shell
        (:foreground "deep sky blue" :bold t :height 3.0))))))
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package highlight-symbol
+  :straight t
+  :bind (("C-=" . highlight-symbol)
+         ("M-n" . highlight-symbol-next)
+         ("M-p" . highlight-symbol-prev)))
+#+end_src
+
 ** Parens
 
 #+begin_src emacs-lisp
