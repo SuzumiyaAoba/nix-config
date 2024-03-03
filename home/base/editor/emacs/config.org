@@ -531,6 +531,16 @@ https://github.com/purcell/exec-path-from-shell
   (global-undo-tree-mode))
 #+end_src
 
+** Shell
+
+#+begin_src emacs-lisp
+(use-package eshell-p10k
+  :straight (eshell-p10k :type git :host github :repo "elken/eshell-p10k")
+  :custom
+  (eshell-prompt-function #'eshell-p10k-prompt-function
+                          eshell-prompt-regexp eshell-p10k-prompt-string))
+#+end_src
+
 ** Flymake
 
 #+begin_src emacs-lisp
