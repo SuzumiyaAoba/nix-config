@@ -1146,7 +1146,6 @@ https://github.com/purcell/exec-path-from-shell
   :straight t)
 #+end_src
 
-
 **** Review
 
 #+begin_src emacs-lisp
@@ -1263,6 +1262,30 @@ https://jblevins.org/projects/markdown-mode/
   :straight t
   :config
   (org-super-agenda-mode))
+#+end_src
+
+**** org-roam
+
+#+begin_src emacs-lisp
+(use-package org-roam
+  :straight t
+  :init
+  (unless (file-exists-p "~/org-roam")
+    (make-directory "~/org-roam"))
+  :custom
+  (org-roam-db-location "~/.emacs.d/org-roam.db")
+  (org-roam-database-connector 'sqlite-builtin)
+  (org-roam-directory (file-truename "~/org-roam"))
+  :config
+  (org-roam-db-autosync-mode))
+
+(use-package org-roam-ui
+  :straight t
+  :after org-roam
+  :custom
+  (org-roam-ui-sync-theme t)
+  (org-roam-ui-update-on-save t)
+  (org-roam-ui-open-on-start t))
 #+end_src
 
 *** writeroom-mode
