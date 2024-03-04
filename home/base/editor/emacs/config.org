@@ -1187,6 +1187,13 @@ https://jblevins.org/projects/markdown-mode/
   (org-display-custom-times t)
   (org-image-actual-width nil)
 
+  (org-todo-keywords
+   '((sequence "TODO(t)" "WAIT(w)" "WIP(p)" "REMIND(r)" "SOMEDAY(s)" "|" "DONE(d)")))
+  (org-enforce-todo-dependencies t)
+
+  ;; org-agenda
+  (org-agenda-files '("~/org-roam" "~/org-roam/daily"))
+  (org-agenda-span 'day)
   (org-agenda-tags-column 0)
   (org-agenda-block-separator ?─)
   (org-agenda-time-grid
@@ -1211,8 +1218,7 @@ https://jblevins.org/projects/markdown-mode/
                                                (t 'org-agenda-date))))
                                     ;; 今日は色を反転
                                     (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face))))
-  :config
-  (setq org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")))
+  (org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")))
 
 (use-package org-bars
   :disabled t
@@ -1258,10 +1264,26 @@ https://jblevins.org/projects/markdown-mode/
   :config
   (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
 
+(use-package japanese-holidays
+  :straight t)
+
 (use-package org-super-agenda
   :straight t
+  :after (japanese-holidays)
   :config
-  (org-super-agenda-mode))
+  (org-super-agenda-mode +1)
+
+  (let ((org-super-agenda-groups '(
+                                   (:name "Today"
+                                          :time-grid t
+                                          :todo "TODAY")
+                                   (:name "Important"
+                                          :priority "A")
+                                   (:todo "WAITING" :order 8)
+                                   (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
+                                          :order 9)
+                                   (:priority<= "B" :order 1))))
+    (org-agenda nil "a")))
 #+end_src
 
 **** org-roam
@@ -1269,6 +1291,9 @@ https://jblevins.org/projects/markdown-mode/
 #+begin_src emacs-lisp
 (use-package org-roam
   :straight t
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
   :init
   (unless (file-exists-p "~/org-roam")
     (make-directory "~/org-roam"))
@@ -1276,8 +1301,12 @@ https://jblevins.org/projects/markdown-mode/
   (org-roam-db-location "~/.emacs.d/org-roam.db")
   (org-roam-database-connector 'sqlite-builtin)
   (org-roam-directory (file-truename "~/org-roam"))
+
+  (org-roam-dailies-capture-templates
+   '(("d" "default" entry "* %<%I:%M %p>: %?"
+      :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+filetags: :日記:\n"))))
   :config
-  (org-roam-db-autosync-mode))
+  (org-roam-db-autosync-mode +1))
 
 (use-package org-roam-ui
   :straight t
