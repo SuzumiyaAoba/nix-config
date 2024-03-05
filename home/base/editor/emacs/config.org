@@ -1,11 +1,8 @@
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [1/3]
-:PROPERTIES:
-:COOKIE_DATA: todo recursive
-:END:
+* SuzumiyaAoba's Emacs Configuration [9/18]
 
-** Package Manager/Configuration
+** Package Manager/Configuration [2/2]
 
 *** DONE straight.el
 
@@ -26,7 +23,7 @@ org-mode が読み込まれるように設定している。
 (straight-use-package 'el-patch)
 #+end_src
 
-** Emacs
+** Emacs [0/3]
 
 パッケージに依存しないEmacs に関する設定をする。
 
@@ -183,11 +180,11 @@ https://ladicle.com/post/config/#change-smart-kill-word
 (global-set-key (kbd "C-w")  'backward-kill-word-or-region)
 #+end_src
 
-** File Explorer
+** File Explorer [0/0]
 
 ファイル操作関連の設定。
 
-*** Dired
+*** TODO Dired
 
 #+begin_src emacs-lisp
 (use-package dired
@@ -200,9 +197,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (require 'dired-x))
 #+end_src
 
-*** Treemacs
+*** TODO Treemacs
 
-[[https://github.com/Alexander-Miller/treemacs][treemacs]]
++ GitHub :: https://github.com/Alexander-Miller/treemacs
 
 #+begin_src emacs-lisp
 (use-package treemacs
@@ -276,7 +273,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 シェルの環境変数を読み込む。
 
-https://github.com/purcell/exec-path-from-shell
++ GitHub :: https://github.com/purcell/exec-path-from-shell
 
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
@@ -350,7 +347,7 @@ https://github.com/purcell/exec-path-from-shell
 
 **** doom-modeline
 
-[[https://github.com/seagle0128/doom-modeline][doom-modeline]]
++ GitHub :: https://github.com/seagle0128/doom-modeline
 
 #+begin_src emacs-lisp
 (use-package doom-modeline
@@ -544,7 +541,9 @@ https://github.com/purcell/exec-path-from-shell
   (centaur-tabs-headline-match))
 #+end_src
 
-*** keycast
+*** DONE keycast
+
++ GitHub :: https://github.com/tarsius/keycast
 
 #+begin_src emacs-lisp
 (use-package keycast
@@ -579,7 +578,10 @@ https://github.com/purcell/exec-path-from-shell
   (ddskk-posframe-mode t))
 #+end_src
 
-** Undo/Redo
+** DONE Undo/Redo
+
++ GitHub :: https://github.com/emacsorphanage/undohist
++ GitLab :: https://gitlab.com/tsc25/undo-tree
 
 #+begin_src emacs-lisp
 (use-package undohist
@@ -596,7 +598,9 @@ https://github.com/purcell/exec-path-from-shell
   (global-undo-tree-mode))
 #+end_src
 
-** Shell
+** TODO Shell
+
++ GitHub :: https://github.com/elken/eshell-p10k
 
 #+begin_src emacs-lisp
 (use-package eshell-p10k
@@ -606,7 +610,7 @@ https://github.com/purcell/exec-path-from-shell
                           eshell-prompt-regexp eshell-p10k-prompt-string))
 #+end_src
 
-** Flymake
+** TODO Flymake
 
 #+begin_src emacs-lisp
 (use-package flymake
@@ -813,6 +817,19 @@ https://github.com/purcell/exec-path-from-shell
 #+end_src
 
 #+begin_src emacs-lisp
+(use-package affe
+  :straight t
+  :bind (("s-g" . affe-grep)
+         ("s-f" . affe-find))
+  :custom
+  (affe-highlight-function 'orderless-highlight-matches)
+  (affe-regexp-function 'orderless-pattern-compiler)
+  (affe-find-command "fd --color=never --full-path")
+  :config
+  (consult-customize affe-grep :preview-key "M-."))
+#+end_src
+
+#+begin_src emacs-lisp
 (use-package migemo
   :disabled t
   :straight t
@@ -838,20 +855,7 @@ https://github.com/purcell/exec-path-from-shell
   (setq consult--regexp-compiler #'consult--migemo-regexp-compiler))
 #+end_src
 
-#+begin_src emacs-lisp
-(use-package affe
-  :straight t
-  :bind (("s-g" . affe-grep)
-         ("s-f" . affe-find))
-  :custom
-  (affe-highlight-function 'orderless-highlight-matches)
-  (affe-regexp-function 'orderless-pattern-compiler)
-  (affe-find-command "fd --color=never --full-path")
-  :config
-  (consult-customize affe-grep :preview-key "M-."))
-#+end_src
-
-** Hightlights
+** TODO Hightlights
 
 #+begin_src emacs-lisp
 (use-package volatile-highlights
@@ -907,6 +911,16 @@ https://github.com/purcell/exec-path-from-shell
 #+end_src
 
 #+begin_src emacs-lisp
+(use-package highlight-symbol
+  :straight t
+  :bind (("C-=" . highlight-symbol)
+         ("M-n" . highlight-symbol-next)
+         ("M-p" . highlight-symbol-prev)))
+#+end_src
+
+** Window
+
+#+begin_src emacs-lisp
 (use-package ace-window
   :straight t
   :bind (("M-o" . other-window)
@@ -919,14 +933,6 @@ https://github.com/purcell/exec-path-from-shell
    '(aw-leading-char-face
      ((t
        (:foreground "deep sky blue" :bold t :height 3.0))))))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package highlight-symbol
-  :straight t
-  :bind (("C-=" . highlight-symbol)
-         ("M-n" . highlight-symbol-next)
-         ("M-p" . highlight-symbol-prev)))
 #+end_src
 
 ** Parens
@@ -1191,6 +1197,7 @@ https://jblevins.org/projects/markdown-mode/
   (org-todo-keywords
    '((sequence "TODO(t)" "WAIT(w)" "WIP(p)" "REMIND(r)" "SOMEDAY(s)" "|" "DONE(d)")))
   (org-enforce-todo-dependencies t)
+  (org-hierarchical-todo-statistics nil)
 
   ;; org-agenda
   (org-agenda-files '("~/org-roam" "~/org-roam/daily"))
@@ -1543,7 +1550,7 @@ https://emacs-lsp.github.io/lsp-mode/
          (markdown-mode . valign-mode)))
 #+end_src
 
-*** Lisp
+*** TODO Lisp
 
 https://paredit.org/
 
@@ -1562,7 +1569,7 @@ https://paredit.org/
   :straight t)
 #+end_src
 
-**** Clojure
+**** TODO Clojure
 
 #+begin_src emacs-lisp
 (use-package clojure-mode
@@ -1576,7 +1583,7 @@ https://paredit.org/
   :straight t)
 #+end_src
 
-*** JavaScript/TypeScript
+*** TODO JavaScript/TypeScript
 
 #+begin_src emacs-lisp
 (use-package typescript-ts-mode
@@ -1610,14 +1617,20 @@ https://paredit.org/
   (setq-default css-indent-offset 2))
 #+end_src
 
-*** YAML
+*** DONE YAML
+
+https://github.com/yoshiki/yaml-mode
 
 #+begin_src emacs-lisp
 (use-package yaml-mode
-  :straight t)
+  :straight t
+  :mode (("\\.yml\\'" . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode)))
 #+end_src
 
-*** Groovy
+*** DONE Groovy
+
+https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
 
 #+begin_src emacs-lisp
 (use-package groovy-mode
@@ -1627,7 +1640,9 @@ https://paredit.org/
                           (setq tab-width 4)))))
 #+end_src
 
-*** Zig
+*** DONE Zig
+
+https://github.com/ziglang/zig
 
 #+begin_src emacs-lisp
 (use-package zig-mode
@@ -1655,7 +1670,7 @@ https://paredit.org/
   :ensure nil)
 #+end_src
 
-*** Scala
+*** TODO Scala
 
 #+begin_src emacs-lisp
 (use-package scala-mode
@@ -1678,14 +1693,17 @@ https://paredit.org/
   :straight t)
 #+end_src
 
-*** Nix
+*** DONE Nix
+
+https://github.com/NixOS/nix-mode
 
 #+begin_src emacs-lisp
 (use-package nix-mode
-  :straight t)
+  :straight t
+  :mode "\\.nix\\'")
 #+end_src
 
-*** SQLite
+*** DONE SQLite
 
 #+begin_src emacs-lisp
 (use-package sqlite-mode
