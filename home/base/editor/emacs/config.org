@@ -1172,6 +1172,7 @@ https://jblevins.org/projects/markdown-mode/
 
 #+begin_src emacs-lisp
 (use-package org
+  :after (nerd-icons)
   :hook ((org-mode . (lambda ()
                        (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
   :custom
@@ -1218,7 +1219,47 @@ https://jblevins.org/projects/markdown-mode/
                                                (t 'org-agenda-date))))
                                     ;; 今日は色を反転
                                     (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face))))
-  (org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")))
+  (org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>"))
+
+  :config
+  ;; リンクにアイコンを表示
+  ;; see: https://www.yewton.net/2023/04/01/org-link-prefix/
+  ;; see: https://gist.github.com/yewton/eecc7fbb157c57159ce6cc785df0ea73
+  (defconst my-org-link-prefixes `(("id" . ,(nerd-icons-sucicon "nf-custom-orgmode"))
+                                   ("roam" . ,(nerd-icons-sucicon "nf-custom-orgmode"))
+                                   ("attachment" . ,(nerd-icons-mdicon "nf-md-attachment"))
+                                   ("file" . ,(nerd-icons-mdicon "nf-md-floppy"))
+                                   ("shell" . ,(nerd-icons-codicon "nf-cod-terminal_powershell"))
+                                   ("https" . ,(nerd-icons-mdicon "nf-md-earth"))
+                                   ("http" . ,(nerd-icons-mdicon "nf-md-earth"))
+                                   ("help" . ,(nerd-icons-faicon "nf-fa-question"))
+                                   ("info" . ,(nerd-icons-mdicon "nf-md-information_variant"))
+                                   ("elisp" . ,(nerd-icons-sucicon "nf-custom-emacs"))))
+
+  (defun my-org-link-on-modification (ov changed _start _end &optional _len)
+    (when changed (delete-overlay ov)))
+
+  (defun my-org-link-activate (type start end bracketp)
+    (remove-overlays start end 'org-link-prefix t)
+    (when (and org-link-descriptive bracketp)
+      (let* ((prefix (or (when-let ((found (cdr-safe (assoc-string type my-org-link-prefixes))))
+                           (format "%s " found))
+                         (format "%s:" (upcase type))))
+             (ov (make-overlay start end))
+             (props `((org-link-prefix . t)
+                      (before-string . ,prefix)
+                      (evaporate . t)
+                      (modification-hooks . ,(list #'my-org-link-on-modification))
+                      (insert-in-front-hooks . ,(list #'my-org-link-on-modification)))))
+        (dolist (prop props)
+          (overlay-put ov (car prop) (cdr prop))))))
+
+  (dolist (prefix my-org-link-prefixes)
+    (let ((type (car prefix)))
+      (org-link-set-parameters type
+                               :activate-func
+                               `(lambda (start end _path bracketp)
+                                  (my-org-link-activate ,type start end bracketp))))))
 
 (use-package org-bars
   :disabled t
