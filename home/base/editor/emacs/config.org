@@ -554,11 +554,25 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 *** DONE solaire
 
++ GitHub :: https://github.com/hlissner/emacs-solaire-mode
+
 #+begin_src emacs-lisp
 (use-package solaire-mode
   :straight t
   :config
   (solaire-global-mode +1))
+#+end_src
+
+*** DONE Padding
+
++ GitHub :: https://github.com/protesilaos/spacious-padding
++ Manual :: https://protesilaos.com/emacs/spacious-padding
+
+#+begin_src emacs-lisp
+(use-package spacious-padding
+  :straight t
+  :config
+  (spacious-padding-mode 1))
 #+end_src
 
 ** IME
