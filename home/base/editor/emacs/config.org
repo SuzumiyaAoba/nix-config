@@ -1,6 +1,6 @@
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [9/18]
+* SuzumiyaAoba's Emacs Configuration [13/28]
 
 ** Package Manager/Configuration [2/2]
 
@@ -64,6 +64,7 @@ Emacs デーモンを起動したとき =window-system= が =nil= になって�
               (tool-bar-mode -1)
               (menu-bar-mode -1)))
 
+  (add-hook 'after-make-frame-functions #'my-func-called-at-gui-initialization t)
   (my-func-called-at-gui-initialization))
 
 (add-hook 'after-init-hook #'my-gui-setup)
@@ -563,7 +564,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (solaire-global-mode +1))
 #+end_src
 
-*** DONE Padding
+*** TODO Padding
+
+デーモンとして起動した場合に正しく =face= が設定されない問題がある。
 
 + GitHub :: https://github.com/protesilaos/spacious-padding
 + Manual :: https://protesilaos.com/emacs/spacious-padding
@@ -571,13 +574,15 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+begin_src emacs-lisp
 (use-package spacious-padding
   :straight t
-  :config
-  (spacious-padding-mode 1))
+  :after (modus-themes)
+  ;; :custom
+  ;; (spacious-padding-subtle-mode-line nil)
+  )
 #+end_src
 
 ** IME
 
-*** DDSKK
+*** DONE DDSKK
 
 [[http://openlab.ring.gr.jp/skk/ddskk-ja.html][SKK Olenlab - DDSKK]]
 
@@ -704,7 +709,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :straight t
   :init
   (marginalia-mode))
+#+end_src
 
+#+begin_src emacs-lisp
 (use-package consult
   :straight t
   :bind (("C-s" . consult-line-at)
@@ -941,7 +948,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
          ("M-p" . highlight-symbol-prev)))
 #+end_src
 
-** Window
+** DONE Window
 
 #+begin_src emacs-lisp
 (use-package ace-window
@@ -987,7 +994,6 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (which-key-mode)
   (which-key-setup-side-window-bottom))
 #+end_src
-
 
 ** TODO Dashboard
 
@@ -1039,6 +1045,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :straight t
   :hook ((git-commit-mode . fci-mode)))
 #+end_src
+
+** imenu
 
 #+begin_src emacs-lisp
 (use-package imenu-list
@@ -1200,8 +1208,11 @@ https://jblevins.org/projects/markdown-mode/
 *** Org
 
 #+begin_src emacs-lisp
+(use-package japanese-holidays
+  :straight t)
+
 (use-package org
-  :after (nerd-icons)
+  :after (nerd-icons japanese-holidays)
   :hook ((org-mode . (lambda ()
                        (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
   :custom
@@ -1211,8 +1222,13 @@ https://jblevins.org/projects/markdown-mode/
   (org-startup-with-inline-images t)
   ;; (org-hide-leading-stars t)
   (org-ellipsis " ▼")
+  (org-hide-emphasis-markers t)
   (org-fontify-quote-and-verse-blocks t)
   (org-use-speed-commands t)
+
+  (org-special-ctrl-a/e t)
+  (org-auto-align-tags nil)
+  (org-tags-column 0)
 
   (org-display-custom-times t)
   (org-image-actual-width nil)
@@ -1224,7 +1240,7 @@ https://jblevins.org/projects/markdown-mode/
 
   ;; org-agenda
   (org-agenda-files '("~/org-roam" "~/org-roam/daily"))
-  (org-agenda-span 'day)
+  ;; (org-agenda-span 'day)
   (org-agenda-tags-column 0)
   (org-agenda-block-separator ?─)
   (org-agenda-time-grid
@@ -1302,7 +1318,7 @@ https://jblevins.org/projects/markdown-mode/
 
 (use-package org-modern
   :straight t
-  :hook ((emacs-startup . global-org-modern-mode))
+  :hook ((org-mode . org-modern-mode))
   :custom
   (org-modern-hide-stars "")
   (org-modern-list
@@ -1332,11 +1348,7 @@ https://jblevins.org/projects/markdown-mode/
   :straight (org-modern-indent :type git
                                :host github
                                :repo "jdtsmith/org-modern-indent")
-  :config
-  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
-
-(use-package japanese-holidays
-  :straight t)
+  :hook ((org-modern-mode . org-modern-indent-mode)))
 
 (use-package org-super-agenda
   :straight t
