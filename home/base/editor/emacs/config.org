@@ -1240,7 +1240,7 @@ https://jblevins.org/projects/markdown-mode/
 
   ;; org-agenda
   (org-agenda-files '("~/org-roam" "~/org-roam/daily"))
-  ;; (org-agenda-span 'day)
+  (org-agenda-span 'day)
   (org-agenda-tags-column 0)
   (org-agenda-block-separator ?─)
   (org-agenda-time-grid
@@ -1398,6 +1398,13 @@ https://jblevins.org/projects/markdown-mode/
   (org-roam-ui-sync-theme t)
   (org-roam-ui-update-on-save t)
   (org-roam-ui-open-on-start t))
+#+end_src
+
+**** Notification
+
+#+begin_src emacs-lisp
+(use-package org-alert
+  :straight t)
 #+end_src
 
 *** writeroom-mode
