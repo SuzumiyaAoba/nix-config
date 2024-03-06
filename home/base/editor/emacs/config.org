@@ -552,6 +552,15 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (keycast-tab-bar-mode))
 #+end_src
 
+*** DONE solaire
+
+#+begin_src emacs-lisp
+(use-package solaire-mode
+  :straight t
+  :config
+  (solaire-global-mode +1))
+#+end_src
+
 ** IME
 
 *** DDSKK
