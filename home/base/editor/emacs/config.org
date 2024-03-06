@@ -1098,7 +1098,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 (use-package magit-todos
-  :straight t
+  :straight (magit-todos :type git :host github :repo "SuzumiyaAoba/magit-todos")
   :after magit
   :config
   (magit-todos-mode 1))
