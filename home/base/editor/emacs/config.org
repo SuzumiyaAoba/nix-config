@@ -1218,6 +1218,8 @@ https://jblevins.org/projects/markdown-mode/
   :custom
   (org-src-fontify-natively t)
 
+  (org-startup-indented t)
+
   (system-time-locate nil)
   (org-startup-with-inline-images t)
   ;; (org-hide-leading-stars t)
@@ -1315,6 +1317,15 @@ https://jblevins.org/projects/markdown-mode/
   :hook ((org-mode . (lambda ()
                        (require 'org-bars)
                        (org-bars-mode)))))
+
+(use-package org-sidebar
+  :straight t)
+
+(use-package org-sticky-header
+  :straight t
+  :hook ((org-mode . org-sticky-header-mode))
+  :custom
+  (org-sticky-header-full-path 'full))
 
 (use-package org-modern
   :straight t
