@@ -1,8 +1,8 @@
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [15/30]
+* SuzumiyaAoba's Emacs Configuration [32/48]
 
-** Package Manager/Configuration [2/2]
+** Basic Packages [5/5]
 
 *** DONE straight.el
 
@@ -21,6 +21,48 @@ org-mode が読み込まれるように設定している。
 
 #+begin_src emacs-lisp
 (straight-use-package 'el-patch)
+#+end_src
+
+
+*** DONE Hydra [2/2]
+
+#+begin_src emacs-lisp
+(use-package hydra
+  :straight t
+  :demand t)
+#+end_src
+
+**** DONE hydra-posframe
+
++ GitHub :: [[https://github.com/Ladicle/hydra-posframe][Ladicle/hydra-posframe]]
+
+#+begin_src emacs-lisp
+(use-package hydra-posframe
+  :straight (hydra-posframe :type git :host github :repo "Ladicle/hydra-posframe")
+  :demand t
+  :hook (after-init . hydra-posframe-mode))
+#+end_src
+
+**** DONE major-mode-hydra
+
++ GitHub :: [[https://github.com/jerrypnz/major-mode-hydra.el][jerrypnz/major-mode-hydra.el]]
+
+#+begin_src emacs-lisp
+(use-package major-mode-hydra
+  :straight t
+  :demand t
+  :bind (("M-SPC" . major-mode-hydra))
+  :init
+  (defun major-mode-hydra--title-for-mode (mode)
+    (cl-case mode
+      ((QUOTE emacs-lisp-mode) "Emacs Lisp")
+      (t (symbol-name mode))))
+  (setq major-mode-hydra-title-generator
+        '(lambda (mode)
+           (s-concat (nerd-icons-icon-for-mode mode :v-adjust 0.05)
+                     " "
+                     (major-mode-hydra--title-for-mode mode)
+                     " commands"))))
 #+end_src
 
 ** Emacs [0/3]
@@ -59,7 +101,7 @@ Emacs デーモンを起動したとき =window-system= が =nil= になって�
 (defun my-gui-setup ()
   "Setup if Emacs is running on GUI."
   (add-hook 'my-gui-setup-hook
-            (lambda()
+            (lambda ()
               (scroll-bar-mode -1)
               (tool-bar-mode -1)
               (menu-bar-mode -1)))
@@ -157,7 +199,9 @@ Emacs デーモンを起動したとき =window-system= が =nil= になって�
     (setq interprogram-paste-function 'copy-from-osx)))
 #+end_src
 
-*** TODO Key Bindings
+** Key Bindings
+
+*** Basic
 
 https://ladicle.com/post/config/#change-smart-kill-word
 
@@ -196,11 +240,19 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (dired-isearch-filenames t)
   :config
   (require 'dired-x))
+
+(use-package nerd-icons-dired
+  :straight t
+  :after nerd-icons
+  :diminish nerd-icons-dired-mode
+  :commands (nerd-icons-dired-mode)
+  ;; :hook ((dired-mode . nerd-icons-dired-mode))
+  )
 #+end_src
 
-*** TODO Treemacs
+*** TODO Treemacs :NotUsed:
 
-+ GitHub :: https://github.com/Alexander-Miller/treemacs
++ GitHub :: [[https://github.com/Alexander-Miller/treemacs][Alexander-Miller/treemacs]]
 
 #+begin_src emacs-lisp
 (use-package treemacs
@@ -240,14 +292,18 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :config (treemacs-set-scope-type 'Tabs))
 #+end_src
 
-*** dirvish
+*** DONE dirvish
+
++ GitHub :: [[https://github.com/alexluigit/dirvish][alexluigit/dirvish]]
 
 #+begin_src emacs-lisp
 (use-package dirvish
   :straight t
   :bind (("C-\\" . dirvish-side)
+         ("C-c f" . dirvish)
          :map dirvish-mode-map
-         ("TAB" . dirvish-subtree-toggle))
+         ("TAB" . dirvish-subtree-toggle)
+         ("s" . dirvish-narrow))
   :custom
   (dirvish-attributes
    '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size))
@@ -257,6 +313,15 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (dired-listing-switches
    "-l --almost-all --human-readable --group-directories-first --no-group")
   :config
+  (dirvish-define-preview eza (file)
+    "Use `eza' to generate directory preview."
+    :require ("eza") ; tell Dirvish to check if we have the executable
+    (when (file-directory-p file) ; we only interest in directories here
+      `(shell . ("eza" "-al" "--color=always" "--icons"
+                 "--group-directories-first" ,file))))
+
+  (add-to-list 'dirvish-preview-dispatchers 'eza)
+
   (dirvish-override-dired-mode +1)
   (dirvish-peek-mode +1)
   (dirvish-side-follow-mode +1))
@@ -274,7 +339,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 シェルの環境変数を読み込む。
 
-+ GitHub :: https://github.com/purcell/exec-path-from-shell
++ GitHub :: [[https://github.com/purcell/exec-path-from-shell][purcell/exec-path-from-shell]]
 
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
@@ -283,9 +348,13 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (exec-path-from-shell-initialize))
 #+end_src
 
-** Look & Feel
+** Look & Feel [9/9]
 
-*** Themes
+*** Themes [4/4]
+
+**** DONE doom-themes :NotUsed:
+
++ GitHub :: [[https://github.com/doomemacs/themes][doomemacs/themes]] 
 
 #+begin_src emacs-lisp
 (use-package doom-themes
@@ -295,13 +364,25 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
   (load-theme 'doom-one t))
+#+end_src
 
+**** DONE one-themes :NotUsed:
+
++ GitHub :: [[https://github.com/balajisivaraman/emacs-one-themes][balajisivaraman/emacs-one-themes]]
+
+#+begin_src emacs-lisp
 (use-package one-themes
   :disabled t
   :straight t
   :config
   (load-theme 'one-light t))
+#+end_src
 
+**** DONE gruvbox-theme :NotUsed:
+
++ GitHub :: [[https://github.com/greduan/emacs-theme-gruvbox][greduan/emacs-theme-gruvbox]]
+
+#+begin_src emacs-lisp
 (use-package gruvbox-theme
   :disabled t
   :straight t
@@ -315,6 +396,11 @@ https://ladicle.com/post/config/#change-smart-kill-word
     (set-face-attribute 'mode-line          nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :box        nil)))
 #+end_src
+
+**** DONE Modus Themes
+
++ GitHub :: [[https://github.com/protesilaos/modus-themes][protesilaos/modus-themes]]
++ Documents :: https://protesilaos.com/emacs/modus-themes 
 
 #+begin_src emacs-lisp
 (use-package modus-themes 
@@ -344,11 +430,11 @@ https://ladicle.com/post/config/#change-smart-kill-word
   )
 #+end_src
 
-*** Modeline
+*** Modeline [3/3]
 
-**** doom-modeline
+**** DONE doom-modeline
 
-+ GitHub :: https://github.com/seagle0128/doom-modeline
++ GitHub :: [[https://github.com/seagle0128/doom-modeline][seagle0128/doom-modeline]]
 
 #+begin_src emacs-lisp
 (use-package doom-modeline
@@ -384,7 +470,13 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :init
   (column-number-mode)
   (doom-modeline-mode 1))
+#+end_src
 
+**** DONE nyan-mode
+
++ GitHub :: [[https://github.com/TeMPOraL/nyan-mode][TeMPOraL/nyan-mode]]
+
+#+begin_src emacs-lisp
 (use-package nyan-mode
   :straight t
   :custom
@@ -395,9 +487,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (nyan-mode))
 #+end_src
 
-**** moody
+**** DONE moody :NotUsed:
 
-[[https://github.com/tarsius/moody][moody]]
++ GitHub :: [[https://github.com/tarsius/moody][tarsius/moody]]
 
 #+begin_src emacs-lisp
 (use-package moody
@@ -412,7 +504,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (moody-replace-eldoc-minibuffer-message-function))
 #+end_src
 
-*** Icons
+*** DONE Icons
 
 - [[https://github.com/domtronn/all-the-icons.el][all-the-icons.el]]
 - [[https://github.com/rainstormstudio/nerd-icons.el][nerd-icons.el]]
@@ -421,19 +513,11 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+begin_src emacs-lisp
 (use-package nerd-icons
   :straight t)
-
-(use-package nerd-icons-dired
-  :straight t
-  :after nerd-icons
-  :diminish nerd-icons-dired-mode
-  :commands (nerd-icons-dired-mode)
-  ;; :hook ((dired-mode . nerd-icons-dired-mode))
-  )
 #+end_src
 
-*** Hide
+*** DONE Hide
 
-[[https://github.com/hlissner/emacs-hide-mode-line][hide-mode-line]]
++ [[https://github.com/hlissner/emacs-hide-mode-line][hlissner/emacs-hide-mode-line]]
 
 #+begin_src emacs-lisp
 (use-package hide-mode-line
@@ -442,7 +526,12 @@ https://ladicle.com/post/config/#change-smart-kill-word
          (minimap-mode          . hide-mode-line-mode)))
 #+end_src
 
-*** Cursor
+*** Cursor [0/0]
+
+**** DONE pulsar
+
++ GitHub :: [[https://github.com/protesilaos/pulsar][protesilaos/pulsar]]
++ Documents :: https://protesilaos.com/emacs/pulsar 
 
 #+begin_src emacs-lisp
 (use-package pulsar
@@ -461,6 +550,10 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (pulsar-global-mode +1))
 #+end_src
 
+**** DONE mwim
+
++ GitHub :: [[https://github.com/alezost/mwim.el][alezost/mwim.el]]
+
 #+begin_src emacs-lisp
 (use-package mwim
   :straight t
@@ -468,17 +561,21 @@ https://ladicle.com/post/config/#change-smart-kill-word
          ("C-e" . mwim-end)))
 #+end_src
 
+**** DONE avy
+
++ GitHub :: [[https://github.com/abo-abo/avy][abo-abo/avy]]
+
 #+begin_src emacs-lisp
 (use-package avy
   :straight t
   :bind (("C-:" . avy-goto-char-2)))
 #+end_src
 
-** Tab
-
-[[https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/][記事]]を参考にタブ番号でアイコンを使うように設定する。
+** Tab [2/3]
 
 *** tab-bar
+
+[[https://christiantietze.de/posts/2022/02/emacs-tab-bar-numbered-tabs/][記事]]を参考にタブ番号でアイコンを使うように設定する。
 
 #+begin_src emacs-lisp
 (use-package tab-bar
@@ -514,7 +611,13 @@ https://ladicle.com/post/config/#change-smart-kill-word
         '(tb/tab-bar-tab-name-format-hints
           tab-bar-tab-name-format-close-button
           tab-bar-tab-name-format-face)))
+#+end_src
 
+**** TODO tabgo
+
++ GitHub :: [[https://github.com/isamert/tabgo.el][isamert/tabgo.el]]
+
+#+begin_src emacs-lisp
 (use-package tabgo
   :straight (:host github :repo "isamert/tabgo.el")
   :bind (
@@ -523,7 +626,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
          ("C-t" . tabgo)))
 #+end_src
 
-*** centaur-tabs
+*** DONE centaur-tabs :NotUsed:
 
 #+begin_src emacs-lisp
 (use-package centaur-tabs
@@ -1207,6 +1310,8 @@ https://jblevins.org/projects/markdown-mode/
 
 *** Org
 
++ [[https://misohena.jp/blog/2022-11-22-org-elisp-link-type.html][Emacs Lisp要素へのリンクをorg-modeに追加する]]
+
 #+begin_src emacs-lisp
 (use-package japanese-holidays
   :straight t)
@@ -1621,6 +1726,29 @@ https://paredit.org/
 #+begin_src emacs-lisp
 (use-package slime
   :straight t)
+#+end_src
+
+**** TODO Emacs Lisp
+
+#+begin_src emacs-lisp
+(use-package emacs-lisp-mode
+  :after (major-mode-hydra)
+  :mode-hydra
+  ("Eval"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "REPL"
+   (("I" ielm "ielm"))
+   "Test"
+   (("t" ert "prompt")
+    ("T" (ert t) "all")
+    ("F" (ert :failed) "failed"))
+   "Doc"
+   (("d" describe-foo-at-point "thing-at-pt")
+    ("f" describe-function "function")
+    ("v" describe-variable "variable")
+    ("i" info-lookup-symbol "info lookup"))))
 #+end_src
 
 **** TODO Clojure
