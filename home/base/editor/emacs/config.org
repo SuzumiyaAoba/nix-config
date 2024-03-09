@@ -1227,6 +1227,7 @@ https://jblevins.org/projects/markdown-mode/
   (org-hide-emphasis-markers t)
   (org-fontify-quote-and-verse-blocks t)
   (org-use-speed-commands t)
+  (org-return-follows-link t)
 
   (org-special-ctrl-a/e t)
   (org-auto-align-tags nil)
