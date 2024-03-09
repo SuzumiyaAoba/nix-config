@@ -961,6 +961,15 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :straight t)
 #+end_src
 
+**** DONE consult-todo
+
++ GitHub :: [[https://github.com/liuyinz/consult-todo][liuyinz/consult-todo]]
+
+#+begin_src emacs-lisp
+(use-package consult-todo
+  :straight t)
+#+end_src
+
 ** Completion in Region Function
 
 + GitHub :: [[https://github.com/minad/corfu][corfuminad/corfu]]
@@ -1203,6 +1212,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+end_src
 
 *** DONE hl-todo
+
++ GitHub :: [[https://github.com/tarsius/hl-todo][tarsius/hl-todo]]
 
 #+begin_src emacs-lisp
 (use-package hl-todo
