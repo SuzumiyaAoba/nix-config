@@ -1527,15 +1527,16 @@ https://jblevins.org/projects/markdown-mode/
 
 (use-package org
   :after (nerd-icons japanese-holidays)
+  :bind (("C-x c" . major-mode-hydras/org-mode/body))
   :hook ((org-mode . (lambda ()
                        (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
   :mode-hydra
   (org-mode
    ("Agenda"
     (("a" (org-agenda nil "a") "current")
-     ("t" (org-agenda nil "t") "TODO"))
+     ("T" (org-agenda nil "t") "TODO"))
     "Roam"
-    (("c" org-roam-dailies-find-today "today")
+    (("t" org-roam-dailies-find-today "today")
      ("f" org-roam-node-find "find"))))
   :custom
   (org-src-fontify-natively t)
