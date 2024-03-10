@@ -1,7 +1,7 @@
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [37/53]
+* SuzumiyaAoba's Emacs Configuration [46/61]
 
 ** Basic Packages [5/5]
 
@@ -57,6 +57,7 @@ org-mode が読み込まれるように設定している。
   (defun major-mode-hydra--title-for-mode (mode)
     (cl-case mode
       ((QUOTE emacs-lisp-mode) "Emacs Lisp")
+      ((QUOTE org-mode) "Org")
       (t (symbol-name mode))))
   (setq major-mode-hydra-title-generator
         '(lambda (mode)
@@ -660,7 +661,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :bind (("C-:" . avy-goto-char-2)))
 #+end_src
 
-** Tab [4/5]
+** Tab [5/5]
 
 *** tab-bar
 
@@ -668,6 +669,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package tab-bar
+  :bind (("C-t" . tab/body))
   :custom
   (tab-bar-new-tab-choice "*scratch*")
   (tab-bar-select-tab-modifiers '(super))
@@ -699,20 +701,52 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (setq tab-bar-tab-name-format-functions
         '(tb/tab-bar-tab-name-format-hints
           tab-bar-tab-name-format-close-button
-          tab-bar-tab-name-format-face)))
+          tab-bar-tab-name-format-face))
+
+  (defvar tab--title (s-concat (nerd-icons-mdicon "nf-md-tab")
+                               " "
+                               "Tab Management"))
+  (pretty-hydra-define tab
+    (:title tab--title :quit-key "q")
+    ("Create"
+     (("c" tab-new "new")
+      ("C" tab-new-to "new to"))
+     "Switch"
+     (("s" tab-switch "switch")
+      ("n" tab-next "next")
+      ("p" tab-previous "previous")
+      ("1" (tab-select 1) "swtich 1")
+      ("2" (tab-select 2) "swtich 2")
+      ("3" (tab-select 3) "swtich 3")
+      ("4" (tab-select 4) "swtich 4")
+      ("5" (tab-select 5) "swtich 5")
+      ("6" (tab-select 6) "swtich 6")
+      ("7" (tab-select 7) "swtich 7")
+      ("8" (tab-select 8) "swtich 8")
+      ("9" (tab-select 9) "swtich 9"))
+     "Move"
+     (("N" tab-move "move right")
+      ("C-1" (tab-move-to 1) "move 1")
+      ("C-2" (tab-move-to 2) "move 2")
+      ("C-3" (tab-move-to 3) "move 3")
+      ("C-4" (tab-move-to 4) "move 4")
+      ("C-5" (tab-move-to 5) "move 5")
+      ("C-6" (tab-move-to 6) "move 6")
+      ("C-7" (tab-move-to 7) "move 7")
+      ("C-8" (tab-move-to 8) "move 8")
+      ("C-9" (tab-move-to 9) "move 9"))
+     "Name"
+     (("r" tab-rename "rename")))))
 #+end_src
 
-**** TODO tabgo
+**** DONE tabgo :NotUsed:
 
 + GitHub :: [[https://github.com/isamert/tabgo.el][isamert/tabgo.el]]
 
 #+begin_src emacs-lisp
 (use-package tabgo
   :straight (:host github :repo "isamert/tabgo.el")
-  :bind (
-         :prefix-map tab-bar-prefix-map
-         :prefix "C-t"
-         ("C-t" . tabgo)))
+  :after (tab-bar))
 #+end_src
 
 *** DONE centaur-tabs :NotUsed:
@@ -1495,6 +1529,14 @@ https://jblevins.org/projects/markdown-mode/
   :after (nerd-icons japanese-holidays)
   :hook ((org-mode . (lambda ()
                        (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
+  :mode-hydra
+  (org-mode
+   ("Agenda"
+    (("a" (org-agenda nil "a") "current")
+     ("t" (org-agenda nil "t") "TODO"))
+    "Roam"
+    (("c" org-roam-dailies-find-today "today")
+     ("f" org-roam-node-find "find"))))
   :custom
   (org-src-fontify-natively t)
 
@@ -1589,7 +1631,11 @@ https://jblevins.org/projects/markdown-mode/
                                :activate-func
                                `(lambda (start end _path bracketp)
                                   (my-org-link-activate ,type start end bracketp))))))
+#+end_src
 
+**** org-bars
+
+#+begin_src emacs-lisp
 (use-package org-bars
   :disabled t
   :straight (org-bars :type git
@@ -1598,16 +1644,28 @@ https://jblevins.org/projects/markdown-mode/
   :hook ((org-mode . (lambda ()
                        (require 'org-bars)
                        (org-bars-mode)))))
+#+end_src
 
+**** org-sidebar
+
+#+begin_src emacs-lisp
 (use-package org-sidebar
   :straight t)
+#+end_src
 
+**** org-sticky-header
+
+#+begin_src emacs-lisp
 (use-package org-sticky-header
   :straight t
   :hook ((org-mode . org-sticky-header-mode))
   :custom
   (org-sticky-header-full-path 'full))
+#+end_src
 
+**** org-modern
+
+#+begin_src emacs-lisp
 (use-package org-modern
   :straight t
   :hook ((org-mode . org-modern-mode))
@@ -1618,13 +1676,15 @@ https://jblevins.org/projects/markdown-mode/
      (?* . "•")
      (?+ . "‣")))
   (org-modern-timestamp '(" %Y年%m月%d日(%a) " . " %H時%M分 "))
-  :init
-  (setq org-modern-star (list #("󰎥" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                              #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                              #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                              #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                              #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-                              ))
+  ;; :init
+  ;; (setq org-modern-star (list #("󰎥" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             #("󰎴" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             #("󰎷" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+  ;;                             ))
   :config
   (let ((comment-color (face-attribute 'font-lock-comment-face :foreground)))
     (custom-theme-set-faces
@@ -1635,13 +1695,21 @@ https://jblevins.org/projects/markdown-mode/
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((ditaa . t))))
+#+end_src
 
+**** org-modern-indent
+
+#+begin_src emacs-lisp
 (use-package org-modern-indent
   :straight (org-modern-indent :type git
                                :host github
                                :repo "jdtsmith/org-modern-indent")
   :hook ((org-modern-mode . org-modern-indent-mode)))
+#+end_src
 
+**** org-super-agenda
+
+#+begin_src emacs-lisp
 (use-package org-super-agenda
   :straight t
   :after (japanese-holidays)
@@ -1667,7 +1735,6 @@ https://jblevins.org/projects/markdown-mode/
 (use-package org-roam
   :straight t
   :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
   :init
   (unless (file-exists-p "~/org-roam")
@@ -1717,7 +1784,7 @@ https://jblevins.org/projects/markdown-mode/
   (olivetti-body-width 0.65))
 #+end_src
 
-** Programming
+** Programming [0/0]
 
 #+begin_src emacs-lisp
 (use-package eldoc
@@ -1778,7 +1845,7 @@ https://jblevins.org/projects/markdown-mode/
   (global-treesit-auto-mode))
 #+end_src
 
-** Language Server
+** Language Server [0/0]
 
 *** LSP
 
@@ -1873,9 +1940,9 @@ https://emacs-lsp.github.io/lsp-mode/
   (copilot-indent-offset-warning-disable t))
 #+end_src
 
-** Refactoring
+*** Refactoring [1/1]
 
-*** DONE Emacs Refactor (EMR)
+**** DONE Emacs Refactor (EMR)
 
 #+begin_src emacs-lisp
 (use-package emr
@@ -1883,7 +1950,7 @@ https://emacs-lsp.github.io/lsp-mode/
   :bind (("M-RET" . emr-show-refactor-menu)))
 #+end_src
 
-** Languages
+*** Languages [5/10]
 
 #+begin_src emacs-lisp
 (use-package valign
@@ -1892,7 +1959,7 @@ https://emacs-lsp.github.io/lsp-mode/
          (markdown-mode . valign-mode)))
 #+end_src
 
-*** TODO Lisp
+**** TODO Lisp
 
 https://paredit.org/
 
@@ -1911,7 +1978,7 @@ https://paredit.org/
   :straight t)
 #+end_src
 
-**** TODO Emacs Lisp
+***** TODO Emacs Lisp
 
 #+begin_src emacs-lisp
 (use-package emacs-lisp-mode
@@ -1934,7 +2001,11 @@ https://paredit.org/
     ("i" info-lookup-symbol "info lookup"))))
 #+end_src
 
-**** TODO Clojure
+***** TODO Clojure
+
+****** clojure-mode
+
++ GitHub :: [[https://github.com/clojure-emacs/clojure-mode][clojure-emacs/clojure-mode]]
 
 #+begin_src emacs-lisp
 (use-package clojure-mode
@@ -1943,12 +2014,44 @@ https://paredit.org/
 
 (use-package clojure-ts-mode
   :straight t)
-
-(use-package cider
-  :straight t)
 #+end_src
 
-*** TODO JavaScript/TypeScript
+****** cider
+
++ GitHub :: [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]]
+
+#+begin_src emacs-lisp
+(use-package cider
+  :straight t
+  :hook ((clojure-mode . cider-mode))
+  :config
+  )
+#+end_src
+
+****** clj-refactor
+
++ GitHub :: [[https://github.com/clojure-emacs/clj-refactor.el][clojure-emacs/clj-refactor.el]]
+
+#+begin_src emacs-lisp
+(use-package clj-refactor
+  :straight t
+  :hook ((clojure-mode . (lambda ()
+                           (clj-refactor-mode +1)
+                           (clj-add-keybindings-with-prefix "C-c C-m")))))
+#+end_src
+
+****** ob-clojure-literate
+
++ https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html
+
+  #+begin_src emacs-lisp
+(with-eval-after-load 'cider
+  (require 'ob-clojure)
+  (setq org-babel-clojure-backend 'cider)
+  (require 'cider))
+  #+end_src
+
+**** TODO JavaScript/TypeScript
 
 #+begin_src emacs-lisp
 (use-package typescript-ts-mode
@@ -1982,7 +2085,7 @@ https://paredit.org/
   (setq-default css-indent-offset 2))
 #+end_src
 
-*** DONE YAML
+**** DONE YAML
 
 https://github.com/yoshiki/yaml-mode
 
@@ -1993,7 +2096,7 @@ https://github.com/yoshiki/yaml-mode
          ("\\.yaml\\'" . yaml-mode)))
 #+end_src
 
-*** DONE Groovy
+**** DONE Groovy
 
 https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
 
@@ -2005,7 +2108,7 @@ https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
                           (setq tab-width 4)))))
 #+end_src
 
-*** DONE Zig
+**** DONE Zig
 
 https://github.com/ziglang/zig
 
@@ -2015,7 +2118,7 @@ https://github.com/ziglang/zig
   :mode (("\\.zig\\'" . zig-mode)))
 #+end_src
 
-*** Java
+**** Java
 
 #+begin_src emacs-lisp
 (use-package lsp-java
@@ -2035,7 +2138,7 @@ https://github.com/ziglang/zig
   :ensure nil)
 #+end_src
 
-*** TODO Scala
+**** TODO Scala
 
 #+begin_src emacs-lisp
 (use-package scala-mode
@@ -2058,7 +2161,14 @@ https://github.com/ziglang/zig
   :straight t)
 #+end_src
 
-*** DONE Nix
+**** DONE SQLite
+
+#+begin_src emacs-lisp
+(use-package sqlite-mode
+  :straight t)
+#+end_src
+
+**** DONE Nix
 
 https://github.com/NixOS/nix-mode
 
@@ -2066,13 +2176,6 @@ https://github.com/NixOS/nix-mode
 (use-package nix-mode
   :straight t
   :mode "\\.nix\\'")
-#+end_src
-
-*** DONE SQLite
-
-#+begin_src emacs-lisp
-(use-package sqlite-mode
-  :straight t)
 #+end_src
 
 ** Finalize
