@@ -1,7 +1,7 @@
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [49/64]
+* SuzumiyaAoba's Emacs Configuration [52/66]
 
 ** Basic Packages [5/5]
 
@@ -864,18 +864,30 @@ https://ladicle.com/post/config/#change-smart-kill-word
                           eshell-prompt-regexp eshell-p10k-prompt-string))
 #+end_src
 
-** TODO Flymake
+** TODO Flymake [2/2]
 
 #+begin_src emacs-lisp
 (use-package flymake
   :straight t
   :diminish flymake-mode)
+#+end_src
 
+*** DONE flymake-diagnostic-at-point :NotUsed:
+
++ GitHub :: [[https://github.com/meqif/flymake-diagnostic-at-point][meqif/flymake-diagnostic-at-point]]
+
+#+begin_src emacs-lisp
 (use-package flymake-diagnostic-at-point
   :straight t
   :disabled t
   :hook ((flymake-mode . flymake-diagnostic-at-point-mode)))
+#+end_src
 
+*** DONE flymake-popon
+
++ GitHub :: [[https://codeberg.org/akib/emacs-flymake-popon][akib/emacs-flymake-popon]]
+
+#+begin_src emacs-lisp
 (use-package flymake-popon
   :straight (flymake-popon :type git :repo "https://codeberg.org/akib/emacs-flymake-popon.git")
   :diminish flymake-popon-mode
@@ -1004,7 +1016,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :straight t)
 #+end_src
 
-** Completion in Region Function
+** Completion in Region Function [0/0]
 
 + GitHub :: [[https://github.com/minad/corfu][corfuminad/corfu]]
 
@@ -1081,7 +1093,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
 
-** Search/Replace [1/1]
+** Search/Replace [4/4]
 
 *** DONE anzu
 
@@ -1441,19 +1453,40 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (set-face-background 'git-gutter:deleted "#ff79c6")
 
   (global-git-gutter-mode +1))
+#+end_src
 
+*** magit
+
+#+begin_src emacs-lisp
 (use-package magit
   :straight t
   :commands (magit)
   :bind (("C-x g" . magit))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+#+end_src
 
+**** DONE magit-todo
+
+#+begin_src emacs-lisp
 (use-package magit-todos
   :straight (magit-todos :type git :host github :repo "SuzumiyaAoba/magit-todos")
   :after magit
   :config
-  (magit-todos-mode 1))
+  (magit-todos-mode +1))
+#+end_src
+
+**** DONE magit-delta
+
++ GitHub :: [[https://github.com/dandavison/magit-delta][dandavison/magit-delta]]
+
+#+begin_src emacs-lisp
+(use-package magit-delta
+  :straight t
+  :hook ((magit-mode . magit-delta-mode))
+  :custom
+  (magit-delta-default-dark-theme "gruvbox-dark")
+  (magit-delta-hide-plus-minus-markers t))
 #+end_src
 
 *** GitHub

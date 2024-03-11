@@ -26,5 +26,6 @@
     ./gnupg.nix
     ./ast-grep.nix
     ./hexyl.nix
+    ./delta.nix
   ];
 }
