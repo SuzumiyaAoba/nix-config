@@ -1,7 +1,7 @@
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [46/61]
+* SuzumiyaAoba's Emacs Configuration [49/64]
 
 ** Basic Packages [5/5]
 
@@ -801,8 +801,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
 (use-package spacious-padding
   :straight t
   :after (modus-themes)
-  ;; :custom
-  ;; (spacious-padding-subtle-mode-line nil)
+  :custom
+  (spacious-padding-subtle-mode-line nil)
   )
 #+end_src
 
@@ -1123,7 +1123,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
      ("G" affe-grep "grep")))))
 #+end_src
 
-*** migemo :NotUsed:
+*** DONE migemo :NotUsed:
 
 + GitHub :: [[https://github.com/emacs-jp/migemo][emacs-jp/migemo]]
 
@@ -1153,7 +1153,16 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (setq consult--regexp-compiler #'consult--migemo-regexp-compiler))
 #+end_src
 
-** TODO Highlights [0/0]
+*** DONE ripgrep
+
++ GitHub :: [[https://github.com/nlamirault/ripgrep.el][nlamirault/ripgrep.el]]
+
+#+begin_src emacs-lisp
+(use-package ripgrep
+  :straight t)
+#+end_src
+
+** DONE Highlights [6/6]
 
 *** DONE volatile-highlights
 
@@ -1200,7 +1209,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :hook ((prog-mode . highlight-indent-guides-mode)))
 #+end_src
 
-*** dimmer
+*** DONE dimmer :NotUsed:
 
 + GitHub :: [[https://github.com/gonewest818/dimmer.el][gonewest818/dimmer.el]]
 
@@ -1277,7 +1286,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
        (:foreground "deep sky blue" :bold t :height 3.0))))))
 #+end_src
 
-** Parens
+** Parens [0/0]
 
 #+begin_src emacs-lisp
 (use-package paren
@@ -1338,18 +1347,18 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 ** Project
 
++ GitHub :: [[https://github.com/bbatsov/projectile][bbatsov/projectile]]
+
 #+begin_src emacs-lisp
 (use-package projectile
   :straight t
+  :after (ripgrep)
   :diminish projectile-mode
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
   :hook ((emacs-startup . projectile-mode))
   :custom
   (projectile-generic-dommand "fd . -0 --type f --color=never"))
-
-(use-package ripgrep
-  :straight t)
 #+end_src
 
 #+begin_src emacs-lisp
