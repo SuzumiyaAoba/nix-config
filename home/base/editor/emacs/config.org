@@ -1,7 +1,7 @@
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [52/66]
+* SuzumiyaAoba's Emacs Configuration [55/69]
 
 ** Basic Packages [5/5]
 
@@ -1455,7 +1455,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (global-git-gutter-mode +1))
 #+end_src
 
-*** magit
+*** DONE magit [2/2]
+
++ GitHub :: [[https://github.com/magit/magit][magit/magit]]
 
 #+begin_src emacs-lisp
 (use-package magit
@@ -1467,6 +1469,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+end_src
 
 **** DONE magit-todo
+
++ GitHub :: [[https://github.com/alphapapa/magit-todos][alphapapa/magit-todos]]
 
 #+begin_src emacs-lisp
 (use-package magit-todos
@@ -1491,14 +1495,18 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 *** GitHub
 
-**** ghub
+**** DONE ghub
+
++ GitHub :: [[https://github.com/magit/ghub][magit/ghub]]
 
 #+begin_src emacs-lisp
 (use-package ghub
   :straight t)
 #+end_src
 
-**** forge
+**** DONE forge
+
++ GitHub :: [[https://github.com/magit/forge][magit/forge]]
 
 #+begin_src emacs-lisp
 (use-package forge
@@ -1508,14 +1516,18 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (require 'forge))
 #+end_src
 
-**** gh
+**** DONE gh
+
++ GitHub :: [[https://github.com/sigma/gh.el][sigma/gh.el]]
 
 #+begin_src emacs-lisp
 (use-package gh
   :straight t)
 #+end_src
 
-**** consult-gh
+**** DONE consult-gh
+
++ GitHub :: [[https://github.com/armindarvish/consult-gh][armindarvish/consult-gh]]
 
 #+begin_src emacs-lisp
 (use-package consult-gh
@@ -1530,11 +1542,13 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (require 'consult-gh-forge))
   #+END_src
 
-**** Notification
+**** TODO Notification
+
++ GitHub :: [[https://github.com/anticomputer/gh-notify][anticomputer/gh-notify]]
 
 #+begin_src emacs-lisp
 (use-package gh-notify
-  :straight t)
+  :straight (gh-notify :type git :host github :repo "benthamite/gh-notify" :branch "fix/update-forge-functions"))
 #+end_src
 
 **** Review
