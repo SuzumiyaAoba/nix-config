@@ -1,7 +1,7 @@
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [55/69]
+* SuzumiyaAoba's Emacs Configuration [60/75]
 
 ** Basic Packages [5/5]
 
@@ -2234,6 +2234,18 @@ https://github.com/NixOS/nix-mode
   :straight t
   :mode "\\.nix\\'")
 #+end_src
+
+** Browser Extensions [1/1]
+
+*** DONE Atomic Chrome
+
+#+begin_src emacs-lisp
+(use-package atomic-chrome
+  :straight t
+  :config
+  (atomic-chrome-start-server))
+#+end_src
+
 
 ** Finalize
 
