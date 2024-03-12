@@ -709,10 +709,10 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (pretty-hydra-define tab
     (:title tab--title :quit-key "q")
     ("Create"
-     (("c" tab-new "new")
-      ("C" tab-new-to "new to"))
+     (("c" tab-new "new" :exit t)
+      ("C" tab-new-to "new to" :exit t))
      "Switch"
-     (("s" tab-switch "switch")
+     (("s" tab-switch "switch" :exit t)
       ("n" tab-next "next")
       ("p" tab-previous "previous")
       ("1" (tab-select 1) "swtich 1")
@@ -725,7 +725,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
       ("8" (tab-select 8) "swtich 8")
       ("9" (tab-select 9) "swtich 9"))
      "Move"
-     (("N" tab-move "move right")
+     (("C-n" tab-move "move right")
       ("C-1" (tab-move-to 1) "move 1")
       ("C-2" (tab-move-to 2) "move 2")
       ("C-3" (tab-move-to 3) "move 3")
@@ -1548,7 +1548,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package gh-notify
-  :straight (gh-notify :type git :host github :repo "benthamite/gh-notify" :branch "fix/update-forge-functions"))
+  :straight (gh-notify :type git :host github :repo "SuzumiyaAoba/gh-notify" :branch "main"))
 #+end_src
 
 **** Review
@@ -1589,11 +1589,12 @@ https://jblevins.org/projects/markdown-mode/
   :mode-hydra
   (org-mode
    ("Agenda"
-    (("a" (org-agenda nil "a") "current")
-     ("T" (org-agenda nil "t") "TODO"))
+    (("a" (org-agenda nil "a") "current" :exit t)
+     ("T" (org-agenda nil "t") "TODO" :exit t))
     "Roam"
-    (("t" org-roam-dailies-find-today "today")
-     ("f" org-roam-node-find "find"))))
+    (("t" org-roam-dailies-goto-today "today" :exit t)
+     ("d" org-roam-dailies-goto-date "date" :exit t)
+     ("n" org-roam-node-find "find" :exit t))))
   :custom
   (org-src-fontify-natively t)
 
