@@ -1023,6 +1023,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+begin_src emacs-lisp
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
+  :bind (:map corfu-map
+         ("SPC" . corfu-insert-separator))
   :custom
   (corfu-auto t)
   (corfu-auto-delay 0)
@@ -1041,15 +1043,35 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :after corfu
   :config
   (corfu-terminal-mode +1))
+#+end_src
 
+*** DONE nerd-icons-corfu
+
++ GitHub :: [[https://github.com/LuigiPiucco/nerd-icons-corfu][LuigiPiucco/nerd-icons-corfu]]
+
+#+begin_src emacs-lisp
+(use-package nerd-icons-corfu
+  :straight t
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+#+end_src
+
+*** DONE kind-icon :NotUsed:
+
++ GitHub :: [[https://github.com/jdtsmith/kind-icon][jdtsmith/kind-icon]]
+
+#+begin_src emacs-lisp
 (use-package kind-icon
+  :disabled t
   :straight t
   :after corfu
   :custom
   (kind-icon-default-face 'corfu-default)
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+#+end_src
 
+#+begin_src emacs-lisp
 (use-package orderless
   :straight t
   :custom
