@@ -1605,7 +1605,7 @@ https://jblevins.org/projects/markdown-mode/
 
 (use-package org
   :after (nerd-icons japanese-holidays)
-  :bind (("C-x c" . major-mode-hydras/org-mode/body))
+  :bind (("C-c c" . major-mode-hydras/org-mode/body))
   :hook ((org-mode . (lambda ()
                        (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
   :mode-hydra
@@ -1615,9 +1615,14 @@ https://jblevins.org/projects/markdown-mode/
      ("T" (org-agenda nil "t") "TODO" :exit t))
     "Roam"
     (("t" org-roam-dailies-goto-today "today" :exit t)
-     ("d" org-roam-dailies-goto-date "date" :exit t)
-     ("n" org-roam-node-find "find" :exit t))))
+     ("." org-roam-dailies-goto-date "date" :exit t)
+     ("f" org-roam-node-find "find" :exit t)
+     ("i" org-roam-node-insert "insert" :exit t)
+     ("<" org-roam-buffer-toggle "toggle" :exit t))
+    "Capture"
+    (("n" org-roam-dailies-capture-today "now" :exit t))))
   :custom
+  (org-log-done 'time)
   (org-src-fontify-natively t)
 
   (org-startup-indented t)
@@ -1793,20 +1798,19 @@ https://jblevins.org/projects/markdown-mode/
 (use-package org-super-agenda
   :straight t
   :after (japanese-holidays)
+  :custom
+  (org-super-agenda-groups
+   '((:name "Today"
+            :time-grid t
+            :todo "TODAY")
+     (:name "Important"
+            :priority "A")
+     (:todo "WAITING" :order 8)
+     (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
+            :order 9)
+     (:priority<= "B" :order 1)))
   :config
-  (org-super-agenda-mode +1)
-
-  (let ((org-super-agenda-groups '(
-                                   (:name "Today"
-                                          :time-grid t
-                                          :todo "TODAY")
-                                   (:name "Important"
-                                          :priority "A")
-                                   (:todo "WAITING" :order 8)
-                                   (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
-                                          :order 9)
-                                   (:priority<= "B" :order 1))))
-    (org-agenda nil "a")))
+  (org-super-agenda-mode +1)))
 #+end_src
 
 **** org-roam
