@@ -6,5 +6,6 @@
     ./rectangle.nix
     ./karabiner
     ./appcleaner.nix
+    ./terminal-notifier.nix
   ];
 }

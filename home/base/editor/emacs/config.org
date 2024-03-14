@@ -1810,7 +1810,7 @@ https://jblevins.org/projects/markdown-mode/
             :order 9)
      (:priority<= "B" :order 1)))
   :config
-  (org-super-agenda-mode +1)))
+  (org-super-agenda-mode +1))
 #+end_src
 
 **** org-roam
@@ -1847,7 +1847,9 @@ https://jblevins.org/projects/markdown-mode/
 
 #+begin_src emacs-lisp
 (use-package org-alert
-  :straight t)
+  :straight t
+  :custom
+  (alert-default-style 'notifier))
 #+end_src
 
 *** writeroom-mode
