@@ -434,6 +434,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell
   :straight t
+  :custom
+  (exec-path-from-shell-arguments (quote ("-l")))
   :config
   (exec-path-from-shell-initialize))
 #+end_src
@@ -1052,6 +1054,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+begin_src emacs-lisp
 (use-package nerd-icons-corfu
   :straight t
+  :after (corfu)
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 #+end_src
@@ -1815,9 +1818,12 @@ https://jblevins.org/projects/markdown-mode/
 
 **** org-roam
 
++ GitHub :: [[https://github.com/org-roam/org-roam][org-roam/org-roam]]
+
 #+begin_src emacs-lisp
 (use-package org-roam
   :straight t
+  :after (nerd-icons)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n i" . org-roam-node-insert))
   :init
@@ -1832,15 +1838,48 @@ https://jblevins.org/projects/markdown-mode/
    '(("d" "default" entry "* %<%I:%M %p>: %?"
       :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+filetags: :日記:\n"))))
   :config
-  (org-roam-db-autosync-mode +1))
+  (org-roam-db-autosync-mode +1)
 
+  (defvar org-roam--title (s-concat (nerd-icons-sucicon "nf-custom-orgmode")
+                                    " "
+                                    "Org Roam"))
+  (pretty-hydra-define org-roam
+    (:title org-roam--title :quit-key "q")
+    ("Basic"
+     (("f" org-roam-node-find "find" :exit t)
+      ("i" org-roam-node-insert "insert" :exit t)
+      ("b" org-roam-buffer-toggle "buffer toggle" :exit t)
+      ("r" org-roam-refile "refile" :exit t))
+     "Tag"
+     (("ta" org-roam-tag-add "add tag" :exit t)
+      ("tr" org-roam-tag-remove "remove tag" :eixt t))
+     "Dailies"
+     (("dy" org-roam-dailies-goto-yesterday "yesterday" :exit t)
+      ("dt" org-roam-dailies-goto-today "today" :exit t)
+      ("dr" org-roam-dailies-goto-tomorrow "tomorrow" :exit t)
+      ("df" org-roam-dailies-find-date "find" :exit t))
+     "Capture"
+     (("ct" org-roam-dailies-capture-today "today" :exit t)
+      ("cy" org-roam-dailies-capture-yesterday "yesterday" :exit t)
+      ("cr" org-roam-dailies-capture-tomorrow "tomorrow" :exit t)))))
+#+end_src
+
+***** org-roam-ui
+
++ GitHub :: [[https://github.com/org-roam/org-roam-ui][org-roam/org-roam-ui]]
+
+#+begin_src emacs-lisp
 (use-package org-roam-ui
   :straight t
   :after org-roam
   :custom
   (org-roam-ui-sync-theme t)
   (org-roam-ui-update-on-save t)
-  (org-roam-ui-open-on-start t))
+  (org-roam-ui-open-on-start t)
+  :config
+  (pretty-hydra-define+ org-roam nil
+    ("UI"
+     (("o" org-roam-ui-open "open" :exit t)))))
 #+end_src
 
 **** Notification
