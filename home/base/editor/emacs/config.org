@@ -1865,12 +1865,15 @@ CLOSED: [2024-03-17 日 22:04]
   :custom
   (org-roam-db-location "~/.emacs.d/org-roam.db")
   (org-roam-database-connector 'sqlite-builtin)
-  (org-roam-directory (file-truename "~/org-roam"))
 
   (org-roam-dailies-capture-templates
    '(("d" "default" entry "* %<%I:%M %p>: %?"
       :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+filetags: :日記:\n"))))
   :config
+  (setq org-roam-directory (file-truename (if (file-exists-p "~/マイドライブ")
+                                              "~/マイドライブ/org-roam"
+                                            "~/org-roam")))
+
   (org-roam-db-autosync-mode +1)
 
   (defvar org-roam--title (s-concat (nerd-icons-sucicon "nf-custom-orgmode")
