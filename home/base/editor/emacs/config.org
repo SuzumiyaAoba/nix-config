@@ -1,7 +1,7 @@
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
-* SuzumiyaAoba's Emacs Configuration [60/75]
+* SuzumiyaAoba's Emacs Configuration [72/87]
 
 ** Basic Packages [5/5]
 
@@ -1308,6 +1308,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 ** DONE Window
 
++ GitHub :: [[https://github.com/abo-abo/ace-window][abo-abo/ace-window]]
+
 #+begin_src emacs-lisp
 (use-package ace-window
   :straight t
@@ -1323,7 +1325,11 @@ https://ladicle.com/post/config/#change-smart-kill-word
        (:foreground "deep sky blue" :bold t :height 3.0))))))
 #+end_src
 
-** Parens [0/0]
+** Parens [3/3]
+
+*** DONE paren
+
++ Documents :: https://www.emacswiki.org/emacs/ShowParenMode
 
 #+begin_src emacs-lisp
 (use-package paren
@@ -1332,19 +1338,37 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (after-init . show-paren-mode)
   :custom
   (show-paren-style 'mixed))
+#+end_src
 
+*** DONE smartprens
+
++ GitHub :: [[https://github.com/Fuco1/smartparens][Fuco1/smartparens]]
+
+#+begin_src emacs-lisp
 (use-package smartparens
   :straight t
   :diminish smartparens-mode
   :config
   (require 'smartparens-config)
 
-  (smartparens-global-mode t))
+  (smartparens-global-strict-mode t))
+#+end_src
 
+*** DONE rainbow-delimiters
+
++ GitHub :: [[https://github.com/Fanael/rainbow-delimiters][Fanael/rainbow-delimiters]]
+
+#+begin_src emacs-lisp
 (use-package rainbow-delimiters
   :straight t
   :hook ((prog-mode . rainbow-delimiters-mode)))
+#+end_src
 
+*** DONE which-key
+
++ GitHub :: https://github.com/justbur/emacs-which-key
+
+#+begin_src emacs-lisp
 (use-package which-key
   :straight t
   :diminish which-key-mode
@@ -1585,9 +1609,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 ** Writing
 
-*** Markdown
+*** DONE Markdown
 
-https://jblevins.org/projects/markdown-mode/
++ Documents :: https://jblevins.org/projects/markdown-mode/
 
 #+begin_src emacs-lisp
 (use-package markdown-mode
@@ -1721,7 +1745,9 @@ https://jblevins.org/projects/markdown-mode/
                                   (my-org-link-activate ,type start end bracketp))))))
 #+end_src
 
-**** org-bars
+**** DONE org-bars :NotUsed:
+
++ GitHub :: [[https://github.com/tonyaldon/org-bars][tonyaldon/org-bars]]
 
 #+begin_src emacs-lisp
 (use-package org-bars
@@ -1734,14 +1760,19 @@ https://jblevins.org/projects/markdown-mode/
                        (org-bars-mode)))))
 #+end_src
 
-**** org-sidebar
+**** DONE org-sidebar
+
++ GitHub :: [[https://github.com/alphapapa/org-sidebar][alphapapa/org-sidebar]]
 
 #+begin_src emacs-lisp
 (use-package org-sidebar
   :straight t)
 #+end_src
 
-**** org-sticky-header
+**** DONE org-sticky-header
+CLOSED: [2024-03-17 日 22:04]
+
++ GitHub :: [[https://github.com/alphapapa/org-sticky-header][alphapapa/org-sticky-header]]
 
 #+begin_src emacs-lisp
 (use-package org-sticky-header
@@ -1751,7 +1782,9 @@ https://jblevins.org/projects/markdown-mode/
   (org-sticky-header-full-path 'full))
 #+end_src
 
-**** org-modern
+**** DONE org-modern
+
++ GitHub :: [[https://github.com/minad/org-modern][minad/org-modern]]
 
 #+begin_src emacs-lisp
 (use-package org-modern
@@ -2144,6 +2177,7 @@ https://paredit.org/
 ****** cider
 
 + GitHub :: [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]]
++ Documents :: https://docs.cider.mx/cider/index.html 
 
 #+begin_src emacs-lisp
 (use-package cider
@@ -2153,7 +2187,7 @@ https://paredit.org/
   )
 #+end_src
 
-****** clj-refactor
+****** DONE clj-refactor
 
 + GitHub :: [[https://github.com/clojure-emacs/clj-refactor.el][clojure-emacs/clj-refactor.el]]
 
@@ -2165,7 +2199,7 @@ https://paredit.org/
                            (clj-add-keybindings-with-prefix "C-c C-m")))))
 #+end_src
 
-****** ob-clojure-literate
+****** DONE ob-clojure-literate
 
 + https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html
 
