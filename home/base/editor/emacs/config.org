@@ -1346,7 +1346,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :config
   (require 'smartparens-config)
 
-  (smartparens-global-strict-mode t))
+  (smartparens-global-mode t))
 #+end_src
 
 *** DONE rainbow-delimiters
