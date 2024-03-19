@@ -599,7 +599,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package nerd-icons
-xs  :straight t)
+  :straight t)
 #+end_src
 
 *** DONE Hide
