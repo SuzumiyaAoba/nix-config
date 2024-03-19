@@ -599,7 +599,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package nerd-icons
-  :straight t)
+xs  :straight t)
 #+end_src
 
 *** DONE Hide
@@ -1992,7 +1992,11 @@ CLOSED: [2024-03-17 日 22:04]
   :straight t
   :diminish tree-sitter-mode
   :hook ((typescript-mode . tree-sitter-hl-mode)
-         (tsx-ts-mode . tree-sitter-hl-mode)))
+         (tsx-ts-mode . tree-sitter-hl-mode))
+  :config
+  (global-tree-sitter-mode)
+
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package treesit-auto
   :straight t
@@ -2055,7 +2059,8 @@ https://emacs-lsp.github.io/lsp-mode/
          (lsp-mode . lsp-lens-mode)
          (scala-mode . lsp)
          (typescript-ts-mode . lsp-deferred)
-         (tsx-ts-mode . lsp-deferred))
+         (tsx-ts-mode . lsp-deferred)
+         (rust-mode . lsp))
   :config
   (with-eval-after-load 'lsp-mode
     (setq lsp-completion-provider :none))
@@ -2316,6 +2321,16 @@ https://github.com/ziglang/zig
 
 (use-package lsp-metals
   :straight t)
+#+end_src
+
+**** Rust
+
+#+begin_src emacs-lisp
+(use-package rust-mode
+  :straight t
+  :custom
+  (rust-format-on-save t)
+  (rust-mode-treesitter-derive t))
 #+end_src
 
 **** DONE SQLite
