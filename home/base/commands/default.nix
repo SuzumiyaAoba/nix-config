@@ -1,4 +1,4 @@
-{ ... }:
+ { ... }:
 
 {
   imports = [
@@ -27,5 +27,6 @@
     ./ast-grep.nix
     ./hexyl.nix
     ./delta.nix
+    ./hugo.nix
   ];
 }
