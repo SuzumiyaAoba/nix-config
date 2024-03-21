@@ -1671,7 +1671,6 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (org-hierarchical-todo-statistics nil)
 
   ;; org-agenda
-  (org-agenda-files '("~/org-roam" "~/org-roam/daily"))
   (org-agenda-span 'day)
   (org-agenda-tags-column 0)
   (org-agenda-block-separator ?─)
@@ -1698,8 +1697,11 @@ https://ladicle.com/post/config/#change-smart-kill-word
                                     ;; 今日は色を反転
                                     (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face))))
   (org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>"))
-
   :config
+  (setq org-agenda-files (if (file-exists-p "~/マイドライブ"))
+        '("~/マイドライブ/org-roam" "~/マイドライブ/org-roam/daily")
+        '("~/org-roam" "~/org-roam/daily"))
+
   ;; リンクにアイコンを表示
   ;; see: https://www.yewton.net/2023/04/01/org-link-prefix/
   ;; see: https://gist.github.com/yewton/eecc7fbb157c57159ce6cc785df0ea73
@@ -1852,8 +1854,6 @@ CLOSED: [2024-03-17 日 22:04]
 (use-package org-roam
   :straight t
   :after (nerd-icons)
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n i" . org-roam-node-insert))
   :init
   (unless (file-exists-p "~/org-roam")
     (make-directory "~/org-roam"))
