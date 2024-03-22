@@ -1482,8 +1482,15 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 (use-package git-modes
   :straight t)
+#+end_src
 
+*** DONE git-gutter :NotUsed:
+
++ GitHub :: https://github.com/emacsorphanage/git-gutter
+
+#+begin_src emacs-lisp
 (use-package git-gutter
+  :disabled t
   :straight t
   :diminish git-gutter-mode
   :custom ((git-gutter:unchaged-sign " ")
@@ -1498,6 +1505,18 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
   (global-git-gutter-mode +1))
 #+end_src
+
+*** DONE diff-hl
+
++ GitHub :: https://github.com/dgutov/diff-hl
+
+  #+begin_src emacs-lisp
+(use-package diff-hl
+  :straight t
+  :config
+
+  (global-diff-hl-mode +1))
+  #+end_src
 
 *** DONE magit [2/2]
 
@@ -1937,6 +1956,17 @@ CLOSED: [2024-03-17 日 22:04]
 #+begin_src emacs-lisp
 (use-package writeroom-mode
   :straight t)
+#+end_src
+
+*** DONE perfect-margin
+
++ GitHub :: https://github.com/mpwang/perfect-margin/
+
+#+begin_src emacs-lisp
+(use-package perfect-margin
+  :straight t
+  :config
+  (perfect-margin-mode +1))
 #+end_src
 
 *** TODO Olivetti
