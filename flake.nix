@@ -18,6 +18,8 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+
+    emacs-lsp-booster.url = "github:slotThe/emacs-lsp-booster-flake";
   };
 
   outputs =
@@ -27,6 +29,7 @@
     , home-manager
     , nix-homebrew
     , emacs-overlay
+    , emacs-lsp-booster
     , ...
     }@inputs:
     let
@@ -48,6 +51,10 @@
         nix.settings = {
           experimental-features = [ "nix-command" "flakes" ];
         };
+
+        nixpkgs.overlays = [
+          emacs-lsp-booster.overlays.default
+        ];
       };
     in
     {

@@ -13,3 +13,7 @@
 (add-to-list 'default-frame-alist '(font . "0xProto-12"))
 
 (add-to-list 'face-remapping-alist '(:family "HackGen Console NF"))
+
+;; lsp
+;; see: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
+(setenv "LSP_USE_PLISTS" "true")
