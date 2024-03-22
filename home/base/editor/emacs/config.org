@@ -1629,7 +1629,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :after (nerd-icons japanese-holidays)
   :bind (("C-c c" . major-mode-hydras/org-mode/body))
   :hook ((org-mode . (lambda ()
-                       (set-face-attribute 'fixed-pitch nil :font "0xProto-12"))))
+                       (set-face-attribute 'fixed-pitch nil :font "0xProto-12")))
+         (org-mode . (lambda () (add-hook 'text-scale-mode-hook #'my/resize-org-latex-overlays nil t))))
   :mode-hydra
   (org-mode
    ("Agenda"
@@ -1643,7 +1644,16 @@ https://ladicle.com/post/config/#change-smart-kill-word
      ("<" org-roam-buffer-toggle "toggle" :exit t))
     "Capture"
     (("n" org-roam-dailies-capture-today "now" :exit t))))
+  :init
+  (defun my/resize-org-latex-overlays ()
+    (cl-loop for o in (car (overlay-lists))
+             if (eq (overlay-get o 'org-overlay-type) 'org-latex-overlay)
+             do (plist-put (cdr (overlay-get o 'display))
+		           :scale (expt text-scale-mode-step
+				        text-scale-mode-amount))))
   :custom
+  (org-latex-create-formula-image-program 'dvisvgm)
+
   (org-log-done 'time)
   (org-src-fontify-natively t)
 
@@ -1698,9 +1708,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
                                     (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face))))
   (org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>"))
   :config
-  (setq org-agenda-files (if (file-exists-p "~/マイドライブ"))
-        '("~/マイドライブ/org-roam" "~/マイドライブ/org-roam/daily")
-        '("~/org-roam" "~/org-roam/daily"))
+  (setq org-agenda-files (if (file-exists-p "~/マイドライブ")
+                             '("~/マイドライブ/org-roam" "~/マイドライブ/org-roam/daily")
+                           '("~/org-roam" "~/org-roam/daily")))
 
   ;; リンクにアイコンを表示
   ;; see: https://www.yewton.net/2023/04/01/org-link-prefix/

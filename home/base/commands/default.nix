@@ -28,5 +28,6 @@
     ./hexyl.nix
     ./delta.nix
     ./hugo.nix
+    ./textlive.nix
   ];
 }
