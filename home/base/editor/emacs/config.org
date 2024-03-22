@@ -658,6 +658,15 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :bind (("C-:" . avy-goto-char-2)))
 #+end_src
 
+*** Breadcrumb
+
+#+begin_src emacs-lisp
+(use-package breadcrumb
+  :straight t
+  :config
+  (breadcrumb-mode))
+#+end_src
+
 ** Tab [5/5]
 
 *** tab-bar
