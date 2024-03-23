@@ -1952,6 +1952,18 @@ CLOSED: [2024-03-17 日 22:04]
      (("o" org-roam-ui-open "open" :exit t)))))
 #+end_src
 
+***** DONE org-roam-timestamps
+
++ GitHub :: https://github.com/tefkah/org-roam-timestamps?tab=readme-ov-file
+
+#+begin_src emacs-lisp
+(use-package org-roam-timestamps
+  :straight t
+  :after org-roam
+  :config
+  (org-roam-timestamps-mode))
+#+end_src
+
 **** Notification
 
 #+begin_src emacs-lisp
@@ -2059,7 +2071,8 @@ CLOSED: [2024-03-17 日 22:04]
 
 *** LSP
 
-https://emacs-lsp.github.io/lsp-mode/
++ Documents :: https://emacs-lsp.github.io/lsp-mode/
++ GitHub :: [[https://github.com/blahgeek/emacs-lsp-booster][blahgeek/emacs-lsp-booster]]
 
 #+begin_src emacs-lisp
 (use-package lsp-mode
@@ -2118,33 +2131,9 @@ https://emacs-lsp.github.io/lsp-mode/
   (defun corfu-lsp-setup ()
     (setq-local completion-styles '(orderless)
                 completion-category-defaults nil))
-  (add-hook 'lsp-mode-hook #'corfu-lsp-setup))
+  (add-hook 'lsp-mode-hook #'corfu-lsp-setup)
 
-(use-package lsp-ui
-  :straight t
-  :commands lsp-ui-mode)
-
-(use-package lsp-treemacs
-  :commands lsp-treemacs-errors-list)
-
-(use-package dap-mode
-  :straight t
-  :config
-  (dap-auto-configure-mode))
-
-(use-package consult-lsp
-  :bind (([remap xref-find-apropos] . consult-lsp-symbols))
-  :straight t)
-#+end_src
-
-*** DONE lsp-booster
-
-+ GitHub :: https://github.com/blahgeek/emacs-lsp-booster
-
-#+begin_src emacs-lisp
-(use-package lsp-booster
-  :straight t
-  :config
+  ;; lsp-booster
   (defun lsp-booster--advice-json-parse (old-fn &rest args)
     "Try to parse bytecode instead of json."
     (or
@@ -2173,6 +2162,22 @@ https://emacs-lsp.github.io/lsp-mode/
             (cons "emacs-lsp-booster" orig-result))
         orig-result)))
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command))
+
+(use-package lsp-ui
+  :straight t
+  :commands lsp-ui-mode)
+
+(use-package lsp-treemacs
+  :commands lsp-treemacs-errors-list)
+
+(use-package dap-mode
+  :straight t
+  :config
+  (dap-auto-configure-mode))
+
+(use-package consult-lsp
+  :bind (([remap xref-find-apropos] . consult-lsp-symbols))
+  :straight t)
 #+end_src
 
 *** DONE jsonrpc
