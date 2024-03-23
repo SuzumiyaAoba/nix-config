@@ -1387,6 +1387,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package dashboard
+  :disabled t
   :straight t
   :after (nerd-icons)
   :custom
