@@ -1904,9 +1904,33 @@ CLOSED: [2024-03-17 日 22:04]
    '(("d" "default" entry "* %<%I:%M %p>: %?"
       :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+filetags: :日記:\n"))))
   :config
+  (setq org-roam--public t)
+
+  (defun org-roam--base-dir ()
+    (if (file-exists-p "~/マイドライブ")
+        (if org-roam--public
+            "~/マイドライブ/org-roam/public"
+          "~/マイドライブ/org-roam/private")
+      "~/org-roam"))
+
   (setq org-roam-directory (file-truename (if (file-exists-p "~/マイドライブ")
                                               "~/マイドライブ/org-roam"
                                             "~/org-roam")))
+
+  (defun org-roam--update-directory ()
+    (let ((dir (org-roam--base-dir)))
+      (progn
+        (setq org-agenda-files `(,dir ,(concat dir "/daily")))
+        (setq org-roam-directory (file-truename dir))
+        (org-roam-db-sync))))
+    
+  (defun org-roam--public-toggle ()
+    (interactive)
+    (progn
+      (setq org-roam--public (not org-roam--public))
+      (org-roam--update-directory)))
+
+  (org-roam--update-directory)
 
   (org-roam-db-autosync-mode +1)
 
@@ -1916,7 +1940,8 @@ CLOSED: [2024-03-17 日 22:04]
   (pretty-hydra-define org-roam
     (:title org-roam--title :quit-key "q")
     ("Basic"
-     (("f" org-roam-node-find "find" :exit t)
+     (("p" org-roam--public-toggle "public" :toggle org-roam--public)
+      ("f" org-roam-node-find "find" :exit t)
       ("i" org-roam-node-insert "insert" :exit t)
       ("b" org-roam-buffer-toggle "buffer toggle" :exit t)
       ("r" org-roam-refile "refile" :exit t))
