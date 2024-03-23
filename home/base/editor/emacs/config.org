@@ -1898,7 +1898,6 @@ CLOSED: [2024-03-17 日 22:04]
   (unless (file-exists-p "~/org-roam")
     (make-directory "~/org-roam"))
   :custom
-  (org-roam-db-location "~/.emacs.d/org-roam.db")
   (org-roam-database-connector 'sqlite-builtin)
 
   (org-roam-dailies-capture-templates
@@ -1923,6 +1922,7 @@ CLOSED: [2024-03-17 日 22:04]
       (progn
         (setq org-agenda-files `(,dir ,(concat dir "/daily")))
         (setq org-roam-directory (file-truename dir))
+        (setq org-roam-db-location (concat dir "/org-roam.db"))
         (org-roam-db-sync))))
     
   (defun org-roam--public-toggle ()
