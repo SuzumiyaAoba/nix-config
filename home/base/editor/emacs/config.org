@@ -1036,6 +1036,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (corfu-auto-delay 0)
   (completion-styles '(orderless))
   (corfu-popupinfo-delay 0.5)
+  (corfu-quit-no-match t)
   :config
   (global-corfu-mode))
 
