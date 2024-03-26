@@ -2279,6 +2279,14 @@ CLOSED: [2024-03-17 日 22:04]
   (global-treesit-auto-mode))
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package tree-sitter-indent
+  :straight (tree-sitter-indent :type git
+                                :host github
+                                :repo "emacsmirror/tree-sitter-indent"
+                                :files ("tree-sitter-indent.el")))
+#+end_src
+
 ** Language Server [0/0]
 
 *** LSP
@@ -2706,6 +2714,14 @@ https://github.com/ziglang/zig
   :custom
   (rust-format-on-save t)
   (rust-mode-treesitter-derive t))
+#+end_src
+
+**** Gleam
+
+#+begin_src emacs-lisp
+(use-package gleam-mode
+  :straight (gleam-mode :type git :host github :repo "gleam-lang")
+  :after (tree-sitter tree-sitter-indent))
 #+end_src
 
 **** DONE SQLite
