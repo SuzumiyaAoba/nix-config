@@ -453,7 +453,6 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 (use-package treemacs-nerd-icons
   :straight t
-  :after treemacs
   :config
   (treemacs-load-theme "nerd-icons"))
 
@@ -2403,6 +2402,24 @@ CLOSED: [2024-03-17 日 22:04]
   :ensure nil
   :custom
   (lsp-imenu-sort-methods '(position)))
+#+end_src
+
+*** DONE lsp-treemacs-nerd-icons
+
+#+begin_src emacs-lisp
+(use-package lsp-treemacs-nerd-icons
+  :straight (lsp-treemacs-nerd-icons :type git :host github :repo "Velnbur/lsp-treemacs-nerd-icons")
+  :after (treemacs nerd-icons))
+#+end_src
+
+*** DONE lsp-treemacs
+
+#+begin_src emacs-lisp
+(use-package lsp-treemacs
+  :straight t
+  :after lsp-treemacs-nerd-icons
+  :custom
+  (lsp-treemacs-theme "nerd-icons-ext"))
 #+end_src
 
 *** DONE jsonrpc
