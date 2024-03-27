@@ -121,7 +121,7 @@ org-mode が読み込まれるように設定している。
 
 *** OS
 
-#+begin_src emacs-lsip
+#+begin_src emacs-lisp
 (defconst IS-MAC (eq system-type 'darwin))
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
@@ -221,7 +221,7 @@ Emacs デーモンを起動したとき =window-system= が =nil= になって�
   (savehist-mode +1)
   ;; 最近使ったファイルを覚えていく
   (setq recentf-max-saved-items 100)
-  (recentf-mode+)
+  (recentf-mode +1)
 
   ;; 現在行をハイライト
   (global-hl-line-mode)
@@ -536,7 +536,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 **** DONE doom-themes :NotUsed:
 
-+ GitHub :: [[https://github.com/doomemacs/themes][doomemacs/themes]] 
++ GitHub :: [[https://github.com/doomemacs/themes][doomemacs/themes]]
 
 #+begin_src emacs-lisp
 (use-package doom-themes
@@ -604,9 +604,9 @@ https://ladicle.com/post/config/#change-smart-kill-word
         ))
   :config
   ;; (load-theme 'modus-operandi t)
-  ;; (load-theme 'modus-operandi-tinted t)
+  (load-theme 'modus-operandi-tinted t)
   ;; (load-theme 'modus-vivendi t)
-  (load-theme 'modus-vivendi-tinted t)
+  ;; (load-theme 'modus-vivendi-tinted t)
   ;; (load-theme 'modus-vivendi-deuteranopia t)
   ;; (load-theme 'modus-vivendi-tritanopia t)
   )
@@ -935,22 +935,60 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 ** DONE Undo/Redo
 
+*** DONE undohist
+
 + GitHub :: https://github.com/emacsorphanage/undohist
-+ GitLab :: https://gitlab.com/tsc25/undo-tree
 
 #+begin_src emacs-lisp
 (use-package undohist
   :straight t
   :config
   (undohist-initialize))
+#+end_src
 
+*** DONE undo-tree :NotUsed:
+
++ GitLab :: https://gitlab.com/tsc25/undo-tree
+
+#+begin_src emacs-lisp
 (use-package undo-tree
+  :disabled t
   :straight t
   :diminish undo-tree-mode
   :custom
   (undo-tree-auto-save-history nil)
   :config
   (global-undo-tree-mode))
+#+end_src
+
+*** DONE vundo
+
++ GitHub :: [[https://github.com/casouri/vundo][casouri/vundo]]
+
+#+begin_src emacs-lisp
+(use-package vundo
+  :straight t
+  :bind (("C-x u" . vundo)))
+#+end_src
+
+*** DONE undo-fu
+
++ GitHub :: [[https://github.com/emacsmirror/undo-fu][emacsmirror/undo-fu]]
+
+#+begin_src emacs-lisp
+(use-package undo-fu
+  :straight t)
+#+end_src
+
+*** DONE undo-fu-session
+
++ GitHub :: [[https://github.com/emacsmirror/undo-fu-session][emacsmirror/undo-fu-session]]
+
+#+begin_src emacs-lisp
+(use-package undo-fu-session
+  :straight t
+  :config
+  (undo-fu-session-global-mode +1))
 #+end_src
 
 ** TODO Shell
@@ -1035,10 +1073,27 @@ https://ladicle.com/post/config/#change-smart-kill-word
               ("DEL" . vertico-directory-delete-char)))
 
 (use-package prescient
-  :straight t)
+  :straight t
+  :config
+  (setq prescient-aggressive-file-save t)
+  (prescient-persist-mode +1))
 
 (use-package vertico-prescient
-  :straight t)
+  :straight t
+  :config
+  (setq vertico-prescient-enable-filtering nil)
+  (vertico-prescient-mode +1))
+#+end_src
+
+**** DONE vertico-truncate
+
++ GitHub :: [[https://github.com/jdtsmith/vertico-truncate][jdtsmith/vertico-truncate]]
+
+#+begin_src emacs-lisp
+(use-package vertico-truncate
+  :straight (vertico-truncate :type git :host github :repo "jdtsmith/vertico-truncate")
+  :config
+  (vertico-truncate-mode +1))
 #+end_src
 
 *** DONE marginalia
@@ -1181,7 +1236,10 @@ https://ladicle.com/post/config/#change-smart-kill-word
   (completion-styles '(orderless basic)))
 
 (use-package corfu-prescient
-  :straight t)
+  :straight t
+  :config
+  (setq corfu-prescient-enable-filtering nil)
+  (corfu-prescient-mode +1))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1301,6 +1359,17 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 ** DONE Highlights [6/6]
 
+*** DONE lin
+
+#+begin_src emacs-lisp
+(use-package lin
+ :straight t
+ :custom
+ (lin-face 'lin-red)
+ :config
+ (lin-global-mode +1))
+#+end_src
+
 *** DONE volatile-highlights
 
 + GitHub :: [[https://github.com/k-talo/volatile-highlights.el][k-talo/volatile-highlights.el]]
@@ -1410,7 +1479,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (setq-default show-trailing-whitespace t)
-#+end_src
+#+end_src 
 
 ** DONE Window
 
@@ -1731,6 +1800,23 @@ https://ladicle.com/post/config/#change-smart-kill-word
 #+begin_src emacs-lisp
 (use-package github-review
   :straight t)
+#+end_src
+
+** Diff
+
+*** difftastic.el
+
+#+begin_src emacs-lisp
+(use-package difftastic
+  :straight t
+  :bind (:map magit-blame-read-only-mode-map
+              ("D" . difftastic-magit-show)
+              ("S" . difftastic-magit-show))
+  :config
+  (eval-after-load 'magit-diff
+    '(transient-append-suffix 'magit-diff '(-1 -1)
+       [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
+        ("S" "Difftastic show" difftastic-magit-show)])))
 #+end_src
 
 ** Writing
@@ -2162,7 +2248,7 @@ CLOSED: [2024-03-17 日 22:04]
 + GitHub :: [[https://github.com/emacsmirror/rainbow-mode][emacsmirror/rainbow-mode]]
 
 #+begin_src emacs-lisp
-(use-package rainbow-mode  
+(use-package rainbow-mode
   :straight t
   :hook ((prog-mode . rainbow-mode)))
 #+end_src
@@ -2391,6 +2477,22 @@ https://paredit.org/
     ("i" info-lookup-symbol "info lookup"))))
 #+end_src
 
+****** highlight-defined
+
+#+begin_src emacs-lisp
+(use-package highlight-defined
+  :straight t
+  :hook (emacs-lisp-mode . highlight-defined-mode))
+#+end_src
+
+****** highlight-quoted
+
+#+begin_src emacs-lisp
+(use-package highlight-quoted
+  :straight t
+  :hook (emacs-lisp-mode . highlight-quoted-mode))
+#+end_src
+
 ***** TODO Clojure
 
 ****** clojure-mode
@@ -2409,7 +2511,7 @@ https://paredit.org/
 ****** cider
 
 + GitHub :: [[https://github.com/clojure-emacs/cider][clojure-emacs/cider]]
-+ Documents :: https://docs.cider.mx/cider/index.html 
++ Documents :: https://docs.cider.mx/cider/index.html
 
 #+begin_src emacs-lisp
 (use-package cider
