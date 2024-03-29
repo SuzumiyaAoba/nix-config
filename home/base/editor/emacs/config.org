@@ -1,3 +1,4 @@
+
 #+TITLE: Emacs Configuration
 #+SEQ_TODO: TODO(t) WIP(w) | DONE(d)
 
@@ -940,6 +941,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package undohist
+  :dsiabled t
   :straight t
   :config
   (undohist-initialize))
@@ -2711,16 +2713,18 @@ https://github.com/ziglang/zig
 #+begin_src emacs-lisp
 (use-package rust-mode
   :straight t
+  :after tree-sitter
+  :init
+  (setq rust-mode-treesitter-derive t)
   :custom
-  (rust-format-on-save t)
-  (rust-mode-treesitter-derive t))
+  (rust-format-on-save t))
 #+end_src
 
 **** Gleam
 
 #+begin_src emacs-lisp
 (use-package gleam-mode
-  :straight (gleam-mode :type git :host github :repo "gleam-lang")
+  :straight (gleam-mode :type git :host github :repo "gleam-lang/gleam-mode")
   :after (tree-sitter tree-sitter-indent))
 #+end_src
 
