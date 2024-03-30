@@ -2260,12 +2260,15 @@ CLOSED: [2024-03-17 日 22:04]
   :after tree-sitter
   :config
   (tree-sitter-require 'tsx)
-  (add-to-list 'tree-sitter-major-mode-language-alist '(tsx-ts-mode . tsx)))
+  (add-to-list 'tree-sitter-major-mode-language-alist '(tsx-ts-mode . tsx))
+
+  (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-ts-mode . typescript)))
 
 (use-package tree-sitter
   :straight t
   :diminish tree-sitter-mode
   :hook ((typescript-mode . tree-sitter-hl-mode)
+         (typescript-ts-mode . tree-sitter-hl-mode)
          (tsx-ts-mode . tree-sitter-hl-mode))
   :config
   (global-tree-sitter-mode)
@@ -2455,7 +2458,9 @@ CLOSED: [2024-03-17 日 22:04]
          ("C-<tab>" . copilot-accept-completion-by-word))
   :hook ((prog-mode . copilot-mode))
   :custom
-  (copilot-indent-offset-warning-disable t))
+  (copilot-indent-offset-warning-disable t)
+  :config
+  (copilot-install-server))
 #+end_src
 
 *** Refactoring [1/1]
