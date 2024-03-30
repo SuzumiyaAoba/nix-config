@@ -6,6 +6,5 @@
     ./dust.nix
     ./silicon.nix
     ./xsv.nix
-    ./gleam.nix
   ];
 }

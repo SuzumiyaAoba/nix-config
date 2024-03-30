@@ -6,5 +6,6 @@
 
     ./programs
     ./gui
+    ./languages
   ];
 }

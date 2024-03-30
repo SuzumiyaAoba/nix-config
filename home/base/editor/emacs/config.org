@@ -2278,7 +2278,7 @@ CLOSED: [2024-03-17 日 22:04]
 (use-package treesit-auto
   :straight t
   :config
-  (setq treesit-auto-install 'prompt)
+  (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 #+end_src
 
@@ -2727,12 +2727,18 @@ https://github.com/ziglang/zig
   (rust-format-on-save t))
 #+end_src
 
-**** Gleam
+**** TODO Gleam
 
 #+begin_src emacs-lisp
-(use-package gleam-mode
-  :straight (gleam-mode :type git :host github :repo "gleam-lang/gleam-mode")
-  :after (tree-sitter tree-sitter-indent))
+(use-package gleam-ts-mode
+  :straight (gleam-ts-mode :type git
+                        :host github
+                        :repo "gleam-lang/gleam-mode"
+                        :branch "gleam-ts-mode"
+                        :files ("gleam-ts-mode.el"))
+  :after (tree-sitter tree-sitter-indent treesit-auto)
+  :mode (("\\.gleam\\'" . gleam-ts-mode))
+  :hook ((gleam-ts-mode . (lambda () (add-hook 'before-save-hook 'gleam-format nil t)))))
 #+end_src
 
 **** DONE SQLite
