@@ -939,7 +939,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 #+begin_src emacs-lisp
 (use-package undohist
-  :dsiabled t
+  :disabled t
   :straight t
   :config
   (undohist-initialize))
@@ -2304,19 +2304,23 @@ CLOSED: [2024-03-17 日 22:04]
          ("C-c i"   . lsp-ui-peek-find-implementation)
          ("C-c m"   . lsp-ui-imenu)
          ("C-c s"   . lsp-ui-sideline-mode))
+  :init
+  (custom-set-faces
+   '(lsp-ui-doc-background ((t :background "#ffffff"))))
   :custom
   ;; performance
   (read-process-output-max (* 1024 1024))
 
   ;; doc
-  (lsp-ui-doc-enable nil)
+  (lsp-ui-doc-enable t)
   (lsp-ui-doc-include-signature t)
+  (lsp-ui-doc-header nil)
   (lsp-ui-doc-position 'at-point)
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-use-childframe t)
   (lsp-ui-doc-use-webkit t)
   (lsp-ui-doc-border (face-foreground 'default))
-  (lsp-eldoc-render-all t)
+  (lsp-eldoc-render-all nil)
 
   ;; sideline
   (lsp-ui-sideline-enable nil)
