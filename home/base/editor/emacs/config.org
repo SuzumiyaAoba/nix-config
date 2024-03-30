@@ -2314,6 +2314,12 @@ CLOSED: [2024-03-17 日 22:04]
   ;; performance
   (read-process-output-max (* 1024 1024))
 
+  ;; headerline
+  (lsp-headerline-breadcrumb-enable nil)
+
+  ;; symbol highlight
+  (lsp-enable-symbol-highlighting t)
+
   ;; doc
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-include-signature t)
@@ -2725,6 +2731,21 @@ https://github.com/ziglang/zig
   (setq rust-mode-treesitter-derive t)
   :custom
   (rust-format-on-save t))
+#+end_src
+
+**** Golang
+
+***** DONE go-mode
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :straight t
+  :hook (((go-mode go-ts-mode) . lsp)
+         ((go-mode go-ts-mode) . (lambda ()
+                                   (add-hook 'before-save-hook 'gofmt nil t))))
+  :commands (gofmt)
+  :custom
+  (gofmt-command "gofmt"))
 #+end_src
 
 **** TODO Gleam
