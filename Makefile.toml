@@ -17,8 +17,9 @@ NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix --extra-experimental-features 'nix-comman
 '''
 
 [tasks.update]
-command = "nix"
-args = ["flake", "lock", "--update-input", "nixpkgs"]
+script = '''
+nix flake update
+'''
 
 [tasks.gc]
 script = '''

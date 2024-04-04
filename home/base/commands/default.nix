@@ -29,5 +29,6 @@
     ./delta.nix
     ./hugo.nix
     ./textlive.nix
+    ./jnv.nix
   ];
 }
