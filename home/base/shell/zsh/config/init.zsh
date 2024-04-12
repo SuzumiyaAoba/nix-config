@@ -3,7 +3,7 @@ setopt no_beep
 export LANG=ja_JP.UTF-8
 
 autoload -Uz select-word-style
-select-word-style default 
+select-word-style default
 zstyle ':zle:*' word-chars ' /=;@:{}[]()<>,|.'
 zstyle ':zle:*' word-style unspecified
 

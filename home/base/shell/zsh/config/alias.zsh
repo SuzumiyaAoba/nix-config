@@ -1,10 +1,10 @@
 ## ls
 if [[ $(command -v exa) ]]; then
   alias l='clear && ls'
-  alias ls='exa --icons --git'
-  alias ll='exa -aahl --icons --git'
-  alias lt='exa -T -L 3 -a -I ".git" --git-ignore --icons'
-  alias lta='exa -T -a -I ".git" --git-ignore --color=always --icons | less -r'
+  alias ls='eza --icons --git'
+  alias ll='eza -ahl --icons --git'
+  alias lt='eza -T -L 3 -a -I ".git" --git-ignore --icons'
+  alias lta='eza -T -a -I ".git" --git-ignore --color=always --icons | less -r'
 fi
 
 ## grep
