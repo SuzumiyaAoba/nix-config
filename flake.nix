@@ -53,6 +53,7 @@
         };
 
         nixpkgs.overlays = [
+          emacs-overlay.overlays.emacs
           emacs-lsp-booster.overlays.default
         ];
       };
@@ -65,7 +66,6 @@
 
           modules = [
             configuration
-            ./modules/overlays.nix
             ./modules/darwin
             home-manager.darwinModules.home-manager
             {
@@ -92,7 +92,6 @@
 
           modules = [
             configuration
-            ./modules/overlays.nix
             ./modules/darwin
             home-manager.darwinModules.home-manager
             {
@@ -110,7 +109,6 @@
 
           modules = [
             configuration
-            ./modules/overlays.nix
             ./modules/darwin
             home-manager.darwinModules.home-manager
             {
