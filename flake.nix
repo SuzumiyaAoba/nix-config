@@ -18,7 +18,6 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-
     emacs-lsp-booster.url = "github:slotThe/emacs-lsp-booster-flake";
   };
 
@@ -34,12 +33,12 @@
     }@inputs:
     let
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      username = builtins.getEnv "USER";
+      # username = builtins.getEnv "USER";
+      username = "suzumiyaaoba";
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       specialArgs = {
-        inherit emacs-overlay;
         inherit username;
       };
 
@@ -70,6 +69,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./hosts/private/home/aarch64;
               home-manager.extraSpecialArgs = specialArgs;
             }
@@ -119,6 +119,28 @@
             ./hosts/work
           ];
         };
+      };
+
+      nixosConfigurations = {
+        nixos-x86_64 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          inherit specialArgs;
+
+          modules = [
+            ./hosts/nixos
+            ./hosts/nixos/hardware/trigkey.nix
+            ./modules/nixos/configuration.nix
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ emacs-overlay.overlays.emacs ]; })
+            ./modules/nixos
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.${username} = import ./home/nixos;
+            }
+          ];
+	};
       };
 
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);

@@ -526,6 +526,8 @@ https://ladicle.com/post/config/#change-smart-kill-word
   :custom
   (exec-path-from-shell-arguments (quote ("-l")))
   :config
+  (setenv "PATH" (concat (getenv "PATH") ":~/.volta/bin"))
+
   (exec-path-from-shell-initialize))
 #+end_src
 

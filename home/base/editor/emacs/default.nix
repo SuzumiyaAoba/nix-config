@@ -1,11 +1,6 @@
 { nixpkgs, config, pkgs, ... }:
 
 {
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-git;
-  };
-
   home.file = {
     ".emacs.d/init.el".source = ./init.el;
     ".emacs.d/config.org".source = ./config.org;

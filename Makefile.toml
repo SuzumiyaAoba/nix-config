@@ -14,7 +14,12 @@ env = { NIX_DARWIN_CONFIG = "private-aarch64" }
 [tasks."darwin:apply"]
 script = '''
 NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#${NIX_DARWIN_CONFIG} --impure
-'''
+  '''
+
+[tasks."nixos:apply"]
+script = '''
+sudo nixos-rebuild switch --flake .#nixos-x86_64 --impure
+  '''
 
 [tasks.update]
 script = '''

@@ -6,4 +6,6 @@
     deno
     bun
   ];
+
+  home.sessionPath = [ "$HOME/.volta/bin" ];
 }

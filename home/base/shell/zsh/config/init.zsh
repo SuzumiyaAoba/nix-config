@@ -12,7 +12,6 @@ source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"
 
 bin=(
-    "volta"
     "sdkman"
     "rancher"
 )
