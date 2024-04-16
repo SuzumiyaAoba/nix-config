@@ -9,6 +9,7 @@
     ./editor
     ./ide
     ./fonts.nix
+    ./browser
   ];
 
   home = {
