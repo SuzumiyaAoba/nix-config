@@ -139,6 +139,7 @@
 
               home-manager.users.${username} = import ./home/nixos;
             }
+            ./modules/gui/1password.nix
           ];
 	};
       };
