@@ -53,6 +53,8 @@
 
   environment.systemPackages = with pkgs; [
     usbutils
+    wl-clipboard
+    mako
   ];
 
   environment.pathsToLink = [ "/libexec" ];
@@ -70,20 +72,75 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  services.keyd = {
-    enable = true;
+  # services.keyd = {
+  #   enable = true;
 
-    keyboards.default = {
-      ids = [ "*" ];
-      settings = {
-        main = {
-	  capslock = "overload(control, esc)";
-	  ";" = ":";
-	};
-	shift = {
-	  ";" = ";";
-	};
-      };
+  #   keyboards.default = {
+  #     ids = [ "*" ];
+  #     settings = {
+  #       main = {
+  #         capslock = "overload(control, esc)";
+  #         ";" = ":";
+  #       };
+  #       shift = {
+  #         ";" = ";";
+  #       };
+  #     };
+  #   };
+  # };
+
+  services.xremap = {
+    enable = true;
+    withWlroots = true;
+    userName = "suzumiyaaoba";
+    serviceMode = "user";
+
+    config = {
+      modmap = [
+        {
+          remap = {
+            CapsLock = "Control_L";
+          };
+        }
+      ];
+
+      keymap = [
+        {
+          name = "Default";
+          remap = {
+            Semicolon = "Shift-Semicolon";
+            Shift-Semicolon = "Semicolon";
+          };
+        }
+        {
+          name = "Emacs";
+          application = {
+            not = [
+              "emacs"
+              "foot"
+            ];
+          };
+          remap = {
+            C-b = { with_mark = "left"; };
+            C-f = { with_mark = "right"; };
+            C-p = { with_mark = "up"; };
+            C-n = { with_mark = "down"; };
+
+            C-a = { with_mark = "home"; };
+            C-e = { with_mark = "end"; };
+
+            M-v = { with_mark = "pageup"; };
+            C-v = { with_mark = "pagedown"; };
+
+            C-w = [ "C-x" { set_mark = false; } ];
+            C-d = [ "delete" { set_mark = false; } ];
+            C-k = [ "Shift-end" "C-x" { set_mark = false; } ];
+            C-space = { set_mark = true; };
+
+            C-g = [ "esc" { set_mark = false; } ];
+          };
+        }
+      ];
     };
   };
 

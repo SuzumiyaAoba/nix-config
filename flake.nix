@@ -19,6 +19,8 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-lsp-booster.url = "github:slotThe/emacs-lsp-booster-flake";
+
+    xremap.url = "github:xremap/nix-flake";
   };
 
   outputs =
@@ -29,6 +31,7 @@
     , nix-homebrew
     , emacs-overlay
     , emacs-lsp-booster
+    , xremap
     , ...
     }@inputs:
     let
@@ -127,6 +130,7 @@
           inherit specialArgs;
 
           modules = [
+            xremap.nixosModules.default
             ./hosts/nixos
             ./hosts/nixos/hardware/trigkey.nix
             ./modules/nixos/configuration.nix
