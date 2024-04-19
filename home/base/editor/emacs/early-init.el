@@ -10,9 +10,14 @@
 ;; ツールバーを無効
 (push '(tool-bar-lines . 0) default-frame-alist)
 
-(add-to-list 'default-frame-alist '(font . "0xProto-12"))
+(set-face-attribute 'default nil :family "0xProto")
 
-(add-to-list 'face-remapping-alist '(:family "HackGen Console NF"))
+(add-hook 'after-init-hook
+          (lambda ()
+            (cond ((display-graphic-p)
+                   (set-fontset-font nil 'japanese-jisx0213.2004-1 "HackGen Console NF")
+                   (set-fontset-font nil 'japanese-jisx0213-2 "HackGen Console NF")
+                   (set-fontset-font nil 'katakana-jisx0201 "HackGen Console NF")))))
 
 ;; lsp
 ;; see: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization

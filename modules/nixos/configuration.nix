@@ -118,6 +118,7 @@
             not = [
               "emacs"
               "foot"
+              "org.wezfurlong.wezterm"
             ];
           };
           remap = {

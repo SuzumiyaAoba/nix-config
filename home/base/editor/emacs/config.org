@@ -583,10 +583,10 @@ https://ladicle.com/post/config/#change-smart-kill-word
 **** DONE Modus Themes
 
 + GitHub :: [[https://github.com/protesilaos/modus-themes][protesilaos/modus-themes]]
-+ Documents :: https://protesilaos.com/emacs/modus-themes 
++ Documents :: https://protesilaos.com/emacs/modus-themes
 
 #+begin_src emacs-lisp
-(use-package modus-themes 
+(use-package modus-themes
   :straight t
   :custom
   (modus-themes-italic-constructs t)
@@ -605,7 +605,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
         ))
   :config
   ;; (load-theme 'modus-operandi t)
-  (load-theme 'modus-operandi-tinted t)
+   (load-theme 'modus-operandi-tinted t)
   ;; (load-theme 'modus-vivendi t)
   ;; (load-theme 'modus-vivendi-tinted t)
   ;; (load-theme 'modus-vivendi-deuteranopia t)
@@ -2329,7 +2329,7 @@ CLOSED: [2024-03-17 日 22:04]
   (lsp-ui-doc-position 'at-point)
   (lsp-ui-doc-show-with-cursor t)
   (lsp-ui-doc-use-childframe t)
-  (lsp-ui-doc-use-webkit t)
+  (lsp-ui-doc-use-webkit nil)
   (lsp-ui-doc-border (face-foreground 'default))
   (lsp-eldoc-render-all nil)
 
