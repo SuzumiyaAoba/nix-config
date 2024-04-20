@@ -12,9 +12,10 @@
       };
       input = {
         "1133:16505:Logitech_G_Pro" = {
-	  pointer_accel = "-1";
-	};
+          pointer_accel = "-1";
+        };
       };
+      terminal = "wezterm";
     };
   };
 }
