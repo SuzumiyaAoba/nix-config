@@ -5,6 +5,13 @@
     enable = true;
     config = rec {
       modifier = "Mod4";
+      terminal = "wezterm";
+      bars = [
+        {
+          command = "waybar";
+        }
+      ];
+      menu = "${pkgs.wofi}/bin/wofi -f -S run -i";
       output = {
         "Eizo Nanao Corporation EV2785 0x03080071" = {
           scale =  "2";
@@ -15,7 +22,19 @@
           pointer_accel = "-0.5";
         };
       };
-      terminal = "wezterm";
+
+      gaps = {
+        bottom = 16;
+        horizontal = 10;
+        vertical = 10;
+        inner = 10;
+        left = 10;
+        outer = 10;
+        right = 10;
+        top = 10;
+        smartBorders = "on";
+        smartGaps = true;
+      };
     };
   };
 
