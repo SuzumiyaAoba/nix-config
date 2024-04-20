@@ -12,10 +12,20 @@
       };
       input = {
         "1133:16505:Logitech_G_Pro" = {
-          pointer_accel = "-1";
+          pointer_accel = "-0.5";
         };
       };
       terminal = "wezterm";
+    };
+  };
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
     };
   };
 }
