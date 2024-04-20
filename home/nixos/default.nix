@@ -9,6 +9,7 @@
 
     ./wayland
     ./editor
+    ./browser
     ./commands
   ];
 
