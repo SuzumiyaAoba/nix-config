@@ -54,7 +54,9 @@
   environment.systemPackages = with pkgs; [
     usbutils
     wl-clipboard
+    clipman
     mako
+    unzip
   ];
 
   environment.pathsToLink = [ "/libexec" ];

@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  wofi = "${pkgs.wofi}/bin/wofi";
+in
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -11,7 +14,7 @@
           command = "waybar";
         }
       ];
-      menu = "${pkgs.wofi}/bin/wofi -f -S run -i";
+      menu = "${wofi} -f -S run -i";
       output = {
         "Eizo Nanao Corporation EV2785 0x03080071" = {
           scale =  "2";
