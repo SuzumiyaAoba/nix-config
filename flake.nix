@@ -44,8 +44,7 @@
     }@inputs:
     let
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      # username = builtins.getEnv "USER";
-      username = "suzumiyaaoba";
+      username = builtins.getEnv "USER";
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
@@ -136,7 +135,12 @@
       nixosConfigurations = {
         nixos-x86_64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          inherit specialArgs;
+          username = "suzumiyaaoba";
+
+          specialArgs = {
+            inherit username;
+            inherit hyprland-plugins;
+          };
 
           modules = [
             xremap.nixosModules.default

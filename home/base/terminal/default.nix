@@ -4,6 +4,6 @@
   imports = [
     ./alacritty
     ./wezterm
-    ./kitty
+    # ./kitty
   ];
 }
