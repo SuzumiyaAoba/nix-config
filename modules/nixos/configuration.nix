@@ -119,7 +119,7 @@
           application = {
             not = [
               "emacs"
-              "foot"
+              "kitty"
               "org.wezfurlong.wezterm"
             ];
           };
@@ -168,10 +168,10 @@
   };
 
   programs = {
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-    };
+    # sway = {
+    #  enable = true;
+    #  wrapperFeatures.gtk = true;
+    # };
 
     zsh = {
       enable = true;

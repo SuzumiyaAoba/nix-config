@@ -21,6 +21,12 @@
     emacs-lsp-booster.url = "github:slotThe/emacs-lsp-booster-flake";
 
     xremap.url = "github:xremap/nix-flake";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs =
@@ -32,6 +38,8 @@
     , emacs-overlay
     , emacs-lsp-booster
     , xremap
+    , hyprland
+    , hyprland-plugins
     , ...
     }@inputs:
     let
@@ -43,6 +51,7 @@
 
       specialArgs = {
         inherit username;
+        inherit hyprland-plugins;
       };
 
       configuration = { pkgs, ... }: {
@@ -140,12 +149,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
 
               home-manager.users.${username} = import ./home/nixos;
             }
             ./modules/gui/1password.nix
           ];
-	};
+	      };
       };
 
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
