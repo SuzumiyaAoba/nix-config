@@ -1,8 +1,12 @@
 { ... }:
 
 {
-  programs.chromium.commandLineArgs = [
-    "--enable-features=UseOzonePlatform"
-    "--ozone-platform=wayland"
-  ];
+  programs.chromium = {
+    enable = true;
+
+    commandLineArgs = [
+      "--enable-features=UseOzonePlatform"
+      "--ozone-platform=wayland"
+    ];
+  };
 }
