@@ -27,6 +27,11 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+
+    purescript-overlay = {
+      url = "github:thomashoneyman/purescript-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,6 +45,7 @@
     , xremap
     , hyprland
     , hyprland-plugins
+    , purescript-overlay
     , ...
     }@inputs:
     let
@@ -65,6 +71,7 @@
         nixpkgs.overlays = [
           emacs-overlay.overlays.emacs
           emacs-lsp-booster.overlays.default
+          purescript-overlay.overlays.default
         ];
       };
     in

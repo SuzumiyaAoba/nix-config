@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, username, ... }:
 
 {
   programs.wezterm = {
@@ -8,7 +8,7 @@
       local config = require 'config'
 
       config.set_environment_variables = {
-        PATH = "${config.home.homeDirectory}/.nix-profile/bin:${pkgs.nix}/bin:" .. os.getenv("PATH"),
+        PATH = "/etc/profiles/per-user/${username}/bin:${pkgs.nix}/bin:" .. os.getenv("PATH"),
       }
 
       return config
