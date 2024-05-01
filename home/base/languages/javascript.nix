@@ -5,6 +5,7 @@
     volta
     deno
     bun
+    esbuild
   ];
 
   home.sessionPath = [ "$HOME/.volta/bin" ];
