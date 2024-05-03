@@ -14,6 +14,7 @@ source "$HOME/.config/zsh/keybinds.zsh"
 bin=(
     "sdkman"
     "rancher"
+    "deno"
 )
 
 for filename in $bin; do
