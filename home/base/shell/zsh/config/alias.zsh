@@ -25,7 +25,7 @@ if [[ $(command -v emacs) ]]; then
     alias killemacs='emacsclient -e "(kill-emacs)"'
     alias e='emacs'
     alias ge='gemacs'
-    export EDITOR='emacsclient -nw -c -a ""'
+    export EDITOR='emacsclient -c -a ""'
 fi
 
 ## vim

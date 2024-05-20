@@ -227,8 +227,9 @@ Emacs デーモンを起動したとき =window-system= が =nil= になって�
   (setq recentf-max-saved-items 100)
   (recentf-mode +1)
 
+  ;; disable for performance
   ;; 現在行をハイライト
-  (global-hl-line-mode)
+  ;; (global-hl-line-mode)
 
   ;; インデントをスペースにする
   (setq-default indent-tabs-mode nil)
@@ -2027,14 +2028,14 @@ CLOSED: [2024-03-17 日 22:04]
      (?+ . "‣")))
   (org-modern-timestamp '(" %Y年%m月%d日(%a) " . " %H時%M分 "))
   ;; :init
-  ;; (setq org-modern-star (list #("󰎥" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             #("󰎴" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             #("󰎷" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
-  ;;                             ))
+  (setq org-modern-star (list #("󰎥" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎴" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              #("󰎷" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+                              ))
   :config
   (let ((comment-color (face-attribute 'font-lock-comment-face :foreground)))
     (custom-theme-set-faces
