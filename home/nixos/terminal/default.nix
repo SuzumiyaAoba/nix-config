@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./alacritty
-    ./wezterm
+    ./kitty
   ];
 }

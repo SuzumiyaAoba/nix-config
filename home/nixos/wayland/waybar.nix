@@ -8,8 +8,8 @@
       mainBar = {
         layer = "top";
         position = "bottom";
-        modules-left = [ "sway/workspaces" ];
-        modules-center = [ "sway/window" ];
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [ "hyprland/window" ];
         modules-right = [
           "cpu"
           "memory"

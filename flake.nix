@@ -22,7 +22,7 @@
 
     xremap.url = "github:xremap/nix-flake";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -31,6 +31,11 @@
     purescript-overlay = {
       url = "github:thomashoneyman/purescript-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hy3 = {
+      url = "github:outfoxxed/hy3?ref=hl0.39.1";
+      inputs.hyprland.follows = "hyprland";
     };
   };
 
@@ -46,17 +51,20 @@
     , hyprland
     , hyprland-plugins
     , purescript-overlay
+    , hy3
     , ...
     }@inputs:
     let
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      username = builtins.getEnv "USER";
+      # username = builtins.getEnv "USER";
+      username = "suzumiyaaoba";
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       specialArgs = {
         inherit username;
         inherit hyprland-plugins;
+        inherit hy3;
       };
 
       configuration = { pkgs, ... }: {
@@ -142,12 +150,8 @@
       nixosConfigurations = {
         nixos-x86_64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          username = "suzumiyaaoba";
 
-          specialArgs = {
-            inherit username;
-            inherit hyprland-plugins;
-          };
+          inherit specialArgs;
 
           modules = [
             xremap.nixosModules.default

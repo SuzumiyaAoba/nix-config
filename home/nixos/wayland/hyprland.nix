@@ -1,4 +1,4 @@
-{ hyprland, hyprland-plugins, pkgs, ... }:
+{ hyprland, hyprland-plugins, hy3, pkgs, ... }:
 
 {
   wayland.windowManager.hyprland = {
@@ -8,6 +8,7 @@
 
     plugins = [
       # hyprland-plugins.packages.${pkgs.system}.hyprbars
+      hy3.packages.${pkgs.system}.hy3
     ];
 
     settings = {
