@@ -8,12 +8,11 @@
       mainBar = {
         layer = "top";
         position = "bottom";
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "hyprland/window" ];
+        modules-left = [ "sway/workspaces" ];
+        modules-center = [ "sway/window" ];
         modules-right = [
           "cpu"
           "memory"
-          "clock"
           "tray"
         ];
 
@@ -42,29 +41,35 @@
         font-family: 'HackGen Console NF';
         border: none;
         border-radius: 0;
-        font-size: 14pt;
+        font-size: 12pt;
         min-height: 0;
         padding: 2px 0;
       }
       window#waybar {
         opacity: 0.9;
-        background: @background-darker;
+        background: rgba(12, 12, 12, 0.0);
         color: @foreground;
-        border-bottom: 2px solid @background;
+      }
+      #window {
+        padding: 0 20px;
+        border: none;
+        border-radius: 10px;
+        background: @background;
       }
       #workspaces button {
         padding: 0 10px;
-        margin: 0 2px;
+        margin: 0 4px;
+        border: none;
+        border-radius: 10px;
         background: @background;
         color: @foreground;
       }
       #workspaces button.focused {
+        border: none;
         background: @red;
-        border-radius: 10px;
       }
       #clock {
         padding: 0 4px;
-        background: @background;
       }
     '';
   };

@@ -2,13 +2,13 @@
 
 {
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
 
     systemd.variables = ["--all"];
 
     plugins = [
       # hyprland-plugins.packages.${pkgs.system}.hyprbars
-      hy3.packages.${pkgs.system}.hy3
+      # hy3.packages.${pkgs.system}.hy3
     ];
 
     settings = {

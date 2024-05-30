@@ -5,7 +5,7 @@ let
 in
 {
   wayland.windowManager.sway = {
-    enable = false;
+    enable = true;
     config = rec {
       modifier = "Mod4";
       terminal = "wezterm";
@@ -27,7 +27,7 @@ in
       };
 
       gaps = {
-        bottom = 16;
+        bottom = 10;
         horizontal = 10;
         vertical = 10;
         inner = 10;

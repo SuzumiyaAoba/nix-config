@@ -10,7 +10,7 @@
 	          --time \
 	          --asterisks \
 	          --user-menu \
-	          --cmd Hyprland
+	          --cmd sway
         '';
 
         user = "suzumiyaaoba";

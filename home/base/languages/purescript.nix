@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    purs
-    spago-unstable
+    # purs
+    # spago-unstable
   ];
 }
