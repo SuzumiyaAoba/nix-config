@@ -56,8 +56,8 @@
     }@inputs:
     let
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      # username = builtins.getEnv "USER";
-      username = "suzumiyaaoba";
+      username = builtins.getEnv "USER";
+      # username = "suzumiyaaoba";
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
