@@ -20,12 +20,13 @@ fi
 
 ## emacs
 if [[ $(command -v emacs) ]]; then
-    alias emacs='emacsclient -nw -c -a ""'
-    alias gemacs='emacsclient -c -a "" &'
-    alias killemacs='emacsclient -e "(kill-emacs)"'
+    alias emacsd='emacsclient -nw -c -a ""'
+    alias gemacsd'emacsclient -c -a "" &'
+    alias killemacsd='emacsclient -e "(kill-emacs)"'
     alias e='emacs'
-    alias ge='gemacs'
-    export EDITOR='emacsclient -c -a ""'
+    alias ed='emacsd'
+    alias ged='gemacsd'
+    export EDITOR='emacs'
 fi
 
 ## vim

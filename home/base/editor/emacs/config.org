@@ -2206,6 +2206,7 @@ CLOSED: [2024-03-17 日 22:04]
 #+begin_src emacs-lisp
 (use-package perfect-margin
   :straight t
+  :disabled t
   :config
   (perfect-margin-mode +1))
 #+end_src
