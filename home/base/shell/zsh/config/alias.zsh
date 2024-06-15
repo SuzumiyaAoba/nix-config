@@ -21,7 +21,7 @@ fi
 ## emacs
 if [[ $(command -v emacs) ]]; then
     alias emacsd='emacsclient -nw -c -a ""'
-    alias gemacsd'emacsclient -c -a "" &'
+    alias gemacsd='emacsclient -c -a "" &'
     alias killemacsd='emacsclient -e "(kill-emacs)"'
     alias e='emacs'
     alias ed='emacsd'
