@@ -10,6 +10,9 @@
 ;; ツールバーを無効
 (push '(tool-bar-lines . 0) default-frame-alist)
 
+(set-face-attribute 'default nil :family "0xProto" :height 120)
+
+
 ;; lsp
 ;; see: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
 (setenv "LSP_USE_PLISTS" "true")
