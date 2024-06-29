@@ -15,4 +15,8 @@
     };
     recursive = true;
   };
+
+  home.file.".spacemacs" = {
+    source = ./.spacemacs;
+  };
 }
