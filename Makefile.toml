@@ -13,22 +13,23 @@ env = { NIX_DARWIN_CONFIG = "private-aarch64" }
 
 [tasks."darwin:apply"]
 script = '''
-NIXPKGS_ALLOW_BROKEN=1 NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#${NIX_DARWIN_CONFIG} --impure
+  NIXPKGS_ALLOW_BROKEN=1 NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#${NIX_DARWIN_CONFIG} --impure
   '''
 
 [tasks."nixos:apply"]
 script = '''
-sudo nixos-rebuild switch --flake .#nixos-x86_64 --impure
+  sudo nixos-rebuild switch --flake .#nixos-x86_64 --impure
   '''
 
 [tasks.update]
 script = '''
-nix flake update
-'''
+  nix flake update
+  git submodule update
+  '''
 
 [tasks.gc]
 script = '''
-sudo nix profile wipe-history --extra-experimental-features 'nix-command flakes' --profile /nix/var/nix/profiles/system --older-than 7d
+  sudo nix profile wipe-history --extra-experimental-features 'nix-command flakes' --profile /nix/var/nix/profiles/system --older-than 7d
 
-sudo nix store gc --debug --extra-experimental-features 'nix-command flakes'
-'''
+  sudo nix store gc --debug --extra-experimental-features 'nix-command flakes'
+  '''

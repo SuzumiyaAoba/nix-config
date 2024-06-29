@@ -28,7 +28,7 @@
   ;; 前回起動時に生成された config.el を削除
   (if (file-exists-p (expand-file-name "config.el" user-emacs-directory))
       (delete-file (expand-file-name "config.el" user-emacs-directory)))
-  
+
   (org-babel-load-file
    (expand-file-name "config.org"
                      user-emacs-directory)))
