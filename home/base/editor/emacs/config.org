@@ -117,7 +117,7 @@ org-mode が読み込まれるように設定している。
 
 ** Emacs [0/3]
 
-パッケージに依存しないEmacs に関する設定をする。
+パッケージに依存しない Emacs に関する設定をする。
 
 *** OS
 
@@ -1194,7 +1194,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
   :bind (:map corfu-map
-         ("SPC" . corfu-insert-separator))
+              ("SPC" . corfu-insert-separator))
   :custom
   (corfu-auto t)
   (corfu-auto-delay 0)

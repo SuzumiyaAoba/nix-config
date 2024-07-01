@@ -1,4 +1,4 @@
-1; -*- mode: emacs-lisp; lexical-binding: t -*-
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -48,7 +48,9 @@ This function should only modify configuration layer settings."
      multiple-cursors
      (org :variables
           org-enable-modern-support t
-          org-enable-sticky-header t)
+          org-enable-sticky-header t
+          org-enable-roam-support t
+          org-enable-roam-ui t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -59,8 +61,22 @@ This function should only modify configuration layer settings."
                treemacs-use-icons-dired nil)
      japanese
 
+     command-log
+
      java
-     typescript
+     scala
+     (html :variables
+           web-mode-code-indent-offset 2
+           web-mode-markup-indent-offset 2
+           web-mode-css-indent-offset 2
+           web-mode-script-padding 2)
+     (javascript :variables
+                 js2-basic-offset 2
+                 js-indent-level 2)
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-indent-level 2)
+     rust
      nixos)
 
 
@@ -448,7 +464,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
    ;; `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
 
    ;; If non-nil smartparens-mode will be enabled in programming modes.
    ;; (default t)
@@ -457,7 +473,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -546,14 +562,14 @@ It should only modify the values of Spacemacs settings."
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
-   dotspacemacs-pretty-docs nil
+   dotspacemacs-pretty-docs t
 
    ;; If nil the home buffer shows the full path of agenda items
    ;; and todos. If non-nil only the file name is shown.
-   dotspacemacs-home-shorten-agenda-source nil
+   dotspacemacs-home-shorten-agenda-source t
 
    ;; If non-nil then byte-compile some of Spacemacs files.
-   dotspacemacs-byte-compile nil))
+   dotspacemacs-byte-compile t))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
@@ -601,7 +617,17 @@ before packages are loaded."
     :commands (consult-ghq-switch-project)
     :bind (("C-c C-g" . consult-ghq-switch-project)))
 
+  ;; keycast
+  (use-package keycast
+    :config
+    (keycast-tab-bar-mode))
+
   ;; org
+  (use-package org
+    :custom
+    (org-src-preserve-indentation t)
+    (org-edit-src-content-indentation 0)
+    (org-src-tab-acts-natively t))
   (use-package org-modern
     :custom
     (org-modern-hide-stars 'leading)
