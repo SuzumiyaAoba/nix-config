@@ -4,5 +4,6 @@
   imports = [
     ./emacs
     ./vscode
+    ./zed
   ];
 }
