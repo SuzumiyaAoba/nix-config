@@ -1,3 +1,5 @@
+source "$HOME/.config/zsh/tmux.zsh"
+
 setopt no_beep
 
 export LANG=ja_JP.UTF-8

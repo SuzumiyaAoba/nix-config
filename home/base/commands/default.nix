@@ -30,5 +30,6 @@
     ./hugo.nix
     ./textlive.nix
     ./jnv.nix
+    ./tmux.nix
   ];
 }

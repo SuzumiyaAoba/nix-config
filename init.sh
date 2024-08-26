@@ -14,3 +14,4 @@ sudo rm -rf /etc/nix/nix.conf /etc/zshenv
 
 # Install with cargo-mamke
 nix --experimental-features 'nix-command flakes' shell nixpkgs#cargo-make -c makers 'private-aarch64:apply'
+

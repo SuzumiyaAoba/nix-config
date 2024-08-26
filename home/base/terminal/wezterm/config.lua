@@ -14,7 +14,7 @@ return {
   },
   font_size = 14,
 
-  default_prog = { "zellij" },
+  -- default_prog = { "zellij" },
 
   color_scheme = "Gruvbox dark, hard (base16)",
   window_background_opacity = 1,
