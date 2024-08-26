@@ -508,6 +508,13 @@
 #+end_src
 
 #+begin_src emacs-lisp
+(use-package git-commit
+  :straight t
+  :config
+  (global-git-commit-mode t))
+#+end_src
+
+#+begin_src emacs-lisp
 (use-package tree-sitter-langs
   :straight t
   :after tree-sitter
