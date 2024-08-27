@@ -34,7 +34,12 @@
       tmuxPlugins.fpp
       tmuxPlugins.fuzzback
       tmuxPlugins.fzf-tmux-url
-      tmuxPlugins.jump
+      {
+        plugin = tmuxPlugins.jump;
+          extraConfig = ''
+            set -g @jump-key 'J'
+          '';
+      }
       tmuxPlugins.open
       tmuxPlugins.sensible
       {
