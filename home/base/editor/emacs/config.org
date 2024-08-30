@@ -198,6 +198,7 @@
 
 #+begin_src emacs-lisp
 (use-package keycast
+  :disabled t
   :straight t
   :config
   (keycast-tab-bar-mode))
@@ -550,7 +551,7 @@
   :custom
   (read-process-output-max (* 1024 1024))
   (lsp-headerline-breadcrumb-enable nil)
-  (lsp-enable-symbol-highlighting t)
+  (lsp-enable-symbol-highlighting nil)
 
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-include-signature t)
@@ -650,7 +651,7 @@
   (fset #'jsonrpc--log-event #'ignore))
 #+end_src
 
-src emacs-lisp
+#+begin_src emacs-lisp
 (use-package lsp-java
   :straight t
   :hook ((java-mode . lsp-deferred)
@@ -751,6 +752,11 @@ src emacs-lisp
 
 #+begin_src emacs-lisp
 (use-package nix-mode
+  :straight t)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package lsp-metals
   :straight t)
 #+end_src
 
