@@ -437,7 +437,7 @@ The ORDER can be used to deduce the feature context."
   (:elpaca t)
   (:opt eldoc-echo-area-use-multiline-p nil)
   (:global
-   "C-c d" toggle-eldoc-doc-buffer)
+   "C-c q" toggle-eldoc-doc-buffer)
   (:when-loaded
     (diminish 'eldoc-mode))
 
@@ -457,13 +457,13 @@ The ORDER can be used to deduce the feature context."
                  display-buffer-at-bottom
                  (window-height . 10)))
 
-  (defun toggle-eldoc-doc-buffer ()
+  (defun toggle-eldoc-doc-buffer (&optional interactive)
     "Toggle the display of the eldoc documentation buffer."
-    (interactive)
+    (interactive '(t))
     (let ((buffer (get-buffer-by-regex eldoc-buffer-regex)))
       (if (and buffer (get-buffer-window buffer))
           (delete-window (get-buffer-window buffer))
-        (eldoc)))))
+        (eldoc-print-current-symbol-info interactive)))))
 
 ;; form-feed
 (setup form-feed
@@ -579,6 +579,7 @@ The ORDER can be used to deduce the feature context."
   (:with-mode java-ts-mode
     (:hook lsp-deferred)
     (:hook (lambda () (setq c-basic-offset 2))))
+  (:opt lsp-java-compile-null-analysis-mode "automatic")
   (push (concat "-javaagent:"
                 (getenv "LOMBOK_JAR_PATH"))
         lsp-java-vmargs))
