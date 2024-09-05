@@ -27,7 +27,7 @@ if [[ $(command -v emacs) ]]; then
     alias ge='emacs'
     alias ed='emacsd'
     alias ged='gemacsd'
-    export EDITOR='emacsclient -nw'
+    export EDITOR='emacsclient'
 fi
 
 ## vim
