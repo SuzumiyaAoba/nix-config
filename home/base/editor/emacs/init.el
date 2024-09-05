@@ -172,9 +172,10 @@ The ORDER can be used to deduce the feature context."
 (setq vc-follow-symlinks t)
 (setq ring-bell-function 'ignore)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(setq inhibit-startup-message t)
 
 ;; improve performance tips
-(setup 'simple
+(setup simple
   (setq blink-matching-paren nil)
   (setq auto-mode-case-fold nil)
   (setq vc-handled-backends '(Git))
@@ -189,7 +190,7 @@ The ORDER can be used to deduce the feature context."
   (:only-if is-darwin)
   (setq command-line-ns-option-alist nil))
 
-(with-eval-after-load 'simple
+(setup simple
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
   (set-default 'buffer-file-coding-system 'utf-8))
@@ -253,6 +254,12 @@ The ORDER can be used to deduce the feature context."
           ))
   (load-theme 'modus-vivendi-tinted t))
 
+;; ace-window
+(setup ace-window
+  (:elpaca t)
+  (:global "C-x o" ace-window)
+  (:opt aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
 ;; anzu
 (setup anzu
   (:elpaca t)
@@ -265,6 +272,11 @@ The ORDER can be used to deduce the feature context."
   (:when-loaded
     (diminish 'anzu-mode))
   (copy-face 'mode-line 'anzu-mode-line))
+
+;; avy
+(setup avy
+  (:elpaca t)
+  (:global "M-g M-g" 'avy-goto-char))
 
 ;; consult
 (setup consult
@@ -307,7 +319,7 @@ The ORDER can be used to deduce the feature context."
     (:hook display-line-numbers-mode)))
 
 ;; scroll
-(with-eval-after-load 'simple
+(setup simple
   (setq scroll-margin 0)
   (setq scroll-conservatively 100000)
   (setq scroll-preserve-screen-position t))
@@ -425,21 +437,33 @@ The ORDER can be used to deduce the feature context."
   (:elpaca t)
   (:opt eldoc-echo-area-use-multiline-p nil)
   (:global
-   "C-c q" toggle-eldoc-doc-buffer)
+   "C-c d" toggle-eldoc-doc-buffer)
   (:when-loaded
     (diminish 'eldoc-mode))
 
+  (defun get-buffer-by-regex (regex)
+    (car (seq-filter (lambda (buf)
+                       (string-match-p regex (buffer-name buf)))
+                     (buffer-list))))
+
+  (seq-filter (lambda (buf)
+                (string-match-p "^*scratch" (buffer-name buf)))
+              (buffer-list))
+
+  (setq eldoc-buffer-regex "^\\*eldoc\\( for [^*]+\\)\?\\*")
+
   (add-to-list 'display-buffer-alist
-               '("^\\*eldoc\\*" display-buffer-at-bottom
-                 (window-height . 20)))
+               `(,eldoc-buffer-regex
+                 display-buffer-at-bottom
+                 (window-height . 10)))
 
   (defun toggle-eldoc-doc-buffer ()
     "Toggle the display of the eldoc documentation buffer."
     (interactive)
-    (let ((buffer (get-buffer "*eldoc*")))
+    (let ((buffer (get-buffer-by-regex eldoc-buffer-regex)))
       (if (and buffer (get-buffer-window buffer))
           (delete-window (get-buffer-window buffer))
-        (eldoc-doc-buffer)))))
+        (eldoc)))))
 
 ;; form-feed
 (setup form-feed
@@ -479,7 +503,7 @@ The ORDER can be used to deduce the feature context."
 
         lsp-ui-doc-enable t
         lsp-ui-doc-include-signature t
-        lsp-ui-doc-header t
+        lsp-ui-doc-header nil
         lsp-ui-doc-position 'at-point
         lsp-ui-doc-show-with-cursor nil
         lsp-eldoc-enable-hover t
@@ -558,6 +582,10 @@ The ORDER can be used to deduce the feature context."
   (push (concat "-javaagent:"
                 (getenv "LOMBOK_JAR_PATH"))
         lsp-java-vmargs))
+
+;; lsp-treemacs
+(setup lsp-treemacs
+  (:elpaca t))
 
 ;; lsp-ui
 (setup lsp-ui
@@ -656,7 +684,7 @@ The ORDER can be used to deduce the feature context."
   (recentf-mode +1))
 
 ;; savehist-mode
-(setup simple
+(with-eval-after-load 'savehist-mode
   (savehist-mode +1))
 
 ;; server
@@ -687,7 +715,7 @@ The ORDER can be used to deduce the feature context."
 ;; treemacs-nerd-icons
 (setup treemacs-nerd-icons
   (:elpaca t)
-  (:load-after treemacs)
+  (require 'treemacs-nerd-icons)
   (treemacs-load-theme "nerd-icons"))
 
 ;; treemacs-projectile
