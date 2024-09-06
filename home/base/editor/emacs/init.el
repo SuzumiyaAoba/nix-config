@@ -285,9 +285,12 @@ The ORDER can be used to deduce the feature context."
   (:elpaca t)
   (:opt consult-preview-raw-size 1024000
         consult-preview-max-size 1024000
+        consult-preview-key 'any
         xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
-  (:global "C-s" consult-line-at)
+  (:global
+   "C-s" consult-line-at
+   "C-x b" consult-buffer)
   (:when-loaded
     (consult-customize
      consult-buffer
@@ -307,6 +310,21 @@ The ORDER can be used to deduce the feature context."
   (:elpaca t)
   (:global
    "C-c C-g" consult-ghq-switch-project))
+
+;; consult-projectile
+(setup consult-projectile
+  (:elpaca t)
+  (:load-after projectile)
+  (:when-loaded
+    (advice-add 'projectile-switch-to-buffer :override #'consult-projectile-switch-to-buffer)
+    (advice-add 'projectile-switch-to-buffer-other-window :override #'consult-projectile-switch-to-buffer-other-window)
+    (advice-add 'projectile-switch-to-buffer-other-frame :override #'consult-projectile-switch-to-buffer-other-frame)
+    (advice-add 'projectile-find-dir :override #'consult-projectile-find-dir)
+    (advice-add 'projectile-find-file :override #'consult-projectile-find-file)
+    (advice-add 'projectile-find-file-other-window :override #'consult-projectile-find-file-other-window)
+    (advice-add 'projectile-find-file-other-frame :override #'consult-projectile-find-file-other-frame)
+    (advice-add 'projectile-recentf :override #'consult-projectile-recentf)
+    (advice-add 'projectile-switch-project :override #'consult-projectile-switch-project)))
 
 ;; diminish
 (setup diminish
