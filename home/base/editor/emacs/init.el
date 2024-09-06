@@ -326,6 +326,15 @@ The ORDER can be used to deduce the feature context."
     (advice-add 'projectile-recentf :override #'consult-projectile-recentf)
     (advice-add 'projectile-switch-project :override #'consult-projectile-switch-project)))
 
+;; dap-mode
+(setup dap-mode
+  (:elpaca t)
+  (:with-mode scala-mode
+    (:hook dap-mode
+           dap-ui-mode))
+  (:when-loaded
+    (diminish 'dap-mode)))
+
 ;; diminish
 (setup diminish
   (:elpaca t))
@@ -588,6 +597,8 @@ The ORDER can be used to deduce the feature context."
 
         lsp-keymap-prefix "C-c l")
   (:with-mode tsx-mode
+    (:hook lsp-deferred))
+  (:with-mode scala-mode
     (:hook lsp-deferred))
 
   (with-eval-after-load 'lsp-mode

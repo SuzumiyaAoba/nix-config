@@ -31,5 +31,6 @@
     ./textlive.nix
     ./jnv.nix
     ./tmux.nix
+    ./atuin.nix
   ];
 }

@@ -17,6 +17,7 @@ bin=(
     "sdkman"
     "rancher"
     "deno"
+    "atuin"
 )
 
 for filename in $bin; do
