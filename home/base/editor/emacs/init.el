@@ -1,4 +1,6 @@
 ;; init.el --- SuzumiyaAoba's init.el -*- lexical-binding: t -*-
+
+;; (setq debug-on-error t)
 
 ;; disable package.el
 (with-eval-after-load 'package
@@ -318,6 +320,23 @@ The ORDER can be used to deduce the feature context."
   (:with-mode text-mode
     (:hook display-line-numbers-mode)))
 
+;; git-gutter
+(setup git-gutter
+  (:elpaca t)
+  (:when-loaded
+    (diminish 'git-gutter-mode)
+    
+    (custom-set-variables
+     '(git-gutter:modified-sign " ")
+     '(git-gutter:added-sign " ")
+     '(git-gutter:deleted-sign " "))
+  
+    (set-face-background 'git-gutter:modified "purple")
+    (set-face-background 'git-gutter:added "green")
+    (set-face-background 'git-gutter:deleted "red"))
+
+  (global-git-gutter-mode t))
+
 ;; scroll
 (setup simple
   (setq scroll-margin 0)
@@ -337,14 +356,16 @@ The ORDER can be used to deduce the feature context."
 
 (setup tree-sitter
   (:elpaca t)
-  (global-tree-sitter-mode))
+  (:when-loaded
+    (global-tree-sitter-mode)))
 
 (setup treesit-auto
   (:elpaca t)
   (:opt treesit-auto-install t)
-  (require 'treesit-auto)
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  (:when-loaded
+    (require 'treesit-auto)
+    (treesit-auto-add-to-auto-mode-alist 'all)
+    (global-treesit-auto-mode)))
 
 ;; C-k
 (setup simple
@@ -363,17 +384,26 @@ The ORDER can be used to deduce the feature context."
 
 ;; copilot
 (setup copilot
-  (:elpaca copilot :host github :repo "copilot-emacs/copilot.el"))
+  (:elpaca copilot :host github :repo "copilot-emacs/copilot.el")
+  (:with-mode prog-mode
+    (:hook copilot-mode))
+  (:with-map copilot-completion-map
+    (:bind "<tab>" copilot-accept-completion)
+    (:bind "TAB" copilot-accept-completion))
+  (:when-loaded
+    (diminish 'copilot-mode)))
 
 ;; corfu
 (setup corfu
   (:elpaca t)
   (:hook corfu-popupinfo-mode)
   (:opt corfu-atuo t
-        corfu-auto-delay 0.2
+        corfu-auto-delay 0.5
         corfu-popupifo-delay 0.5
         corfu-quit-no-match t
-        tab-always-indent 'complete)
+        corfu-auto-prefix 3
+        tab-always-indent 'complete
+        text-mode-ispell-word-completion nil)
   (:with-map corfu-mode-map
     (:bind
      "SPC" corfu-insert-separator))
@@ -429,7 +459,7 @@ The ORDER can be used to deduce the feature context."
 (setup ddskk-posframe
   (:elpaca t)
   (:load-after ddskk)
-  (:load-if is-darwin-window)
+  (:only-if is-darwin-window)
   (ddskk-posframe-mode t))
 
 ;; eldoc
@@ -453,7 +483,7 @@ The ORDER can be used to deduce the feature context."
   (setq eldoc-buffer-regex "^\\*eldoc\\( for [^*]+\\)\?\\*")
 
   (add-to-list 'display-buffer-alist
-               `(,eldoc-buffer-regex
+               `(,eldoc-buffer-regex                 
                  display-buffer-at-bottom
                  (window-height . 10)))
 
@@ -463,7 +493,11 @@ The ORDER can be used to deduce the feature context."
     (let ((buffer (get-buffer-by-regex eldoc-buffer-regex)))
       (if (and buffer (get-buffer-window buffer))
           (delete-window (get-buffer-window buffer))
-        (eldoc-print-current-symbol-info interactive)))))
+        (eldoc-print-current-symbol-info interactive))
+
+      (let* ((buffer (get-buffer-by-regex eldoc-buffer-regex))
+             (window (get-buffer-window buffer)))
+        (select-window window)))))
 
 ;; form-feed
 (setup form-feed
@@ -575,11 +609,12 @@ The ORDER can be used to deduce the feature context."
   (:elpaca t)
   (:with-mode java-mode
     (:hook lsp-deferred)
-    (:hook (lambda () (setq c-basic-offset 2))))
+    (:hook (lambda ()
+             (setq c-basic-offset 2))))
   (:with-mode java-ts-mode
     (:hook lsp-deferred)
     (:hook (lambda () (setq c-basic-offset 2))))
-  (:opt lsp-java-compile-null-analysis-mode "automatic")
+  ;; (:opt lsp-java-compile-null-analysis-mode "disabled")
   (push (concat "-javaagent:"
                 (getenv "LOMBOK_JAR_PATH"))
         lsp-java-vmargs))
@@ -684,6 +719,10 @@ The ORDER can be used to deduce the feature context."
   (:opt recentf-max-saved-items 100)
   (recentf-mode +1))
 
+;; ripgrep
+(setup ripgrep
+  (:elpaca t))
+
 ;; savehist-mode
 (with-eval-after-load 'savehist-mode
   (savehist-mode +1))
@@ -781,6 +820,20 @@ The ORDER can be used to deduce the feature context."
   (:load-after prescient)
   (:opt vertico-prescient-enable-filtering nil)
   (vertico-prescient-mode +1))
+
+;; volatile-highlights
+(setup volatile-highlights
+  (:elpaca t)
+  (:when-loaded
+    (diminish 'volatile-highlights-mode)
+
+    (set-face-attribute
+     'vhl/default-face nil :foreground "#FF3333" :background "#FFCDCD")
+    
+    (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-mode)
+    (vhl/install-extension 'undo-tree))
+
+  (volatile-highlights-mode t))
 
 ;; end profile
 (when my/enable-profile
