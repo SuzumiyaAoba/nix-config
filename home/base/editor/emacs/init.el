@@ -338,6 +338,10 @@ The ORDER can be used to deduce the feature context."
   (:with-mode text-mode
     (:hook display-line-numbers-mode)))
 
+;; dockerfile-mode
+(setup dockerfile-mode
+  (:elpaca t))
+
 ;; git-gutter
 (setup git-gutter
   (:elpaca t)
@@ -503,7 +507,14 @@ The ORDER can be used to deduce the feature context."
   (add-to-list 'display-buffer-alist
                `(,eldoc-buffer-regex                 
                  display-buffer-at-bottom
-                 (window-height . 10)))
+                 (window-height . 20)))
+
+  (defun my/eldoc-doc-buffer-active ()
+    (let* ((buffer (get-buffer-by-regex eldoc-buffer-regex))
+           (window (get-buffer-window buffer)))
+      (when window
+        (select-window window))))
+  (add-hook 'window-configuration-change-hook 'my/eldoc-doc-buffer-active)
 
   (defun toggle-eldoc-doc-buffer (&optional interactive)
     "Toggle the display of the eldoc documentation buffer."
@@ -511,11 +522,7 @@ The ORDER can be used to deduce the feature context."
     (let ((buffer (get-buffer-by-regex eldoc-buffer-regex)))
       (if (and buffer (get-buffer-window buffer))
           (delete-window (get-buffer-window buffer))
-        (eldoc-print-current-symbol-info interactive))
-
-      (let* ((buffer (get-buffer-by-regex eldoc-buffer-regex))
-             (window (get-buffer-window buffer)))
-        (select-window window)))))
+        (eldoc-print-current-symbol-info interactive)))))
 
 ;; form-feed
 (setup form-feed
@@ -621,6 +628,10 @@ The ORDER can be used to deduce the feature context."
         orig-result)))
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
   )
+
+;; lsp-metal
+(setup lsp-metals
+  (:elpaca t))
 
 ;; lsp-java
 (setup lsp-java
