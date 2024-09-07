@@ -222,10 +222,10 @@ The ORDER can be used to deduce the feature context."
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
 
-(setup simple
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1))
+;; (setup simple
+;;   (scroll-bar-mode -1)
+;;   (tool-bar-mode -1)
+;;   (menu-bar-mode -1))
 
 ;; auto-revert-mode
 (setup auto-revert-mode
@@ -491,6 +491,8 @@ The ORDER can be used to deduce the feature context."
   (:elpaca t)
   (:load-after ddskk)
   (:only-if is-darwin-window)
+  (:when-loaded
+    (diminish 'ddskk-posframe-mode))
   (ddskk-posframe-mode t))
 
 ;; eldoc
@@ -549,7 +551,9 @@ The ORDER can be used to deduce the feature context."
 (setup highlight-symbol
   (:elpaca t)
   (:with-mode prog-mode
-    (:hook highlight-symbol-mode)))
+    (:hook highlight-symbol-mode))
+  (:when-loaded
+    (diminish 'highlight-symbol-mode)))
 
 ;; jsonrpc
 (setup jsonrpc
@@ -767,6 +771,11 @@ The ORDER can be used to deduce the feature context."
 (with-eval-after-load 'savehist-mode
   (savehist-mode +1))
 
+;; scss-mode
+(setup scss-mode
+  (:elpaca t)
+  (:opt css-indent-offset 2))
+
 ;; server
 (setup simple
   (:when-loaded
@@ -822,6 +831,20 @@ The ORDER can be used to deduce the feature context."
   (:elpaca tsx-mode :host github :repo "orzechowskid/tsx-mode.el")
   (:load-after coverlay css-in-js-mode origami)
   (:file-match "\\.[jt]s[x]?\\'"))
+
+;; undo-tree
+(setup undo-tree
+  (:elpaca t)
+  (:when-loaded
+    (diminish 'undo-tree-mode))
+  (global-undo-tree-mode t))
+
+;; undohist
+(setup undohist
+  (:elpaca t)
+  (:when-loaded
+    (diminish 'undohist-mode))
+  (undohist-initialize))
 
 ;; vertico
 (setup vertico
