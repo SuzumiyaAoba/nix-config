@@ -1,4 +1,4 @@
-{ nixpkgs, config, pkgs, ... }:
+{ nixpkgs, config, pkgs, lib, ... }:
 
 {
   home.file = {
@@ -19,4 +19,11 @@
   # home.file.".spacemacs" = {
   #   source = ./.spacemacs;
   # };
+
+  home.activation = {
+    runAfterPackageSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval "(byte-compile-file \"~/.emacs.d/early-init.el\")"
+      # $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval "(byte-compile-file \"~/.emacs.d/init.el\")"
+    '';
+  };
 }

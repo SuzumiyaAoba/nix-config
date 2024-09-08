@@ -164,7 +164,13 @@ The ORDER can be used to deduce the feature context."
   (setq native-comp-async-jobs-number 8)
   (setq native-comp-speed 3)
   (setq native-comp-async-report-warnings-errors nil)
-  (setq native-compile-prune-cache t))
+  (setq native-compile-prune-cache t)
+
+  (defun my/native-comp-packages ()
+    (interactive)
+    (native-compile-async "~/.emacs.d/init.el")
+    (native-compile-async "~/.emacs.d/early-init.el")
+    (native-compile-async "~/.emacs.d/elpaca" 'recursively)))
 
 (setq make-backup-files nil)
 (setq backup-inhibited nil)
@@ -185,7 +191,8 @@ The ORDER can be used to deduce the feature context."
   (setq bidi-inhibit-bpa t)
   (setq-default cursor-in-non-selected-windows nil)
   (setq highlight-nonselected-windows nil)
-  (setq fast-but-imprecise-scrolling t)
+  (setq fast-but-imprecise-scrolling t
+        jit-lock-defer-time 0)
   (setq ffap-machine-p-known 'reject)
   (setq idle-update-delay 1.0)
   (setq redisplay-skip-fontification-on-input t)
@@ -195,7 +202,13 @@ The ORDER can be used to deduce the feature context."
 (setup simple
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
-  (set-default 'buffer-file-coding-system 'utf-8))
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (set-file-name-coding-system 'utf-8)
+  (set-clipboard-coding-system 'utf-8)
+  (set-buffer-file-coding-system 'utf-8))
 
 ;; enable magic file name
 (setq file-name-handler-alist my/saved-file-name-handler-alist)
@@ -534,6 +547,20 @@ The ORDER can be used to deduce the feature context."
       (if (and buffer (get-buffer-window buffer))
           (delete-window (get-buffer-window buffer))
         (eldoc-print-current-symbol-info interactive)))))
+
+;; embark
+(setup embark
+  (:elpaca t)
+  (:global
+   "C-." embark-act))
+
+;; fast-scroll
+;; see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
+(setup fast-scroll
+  (:elpaca t)
+  (:when-loaded
+    (fastscroll-config)
+    (fastscroll-mode 1)))
 
 ;; form-feed
 (setup form-feed
@@ -898,6 +925,9 @@ The ORDER can be used to deduce the feature context."
     (vhl/install-extension 'undo-tree))
 
   (volatile-highlights-mode t))
+
+(setup which-key
+  (which-key-mode))
 
 ;; end profile
 (when my/enable-profile
