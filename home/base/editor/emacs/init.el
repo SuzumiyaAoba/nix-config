@@ -835,6 +835,7 @@ The ORDER can be used to deduce the feature context."
 ;; undo-tree
 (setup undo-tree
   (:elpaca t)
+  (:opt undo-tree-auto-save-history nil)
   (:when-loaded
     (diminish 'undo-tree-mode))
   (global-undo-tree-mode t))
