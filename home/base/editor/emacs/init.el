@@ -704,7 +704,15 @@ The ORDER can be used to deduce the feature context."
 (setup magit
   (:elpaca t)
   (:global
-   "C-x g" magit))
+   "C-x g" magit)
+  (:opt magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (:when-loaded
+    (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
+    (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent)))
 
 ;; marginalia
 (setup marginalia
@@ -763,7 +771,62 @@ The ORDER can be used to deduce the feature context."
 
 ;; org-mode
 (setup org
-  (:elpaca t))
+  (:elpaca t)
+  (:opt
+   org-latex-create-formula-image-program 'dvisvgm
+
+   org-log-done 'time
+   org-src-fontify-natively t
+   org-src-preserve-indentation t
+   org-src-tab-acts-natively t
+
+   org-startup-indented t
+
+   system-time-locate nil
+   org-startup-with-inline-images t
+   ;; org-hide-leading-stars t
+   org-ellipsis " ▼"
+   org-hide-emphasis-markers t
+   org-fontify-quote-and-verse-blocks t
+   org-use-speed-commands t
+   org-return-follows-link t
+
+   org-special-ctrl-a/e t
+   org-auto-align-tags nil
+   org-tags-column 0
+
+   org-display-custom-times t
+   org-image-actual-width nil
+
+   org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "WIP(p)" "REMIND(r)" "SOMEDAY(s)" "|" "DONE(d)"))
+   org-enforce-todo-dependencies t
+   org-hierarchical-todo-statistics nil
+
+   ;; org-agenda
+   org-agenda-span 'day
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid '((daily today require-timed)
+                          (800 1000 1200 1400 1600 1800 2000)
+                          " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string "⭠ now ─────────────────────────────────────────────────"
+
+  ;; see: https://misohena.jp/blog/2021-08-29-colorize-saturday-and-japanese-holidays-in-org-agenda.html
+   org-agenda-day-face-function (lambda (date)
+                                  (let ((face (cond
+                                               ;; 土曜日
+                                               ((= (calendar-day-of-week date) 6)
+                                                '(:inherit org-agenda-date :foreground "#0df"))
+                                               ;; 日曜日か日本の祝日
+                                               ((or (= (calendar-day-of-week date) 0)
+                                                    (let ((calendar-holidays japanese-holidays))
+                                                      (calendar-check-holidays date)))
+                                                'org-agenda-date-weekend)
+                                               ;; 普通の日
+                                               (t 'org-agenda-date))))
+                                    ;; 今日は色を反転
+                                    (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face)))
+   org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")))
 
 ;; prescient
 (setup prescient
