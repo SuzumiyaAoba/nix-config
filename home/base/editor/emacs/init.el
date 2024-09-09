@@ -441,7 +441,7 @@ The ORDER can be used to deduce the feature context."
 (setup corfu
   (:elpaca t)
   (:hook corfu-popupinfo-mode)
-  (:opt corfu-atuo t
+  (:opt corfu-auto t
         corfu-auto-delay 0.5
         corfu-popupifo-delay 0.5
         corfu-quit-no-match t
@@ -764,7 +764,7 @@ The ORDER can be used to deduce the feature context."
 
 (setup minibuffer
   (:when-loaded
-    (:opt completion-styles '(orderless basic)
+    (:opt completion-styles '(orderless)
           completion-category-overrides '((file (styles basic partial-completion))))
     (add-to-list 'completion-styles-alist '(orderless orderless-try-completion orderless-all-completions
                                                       "Completion of multiple components, in any order."))))
@@ -900,7 +900,9 @@ The ORDER can be used to deduce the feature context."
 ;; treemacs-projectile
 (setup treemacs-projectile
   (:elpaca t)
-  (:load-after treemacs projectile))
+  (:load-after treemacs projectile)
+  (:with-eval-after
+   (require 'treemacs-projectile)))
 
 ;; typescript
 (setup typescript-ts-mode
