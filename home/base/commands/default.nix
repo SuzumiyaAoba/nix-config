@@ -32,5 +32,6 @@
     ./jnv.nix
     ./tmux.nix
     ./atuin.nix
+    ./sheldon
   ];
 }
