@@ -9,8 +9,9 @@ return {
     -- "Monospace Krypton",
     -- "Monospace Neon",
     -- "Monaspace Argon",
-    "0xProto",
-    "HackGen Console NF"
+    -- "0xProto",
+    "Explex",
+    -- "HackGen Console NF"
   },
   font_size = 14,
 
