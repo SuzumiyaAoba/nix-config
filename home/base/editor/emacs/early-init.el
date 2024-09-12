@@ -1,7 +1,7 @@
 ;; improve performance
 
 ;; Garbage Collection
-(setq gc-cons-threshold (* 40 gc-cons-threshold)) ; 800K * n
+(setq gc-cons-threshold 100000000)
 (setq garbage-collection-messages nil)
 
 (setq package-enable-at-startup nil)
