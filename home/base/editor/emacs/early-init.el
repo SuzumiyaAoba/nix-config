@@ -23,6 +23,7 @@
 
 ;; fonts
 (set-face-attribute 'default nil :family "0xProto" :height 140)
+;; (set-face-attribute 'default nil :family "Explex" :height 140)
 
 ;; lsp
 ;; see: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization

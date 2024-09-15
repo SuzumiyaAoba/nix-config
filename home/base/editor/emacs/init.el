@@ -392,17 +392,6 @@ The ORDER can be used to deduce the feature context."
   (pixel-scroll-precision-mode t))
 
 ;; tree-sitter
-(setup tree-sitter-langs
-  (:elpaca t)
-  (:load-after tree-sitter)
-  (:when-loaded
-    (diminish 'tree-sitter-mode)))
-
-(setup tree-sitter
-  (:elpaca t)
-  (:when-loaded
-    (global-tree-sitter-mode)))
-
 (setup treesit-auto
   (:elpaca t)
   (:opt treesit-auto-install t)
@@ -957,10 +946,10 @@ The ORDER can be used to deduce the feature context."
     (setq cand (cl-call-next-method cand prefix suffix index start))
     (if (bound-and-true-p vertico-grid-mode)
         (if (= vertico--index index)
-            (concat (nerd-icons-faicon "nf-fa-hand_o_right") "  " cand)
+            (concat (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
           (concat #("_" 0 1 (display " ")) cand))
       (if (= vertico--index index)
-          (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") "  " cand)
+          (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
         (concat "    " cand))))
 
   (vertico-mode)

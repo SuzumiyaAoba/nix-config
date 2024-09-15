@@ -33,5 +33,6 @@
     ./tmux.nix
     ./atuin.nix
     ./sheldon
+    ./fzy.nix
   ];
 }
