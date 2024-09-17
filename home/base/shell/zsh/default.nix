@@ -15,10 +15,6 @@
       ignoreSpace = true;
     };
 
-    historySubstringSearch = {
-      enable = true;
-    };
-
     autocd = true;
 
     initExtra = ''
