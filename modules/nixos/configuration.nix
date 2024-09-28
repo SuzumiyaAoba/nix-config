@@ -44,7 +44,7 @@
     isNormalUser = true;
     description = "SuzumiyaAoba";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
 
     shell = pkgs.zsh;
   };
@@ -163,7 +163,7 @@
 
   nix = {
     settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
     };
   };
 
@@ -193,9 +193,9 @@
     fontconfig = {
       defaultFonts = {
         serif = [ "Noto Serif CJK JP" "Noto Color Emoji" ];
-	      sansSerif = [ "Noto Sans CJK JP" "Noto Color Emoji" ];
-	      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
-	      emoji = [ "Noto Color Emoji" ];
+        sansSerif = [ "Noto Sans CJK JP" "Noto Color Emoji" ];
+        monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

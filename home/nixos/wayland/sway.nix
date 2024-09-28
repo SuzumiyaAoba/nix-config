@@ -17,7 +17,7 @@ in
       menu = "${wofi} -f -S run -i";
       output = {
         "Eizo Nanao Corporation EV2785 0x03080071" = {
-          scale =  "2";
+          scale = "2";
         };
       };
       input = {

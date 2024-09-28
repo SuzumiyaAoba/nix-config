@@ -170,7 +170,7 @@
             }
             ./modules/gui/1password.nix
           ];
-	      };
+        };
       };
 
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);

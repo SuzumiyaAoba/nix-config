@@ -3,9 +3,9 @@
 {
   home.file = {
     ".emacs.d/init.el".source = ./init.el;
-  #   ".emacs.d/config.org".source = ./config.org;
+    #   ".emacs.d/config.org".source = ./config.org;
     ".emacs.d/early-init.el".source = ./early-init.el;
-  #   ".emacs.d/yasnippets".source = ./yasnippets;
+    #   ".emacs.d/yasnippets".source = ./yasnippets;
   };
 
   # home.file.".emacs.d" = {
@@ -21,7 +21,7 @@
   # };
 
   home.activation = {
-    runAfterPackageSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    runAfterPackageSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval "(byte-compile-file \"~/.emacs.d/early-init.el\")"
       # $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval "(byte-compile-file \"~/.emacs.d/init.el\")"
     '';

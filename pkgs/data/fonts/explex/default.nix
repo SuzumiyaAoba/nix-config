@@ -4,11 +4,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "explex";
-  version = "0.0.2";
+  version = "0.0.3";
 
   src = fetchzip {
     url = "https://github.com/yuru7/Explex/releases/download/v${version}/Explex_v${version}.zip";
-    hash = "sha256-kqmfyyLYvbC/Wb9pu+OH6tW/RFpT2QNtxKaNi2q+8Qg=";
+    hash = "sha256-OUmzF8GrwVgFAMSEiZLvh85nsOw1a0a7B70u2cRXXO8=";
   };
 
   installPhase = ''
