@@ -983,6 +983,9 @@ The ORDER can be used to deduce the feature context."
 (setup which-key
   (which-key-mode))
 
+(setup yaml-mode
+  (:elpaca t))
+
 ;; end profile
 (when my/enable-profile
   (profiler-report)

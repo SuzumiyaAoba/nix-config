@@ -34,5 +34,6 @@
     ./atuin.nix
     ./sheldon
     ./fzy.nix
+    ./tbls.nix
   ];
 }
