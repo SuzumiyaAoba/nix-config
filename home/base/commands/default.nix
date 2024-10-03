@@ -35,5 +35,6 @@
     ./sheldon
     ./fzy.nix
     ./tbls.nix
+    ./jd-diff-patch.nix
   ];
 }
