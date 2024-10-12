@@ -420,6 +420,8 @@ The ORDER can be used to deduce the feature context."
   (:elpaca copilot :host github :repo "copilot-emacs/copilot.el")
   (:with-mode prog-mode
     (:hook copilot-mode))
+  (:with-mode text-mode
+    (:hook copilot-mode))
   (:with-map copilot-completion-map
     (:bind "<tab>" copilot-accept-completion)
     (:bind "TAB" copilot-accept-completion))

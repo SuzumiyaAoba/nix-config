@@ -36,5 +36,6 @@
     ./fzy.nix
     ./tbls.nix
     ./jd-diff-patch.nix
+    ./ni.nix
   ];
 }
