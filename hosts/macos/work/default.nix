@@ -1,6 +1,6 @@
 { pkgs, username, ... }: {
   imports = [
-    ../../modules/darwin
+    ../../../modules/darwin
   ];
 
   users.users.${username} = {

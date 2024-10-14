@@ -96,7 +96,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${username} = import ./hosts/private/home/aarch64;
+              home-manager.users.${username} = import ./hosts/macos/private/home/aarch64;
               home-manager.extraSpecialArgs = specialArgs;
             }
             nix-homebrew.darwinModules.nix-homebrew
@@ -107,8 +107,8 @@
                 user = "${username}";
               };
             }
-            ./hosts/private
-            ./hosts/private/modules/darwin
+            ./hosts/macos/private
+            ./hosts/macos/private/modules/darwin
           ];
         };
 
@@ -122,10 +122,10 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.${username} = import ./hosts/private/home/x86_64;
+              home-manager.users.${username} = import ./hosts/macos/private/home/x86_64;
               home-manager.extraSpecialArgs = specialArgs;
             }
-            ./hosts/private
+            ./hosts/macos/private
           ];
         };
 
@@ -142,7 +142,7 @@
               home-manager.users.${username} = import ./hosts/work/home;
               home-manager.extraSpecialArgs = specialArgs;
             }
-            ./hosts/work
+            ./hosts/macos/work
           ];
         };
       };
