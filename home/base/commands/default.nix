@@ -30,7 +30,6 @@
     ./hugo.nix
     ./textlive.nix
     ./jnv.nix
-    ./tmux.nix
     ./atuin.nix
     ./sheldon
     ./fzy.nix
