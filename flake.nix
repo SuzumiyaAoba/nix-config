@@ -99,8 +99,7 @@
               home-manager.users.${username} = import ./hosts/macos/aarch64-500GB;
               home-manager.extraSpecialArgs = specialArgs;
             }
-            nix-
-homebrew.darwinModules.nix-homebrew
+            nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
                 enable = true;
