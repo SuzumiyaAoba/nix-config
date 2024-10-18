@@ -35,7 +35,7 @@ in
     "home/base/terminal/wezterm"
     "home/base/shell/zsh"
     "home/base/shell/starship"
-    "home/base/shell/tmux"
+    "home/base/shell/tmux.nix"
 
     # languages
     "home/base/languages/clojure.nix"
