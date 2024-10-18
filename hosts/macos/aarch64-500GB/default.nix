@@ -17,7 +17,7 @@ in
     "home/darwin/base/gui/1password.nix"
     "home/darwin/base/gui/appcleaner.nix"
     "home/darwin/base/gui/karabiner"
-    "home/darwin/base/raycast.nix"
+    "home/darwin/base/gui/raycast.nix"
     "home/darwin/base/gui/rectangle.nix"
     "home/darwin/base/gui/terminal-notifier.nix"
     "home/base/editor/vscode"
