@@ -85,6 +85,31 @@
     in
     {
       darwinConfigurations = {
+        private-aarch64-500GB = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          inherit specialArgs;
+
+          modules = [
+            configuration
+            ./modules/darwin/system.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./hosts/macos/aarch64-500GB;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = false;
+                user = "${username}";
+              };
+            }
+          ];
+        };
+
         private-aarch64 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
