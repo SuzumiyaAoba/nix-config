@@ -1,13 +1,13 @@
 { pkgs, config, username, ... }:
 let
-  baseDir = "../../../";
+  baseDir = ../../..;
 in
 {
   users.users.${username} = {
     home = "/Users/${username}";
   };
 
-  imports = builtins.map (f: baseDir + "${f}") [
+  imports = builtins.map (f: baseDir + "/${f}") [
     # IME
     "modules/darwin/base/ime.nix"
     
