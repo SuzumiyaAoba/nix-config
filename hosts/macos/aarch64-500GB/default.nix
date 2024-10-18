@@ -59,7 +59,7 @@ in
     "home/base/commands/jq.nix"
     "home/base/commands/ripgrep.nix"
     "home/base/commands/sd.nix"
-    "home/base/commands/sheldon.nix"
+    "home/base/commands/sheldon"
     "home/base/commands/tbls.nix"
   ];
 }
