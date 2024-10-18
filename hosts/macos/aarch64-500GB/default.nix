@@ -23,7 +23,7 @@ in
     "home/base/editor/vscode"
 
     # Editors
-    "home/darwin/base/gui/editor/emacs.nix"
+    "home/darwin/base/editor/emacs.nix"
 
     # IDE
     "home/base/ide/jetbrains.nix"
