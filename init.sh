@@ -5,6 +5,9 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
+sudo -i nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+sudo -i nix-channel --update nixpkgs
+
 # Clone nix-config repository
 nix --experimental-features 'nix-command flakes' run nixpkgs#git -- clone https://github.com/SuzumiyaAoba/nix-config.git
 

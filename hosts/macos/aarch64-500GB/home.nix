@@ -31,6 +31,7 @@ in
 
     # Editors
     "home/darwin/base/editor/emacs.nix"
+    "home/base/editor/emacs"
 
     # IDE
     "home/base/ide/jetbrains.nix"
