@@ -92,6 +92,7 @@
           modules = [
             configuration
             ./modules/darwin/system.nix
+            ./hosts/macos/aarch64-500GB/cnofiguratin.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
