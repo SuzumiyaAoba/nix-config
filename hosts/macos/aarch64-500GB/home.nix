@@ -8,8 +8,6 @@ in
   };
 
   imports = builtins.map (f: baseDir + "/${f}") [
-    "modules/darwin/base/commands/sdkman.nix"
-    
     # GUI
     "home/darwin/base/gui/appcleaner.nix"
     "home/darwin/base/gui/karabiner"
