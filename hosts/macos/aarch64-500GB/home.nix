@@ -3,10 +3,6 @@ let
   baseDir = ../../..;
 in
 {
-  users.users.${username} = {
-    home = "/Users/${username}";
-  };
-
   imports = builtins.map (f: baseDir + "/${f}") [
     # GUI
     "home/darwin/base/gui/appcleaner.nix"

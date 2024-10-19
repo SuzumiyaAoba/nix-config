@@ -107,6 +107,7 @@
                 user = "${username}";
               };
             }
+            ./hosts/macos/private
             ./hosts/macos/aarch64-500GB/homebrew.nix
           ];
         };
