@@ -27,5 +27,7 @@ return {
 
   disable_default_key_bindings = true,
   keys = keybind.keys,
+
+  front_end = "WebGpu",
 }
 
