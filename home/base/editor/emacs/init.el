@@ -267,7 +267,8 @@ The ORDER can be used to deduce the feature context."
           (string green-warmer)
           ;; (keyword cyan-cooler)
           ))
-  (load-theme 'modus-vivendi-tinted t))
+  (load-theme 'modus-vivendi t))
+
 
 ;; ace-window
 (setup ace-window
