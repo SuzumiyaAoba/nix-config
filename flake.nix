@@ -85,19 +85,19 @@
     in
     {
       darwinConfigurations = {
-        private-aarch64-500GB = darwin.lib.darwinSystem {
+        private-aarch64-256GB = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
 
           modules = [
             configuration
             ./modules/darwin/system.nix
-            ./hosts/macos/aarch64-500GB/cnofiguratin.nix
+            ./hosts/macos/aarch64-256GB/cnofiguratin.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${username} = import ./hosts/macos/aarch64-500GB/home.nix;
+              home-manager.users.${username} = import ./hosts/macos/aarch64-256GB/home.nix;
               home-manager.extraSpecialArgs = specialArgs;
             }
             nix-homebrew.darwinModules.nix-homebrew
@@ -109,7 +109,7 @@
               };
             }
             ./hosts/macos/private
-            ./hosts/macos/aarch64-500GB/homebrew.nix
+            ./hosts/macos/aarch64-256GB/homebrew.nix
           ];
         };
 

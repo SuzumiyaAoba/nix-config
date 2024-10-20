@@ -11,9 +11,9 @@ env = { NIX_DARWIN_CONFIG = "work" }
 extend = "darwin:apply"
 env = { NIX_DARWIN_CONFIG = "private-aarch64" }
 
-[tasks."private-aarch64-500GB:apply"]
+[tasks."private-aarch64-256GB:apply"]
 extend = "darwin:apply"
-env = { NIX_DARWIN_CONFIG = "private-aarch64-500GB" }
+env = { NIX_DARWIN_CONFIG = "private-aarch64-256GB" }
 
 [tasks."darwin:apply"]
 script = '''

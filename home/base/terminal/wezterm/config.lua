@@ -28,6 +28,7 @@ return {
   disable_default_key_bindings = true,
   keys = keybind.keys,
 
+  -- see: https://github.com/wez/wezterm/issues/6005
   front_end = "WebGpu",
 }
 
