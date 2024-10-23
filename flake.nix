@@ -101,14 +101,6 @@
               home-manager.extraSpecialArgs = specialArgs;
             }
             nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                enableRosetta = false;
-                user = "${username}";
-              };
-            }
-            ./hosts/macos/private
             ./hosts/macos/aarch64-256GB/homebrew.nix
           ];
         };
@@ -196,7 +188,6 @@
 
               home-manager.users.${username} = import ./home/nixos;
             }
-            ./modules/gui/1password.nix
           ];
         };
       };
