@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./alacritty
-    ./wezterm
+    ../../programs/terminal/alacritty
+    ../../programs/terminal/wezterm
   ];
 }

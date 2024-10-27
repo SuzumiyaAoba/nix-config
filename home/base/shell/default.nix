@@ -2,11 +2,11 @@
 
 {
   imports = [
-    ./starship
-    ./tmux.nix
-    ./zellij
+    ../../programs/shell/starship
+    ../../programs/shell/tmux.nix
+    ../../programs/shell/zellij
 
-    ./nushell
-    ./zsh
+    ../../programs/shell/nushell
+    ../../programs/shell/zsh
   ];
 }

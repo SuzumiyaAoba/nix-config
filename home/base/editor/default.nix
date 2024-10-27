@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ../../programs/emacs
-    ../../programs/vscode
-    ../../programs/zed
+    ../../programs/editor/emacs
+    ../../programs/editor/vscode
+    ../../programs/editor/zed
   ];
 }
