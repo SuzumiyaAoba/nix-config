@@ -27,23 +27,23 @@ in
     "home/darwin/base/gui/raycast.nix"
     "home/darwin/base/gui/rectangle.nix"
     "home/darwin/base/gui/terminal-notifier.nix"
-    "home/base/editor/vscode"
+    "home/programs/editor/vscode"
 
     # Editors
     "home/darwin/base/editor/emacs.nix"
-    "home/base/editor/emacs"
+    "home/programs/editor/emacs"
 
     # IDE
-    "home/base/ide/jetbrains.nix"
+    "home/programs/ide/jetbrains.nix"
 
     # fonts
     "home/base/fonts.nix"
 
     # terminal & shell
-    "home/base/terminal/wezterm"
-    "home/base/shell/zsh"
-    "home/base/shell/starship"
-    "home/base/shell/tmux.nix"
+    "home/programs/terminal/wezterm"
+    "home/programs/shell/zsh"
+    "home/programs/shell/starship"
+    "home/programs/shell/tmux.nix"
 
     # languages
     "home/base/languages/clojure.nix"
@@ -53,21 +53,21 @@ in
     "home/base/languages/rust.nix"
 
     # commands
-    "home/base/commands/ast-grep.nix"
-    "home/base/commands/atuin.nix"
-    "home/base/commands/bat.nix"
-    "home/base/commands/cargo-make.nix"
-    "home/base/commands/coreutils.nix"
-    "home/base/commands/delta.nix"
-    "home/base/commands/eza.nix"
-    "home/base/commands/fd.nix"
-    "home/base/commands/fzf"
-    "home/base/commands/ghq.nix"
-    "home/base/commands/git"
-    "home/base/commands/jq.nix"
-    "home/base/commands/ripgrep.nix"
-    "home/base/commands/sd.nix"
-    "home/base/commands/sheldon"
-    "home/base/commands/tbls.nix"
+    "home/programs/commands/ast-grep.nix"
+    "home/programs/commands/atuin.nix"
+    "home/programs/commands/bat.nix"
+    "home/programs/commands/cargo-make.nix"
+    "home/programs/commands/coreutils.nix"
+    "home/programs/commands/delta.nix"
+    "home/programs/commands/eza.nix"
+    "home/programs/commands/fd.nix"
+    "home/programs/commands/fzf"
+    "home/programs/commands/ghq.nix"
+    "home/programs/commands/git"
+    "home/programs/commands/jq.nix"
+    "home/programs/commands/ripgrep.nix"
+    "home/programs/commands/sd.nix"
+    "home/programs/commands/sheldon"
+    "home/programs/commands/tbls.nix"
   ];
 }

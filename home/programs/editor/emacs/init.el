@@ -618,7 +618,9 @@ The ORDER can be used to deduce the feature context."
 
         lsp-lens-enable t
 
-        lsp-keymap-prefix "C-c l")
+        lsp-keymap-prefix "C-c l"
+
+        lsp-rust-server 'rust-analyzer)
   (:with-mode tsx-mode
     (:hook lsp-deferred))
   (:with-mode scala-mode
@@ -847,6 +849,13 @@ The ORDER can be used to deduce the feature context."
 
 ;; ripgrep
 (setup ripgrep
+  (:elpaca t))
+
+;; rust
+(setup rust-mode
+  (:elpaca t))
+
+(setup cargo
   (:elpaca t))
 
 ;; savehist-mode
