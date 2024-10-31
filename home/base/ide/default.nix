@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ../../programms/ide/jetbrains.nix
+    ../../programs/ide/jetbrains.nix
   ];
 }
