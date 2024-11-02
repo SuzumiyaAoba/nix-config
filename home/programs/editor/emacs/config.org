@@ -1076,7 +1076,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    org-src-preserve-indentation t
    org-src-tab-acts-natively t
 
-   org-startup-indented t
+   ;; org-startup-indented t
 
    system-time-locate nil
    org-startup-with-inline-images t
@@ -1125,6 +1125,36 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")
   )
 )
+#+end_src
+
+*** org-modern
+
+#+begin_src emacs-lisp :tangle init.el
+(setup org-modern
+  (:elpaca t)
+  (:with-mode org-mode
+    (:hook org-modern-mode))
+  (:opt org-modern-hide-stars 'leading
+        org-modern-timestamp '(" %Y年%m月%d日(%a) " . " %H時%M分 ")
+        org-modern-star 'replace
+        org-modern-replace-stars
+        (list #("󰎥" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              #("󰎨" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              #("󰎫" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              #("󰎲" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              #("󰎯" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              #("󰎴" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              #("󰎷" 0 1 (face (:family "Symbols Nerd Font Mono" :height 1.0) font-lock-face (:family "Symbols Nerd Font Mono" :height 1.0) display (raise 0.0) rear-nonsticky t))
+              ))
+  (let ((comment-color (face-attribute 'font-lock-comment-face :foreground)))
+    (custom-theme-set-faces
+     'user
+     `(org-quote ((t (:inherit org-block :slant italic :foreground ,comment-color))))))
+
+  (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((ditaa . t))))
 #+end_src
 
 ** Programming
@@ -1345,6 +1375,15 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca tsx-mode :host github :repo "orzechowskid/tsx-mode.el")
   (:load-after coverlay css-in-js-mode origami)
   (:file-match "\\.[jt]s[x]?\\'"))
+#+end_src
+
+** System
+
+*** [[https://code.tecosaur.net/tec/emacs-everywhere][emacs-everywhere]]
+
+#+begin_src emacs-lisp
+(setup emacs-everywhere
+  (:elpaca t))
 #+end_src
 
 ** Finalization
