@@ -31,19 +31,6 @@
                                 "type": "basic"
                             }
                         ]
-                    },
-                    {
-                        "description": "Emacs Everywhere with left_control + left_shift + escape",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": { "mandatory": ["left_control", "left_shift"] }
-                                },
-                                "to": [{ "shell_command": "/etc/profiles/per-user/suzumiyaaoba/bin/emacsclient --eval '(emacs-everywhere)'" }],
-                                "type": "basic"
-                            }
-                        ]
                     }
                 ]
             },

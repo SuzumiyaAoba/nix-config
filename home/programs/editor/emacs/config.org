@@ -39,8 +39,8 @@
 ** Fonts
 
 #+begin_src emacs-lisp :tangle early-init.el
-(set-face-attribute 'default nil :family "0xProto" :height 140)
-;; (set-face-attribute 'default nil :family "Explex" :height 14)0l
+;; (set-face-attribute 'default nil :family "0xProto" :height 140)
+(set-face-attribute 'default nil :family "Explex" :height 140)
 #+end_src
 
 ** Native compile
@@ -699,35 +699,35 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 ** vertico
 
 #+begin_src emacs-lisp :tangle init.el
-  (setup vertico
-    (:elpaca t)
-    (:with-map vertico-map
-      (:bind "C-r" vertico-previous
-             "C-s" vertico-next))
-    (:opt vertico-count 12
-          vertico-cycle t)
-    (:opt marginalia-mode t)
-    (defvar +vertico-current-arrow t)
+(setup vertico
+  (:elpaca t)
+  (:with-map vertico-map
+    (:bind "C-r" vertico-previous
+           "C-s" vertico-next))
+  (:opt vertico-count 12
+        vertico-cycle t)
+  (:opt marginalia-mode t)
+  (defvar +vertico-current-arrow t)
 
-    ;; (cl-defmethod vertico--format-candidate :around
-    ;;   (cand prefix suffix index start &context ((and +vertico-current-arrow
-    ;;                                                  (not (bound-and-true-p vertico-flat-mode)))
-    ;;                                             (eql t)))
-    ;;   (setq cand (cl-call-next-method cand prefix suffix index start))
-    ;;   (if (bound-and-true-p vertico-grid-mode)
-    ;;       (if (= vertico--index index)
-    ;;           (concat (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
-    ;;         (concat #("_" 0 1 (display " ")) cand))
-    ;;     (if (= vertico--index index)
-    ;;         (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
-    ;;       (concat "    " cand))))
+  ;; (cl-defmethod vertico--format-candidate :around
+  ;;   (cand prefix suffix index start &context ((and +vertico-current-arrow
+  ;;                                                  (not (bound-and-true-p vertico-flat-mode)))
+  ;;                                             (eql t)))
+  ;;   (setq cand (cl-call-next-method cand prefix suffix index start))
+  ;;   (if (bound-and-true-p vertico-grid-mode)
+  ;;       (if (= vertico--index index)
+  ;;           (concat (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
+  ;;         (concat #("_" 0 1 (display " ")) cand))
+  ;;     (if (= vertico--index index)
+  ;;         (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
+  ;;       (concat "    " cand))))
 
-    (vertico-mode)
+  (vertico-mode)
 
-    ;; vertico-directory
-    (:with-map vertico-map
-      (:bind "C-l" vertico-directory-up
-             "DEL" vertico-directory-delete-char)))
+  ;; vertico-directory
+  (:with-map vertico-map
+    (:bind "C-l" vertico-directory-up
+           "DEL" vertico-directory-delete-char)))
 #+end_src
 
 *** vertico-prescient
@@ -817,9 +817,9 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
         corfu-auto-prefix 3
         tab-always-indent 'complete
         text-mode-ispell-word-completion nil)
-  (:with-map corfu-mode-map
-    (:bind
-     "SPC" corfu-insert-separator))
+  ;; (:with-map corfu-mode-map
+  ;;   (:bind
+  ;;    "SPC" corfu-insert-separator))
   (global-corfu-mode))
 #+end_src
 
@@ -1379,11 +1379,14 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
 ** System
 
-*** [[https://code.tecosaur.net/tec/emacs-everywhere][emacs-everywhere]]
+*** Window
 
-#+begin_src emacs-lisp
-(setup emacs-everywhere
-  (:elpaca t))
+#+begin_src emacs-lisp :tangle init.el
+(setup simple
+  (:only-if is-darwin-window)
+  (add-hook 'window-setup-hook
+            (lambda ()
+              (set-frame-parameter nil 'fullscreen 'fullboth))))
 #+end_src
 
 ** Finalization
