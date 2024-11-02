@@ -39,8 +39,9 @@
 ** Fonts
 
 #+begin_src emacs-lisp :tangle early-init.el
-;; (set-face-attribute 'default nil :family "0xProto" :height 140)
-(set-face-attribute 'default nil :family "Explex" :height 140)
+(set-face-attribute 'default nil :family "0xProto" :height 140)
+;; (set-face-attribute 'default nil :family "Explex" :height 140)
+;; (set-face-attribute 'default nil :family "Iosevka" :height 140)
 #+end_src
 
 ** Native compile
@@ -197,6 +198,14 @@ The ORDER can be used to deduce the feature context."
   (lambda (&rest pairs)
     `(setopt ,@pairs))
   :after-loaded t)
+
+(setup-define :face
+    (lambda (face spec) `(custom-set-faces (quote (,face ,spec))))
+    :documentation "Customize FACE to SPEC."
+    :signature '(face spec ...)
+    :debug '(setup)
+    :repeatable t
+    :after-loaded t)
 #+end_src
 
 ***** reference
@@ -308,27 +317,29 @@ The ORDER can be used to deduce the feature context."
 (setq kill-whole-line t)
 
 (setq-default indent-tabs-mode nil)
+
+(setq-default show-trailing-whitespace t)
 #+end_src
 
-** Perfomance tips
+** Performance tips
 
 #+begin_src emacs-lisp :tangle init.el
 (setup simple
-  (setq blink-matching-paren nil)
-  (setq auto-mode-case-fold nil)
-  (setq vc-handled-backends '(Git))
-  (setq-default bidi-display-reordering 'left-to-right)
-  (setq bidi-inhibit-bpa t)
-  (setq-default cursor-in-non-selected-windows nil)
-  (setq highlight-nonselected-windows nil)
-  (setq fast-but-imprecise-scrolling t
-        jit-lock-defer-time 0)
-  (setq ffap-machine-p-known 'reject)
-  (setq idle-update-delay 1.0)
-  (setq redisplay-skip-fontification-on-input t)
-
+  (:opt blink-matching-paren nil
+        auto-mode-case-fold nil
+        vc-handled-backends '(Git)
+        bidi-display-reordering 'left-to-right
+        bidi-inhibit-bpa t
+        cursor-in-non-selected-windows nil
+        highlight-nonselected-windows nil
+        fast-but-imprecise-scrolling t
+        jit-lock-defer-time 0
+        ffap-machine-p-known 'reject
+        idle-update-delay 1.0
+        redisplay-skip-fontification-on-input t
+        process-adaptive-read-buffering t)
   (:only-if is-darwin)
-  (setq command-line-ns-option-alist nil))
+  (:opt command-line-ns-option-alist nil))
 #+end_src
 
 ** Languages & Encoding
@@ -452,11 +463,22 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp :tangle init.el
 (setup treemacs-nerd-icons
   (:elpaca t)
+  (:load-after treemacs)
   (require 'treemacs-nerd-icons)
   (treemacs-load-theme "nerd-icons"))
 #+end_src
 
-** moody
+*** svg-tag-mode
+
+#+begin_src emacs-lisp :tagnle init.el
+(setup svg-tag-mode
+  (:elpaca t)
+  (global-svg-tag-mode))
+#+end_src
+
+** Modeline
+
+*** moody
 
 #+begin_src emacs-lisp :tangle init.el
 (setup moody
@@ -465,6 +487,25 @@ The ORDER can be used to deduce the feature context."
   (moody-replace-mode-line-front-space)
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode))
+#+end_src
+
+*** nyan-mode
+
+#+begin_src emacs-lisp :tangle init.el
+(setup nyan-mode
+  (:elpaca t)
+  (:opt nyan-cat-face-number 4
+        nyan-animate-nyancat t
+        nyan-wavy-trail nil)
+  (nyan-mode))
+#+end_src
+
+** solaire-mode
+
+#+begin_src emacs-lisp :tangle init.el
+(setup solaire-mode
+  (:elpaca t)
+  (solaire-global-mode +1))
 #+end_src
 
 ** Scroll
@@ -510,6 +551,18 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (:hook display-line-numbers-mode)))
 #+end_src
 
+** Dired
+
+#+begin_src emacs-lisp :tangle init.el
+(setup dired
+  (:opt dired-dwim-target t
+        dired-do-revert-buffer t
+        dired-recursive-copies 'always
+        dired-isearch-filenames t)
+
+  (require 'dired-x))
+#+end_src
+
 ** eldoc
 
 #+begin_src emacs-lisp :tangle init.el
@@ -533,7 +586,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (setq eldoc-buffer-regex "^\\*eldoc\\( for [^*]+\\)\?\\*")
 
   (add-to-list 'display-buffer-alist
-               `(,eldoc-buffer-regex                 
+               `(,eldoc-buffer-regex
                  display-buffer-at-bottom
                  (window-height . 20)))
 
@@ -553,12 +606,35 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
         (eldoc-print-current-symbol-info interactive)))))
 #+end_src
 
+** delsel
+
+#+begin_src emacs-lisp :tangle init.el
+(setup delsel
+  (delete-selection-mode +1))
+#+end_src
+
+** so-long
+
+#+begin_src emacs-lisp :tangle init.el
+(setup so-long
+  (:elpaca t)
+  (global-so-long-mode +1))
+#+end_src
+
 ** [[https://github.com/tarsius/keycast][keycast]]
 
 #+begin_src emacs-lisp :tangle init.el
 (setup keycast
   (:elpaca t)
   (keycast-tab-bar-mode))
+#+end_src
+
+** breadcrumb
+
+#+begin_src emacs-lisp :tangle init.el
+(setup breadcrumb
+  (:elpaca t)
+  (breadcrumb-mode))
 #+end_src
 
 ** [[https://github.com/emacsmirror/form-feed][form-feed]]
@@ -577,7 +653,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup ace-window
   (:elpaca t)
-  (:global "C-x o" ace-window)
+  (:global "C-x o" ace-window
+           "M-o" other-window)
   (:opt aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 #+end_src
 
@@ -586,7 +663,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 *** [[https://github.com/emacsorphanage/anzu][anzu]]
 
 #+begin_src emacs-lisp :tangle init.el
-;; anzu
 (setup anzu
   (:elpaca t)
   (:global [remap query-replace] anzu-query-replace
@@ -612,7 +688,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup avy
   (:elpaca t)
-  (:global "M-g M-g" 'avy-goto-char))
+  (:global "M-g M-g" 'avy-goto-char
+           "C-;" 'avy-goto-char-2))
 #+end_src
 
 ** auto-revert-mode
@@ -892,11 +969,30 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    "C-." embark-act))
 #+end_src
 
+*** embark-consult
+
+#+begin_src emacs-lisp :tangle init.el
+;; (setup embark-consult
+;;   (:elpaca t)
+;;   (:load-after consult embark)
+;;   (:with-mode consult-preview-at-point-mode
+;;     (:hook embark-collect-mode)))
+
+;; (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
+#+end_src
+
 ** which-key
 
 #+begin_src emacs-lisp :tangle init.el
 (setup which-key
   (which-key-mode))
+#+end_src
+
+** hydra
+
+#+begin_src emacs-lisp :tangle init.el
+(setup hydra
+  (:elpaca t))
 #+end_src
 
 ** Parens
@@ -912,7 +1008,47 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (smartparens-global-mode t))
 #+end_src
 
+*** rainbow-delimitersd
+
+#+begin_src emacs-lisp :tangle init.el
+(setup rainbow-delimiters
+  (:elpaca t)
+  (:with-mode prog-mode
+    (:hook rainbow-delimiters-mode)))
+#+end_src
+
+** Flymake
+
+#+begin_src emacs-lisp :tangle init.el
+(setup flymake
+  (:elpaca t))
+#+end_src
+
+*** flymake-diagnostic-at-point
+
+#+begin_src emacs-lisp :tangle init.el
+(setup flymake-diagnostic-at-point
+  (:elpaca t)
+  (:with-mode flymake-mode
+    (:hook flymake-diagnostic-at-point-mode)))
+#+end_src
+
+*** flymake-popon
+
+#+begin_src emacs-lisp :tangle init.el
+(setup flymake-popon
+  (:elpaca flymake-popon :type git :repo "https://codeberg.org/akib/emacs-flymake-popon.git")
+  (global-flymake-popon-mode))
+#+end_src
+
 ** Git
+
+*** git-modes
+
+#+begin_src emacs-lisp :tangle init.el
+(setup git-modes
+  (:elpaca t))
+#+end_src
 
 *** [[https://github.com/emacsorphanage/git-gutter][git-gutter]]
 
@@ -921,17 +1057,35 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t)
   (:when-loaded
     (diminish 'git-gutter-mode)
-    
+
     (custom-set-variables
      '(git-gutter:modified-sign " ")
      '(git-gutter:added-sign " ")
      '(git-gutter:deleted-sign " "))
-  
+
     (set-face-background 'git-gutter:modified "purple")
     (set-face-background 'git-gutter:added "green")
     (set-face-background 'git-gutter:deleted "red"))
 
   (global-git-gutter-mode t))
+#+end_src
+
+*** blamer
+
+#+begin_src emacs-lisp :tangle init.el
+(setup blamer
+  (:elpaca t)
+  (:face blamer-face ((t :foreground "#7a88cf"
+                         :background nil
+                         :height 120
+                         :italic t))))
+#+end_src
+
+*** git-timemachine
+
+#+begin_src emacs-lisp :tangle init.el
+(setup git-timemachine
+  (:elpaca t))
 #+end_src
 
 *** magit
@@ -943,7 +1097,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t)
   (:global
    "C-x g" magit)
-  (:opt magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  ;; (:opt magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (:when-loaded
     (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
     (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
@@ -951,6 +1105,15 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
     (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
     (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent)))
+#+end_src
+
+*** fill-column-indicator
+
+#+begin_src emacs-lisp :tangle init.el
+(setup fill-column-indicator
+  (:elpaca t)
+  (:with-mode git-commit-mode
+    (:hook fci-mode)))
 #+end_src
 
 ** Highlight
@@ -976,11 +1139,22 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
     (set-face-attribute
      'vhl/default-face nil :foreground "#FF3333" :background "#FFCDCD")
-    
+
     (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-mode)
     (vhl/install-extension 'undo-tree))
 
   (volatile-highlights-mode t))
+#+end_src
+
+*** dimmer
+
+#+begin_src emacs-lisp :tangle init.el
+(setup dimmer
+  (:elpaca t)
+  (:opt dimmer-fraction 0.3)
+  (dimmer-configure-posframe)
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit))
 #+end_src
 
 ** Syntax highlight
@@ -1015,8 +1189,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
 ** treemacs
 
-*** treemacs
-
 #+begin_src emacs-lisp :tangle init.el
 (setup treemacs
   (:elpaca t)
@@ -1037,6 +1209,23 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:load-after treemacs projectile)
   (:with-eval-after
    (require 'treemacs-projectile)))
+#+end_src
+
+*** treemacs-magit
+
+#+begin_src emacs-lisp :tangle init.el
+(setup treemacs-magit
+  (:elpaca t)
+  (:load-after treemacs))
+#+end_src
+
+*** treemacs-tab-bar
+
+#+begin_src emacs-lisp :tangle init.el
+(setup treemacs-tab-bar
+  (:elpaca t)
+  (:load-after treemacs)
+  (:opt treemacs-set-scope-type 'Tabs))
 #+end_src
 
 ** AI
@@ -1127,7 +1316,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 )
 #+end_src
 
-*** org-modern
+**** org-modern
 
 #+begin_src emacs-lisp :tangle init.el
 (setup org-modern
@@ -1157,7 +1346,41 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    '((ditaa . t))))
 #+end_src
 
+**** org-sidebar
+
+#+begin_src emacs-lisp :tangle init.el
+(setup org-sidebar
+  (:elpaca t))
+#+end_src
+
+**** org-sticky-header
+
+#+begin_src emacs-lisp :tangle init.el
+(setup org-sticky-header
+  (:elpaca t)
+  (:with-mode org-mode
+    (:hook org-sticky-header-mode))
+  (:opt org-sticky-header-full-path 'full))
+#+end_src
+
 ** Programming
+
+*** editorconfig
+
+#+begin_src emacs-lisp :tangle init.el
+(setup editorconfig
+  (:elpaca t)
+  (editorconfig-mode))
+#+end_src
+
+*** rainbow-mode
+
+#+begin_src emacs-lisp :tangle init.el
+(setup rainbow-mode
+  (:elpaca t)
+  (:with-mode prog-mode
+    (:hook rainbow-mode)))
+#+end_src
 
 *** dap-mode
 
@@ -1168,7 +1391,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (:hook dap-mode
            dap-ui-mode))
   (:when-loaded
-    (diminish 'dap-mode)))
+    (diminish 'dap-mode))
+  (dap-auto-configure-mode))
 #+end_src
 
 *** LSP
@@ -1267,32 +1491,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
 #+begin_src emacs-lisp :tangle init.el
 (setup lsp-treemacs
-  (:elpaca t))
-#+end_src
-
-**** lsp-java
-
-#+begin_src emacs-lisp :tangle init.el
-(setup lsp-java
   (:elpaca t)
-  (:with-mode java-mode
-    (:hook lsp-deferred)
-    (:hook (lambda ()
-             (setq c-basic-offset 2))))
-  (:with-mode java-ts-mode
-    (:hook lsp-deferred)
-    (:hook (lambda () (setq c-basic-offset 2))))
-  ;; (:opt lsp-java-compile-null-analysis-mode "disabled")
-  (push (concat "-javaagent:"
-                (getenv "LOMBOK_JAR_PATH"))
-        lsp-java-vmargs))
-#+end_src
-
-**** lsp-metals
-
-#+begin_src emacs-lisp :tangle init.el
-(setup lsp-metals
-  (:elpaca t))
+  (:opt lsp-treemacs-theme "nerd-icons-ext"))
 #+end_src
 
 **** jsonrpc
@@ -1302,6 +1502,26 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t)
   (:opt jsonrpc-default-request-timeout 3000)
   (fset #'jsonrpc--log-event #'ignore))
+#+end_src
+
+*** Emacs Lisp
+
+**** highlight-defined
+
+#+begin_src emacs-lisp :tangle init.el
+(setup highlight-defined
+  (:elpaca t)
+  (:with-mode emacs-lisp-mode
+    (:hook highlight-defined-mode)))
+#+end_src
+
+**** highlgiht-quoted
+
+#+begin_src emacs-lisp :tangle init.el
+(setup highlight-quoted
+  (:elpaca t)
+  (:with-mode emacs-lisp-mode
+    (:hook highlight-quoted-mode)))
 #+end_src
 
 *** Docker
@@ -1320,16 +1540,45 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t))
 #+end_src
 
+*** Java
+
+**** lsp-java
+
+#+begin_src emacs-lisp :tangle init.el
+(setup lsp-java
+  (:elpaca t)
+  (:with-mode java-mode
+    (:hook lsp-deferred)
+    (:hook (lambda ()
+             (setq c-basic-offset 2))))
+  (:with-mode java-ts-mode
+    (:hook lsp-deferred)
+    (:hook (lambda ()
+             (setq c-basic-offset 2)
+
+             (require 'dap-java))))
+  ;; (:opt lsp-java-compile-null-analysis-mode "disabled")
+  (push (concat "-javaagent:"
+                (getenv "LOMBOK_JAR_PATH"))
+        lsp-java-vmargs))
+#+end_src
+
 *** Groovy
 
-[[https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes][groovy-mode]]
+https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
 
 #+begin_src emacs-lisp :tangle init.el
 (setup groovy-mode
-  (:elpaca t))
+  (:elpaca t)
+  (:with-mode groovy-mode
+    (:hook (lambda ()
+             (setq indent-tabs-mode t)
+             (setq tab-width 4)))))
 #+end_src
 
 *** Nix
+
+https://github.com/NixOS/nix-mode
 
 #+begin_src emacs-lisp :tangle init.el
 (setup nix-mode
@@ -1348,10 +1597,52 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
 #+begin_src emacs-lisp :tangle init.el
 (setup rust-mode
-  (:elpaca t))
+  (:elpaca t)
+  (:opt rust-format-on-save t
+        rust-mode-treesitter-derive t))
 
 (setup cargo
   (:elpaca t))
+#+end_src
+
+*** Scala
+
+**** scala-mode
+
+#+begin_src emacs-lisp :tangle init.el
+(setup scala-mode
+  (:elpaca t))
+#+end_src
+
+**** sbt-mode
+
+#+begin_src emacs-lisp :tangle init.el
+(setup sbt-mode
+  (:elpaca t)
+  (:opt sbt:program-options '("-Dsbt.supershell=false"))
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+#+end_src
+
+**** lsp-metals
+
+#+begin_src emacs-lisp :tangle init.el
+(setup lsp-metals
+  (:elpaca t))
+#+end_src
+
+*** Golang
+
+#+begin_src emacs-lisp :tangle init.el
+(setup go-mode
+  (:elpaca t)
+  (:with-mode go-mode
+    (:hook (lambda () (add-hook 'before-save-hook 'gofmt nil t))))
+  (:opt gofmt-command "gofmt"))
 #+end_src
 
 *** TypeScript
@@ -1377,6 +1668,13 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:file-match "\\.[jt]s[x]?\\'"))
 #+end_src
 
+*** Gleam
+
+#+begin_src emacs-lisp :tangle init.el
+(setup gleam-ts-mode
+  (:elpaca t))
+#+end_src
+
 ** System
 
 *** Window
@@ -1387,6 +1685,17 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (add-hook 'window-setup-hook
             (lambda ()
               (set-frame-parameter nil 'fullscreen 'fullboth))))
+#+end_src
+
+*** Path
+
+#+begin_src emacs-lisp :tangle init.el
+(setup exec-path-from-shell
+  (:elpaca t)
+  (:opt exec-path-from-shell-arguments (quote ("-l")))
+  (setenv "PATH" (concat (getenv "PATH") ":~/.volta/bin"))
+
+  (exec-path-from-shell-initialize))
 #+end_src
 
 ** Finalization
