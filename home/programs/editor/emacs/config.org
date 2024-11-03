@@ -453,9 +453,7 @@ The ORDER can be used to deduce the feature context."
 (setup nerd-icons-dired
   (:elpaca t)
   (:with-mode dired-mode
-    (:hook nerd-icons-dired-mode))
-  (:when-loaded
-    (diminish 'nerd-icons-dired-mode)))
+    (:hook nerd-icons-dired-mode)))
 #+end_src
 
 *** treemacs-nerd-icons
@@ -533,11 +531,13 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (fastscroll-mode 1)))
 #+end_src
 
-** [[https://github.com/emacsmirror/diminish][diminish]]
+** minions
 
 #+begin_src emacs-lisp :tangle init.el
-(setup diminish
-  (:elpaca t))
+(setup minions
+  (:elpaca t)
+
+  (minions-mode))
 #+end_src
 
 ** display-line-numbers
@@ -571,9 +571,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:opt eldoc-echo-area-use-multiline-p nil)
   (:global
    "C-c q" toggle-eldoc-doc-buffer)
-  (:when-loaded
-    (diminish 'eldoc-mode))
-
   (defun get-buffer-by-regex (regex)
     (car (seq-filter (lambda (buf)
                        (string-match-p regex (buffer-name buf)))
@@ -643,9 +640,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup form-feed
   (:elpaca t)
   (:with-mode emacs-lisp-mode
-    (:hook form-feed-mode))
-  (:when-loaded
-    (diminish 'form-feed-mode)))
+    (:hook form-feed-mode)))
 #+end_src
 
 ** [[https://github.com/abo-abo/ace-window][ace-window]]
@@ -671,8 +666,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
         anzu-search-threshold 1000)
   (:with-mode emacs-startup
     (:hook global-anzu-mode))
-  (:when-loaded
-    (diminish 'anzu-mode))
   (copy-face 'mode-line 'anzu-mode-line))
 #+end_src
 
@@ -722,8 +715,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup undo-tree
   (:elpaca t)
   (:opt undo-tree-auto-save-history nil)
-  (:when-loaded
-    (diminish 'undo-tree-mode))
   (global-undo-tree-mode t))
 #+end_src
 
@@ -732,8 +723,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup undohist
   (:elpaca t)
-  (:when-loaded
-    (diminish 'undohist-mode))
   (undohist-initialize))
 #+end_src
 
@@ -768,8 +757,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t)
   (:load-after ddskk)
   (:only-if is-darwin-window)
-  (:when-loaded
-    (diminish 'ddskk-posframe-mode))
   (ddskk-posframe-mode t))
 #+end_src
 
@@ -966,19 +953,29 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup embark
   (:elpaca t)
   (:global
-   "C-." embark-act))
+   "C-." embark-act)
+  ;; (:opt embark-indicators
+  ;;       '(embark-highlight-indicator
+  ;;         embark-isearch-highlight-indicator
+  ;;         embark-minimal-indicator))
+
+  (add-to-list 'display-buffer-alist
+               '("\\*Embark Actions\\*"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (slot . 0)
+                 (window-height . 0.5)))
+  )
 #+end_src
 
 *** embark-consult
 
 #+begin_src emacs-lisp :tangle init.el
-;; (setup embark-consult
-;;   (:elpaca t)
-;;   (:load-after consult embark)
-;;   (:with-mode consult-preview-at-point-mode
-;;     (:hook embark-collect-mode)))
-
-;; (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
+(setup embark-consult
+  (:elpaca t)
+  (:load-after consult embark)
+  (:with-mode consult-preview-at-point-mode
+    (:hook embark-collect-mode)))
 #+end_src
 
 ** which-key
@@ -1002,8 +999,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup smartparens
   (:elpaca t)
-  (:when-loaded
-    (diminish 'smartparens-mode))
   (require 'smartparens-config)
   (smartparens-global-mode t))
 #+end_src
@@ -1056,8 +1051,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup git-gutter
   (:elpaca t)
   (:when-loaded
-    (diminish 'git-gutter-mode)
-
     (custom-set-variables
      '(git-gutter:modified-sign " ")
      '(git-gutter:added-sign " ")
@@ -1124,9 +1117,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup highlight-symbol
   (:elpaca t)
   (:with-mode prog-mode
-    (:hook highlight-symbol-mode))
-  (:when-loaded
-    (diminish 'highlight-symbol-mode)))
+    (:hook highlight-symbol-mode)))
 #+end_src
 
 *** volatile-highlights
@@ -1135,8 +1126,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup volatile-highlights
   (:elpaca t)
   (:when-loaded
-    (diminish 'volatile-highlights-mode)
-
     (set-face-attribute
      'vhl/default-face nil :foreground "#FF3333" :background "#FFCDCD")
 
@@ -1182,8 +1171,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:with-mode emacs-startup
     (:hook projectile-mode))
   (:opt projectile-generic-dommand "fd . -0 --type f --color=never")
-  (:when-loaded
-    (diminish 'projectile-mode))
   (projectile-mode +1))
 #+end_src
 
@@ -1237,9 +1224,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca copilot :host github :repo "copilot-emacs/copilot.el")
   (:with-map copilot-completion-map
     (:bind "<tab>" copilot-accept-completion)
-    (:bind "TAB" copilot-accept-completion))
-  (:when-loaded
-    (diminish 'copilot-mode)))
+    (:bind "TAB" copilot-accept-completion)))
 #+end_src
 
 ** Text
@@ -1390,8 +1375,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:with-mode scala-mode
     (:hook dap-mode
            dap-ui-mode))
-  (:when-loaded
-    (diminish 'dap-mode))
   (dap-auto-configure-mode))
 #+end_src
 
