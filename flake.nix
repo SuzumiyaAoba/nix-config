@@ -55,7 +55,7 @@
     , ...
     }@inputs:
     let
-      systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
       username = builtins.getEnv "USER";
       # username = "suzumiyaaoba";
 
@@ -129,23 +129,6 @@
             }
             ./hosts/macos/private
             ./hosts/macos/private/modules/darwin
-          ];
-        };
-
-        private-x86_64 = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          inherit specialArgs;
-
-          modules = [
-            configuration
-            ./modules/darwin
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.users.${username} = import ./hosts/macos/private/home/x86_64;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-            ./hosts/macos/private
           ];
         };
 
