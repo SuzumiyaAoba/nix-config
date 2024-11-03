@@ -1308,6 +1308,12 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
                                     (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face)))
    org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")
   )
+
+   (defun org-babel-execute:jshell (body params)
+     "Execute a block of jshell code snippets or commands with org-babel"
+     (message "Executing jshell snippets")
+     (org-babel-eval "jshell -q" (concat body "\n/exit")))
+   (add-to-list 'org-src-lang-modes '("jshell" . "java"))
 )
 #+end_src
 

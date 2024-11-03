@@ -228,7 +228,7 @@ https://ladicle.com/post/config/#change-smart-kill-word
 
 *** DONE dirvish :NotUsed:
 
-+ GitHub :: [[https://github.com/alexluigit/dirvish][alexluigit/dirvish]]
++ GitHub :: [[https://github.com/alexluigit/dirvish][alexluigit/dirvihs]]
 
 #+begin_src emacs-lisp
 (use-package dirvish

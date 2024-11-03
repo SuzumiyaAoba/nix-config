@@ -19,7 +19,7 @@ in
     manpages.enable = false;
     json.enable = false;
   };
-  
+
   imports = builtins.map (f: baseDir + "/${f}") [
     # GUI
     "home/darwin/base/gui/appcleaner.nix"
@@ -30,7 +30,6 @@ in
     "home/programs/editor/vscode"
 
     # Editors
-    "home/darwin/base/editor/emacs.nix"
     "home/programs/editor/emacs"
 
     # IDE

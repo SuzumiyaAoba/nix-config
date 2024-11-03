@@ -18,7 +18,7 @@
 
       rm -f ~/.emacs.d/init.elc ~/.emacs.d/early-init.elc
 
-      # $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval '(byte-compile-file "~/.emacs.d/early-init.el")' 
+      # $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval '(byte-compile-file "~/.emacs.d/early-init.el")'
       # $DRY_RUN_CMD ${pkgs.emacs}/bin/emacs --batch --eval '(byte-compile-file "~/.emacs.d/init.el")'
     '';
   };

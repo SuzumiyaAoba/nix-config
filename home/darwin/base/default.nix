@@ -4,7 +4,6 @@
   imports = [
     ../../base
 
-    ./editor
     ./gui
   ];
 }
