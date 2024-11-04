@@ -1282,6 +1282,20 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    org-enforce-todo-dependencies t
    org-hierarchical-todo-statistics nil
 
+   org-emphasis-regexp-components '("-[:space:]('\"{[:nonascii:]"
+                                    "-[:space:].,:!?;'\")}\\[[:nonascii:]"
+                                    "[:space:]"
+                                    "."
+                                    1)
+   org-match-substring-regexp
+        (concat
+         "\\([0-9a-zA-Zα-γΑ-Ω]\\)\\([_^]\\)\\("
+         "\\(?:" (org-create-multibrace-regexp "{" "}" org-match-sexp-depth) "\\)"
+         "\\|"
+         "\\(?:" (org-create-multibrace-regexp "(" ")" org-match-sexp-depth) "\\)"
+         "\\|"
+         "\\(?:\\*\\|[+-]?[[:alnum:].,\\]*[[:alnum:]]\\)\\)")
+
    ;; org-agenda
    org-agenda-span 'day
    org-agenda-tags-column 0
@@ -1308,6 +1322,9 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
                                     (if (org-agenda-today-p date) (list :inherit face :inverse-video t) face)))
    org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")
   )
+
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  (org-element-update-syntax)
 
    (defun org-babel-execute:jshell (body params)
      "Execute a block of jshell code snippets or commands with org-babel"
