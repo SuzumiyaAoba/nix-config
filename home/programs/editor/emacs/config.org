@@ -1323,6 +1323,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    org-time-stamp-custom-formats '("<%Y年%m月%d日(%a)>" . "<%Y年%m月%d日(%a)%H時%M分>")
   )
 
+  ;; see: https://github.com/lijigang/emacs.d/blob/main/readme.org
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
   (org-element-update-syntax)
 
