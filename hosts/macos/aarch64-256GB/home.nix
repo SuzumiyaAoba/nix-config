@@ -68,5 +68,8 @@ in
     "home/programs/commands/sd.nix"
     "home/programs/commands/sheldon"
     "home/programs/commands/tbls.nix"
+
+    # LLM
+    "home/programs/commands/ollama.nix"
   ];
 }
