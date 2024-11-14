@@ -1382,6 +1382,13 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:opt org-sticky-header-full-path 'full))
 #+end_src
 
+**** orgtbl-aggregate
+
+#+begin_src emacs-lisp :tangle init.el
+(setup orgtbl-aggregate
+  (:elpaca t))
+#+end_src
+
 ** Programming
 
 *** editorconfig
