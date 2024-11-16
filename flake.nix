@@ -93,6 +93,8 @@
             configuration
             ./modules/darwin/system.nix
             ./hosts/macos/aarch64-256GB/cnofiguratin.nix
+            nix-homebrew.darwinModules.nix-homebrew
+            ./hosts/macos/aarch64-256GB/homebrew.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -100,8 +102,6 @@
               home-manager.users.${username} = import ./hosts/macos/aarch64-256GB/home.nix;
               home-manager.extraSpecialArgs = specialArgs;
             }
-            nix-homebrew.darwinModules.nix-homebrew
-            ./hosts/macos/aarch64-256GB/homebrew.nix
           ];
         };
 
