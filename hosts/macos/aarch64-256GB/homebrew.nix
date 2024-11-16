@@ -13,6 +13,7 @@ in
     # GUI
     "home/darwin/homebrew/google-chrome.nix"
     "home/darwin/homebrew/1password.nix"
+    "home/darwin/homebrew/brave-browser.nix"
 
     # CLI
     "home/darwin/homebrew/rancher.nix"
