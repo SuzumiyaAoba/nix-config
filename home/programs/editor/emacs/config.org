@@ -1795,6 +1795,13 @@ https://github.com/NixOS/nix-mode
   (:file-match "\\.[jt]s[x]?\\'"))
 #+end_src
 
+*** Coq
+
+#+begin_src emacs-lisp :tangle init.el
+(setup proof-general
+  (:elpaca t))
+#+end_src
+
 *** Gleam
 
 #+begin_src emacs-lisp :tangle init.el
