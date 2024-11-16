@@ -2,16 +2,6 @@
 
 * early-init.el
 
-** Garbage collection
-
-#+begin_src emacs-lisp :tangle early-init.el
-(setq gc-cons-threshold 100000000)
-(setq garbage-collection-messages nil)
-
-(setq package-enable-at-startup nil)
-(setq load-prefer-newer t)
-#+end_src
-
 ** Inhibit
 
 #+begin_src emacs-lisp :tangle early-init.el
@@ -61,6 +51,9 @@
 (with-eval-after-load 'warnings
   ;; native comp の warning を抑える
   (setopt warning-suppress-types '((comp))))
+
+(setq package-enable-at-startup nil)
+(setq load-prefer-newer t)
 #+end_src
 
 ** LSP
@@ -94,6 +87,13 @@
 
 (defconst my/enable-profile nil
   "If true, enable profile")
+#+end_src
+
+** Garbage collection
+
+#+begin_src emacs-lisp :tangle early-init.el
+(setq gc-cons-threshold most-positive-fixnum)
+(setq garbage-collection-messages nil)
 #+end_src
 
 ** Package manager
@@ -1281,7 +1281,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup markdown-mode
   (:elpaca t)
-  (:file-match "\\.mdx\\'"))
+  (:file-match "\\.mdx\\'")
+  (:opt markdown-fontify-code-blocks-natively t))
 #+end_src
 
 *** org-mode
@@ -1737,6 +1738,17 @@ https://github.com/NixOS/nix-mode
   (:elpaca t))
 #+end_src
 
+** LLM
+
+#+begin_src emacs-lisp :tangle init.el
+(setup ellama
+  (:elpaca t)
+  (:opt ellama-language "Japanese"
+        ellama-provider (make-llm-ollama
+			 :chat-model "qwen2.5-coder:32b"
+			 :embedding-model "qwen2.5-coder:32b")))
+#+end_src
+
 ** System
 
 *** Window
@@ -1761,6 +1773,14 @@ https://github.com/NixOS/nix-mode
 #+end_src
 
 ** Finalization
+
+*** Garbage Collection
+
+GC が利用できるメモリの上限を無制限から戻す。
+
+#+begin_src emacs-lisp
+(setq gc-cons-threshold 100 * 1024 * 1024) ;; 100 mb
+#+end_src
 
 *** Profile
 
