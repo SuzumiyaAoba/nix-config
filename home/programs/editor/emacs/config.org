@@ -308,13 +308,6 @@ The ORDER can be used to deduce the feature context."
 
 ** Libraries
 
-*** dash.el
-
-#+begin_src emacs-lisp :tangle init.el
-(setup dash
-  (:elpaca t))
-#+end_src
-
 ** Basic behavior
 
 #+begin_src emacs-lisp :tangle init.el
@@ -347,9 +340,11 @@ The ORDER can be used to deduce the feature context."
     term-mode
     special-mode))
 
-(--each my/disable-trailing-modes
-  (add-hook (intern (concat (symbol-name it) "-hook"))
-            'my/disable-trailing-mode-hook))
+(mapc
+ (lambda (mode)
+   (add-hook (intern (concat (symbol-name mode) "-hook"))
+             'my/disable-trailing-mode-hook))
+ my/disable-trailing-modes)
 #+end_src
 
 ** Performance tips
@@ -492,7 +487,11 @@ The ORDER can be used to deduce the feature context."
 (setup nerd-icons-dired
   (:elpaca t)
   (:with-mode dired-mode
-    (:hook nerd-icons-dired-mode)))
+    (:hook nerd-icons-dired-mode))
+  (:require nerd-icons)
+
+  (add-to-list 'nerd-icons-extension-icon-alist
+               '("mdx" nerd-icons-octicon "nf-oct-markdown" :face nerd-icons-lblue)))
 #+end_src
 
 *** treemacs-nerd-icons
@@ -500,9 +499,9 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp :tangle init.el
 (setup treemacs-nerd-icons
   (:elpaca t)
-  (:load-after treemacs)
-  (require 'treemacs-nerd-icons)
-  (treemacs-load-theme "nerd-icons"))
+  (:load-after treemacs nerd-icons)
+  (:require 'treemacs-nerd-icons)
+  (:when-loaded (treemacs-load-theme "nerd-icons")))
 #+end_src
 
 *** svg-tag-mode
@@ -687,10 +686,38 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
 ** [[https://github.com/tarsius/keycast][keycast]]
 
+[[https://github.com/tarsius/keycast/issues/7#issuecomment-2387310012][Add support for moody and doom-modeline. · Issue #7 · tarsius/keycast]] を参考に =moody= で =keycast= が動作するように設定。
+
 #+begin_src emacs-lisp :tangle init.el
 (setup keycast
   (:elpaca t)
-  (keycast-tab-bar-mode))
+  (:load-after moody)
+  (:require keycast)
+  ;; (keycast-tab-bar-mode)
+  ;; (keycast-mode-line-mode)
+
+  (define-minor-mode keycast-mode
+    "Show current command and its key binding in the mode line (fix for use with doom-modeline)."
+    :global t
+    (if keycast-mode
+	(add-hook 'pre-command-hook 'keycast--update t)
+      (remove-hook 'pre-command-hook 'keycast--update)))
+
+  (add-to-list 'global-mode-string '("" keycast-mode-line))
+
+  (keycast-mode))
+#+end_src
+
+** [[https://github.com/ema2159/centaur-tabs][Centaur tabs]]
+
+#+begin_src emacs-lisp :tangle init.el
+(setup centaur-tabs
+  (:elpaca t)
+  (:opt centaur-tabs-set-icons t
+        centaur-tabs-icon-type 'nerd-icons)
+  (centaur-tabs-mode t)
+
+  (centaur-tabs-headline-match))
 #+end_src
 
 ** breadcrumb
@@ -846,13 +873,14 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   ;;                                                  (not (bound-and-true-p vertico-flat-mode)))
   ;;                                             (eql t)))
   ;;   (setq cand (cl-call-next-method cand prefix suffix index start))
-  ;;   (if (bound-and-true-p vertico-grid-mode)
+  ;;   (let ((arrow (nerd-icons-faicon "nf-fa-hand_o_right")))
+  ;;     (if (bound-and-true-p vertico-grid-mode)
+  ;;         (if (= vertico--index index)
+  ;;             (concat arrow " " cand)
+  ;;           (concat #("_" 0 1 (display " ")) cand))
   ;;       (if (= vertico--index index)
-  ;;           (concat (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
-  ;;         (concat #("_" 0 1 (display " ")) cand))
-  ;;     (if (= vertico--index index)
-  ;;         (concat " " (nerd-icons-faicon "nf-fa-hand_o_right") (if is-darwin-window " " "  ") cand)
-  ;;       (concat "    " cand))))
+  ;;           (concat " " arrow " " cand)
+  ;;         (concat "    " cand)))))
 
   (vertico-mode)
 
@@ -1102,7 +1130,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup flymake-diagnostic-at-point
   (:elpaca t)
-  (:after flymake)
+  (:after-loaded flymake)
   (require 'flymake-diagnostic-at-point)
   (:with-mode flymake-mode
     (:hook flymake-diagnostic-at-point-mode)))

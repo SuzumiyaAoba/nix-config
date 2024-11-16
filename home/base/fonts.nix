@@ -7,5 +7,11 @@
     iosevka
     _0xproto
     (callPackage ../../pkgs/data/fonts/explex { })
+
+    (nerdfonts.override {
+      fonts = [
+        "NerdFontsSymbolsOnly"
+      ];
+    })
   ];
 }
