@@ -36,10 +36,10 @@
 
 ** Native compile
 
+[[https://apribase.net/2024/07/09/emacs-eln-cache/][Emacs の eln-cache ディレクトリを正しく変更する ||| Apribase]] を参考に Native Compile の出力先を変更する。
+
 #+begin_src emacs-lisp :tangle early-init.el
-;; see: https://apribase.net/2024/07/09/emacs-eln-cache/
 (when (boundp 'native-comp-eln-load-path)
-  ;; コンパイルしたバイナリの出力先を変更する
   (startup-redirect-eln-cache
    (expand-file-name "~/.local/share/emacs/eln-cache/")))
 
@@ -58,8 +58,9 @@
 
 ** LSP
 
+[[https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization][Performance - LSP Mode - LSP support for Emacs]] を参考に lsp-mode のパフォーマンス改善のために設定。
+
 #+begin_src emacs-lisp :tangle early-init.el
-;; see: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
 (setenv "LSP_USE_PLISTS" "true")
 #+end_src
 
@@ -90,6 +91,9 @@
 #+end_src
 
 ** Garbage collection
+
+Emacs 起動時に GC が走らないように設定する。
+=init.el= の最後に閾値を設定し直す。
 
 #+begin_src emacs-lisp :tangle early-init.el
 (setq gc-cons-threshold most-positive-fixnum)
@@ -302,6 +306,15 @@ The ORDER can be used to deduce the feature context."
     (native-compile-async "~/.emacs.d/elpaca" 'recursively)))
 #+end_src
 
+** Libraries
+
+*** dash.el
+
+#+begin_src emacs-lisp :tangle init.el
+(setup dash
+  (:elpaca t))
+#+end_src
+
 ** Basic behavior
 
 #+begin_src emacs-lisp :tangle init.el
@@ -317,8 +330,26 @@ The ORDER can be used to deduce the feature context."
 (setq kill-whole-line t)
 
 (setq-default indent-tabs-mode nil)
+#+end_src
 
+*** show-trailing-whitespace
+
+#+begin_src emacs-lisp :tangle init.el
 (setq-default show-trailing-whitespace t)
+
+(defun my/disable-trailing-mode-hook ()
+  "Disable show tail whitespace."
+  (setq show-trailing-whitespace nil))
+
+(defvar my/disable-trailing-modes
+  '(eshell-mode
+    eww-mode
+    term-mode
+    special-mode))
+
+(--each my/disable-trailing-modes
+  (add-hook (intern (concat (symbol-name it) "-hook"))
+            'my/disable-trailing-mode-hook))
 #+end_src
 
 ** Performance tips
@@ -1071,6 +1102,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup flymake-diagnostic-at-point
   (:elpaca t)
+  (:after flymake)
+  (require 'flymake-diagnostic-at-point)
   (:with-mode flymake-mode
     (:hook flymake-diagnostic-at-point-mode)))
 #+end_src
@@ -1465,9 +1498,12 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup lsp-mode
   (:elpaca t)
-  (:opt read-process-output-max (* 1024 1024)
-        lsp-headerline-breadcrumb-enable nil
+  (:opt lsp-headerline-breadcrumb-enable nil
         lsp-enable-symbol-highlighting nil
+
+        ;; improve performance
+        lsp-idle-delay 0.5000
+        lsp-log-io nil
 
         lsp-ui-doc-enable t
         lsp-ui-doc-include-signature t
@@ -1768,6 +1804,8 @@ https://github.com/NixOS/nix-mode
   (:elpaca t)
   (:opt exec-path-from-shell-arguments (quote ("-l")))
   (setenv "PATH" (concat (getenv "PATH") ":~/.volta/bin"))
+  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH" "LSP_USE_PLISTS"))
+    (add-to-list 'exec-path-from-shell-variables var))
 
   (exec-path-from-shell-initialize))
 #+end_src
