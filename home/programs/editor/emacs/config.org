@@ -574,6 +574,7 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp :tangle init.el
 (setup solaire-mode
   (:elpaca t)
+  (:disabled t)
   (solaire-global-mode +1))
 #+end_src
 
@@ -1260,10 +1261,44 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup dimmer
   (:elpaca t)
-  (:opt dimmer-fraction 0.3)
-  (dimmer-configure-posframe)
+  (:option dimmer-fraction 0.07
+           dimmer-adjustment-mode :background
+           dimmer-use-colorspace :rgb
+           dimmer-watch-frame-focus-events nil)
+  (:require dimmer)
+
+  ;; corfu に対応する。
+  ;; https://github.com/gonewest818/dimmer.el/issues/62
+  (defun advise-dimmer-config-change-handler ()
+    "Advise to only force process if no predicate is truthy."
+    (let ((ignore (cl-some (lambda (f) (and (fboundp f) (funcall f)))
+                           dimmer-prevent-dimming-predicates)))
+      (unless ignore
+        (when (fboundp 'dimmer-process-all)
+          (dimmer-process-all t)))))
+
+  (defun corfu-frame-p ()
+    "Check if the buffer is a corfu frame buffer."
+    (string-match-p "\\` \\*corfu" (buffer-name)))
+
+  (defun dimmer-configure-corfu ()
+    "Convenience settings for corfu users."
+    (add-to-list
+     'dimmer-prevent-dimming-predicates
+     #'corfu-frame-p))
+
+  (advice-add
+   'dimmer-config-change-handler
+   :override 'advise-dimmer-config-change-handler)
+
+  (dimmer-configure-corfu)
+
   (dimmer-configure-which-key)
-  (dimmer-configure-magit))
+  (dimmer-configure-magit)
+  (dimmer-configure-org)
+  (dimmer-configure-posframe)
+
+  (dimmer-mode t))
 #+end_src
 
 ** Syntax highlight
