@@ -13,5 +13,6 @@
         "NerdFontsSymbolsOnly"
       ];
     })
+    cascadia-code
   ];
 }
