@@ -11,7 +11,9 @@ return {
     -- "Monaspace Argon",
     -- "0xProto",
     -- "Explex",
-    "Explex Console",
+    -- "Explex Console",
+    "Cascadia Next JP",
+    "Cascadia Code NF",
     -- "HackGen Console NF"
   },
   font_size = 14,

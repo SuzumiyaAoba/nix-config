@@ -29,9 +29,14 @@
 ** Fonts
 
 #+begin_src emacs-lisp :tangle early-init.el
-(set-face-attribute 'default nil :family "0xProto" :height 120)
+;; (set-face-attribute 'default nil :family "0xProto" :height 120)
+(set-face-attribute 'default nil :family "Cascadia Next JP" :height 120)
+(set-face-attribute 'default nil :family "Cascadia Code NF" :height 120)
 ;; (set-face-attribute 'default nil :family "Explex" :height 140)
 ;; (set-face-attribute 'default nil :family "Iosevka" :height 140)
+
+(setq face-font-family-alternatives
+      '(("Cascadia Code NF" "Explex")))
 #+end_src
 
 ** Native compile

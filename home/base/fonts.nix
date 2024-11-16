@@ -7,6 +7,7 @@
     iosevka
     _0xproto
     (callPackage ../../pkgs/data/fonts/explex { })
+    (callPackage ../../pkgs/data/fonts/cascadia-next { })
 
     (nerdfonts.override {
       fonts = [
