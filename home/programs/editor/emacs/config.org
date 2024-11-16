@@ -715,9 +715,12 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t)
   (:with-mode dired-mode
     (:hook centaur-tabs-local-mode))
-  (:opt centaur-tabs-set-icons t
+  (:opt centaur-tabs-cycle-scope 'tabs
+        centaur-tabs-set-icons t
         centaur-tabs-icon-type 'nerd-icons
         centaur-tabs-set-modified-marker t)
+  (:bind "C-<tab>" centaur-tabs-forward
+         "C-S-<tab>" centaur-tabs-backward)
   (centaur-tabs-mode t)
 
   (centaur-tabs-headline-match))
@@ -965,7 +968,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (advice-add 'projectile-find-file-other-window :override #'consult-projectile-find-file-other-window)
     (advice-add 'projectile-find-file-other-frame :override #'consult-projectile-find-file-other-frame)
     (advice-add 'projectile-recentf :override #'consult-projectile-recentf)
-    (advice-add 'projectile-switch-project :override #'consult-projectile-switch-project)))
+    (advice-add 'projectile-switch-project :override #'consult-projectile-switch-project)
+    (advice-add 'projectile-ripgrep :override #'consult-ripgrep)))
 #+end_src
 
 ** marginalia
