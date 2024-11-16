@@ -43,6 +43,7 @@ in
     "home/base/languages/java.nix"
     "home/base/languages/javascript.nix"
     "home/base/languages/rust.nix"
+    "home/programs/programming/coq.nix"
 
     # commands
     "home/programs/commands/ast-grep.nix"
