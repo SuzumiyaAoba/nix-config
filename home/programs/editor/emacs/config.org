@@ -406,6 +406,7 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp :tangle init.el
 (setup modus-themes
   (:elpaca t)
+  (:disabled t)
   (:opt modus-themes-italic-constructs t
         modus-themes-bold-constructs t
         modus-themes-region '(bg-only no-extend)
@@ -423,6 +424,14 @@ The ORDER can be used to deduce the feature context."
   (load-theme 'modus-vivendi t))
 #+end_src
 
+*** ef-themes
+
+#+begin_src emacs-lisp :tangle init.el
+(setup ef-themes
+  (:elpaca t)
+  (ef-themes-select 'ef-melissa-dark))
+#+end_src
+
 ** Icons
 
 *** nerd-icons-corfu
@@ -434,7 +443,6 @@ The ORDER can be used to deduce the feature context."
   (:when-loaded
     (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)))
 #+end_src
-
 
 *** nerd-icons-completion
 
@@ -476,15 +484,22 @@ The ORDER can be used to deduce the feature context."
 
 ** Modeline
 
+#+begin_src emacs-lisp :tangle init.el
+(setq-default mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
+(line-number-mode 0)
+#+end_src
+
 *** moody
 
 #+begin_src emacs-lisp :tangle init.el
 (setup moody
   (:elpaca t)
+  (:opt x-underline-at-descent-line t)
   (require 'moody)
   (moody-replace-mode-line-front-space)
   (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+  ;; (moody-replace-vc-mode)
+  )
 #+end_src
 
 *** nyan-mode
@@ -492,10 +507,31 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp :tangle init.el
 (setup nyan-mode
   (:elpaca t)
+  (:disabled t)
   (:opt nyan-cat-face-number 4
         nyan-animate-nyancat t
         nyan-wavy-trail nil)
   (nyan-mode))
+#+end_src
+
+*** mlscroll
+
+#+begin_src emacs-lisp :tangle init.el
+(setup mlscroll
+  (:elpaca t)
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'mlscroll-mode)
+    (mlscroll-mode 1)))
+#+end_src
+
+*** nano-modeline
+
+#+begin_src emacs-lisp :tangle init.el
+(setup nano-modeline
+  (:elpaca t)
+  (:opt nano-modeline-padding '(0.20 . 0.25))
+  (:require nano-modeline)
+  (nano-modeline-text-mode t))
 #+end_src
 
 ** solaire-mode
@@ -631,6 +667,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup breadcrumb
   (:elpaca t)
+  (:disabled t)
   (breadcrumb-mode))
 #+end_src
 
@@ -1377,6 +1414,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup org-sticky-header
   (:elpaca t)
+  (:disabled t)
   (:with-mode org-mode
     (:hook org-sticky-header-mode))
   (:opt org-sticky-header-full-path 'full))
