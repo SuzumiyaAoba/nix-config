@@ -18,6 +18,15 @@
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
       };
+
+      trackpad = {
+        ActuationStrength = 0;
+        Clicking = true;
+        Dragging = true;
+        TrackpadRightClick = true;
+        TrackpadThreeFingerDrag = true;
+        TrackpadThreeFingerTapGesture = 2;
+      };
     };
 
     keyboard = {
