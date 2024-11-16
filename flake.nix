@@ -142,7 +142,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.${username} = import ./hosts/macos/work/home;
+              home-manager.users.${username} = import ./home/darwin/aarch64;
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./hosts/macos/work
