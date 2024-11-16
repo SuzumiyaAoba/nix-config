@@ -1262,10 +1262,9 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup treesit-auto
   (:elpaca t)
   (:opt treesit-auto-install t)
-  (:when-loaded
-    (require 'treesit-auto)
-    (treesit-auto-add-to-auto-mode-alist 'all)
-    (global-treesit-auto-mode)))
+  (:require treesit-auto)
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 #+end_src
 
 ** projectile
