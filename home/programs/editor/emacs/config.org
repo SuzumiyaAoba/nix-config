@@ -499,8 +499,8 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp :tangle init.el
 (setup treemacs-nerd-icons
   (:elpaca t)
-  (:load-after treemacs nerd-icons)
-  (:require 'treemacs-nerd-icons)
+  (:load-after treemacs)
+  (:require treemacs-nerd-icons)
   (:when-loaded (treemacs-load-theme "nerd-icons")))
 #+end_src
 
@@ -713,8 +713,11 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup centaur-tabs
   (:elpaca t)
+  (:with-mode dired-mode
+    (:hook centaur-tabs-local-mode))
   (:opt centaur-tabs-set-icons t
-        centaur-tabs-icon-type 'nerd-icons)
+        centaur-tabs-icon-type 'nerd-icons
+        centaur-tabs-set-modified-marker t)
   (centaur-tabs-mode t)
 
   (centaur-tabs-headline-match))
