@@ -44,6 +44,7 @@ in
     "home/base/languages/javascript.nix"
     "home/base/languages/rust.nix"
     "home/programs/programming/coq.nix"
+    "home/programs/programming/scala.nix"
 
     # commands
     "home/programs/commands/ast-grep.nix"
