@@ -724,7 +724,10 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:opt centaur-tabs-cycle-scope 'tabs
         centaur-tabs-set-icons t
         centaur-tabs-icon-type 'nerd-icons
-        centaur-tabs-set-modified-marker t)
+        centaur-tabs-set-modified-marker t
+        centaur-tabs-set-bar 'left
+        x-underline-at-descent-line t
+        centaur-tabs-left-edge-margin nil)
   (:bind "C-<tab>" centaur-tabs-forward
          "C-S-<tab>" centaur-tabs-backward)
   (centaur-tabs-mode t)
@@ -1398,6 +1401,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup org
   (:elpaca t)
   (:opt
+   org-startup-indented t
    org-latex-create-formula-image-program 'dvisvgm
 
    org-log-done 'time
@@ -1487,7 +1491,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t)
   (:with-mode org-mode
     (:hook org-modern-mode))
-  (:opt org-modern-hide-stars 'leading
+  (:opt ;; org-modern-hide-stars 'leading
+        org-modern-hide-stars nil
         org-modern-timestamp '(" %Y年%m月%d日(%a) " . " %H時%M分 ")
         org-modern-star 'replace
         org-modern-replace-stars
@@ -1510,11 +1515,32 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
    '((ditaa . t))))
 #+end_src
 
+**** org-modern-indent
+
+#+begin_src emacs-lisp :tangle init.el
+(setup org-modern-indent
+  (:elpaca org-modern-indent :type git :host github :repo "jdtsmith/org-modern-indent")
+  (:with-mode org-mode
+    (:hook org-modern-indent-mode)))
+#+end_src
+
 **** org-sidebar
 
 #+begin_src emacs-lisp :tangle init.el
 (setup org-sidebar
-  (:elpaca t))
+  (:elpaca t)
+  (:disabled t))
+#+end_src
+
+**** org-side-tree
+
+#+begin_src emacs-lisp :tangle init.el
+(setup org-side-tree
+  (:elpaca t)
+  (:opt org-side-tree-persistent t
+        org-side-tree-add-overlays nil
+        org-side-tree-display-side 'right
+        org-side-tree-enable-folding t))
 #+end_src
 
 **** org-sticky-header
