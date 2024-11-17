@@ -56,6 +56,7 @@ in
     "home/programs/commands/eza.nix"
     "home/programs/commands/fd.nix"
     "home/programs/commands/fzf"
+    "home/programs/commands/tree.nix"
     "home/programs/commands/ghq.nix"
     "home/programs/commands/git"
     "home/programs/commands/jq.nix"
