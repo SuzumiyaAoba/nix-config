@@ -28,6 +28,12 @@
 
 ** Fonts
 
++ [[https://github.com/0xType/0xProto][0xProto]]
++ [[https://github.com/microsoft/cascadia-code/releases/tag/cascadia-next][Cascadia Next JP]]
++ [[https://github.com/microsoft/cascadia-code][Cascadia Code]]
++ [[https://github.com/yuru7/Explex][Explex]]
++ [[https://typeof.net/Iosevka/][Iosevka]]
+
 #+begin_src emacs-lisp :tangle early-init.el
 ;; (set-face-attribute 'default nil :family "0xProto" :height 120)
 (set-face-attribute 'default nil :family "Cascadia Next JP" :height 120)
@@ -73,6 +79,8 @@
 
 ** Header
 
+文字コードを UTF-8 に設定し、レキシカルバインディングを有効にする。
+
 #+begin_src emacs-lisp :tangle init.el
 ;; init.el --- SuzumiyaAoba's init.el -*- lexical-binding: t; coding: utf-8 -*-
 #+end_src
@@ -80,6 +88,8 @@
 ** Options
 
 *** Debug
+
+デバッグする場合はコメントアウトを外す。
 
 #+begin_src emacs-lisp
 ;; (setq debug-on-error t)
@@ -109,14 +119,18 @@ Emacs 起動時に GC が走らないように設定する。
 
 *** [[https://wikemacs.org/wiki/Package.el][package.el]]
 
+=package.el= は使わずに =Elpaca= を使うため起動時に無効化。
+
 #+begin_src emacs-lisp :tangle init.el
 (with-eval-after-load 'package
   (setopt package-enable-at-startup nil))
 #+end_src
 
-*** [[https://github.com/progfolio/elpaca][elpaca]]
+*** [[https://github.com/progfolio/elpaca][Elpaca]]
 
 **** Install
+
+公式の README.md に従ってインストール。
 
 #+begin_src emacs-lisp :tangle init.el
 (defvar elpaca-installer-version 0.8)
@@ -161,6 +175,8 @@ Emacs 起動時に GC が走らないように設定する。
 
 **** [[https://www.emacswiki.org/emacs/SetupEl][startup integration]]
 
+Setup El と Elcapa を組合せ使うための設定を追加。
+
 #+begin_src emacs-lisp :tangle init.el
 (elpaca setup (require 'setup))
 (elpaca-wait)
@@ -194,7 +210,30 @@ The ORDER can be used to deduce the feature context."
 
 **** Macro
 
+Setup El のドキュメントに従って =:load-after= と =:face= を追加。
+[[https://apribase.net/2024/05/29/emacs-elpaca-setup-el/][Elpaca + setup.el でわかりやすく非同期にパッケージを管理する ||| Apribase]] を参考に =:opt= を追加。
+
 #+begin_src emacs-lisp :tangle init.el
+(defmacro -setup (order &rest body)
+  "Execute BODY in `setup' declaration after ORDER is finished.
+If the :disabled keyword is present in body, the package is completely ignored.
+This happens regardless of the value associated with :disabled.
+The expansion is a string indicating the package has been disabled."
+  (declare (indent 1))
+  (if (memq :disabled body)
+      (format "%S :disabled by -setup" order)
+    (let ((o order))
+      (when-let ((ensure (cl-position :ensure body)))
+        (setq o (if (null (nth (1+ ensure) body)) nil order)
+              body (append (cl-subseq body 0 ensure)
+                           (cl-subseq body (+ ensure 2)))))
+      `(elpaca ,o (setup
+                    ,(if-let (((memq (car-safe order) '(quote \`)))
+                              (feature (flatten-tree order)))
+                         (cadr feature)
+                       (elpaca--first order))
+                    ,@body)))))
+
 (setup-define :load-after
   (lambda (&rest features)
     (let ((body `(require ',(setup-get 'feature))))
@@ -233,6 +272,8 @@ The ORDER can be used to deduce the feature context."
 #+end_src
 
 *** OS
+
+OS、環境判定で使うための定数を追加。
 
 #+begin_src emacs-lisp :tangle init.el
 ;; is-darwin
@@ -435,9 +476,9 @@ The ORDER can be used to deduce the feature context."
 ** Theme
 
 #+begin_src emacs-lisp :tangle init.el
-(setup modus-themes
+(-setup modus-themes
+  :disabled
   (:elpaca t)
-  (:disabled t)
   (:opt modus-themes-italic-constructs t
         modus-themes-bold-constructs t
         modus-themes-region '(bg-only no-extend)
@@ -540,9 +581,8 @@ The ORDER can be used to deduce the feature context."
 *** nyan-mode
 
 #+begin_src emacs-lisp :tangle init.el
-(setup nyan-mode
+(-setup nyan-mode
   (:elpaca t)
-  (:disabled t)
   (:opt nyan-cat-face-number 4
         nyan-animate-nyancat t
         nyan-wavy-trail nil)
@@ -572,9 +612,9 @@ The ORDER can be used to deduce the feature context."
 ** solaire-mode
 
 #+begin_src emacs-lisp :tangle init.el
-(setup solaire-mode
+(-setup solaire-mode
+  :disabled
   (:elpaca t)
-  (:disabled t)
   (solaire-global-mode +1))
 #+end_src
 
@@ -639,7 +679,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 
 #+begin_src emacs-lisp :tangle init.el
 (setup eldoc
-  (:elpaca t)
+  ;; (:elpaca t)
   (:opt eldoc-echo-area-use-multiline-p nil)
   (:global
    "C-c q" toggle-eldoc-doc-buffer)
@@ -727,7 +767,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
         centaur-tabs-set-modified-marker t
         centaur-tabs-set-bar 'left
         x-underline-at-descent-line t
-        centaur-tabs-left-edge-margin nil)
+        centaur-tabs-left-edge-margin "")
   (:bind "C-<tab>" centaur-tabs-forward
          "C-S-<tab>" centaur-tabs-backward)
   (centaur-tabs-mode t)
@@ -738,9 +778,9 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 ** breadcrumb
 
 #+begin_src emacs-lisp :tangle init.el
-(setup breadcrumb
+(-setup breadcrumb
+  :disabled
   (:elpaca t)
-  (:disabled t)
   (breadcrumb-mode))
 #+end_src
 
@@ -1146,7 +1186,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup flymake-diagnostic-at-point
   (:elpaca t)
-  (:after-loaded flymake)
+  (:load-after flymake)
   (require 'flymake-diagnostic-at-point)
   (:with-mode flymake-mode
     (:hook flymake-diagnostic-at-point-mode)))
@@ -1351,8 +1391,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup treemacs-projectile
   (:elpaca t)
   (:load-after treemacs projectile)
-  (:with-eval-after
-   (require 'treemacs-projectile)))
+  (with-eval-after-load
+      (require 'treemacs-projectile)))
 #+end_src
 
 *** treemacs-magit
@@ -1473,6 +1513,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   )
 
   ;; see: https://github.com/lijigang/emacs.d/blob/main/readme.org
+  (require 'org)
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
   (org-element-update-syntax)
 
@@ -1527,9 +1568,9 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 **** org-sidebar
 
 #+begin_src emacs-lisp :tangle init.el
-(setup org-sidebar
-  (:elpaca t)
-  (:disabled t))
+(-setup org-sidebar
+  :disabled
+  (:elpaca t))
 #+end_src
 
 **** org-side-tree
@@ -1548,7 +1589,6 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup org-sticky-header
   (:elpaca t)
-  (:disabled t)
   (:with-mode org-mode
     (:hook org-sticky-header-mode))
   (:opt org-sticky-header-full-path 'full))
@@ -1783,6 +1823,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
              (setq c-basic-offset 2)
 
              (require 'dap-java))))
+  (:require lsp-java)
   ;; (:opt lsp-java-compile-null-analysis-mode "disabled")
   (push (concat "-javaagent:"
                 (getenv "LOMBOK_JAR_PATH"))
@@ -1937,6 +1978,7 @@ https://github.com/NixOS/nix-mode
 (setup exec-path-from-shell
   (:elpaca t)
   (:opt exec-path-from-shell-arguments (quote ("-l")))
+  (:require exec-path-from-shell)
   (setenv "PATH" (concat (getenv "PATH") ":~/.volta/bin"))
   (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH" "LSP_USE_PLISTS"))
     (add-to-list 'exec-path-from-shell-variables var))
