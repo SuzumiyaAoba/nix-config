@@ -2053,10 +2053,16 @@ https://github.com/NixOS/nix-mode
         (meow-change)
       (replace-char)))
 
-  ;; NORMAL state
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
+    ;; INSERT state
+    (meow-define-keys 'insert
+      '("ESC" . meow-insert-exit)
+      '("<escape>" . meow-insert-exit)
+      '("C-[" . meow-insert-exit))
+
+    ;; NORMAL state
     (meow-normal-define-key
      '("h" . backward-char)
      '("j" . next-line)
@@ -2081,10 +2087,12 @@ https://github.com/NixOS/nix-mode
      '("p" . meow-yank)
 
      '("x" . puni-forward-delete-char)
-     '("d k" . meow-kill)
+     '("d $" . meow-kill)
      '("d d" . meow-kill-whole-line)
+     '("d l" . puni-kill-line)
 
      '("r" . replace-char-or-meow-replace)
+     '("R" . meow-replace)
 
      '("u" . undo-tree-undo)
      '("C-r" . undo-tree-redo)
@@ -2105,7 +2113,7 @@ https://github.com/NixOS/nix-mode
      '(", f" . consult-fd)
 
      ;; puni
-     '(". c" . puni-mark-list-around-point)
+     '(". l" . puni-mark-list-around-point)
      '(". w" . meow-mark-word)
      '(". x" . puni-mark-sexp-around-point)
      '(". ." . puni-expand-region)
