@@ -8,6 +8,7 @@ in
 
     sessionVariables = {
       EDITOR = "emacs";
+      COLORTERM = "truecolor";
     };
   };
 
