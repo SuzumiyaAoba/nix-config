@@ -2014,7 +2014,7 @@ https://github.com/NixOS/nix-mode
   (:elpaca t))
 #+end_src
 
-*** Meow
+*** COMMENT Meow
 
 #+begin_src emacs-lisp :tangle init.el
 (setup meow
@@ -2044,10 +2044,10 @@ https://github.com/NixOS/nix-mode
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
     (meow-normal-define-key
-     '("h" . meow-left)
+     '("h" . backward-char)
      '("j" . meow-next)
      '("k" . meow-prev)
-     '("l" . meow-right)
+     '("l" . forward-char)
 
      '("w" . meow-next-word)
      '("b" . meow-back-word)
@@ -2058,10 +2058,8 @@ https://github.com/NixOS/nix-mode
      '("g g" . beginning-of-buffer)
      '("G" . end-of-buffer)
 
-     ;; Use `C-v` instaed of
-     ;; '("C-f" . scroll-up)
-     ;; Use `M-v` instaed of
-     ;; '("C-b" . meow-page-up)
+     '("C-f" . meow-page-down)
+     '("C-b" . meow-page-up)
 
      '("o" . meow-open-below)
 
@@ -2074,11 +2072,12 @@ https://github.com/NixOS/nix-mode
      '("r" . replace-char-or-meow-replace)
 
      '("u" . meow-undo)
+     '("U" . undo-tree-visualize)
 
      '("v" . set-mark-command)
      '("V" . meow-line)
-
      '(": w" . save-buffer)
+     '(": g" . meow-goto-line)
 
      '("/" . consult-line)
 
@@ -2089,6 +2088,7 @@ https://github.com/NixOS/nix-mode
 
   (meow-setup)
   (meow-global-mode 1))
+#+end_src
 
 ** Finalization
 
