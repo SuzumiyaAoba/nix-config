@@ -393,6 +393,12 @@ OS、環境判定で使うための定数を追加。
  my/disable-trailing-modes)
 #+end_src
 
+*** blink-cursor-mode
+
+#+begin_src emacs-lisp :tangle init.el
+(blink-cursor-mode -1)
+#+end_src
+
 ** Performance tips
 
 #+begin_src emacs-lisp :tangle init.el
@@ -501,7 +507,7 @@ OS、環境判定で使うための定数を追加。
 #+begin_src emacs-lisp :tangle init.el
 (setup ef-themes
   (:elpaca t)
-  (ef-themes-select 'ef-melissa-dark))
+  (ef-themes-select 'ef-elea-dark))
 #+end_src
 
 ** Icons
@@ -1157,10 +1163,18 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 *** smartparens
 
 #+begin_src emacs-lisp :tangle init.el
-(setup smartparens
+(-setup smartparens
+  (:disabled t)
   (:elpaca t)
   (require 'smartparens-config)
   (smartparens-global-mode t))
+#+end_src
+
+*** Electric Pair
+
+#+begin_src emacs-lisp :tangle init.el
+(setup electric-pair
+  (electric-pair-mode 1))
 #+end_src
 
 *** rainbow-delimitersd
@@ -2014,7 +2028,7 @@ https://github.com/NixOS/nix-mode
   (:elpaca t))
 #+end_src
 
-*** COMMENT Meow
+*** Meow
 
 #+begin_src emacs-lisp :tangle init.el
 (setup meow
@@ -2045,8 +2059,8 @@ https://github.com/NixOS/nix-mode
 
     (meow-normal-define-key
      '("h" . backward-char)
-     '("j" . meow-next)
-     '("k" . meow-prev)
+     '("j" . next-line)
+     '("k" . previous-line)
      '("l" . forward-char)
 
      '("w" . meow-next-word)
@@ -2058,8 +2072,8 @@ https://github.com/NixOS/nix-mode
      '("g g" . beginning-of-buffer)
      '("G" . end-of-buffer)
 
-     '("C-f" . meow-page-down)
-     '("C-b" . meow-page-up)
+     '("C-f" . scroll-up)
+     '("C-b" . scroll-down)
 
      '("o" . meow-open-below)
 
@@ -2067,15 +2081,19 @@ https://github.com/NixOS/nix-mode
      '("p" . meow-yank)
 
      '("x" . puni-forward-delete-char)
+     '("d k" . meow-kill)
      '("d d" . meow-kill-whole-line)
 
      '("r" . replace-char-or-meow-replace)
 
-     '("u" . meow-undo)
+     '("u" . undo-tree-undo)
+     '("C-r" . undo-tree-redo)
      '("U" . undo-tree-visualize)
 
      '("v" . set-mark-command)
      '("V" . meow-line)
+     '("C-v" . rectangle-mark-mode)
+
      '(": w" . save-buffer)
      '(": g" . meow-goto-line)
 
@@ -2084,7 +2102,14 @@ https://github.com/NixOS/nix-mode
      ;; basic
      '(", c" . comment-line)
      '(", g" . consult-ripgrep)
-     '(", f" . consult-fd)))
+     '(", f" . consult-fd)
+
+     ;; puni
+     '(". c" . puni-mark-list-around-point)
+     '(". w" . meow-mark-word)
+     '(". x" . puni-mark-sexp-around-point)
+     '(". ." . puni-expand-region)
+     ))
 
   (meow-setup)
   (meow-global-mode 1))
