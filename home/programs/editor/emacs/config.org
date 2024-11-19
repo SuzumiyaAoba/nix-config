@@ -2053,14 +2053,31 @@ https://github.com/NixOS/nix-mode
         (meow-change)
       (replace-char)))
 
+  (defun meow-mark-word-kill-region (arg)
+    (interactive "p")
+    (meow-mark-word arg)
+    (call-interactively 'kill-region))
+
+  (defun puni-mark-list-around-point-kill-region (arg)
+      (interactive "p")
+      (puni-mark-list-around-point)
+      (call-interactively 'kill-region))
+
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
+    (meow-motion-overwrite-define-key '("h" . backward-char))
+    (meow-leader-define-key '("h" . "H-h"))
+    (meow-motion-overwrite-define-key '("j" . next-line))
+    (meow-leader-define-key '("j" . "H-j"))
+    (meow-motion-overwrite-define-key '("k" . previous-line))
+    (meow-leader-define-key '("k" . "H-k"))
+    (meow-motion-overwrite-define-key '("l" . forward-char))
+    (meow-leader-define-key '("l" . "H-l"))
+
     ;; INSERT state
     (meow-define-keys 'insert
-      '("ESC" . meow-insert-exit)
-      '("<escape>" . meow-insert-exit)
-      '("C-[" . meow-insert-exit))
+      )
 
     ;; NORMAL state
     (meow-normal-define-key
@@ -2086,10 +2103,22 @@ https://github.com/NixOS/nix-mode
      '("y" . kill-ring-save)
      '("p" . meow-yank)
 
-     '("x" . puni-forward-delete-char)
+     '("x" . delete-forward-char)
      '("d $" . meow-kill)
      '("d d" . meow-kill-whole-line)
-     '("d l" . puni-kill-line)
+     '("d D" . puni-kill-line)
+     '("d w" . meow-mark-word-kill-region)
+     '("d l" . puni-mark-list-around-point-kill-region)
+     '("d r" . kill-region)
+
+     '("c w" . (lambda (arg)
+                  (interactive "p")
+                  (meow-mark-word-kill-region arg)
+                  (meow-insert-mode)))
+     '("c l" . (lambda (arg)
+                 (interactive "p")
+                 (puni-mark-list-around-point-kill-region arg)
+                 (meow-insert-mode)))
 
      '("r" . replace-char-or-meow-replace)
      '("R" . meow-replace)
@@ -2101,6 +2130,8 @@ https://github.com/NixOS/nix-mode
      '("v" . set-mark-command)
      '("V" . meow-line)
      '("C-v" . rectangle-mark-mode)
+
+     '("; ;" . avy-goto-char)
 
      '(": w" . save-buffer)
      '(": g" . meow-goto-line)
