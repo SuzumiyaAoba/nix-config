@@ -2075,6 +2075,9 @@ https://github.com/NixOS/nix-mode
     (meow-motion-overwrite-define-key '("l" . forward-char))
     (meow-leader-define-key '("l" . "H-l"))
 
+    (meow-motion-overwrite-define-key '(", ," . avy-goto-char))
+    (meow-leader-define-key '("," . "H-,"))
+
     ;; INSERT state
     (meow-define-keys 'insert
       )
@@ -2131,17 +2134,16 @@ https://github.com/NixOS/nix-mode
      '("V" . meow-line)
      '("C-v" . rectangle-mark-mode)
 
-     '("; ;" . avy-goto-char)
-
      '(": w" . save-buffer)
      '(": g" . meow-goto-line)
 
      '("/" . consult-line)
 
      ;; basic
+     '(", ," . avy-goto-char)
      '(", c" . comment-line)
      '(", g" . consult-ripgrep)
-     '(", f" . consult-fd)
+     '(", f" . consult-projectile-find-file)
 
      ;; puni
      '(". l" . puni-mark-list-around-point)
