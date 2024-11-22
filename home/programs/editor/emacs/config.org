@@ -384,7 +384,8 @@ OS、環境判定で使うための定数を追加。
   '(eshell-mode
     eww-mode
     term-mode
-    special-mode))
+    special-mode
+    coq-goals-mode))
 
 (mapc
  (lambda (mode)
@@ -1972,7 +1973,16 @@ https://github.com/NixOS/nix-mode
 
 #+begin_src emacs-lisp :tangle init.el
 (setup proof-general
-  (:elpaca t))
+  (:elpaca t)
+  (:with-mode coq-mode
+    (:hook (lambda ()
+             (setq-default prettify-symbols-alist '(("forall" . "∀")
+                                                  ;; ("->"     . "→")
+                                                  ("exists" . "∃")
+                                                  ;; ("=>"     . "⇒")
+                                                  ("False"  . "⊥")
+                                                  ("True"   . "⊤")))
+             (prettify-symbols-mode 1)))))
 #+end_src
 
 *** Gleam
@@ -2106,7 +2116,7 @@ https://github.com/NixOS/nix-mode
      '("y" . kill-ring-save)
      '("p" . meow-yank)
 
-     '("x" . delete-forward-char)
+     '("x" . puni-forward-delete-char)
      '("d $" . meow-kill)
      '("d d" . meow-kill-whole-line)
      '("d D" . puni-kill-line)
@@ -2114,6 +2124,8 @@ https://github.com/NixOS/nix-mode
      '("d \"" . puni-mark-list-around-point-kill-region)
      '("d r" . kill-region)
 
+     '("I" . meow-open-above)
+     '("O" . meow-open-above)
      '("c w" . (lambda (arg)
                   (interactive "p")
                   (puni-expand-region-kill-region arg)
