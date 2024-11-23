@@ -25,7 +25,6 @@ stdenvNoCC.mkDerivation rec {
     description = "This is a fun, new monospaced font that includes programming ligatures and is designed to enhance the modern look and feel of the Windows Terminal.";
     homepage = "https://github.com/microsoft/cascadia-code/releases/tag/cascadia-next";
     license = licenses.ofl;
-    maintainers = [ maintainers.suzumiyaaoba ];
     platforms = platforms.all;
   };
 }

@@ -65,6 +65,7 @@ in
     "home/programs/commands/sd.nix"
     "home/programs/commands/sheldon"
     "home/programs/commands/tbls.nix"
+    "home/programs/commands/keg.nix"
 
     # LLM
     "home/programs/commands/ollama.nix"

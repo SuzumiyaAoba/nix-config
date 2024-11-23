@@ -22,7 +22,6 @@ stdenvNoCC.mkDerivation rec {
     description = "Explex は、0xProto と、IBM Plex Sans JP を合成した、プログラミング向けフォントです。";
     homepage = "https://github.com/yuru7/Explex";
     license = licenses.ofl;
-    maintainers = [ maintainers.suzumiyaaoba ];
     platforms = platforms.all;
   };
 }
