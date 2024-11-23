@@ -1159,6 +1159,15 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:elpaca t))
 #+end_src
 
+** apheleia
+
+#+begin_src emacs-lisp :tangle init.el
+(setup apheleia
+  (:elpaca t)
+
+  (apheleia-global-mode +1))
+#+end_src
+
 ** Parens
 
 *** smartparens
