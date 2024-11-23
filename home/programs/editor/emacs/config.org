@@ -1643,23 +1643,24 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup ligature
   (:elpaca t)
 
+  (setq ligature-symbols '("-->" "//" "/**" "/*" "*/" "<!--" ":=" "->>" "<<-" "->" "<-"
+                           "<=>" "==" "!=" "<=" ">=" "=:=" "!==" "&&" "||" "..." ".."
+                           "|||" "///" "&&&" "===" "++" "--" "=>" "|>" "<|" "||>" "<||"
+                           "|||>" "<|||" ">>" "<<" "::=" "|]" "[|" "{|" "|}"
+                           "[<" ">]" ":?>" ":?" "/=" "[||]" "!!" "?:" "?." "::"
+                           "+++" "??" "###" "##" ":::" "####" ".?" "?=" "=!=" "<|>"
+                           "<:" ":<" ":>" ">:" "<>" "***" ";;" "/==" ".=" ".-" "__"
+                           "=/=" "<-<" "<<<" ">>>" "<=<" "<<=" "<==" "<==>" "==>" "=>>"
+                           ">=>" ">>=" ">>-" ">-" "<~>" "-<" "-<<" "=<<" "---" "<-|"
+                           "<=|" "/\\" "\\/" "|=>" "|~>" "<~~" "<~" "~~" "~~>" "~>"
+                           "<$>" "<$" "$>" "<+>" "<+" "+>" "<*>" "<*" "*>" "</>" "</" "/>"
+                           "<->" "..<" "~=" "~-" "-~" "~@" "^=" "-|" "_|_" "|-" "||-"
+                           "|=" "||=" "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#="
+                           "&="))
+
   (ligature-set-ligatures 't '("www"))
-  (ligature-set-ligatures
-   'prog-mode
-   '("-->" "//" "/**" "/*" "*/" "<!--" ":=" "->>" "<<-" "->" "<-"
-     "<=>" "==" "!=" "<=" ">=" "=:=" "!==" "&&" "||" "..." ".."
-     "|||" "///" "&&&" "===" "++" "--" "=>" "|>" "<|" "||>" "<||"
-     "|||>" "<|||" ">>" "<<" "::=" "|]" "[|" "{|" "|}"
-     "[<" ">]" ":?>" ":?" "/=" "[||]" "!!" "?:" "?." "::"
-     "+++" "??" "###" "##" ":::" "####" ".?" "?=" "=!=" "<|>"
-     "<:" ":<" ":>" ">:" "<>" "***" ";;" "/==" ".=" ".-" "__"
-     "=/=" "<-<" "<<<" ">>>" "<=<" "<<=" "<==" "<==>" "==>" "=>>"
-     ">=>" ">>=" ">>-" ">-" "<~>" "-<" "-<<" "=<<" "---" "<-|"
-     "<=|" "/\\" "\\/" "|=>" "|~>" "<~~" "<~" "~~" "~~>" "~>"
-     "<$>" "<$" "$>" "<+>" "<+" "+>" "<*>" "<*" "*>" "</>" "</" "/>"
-     "<->" "..<" "~=" "~-" "-~" "~@" "^=" "-|" "_|_" "|-" "||-"
-     "|=" "||=" "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#="
-     "&="))
+  (ligature-set-ligatures 'prog-mode ligature-symbols)
+  (ligature-set-ligatures 'coq-goals-mode ligature-symbols)
 
   (global-ligature-mode t))
 #+end_src
@@ -1974,14 +1975,22 @@ https://github.com/NixOS/nix-mode
 #+begin_src emacs-lisp :tangle init.el
 (setup proof-general
   (:elpaca t)
+  (setq coq-prettify-symbols '(("forall" . "∀")
+                               ;; ("->"     . "→")
+                               ("exists" . "∃")
+                               ;; ("=>"     . "⇒")
+                               ("False"  . "⊥")
+                               ("True"   . "⊤")
+                               ("~"      . "¬")
+                               ("~~"     . "¬¬")
+                               ("~~~"    . "¬¬¬")))
   (:with-mode coq-mode
     (:hook (lambda ()
-             (setq-default prettify-symbols-alist '(("forall" . "∀")
-                                                  ;; ("->"     . "→")
-                                                  ("exists" . "∃")
-                                                  ;; ("=>"     . "⇒")
-                                                  ("False"  . "⊥")
-                                                  ("True"   . "⊤")))
+             (setq prettify-symbols-alist coq-prettify-symbols)
+             (prettify-symbols-mode 1))))
+  (:with-mode coq-goals-mode
+    (:hook (lambda ()
+             (setq prettify-symbols-alist coq-prettify-symbols)
              (prettify-symbols-mode 1)))))
 #+end_src
 
@@ -1989,6 +1998,16 @@ https://github.com/NixOS/nix-mode
 
 #+begin_src emacs-lisp :tangle init.el
 (setup gleam-ts-mode
+  (:elpaca t))
+#+end_src
+
+*** keg
+
+#+begin_src emacs-lisp :tangle init.el
+(setup keg
+  (:elpaca t))
+
+(setup keg-mode
   (:elpaca t))
 #+end_src
 
@@ -2041,8 +2060,8 @@ https://github.com/NixOS/nix-mode
 *** Meow
 
 #+begin_src emacs-lisp :tangle init.el
-(setup meow
-  ;; (:disabled t)
+(-setup meow
+  (:disabled t)
   (:elpaca t)
   (:load-after puni)
   (:require meow)
