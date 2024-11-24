@@ -1337,7 +1337,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup dimmer
   (:elpaca t)
-  (:opt dimmer-fraction 0.07
+  (:opt dimmer-fraction 0.05
         dimmer-adjustment-mode :background
         dimmer-use-colorspace :rgb
         dimmer-watch-frame-focus-events nil
@@ -1444,8 +1444,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 (setup treemacs-projectile
   (:elpaca t)
   (:load-after treemacs projectile)
-  (with-eval-after-load
-      (require 'treemacs-projectile)))
+  (treemacs-project-follow-mode t))
 #+end_src
 
 *** treemacs-magit
