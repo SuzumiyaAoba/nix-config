@@ -484,7 +484,7 @@ OS、環境判定で使うための定数を追加。
 
 #+begin_src emacs-lisp :tangle init.el
 (-setup modus-themes
-  :disabled
+  (:disabled t)
   (:elpaca t)
   (:opt modus-themes-italic-constructs t
         modus-themes-bold-constructs t
@@ -500,15 +500,16 @@ OS、環境判定で使うための定数を追加。
           (string green-warmer)
           ;; (keyword cyan-cooler)
           ))
-  (load-theme 'modus-vivendi t))
+  (load-theme 'modus-operandi-tritanopia t))
 #+end_src
 
 *** ef-themes
 
 #+begin_src emacs-lisp :tangle init.el
 (setup ef-themes
+  ;; (:disasbled t)
   (:elpaca t)
-  (ef-themes-select 'ef-elea-dark))
+  (ef-themes-select 'ef-melissa-light))
 #+end_src
 
 ** Icons
@@ -869,10 +870,19 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 *** undo-tree
 
 #+begin_src emacs-lisp :tangle init.el
-(setup undo-tree
+(-setup undo-tree
+  (:disabled t)
   (:elpaca t)
   (:opt undo-tree-auto-save-history nil)
   (global-undo-tree-mode t))
+#+end_src
+
+*** vundo
+
+#+begin_src emacs-lisp :tangle init.el
+(setup vundo
+  (:elpaca t)
+  (:global "C-/" vundo))
 #+end_src
 
 *** undohist
