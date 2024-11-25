@@ -28,9 +28,11 @@
 
 ;;; Code:
 
+(require 'cl-lib)
+
 (defgroup magica nil
   "Customization group for `magica-mode'."
-  :group 'magica-module
+  :group 'magica
   :prefix "magica-"
   :link '(url-link "https://github.com/SuzumiyaAoba/magica-mode"))
 
@@ -39,51 +41,62 @@
   :init-value nil
   :group 'magica-module
   :lighter " Magica"
-  :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "h") 'backward-char)
-            (define-key map (kbd "j") 'next-line)
-            (define-key map (kbd "k") 'previous-line)
-            (define-key map (kbd "l") 'forward-char)
-            (define-key map (kbd "i") (lambda ()
-                                        (interactive)
-                                        (magica-mode -1)
-                                        (magica-inert-mode +1)))
-            (suppress-keymap map t)
-            map)
 
   (if magica-mode
-      (magica-mode-enable)
-    (magica-mode-disable)))
+      (magica-normal-mode)))
 
-(defun magica-mode-enable ()
-  ""
-  (message "magica-mode enabled"))
+(defvar magica-current-state 'normal
+  "")
 
-(defun magica-mode-disable ()
-  ""
-  (message "magica-mode disabled"))
+(defmacro magica--make-keymap (&rest args)
+  "Create a sparse keymap with the specified bindings.
+KEYMAP is an optional keyword argument that can be used to specify an existing keymap to modify.
+The remaining arguments are alternating keys and functions to bind in the keymap.
+This macro also suppresses all local bindings in the created keymap."
+  `(let ((keymap (make-sparse-keymap)))
+     ,@(cl-loop for (key func) on args by #'cddr collect
+                `(define-key keymap (kbd ,key)
+                             ,(if (and (listp func) (eq (car func) 'lambda))
+                                  func
+                                `(quote ,func))))
+     (suppress-keymap keymap t)
+     keymap))
 
-(define-minor-mode magica-insert-mqode
+(define-minor-mode magica-normal-mode
   ""
   :init-value nil
-  :group 'magica-module
+  :group 'magica
+  :lighter " Magica"
+  :keymap (magica--make-keymap
+           "h" backward-char
+           "j" next-line
+           "k" previous-line
+           "l" forward-char
+           "i" (lambda ()
+                 (interactive)
+                 (magica-normal-mode -1)
+                 (magica-insert-mode +1))
+           "x" delete-char
+           "0" move-beginning-of-line
+           "$" move-end-of-line)
+
+  (if (magica-normal-mode)))
+
+(define-minor-mode magica-insert-mode
+  ""
+  :init-value nil
+  :group 'magica
   :lighter " Magica"
   :keymap (let ((map (make-sparse-keymap)))
             (global-set-key (kbd "<escape>") (lambda ()
-                                          (interactive)
-                                          (magica-insert-mode -1)
-                                          (magica-mode +1)))
-            map)
+                                               (interactive)
+                                               (magica-insert-mode -1)
+                                               (magica-normal-mode +1)))
+            map))
 
-  (if magica-insert-mode
-      (magica-insert-mode-enable)
-    (magica-insert-mode-disable)))
-
-(defun magica-insert-mode-enable ()
-  (message "magica-insert-mode enabled"))
-
-(defun magica-insert-mode-disable ()
-  (message  "magica-insert-mode disabled"))
+(defun magica--unset-escape ()
+  ""
+  (global-set-key (kbd "<escape>") nil))
 
 (provide 'magica)
 ;;; magica.el ends here
