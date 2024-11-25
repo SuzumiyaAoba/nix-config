@@ -1585,6 +1585,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
   (:with-mode org-mode
     (:hook org-modern-mode))
   (:opt ;; org-modern-hide-stars 'leading
+        org-modern-table nil
         org-modern-hide-stars nil
         org-modern-timestamp '(" %Y年%m月%d日(%a) " . " %H時%M分 ")
         org-modern-star 'replace
@@ -1601,6 +1602,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (custom-theme-set-faces
      'user
      `(org-quote ((t (:inherit org-block :slant italic :foreground ,comment-color))))))
+
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 
   (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
   (org-babel-do-load-languages
@@ -1651,6 +1654,15 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup orgtbl-aggregate
   (:elpaca t))
+#+end_src
+
+*** valign
+
+#+begin_src emacs-lisp :tangle init.el
+(setup valign
+  (:elpaca t)
+  (:with-mode org-mode
+    (:hook valign-mode)))
 #+end_src
 
 ** Programming
