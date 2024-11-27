@@ -45,7 +45,13 @@
   (if magica-mode
       (magica-normal-mode)))
 
+(defcustom magica-escape nil
+  "")
+
 (defvar magica-current-state 'normal
+  "")
+
+(defvar magica--states '()
   "")
 
 (defmacro magica--make-keymap (&rest args)
@@ -62,25 +68,36 @@ This macro also suppresses all local bindings in the created keymap."
      (suppress-keymap keymap t)
      keymap))
 
-(define-minor-mode magica-normal-mode
-  ""
-  :init-value nil
-  :group 'magica
-  :lighter " Magica"
-  :keymap (magica--make-keymap
-           "h" backward-char
-           "j" next-line
-           "k" previous-line
-           "l" forward-char
-           "i" (lambda ()
-                 (interactive)
-                 (magica-normal-mode -1)
-                 (magica-insert-mode +1))
-           "x" delete-char
-           "0" move-beginning-of-line
-           "$" move-end-of-line)
+(defmacro magica-define-state (&rest args)
+  "Define a state with a specified keymap and behavior."
+  (let* ((state (plist-get args :state))
+         (keymap (plist-get args :keymap))
+         (mode-name (intern (concat "magica-" (symbol-name (cadr state)) "-mode")))
+         (expanded-keymap (macroexpand-all `(magica--make-keymap ,@keymap))))
+    `(progn
+       (define-minor-mode ,mode-name
+         ""
+         :init-value nil
+         :group 'magica
+         :lighter " Magica"
+         :keymap ,expanded-keymap)
+       (setq magica--states (if (member ,state magica--states)
+                                magica--states
+                              (cons ,state magica--states))))))
 
-  (if (magica-normal-mode)))
+(magica-define-state
+ :state  'normal
+ :keymap ("h" backward-char
+          "j" next-line
+          "k" previous-line
+          "l" forward-char
+          "i" (lambda ()
+                (interactive)
+                (magica-normal-mode -1)
+                (magica-insert-mode +1))
+          "x" delete-char
+          "0" move-beginning-of-line
+          "$" move-end-of-line))
 
 (define-minor-mode magica-insert-mode
   ""
