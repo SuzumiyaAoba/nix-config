@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  homebrew.casks = [
+  homebrew.brews = [
     "gcc"
     "libgccjit"
   ];
