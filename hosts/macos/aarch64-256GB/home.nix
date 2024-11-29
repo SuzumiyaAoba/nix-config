@@ -66,6 +66,9 @@ in
     "home/programs/commands/sheldon"
     "home/programs/commands/tbls.nix"
     "home/programs/commands/keg.nix"
+    "home/programs/commands/timewarrior.nix"
+    "home/programs/commands/taskwarrior.nix"
+    "home/programs/commands/bugwarrior.nix"
 
     # LLM
     "home/programs/commands/ollama.nix"
