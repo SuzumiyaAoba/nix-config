@@ -9,11 +9,7 @@
     (callPackage ../../pkgs/data/fonts/explex { })
     (callPackage ../../pkgs/data/fonts/cascadia-next { })
 
-    (nerdfonts.override {
-      fonts = [
-        "NerdFontsSymbolsOnly"
-      ];
-    })
+    nerd-fonts.symbols-only
     cascadia-code
   ];
 }

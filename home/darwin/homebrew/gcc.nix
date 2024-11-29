@@ -2,7 +2,7 @@
 
 {
   homebrew.casks = [
-    gcc
-    libgccjit
+    "gcc"
+    "libgccjit"
   ];
 }
