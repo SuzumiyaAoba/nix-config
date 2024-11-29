@@ -1753,7 +1753,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
         lsp-ui-doc-include-signature t
         lsp-ui-doc-header nil
         lsp-ui-doc-position 'at-point
-        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-cursor nil
+        lsp-ui-doc-show-with-mouse t
         lsp-eldoc-enable-hover t
         lsp-eldoc-render-all t
 
