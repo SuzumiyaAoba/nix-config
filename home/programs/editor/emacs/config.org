@@ -50,6 +50,15 @@
 [[https://apribase.net/2024/07/09/emacs-eln-cache/][Emacs の eln-cache ディレクトリを正しく変更する ||| Apribase]] を参考に Native Compile の出力先を変更する。
 
 #+begin_src emacs-lisp :tangle early-init.el
+(if (string= system-type "darwin")
+    (setenv "LIBRARY_PATH"
+            (string-join
+             '("/opt/homebrew/opt/gcc/lib/gcc/current"
+               "/opt/homebrew/opt/libgccjit/lib/gcc/current"
+               "/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin24/14"
+               "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib")
+             ":")))
+
 (when (boundp 'native-comp-eln-load-path)
   (startup-redirect-eln-cache
    (expand-file-name "~/.local/share/emacs/eln-cache/")))

@@ -18,5 +18,7 @@ in
     # CLI
     "home/darwin/homebrew/rancher.nix"
     "home/darwin/homebrew/sdkman.nix"
+
+    "home/darwin/homebrew/gcc.nix"
   ];
 }
