@@ -44,7 +44,7 @@ in
     "home/base/languages/java.nix"
     "home/base/languages/javascript.nix"
     "home/base/languages/rust.nix"
-    "home/programs/programming/coq.nix"
+    # "home/programs/programming/coq.nix"
     "home/programs/programming/scala.nix"
 
     # commands

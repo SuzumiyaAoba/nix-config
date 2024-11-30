@@ -2034,6 +2034,17 @@ https://github.com/NixOS/nix-mode
              (prettify-symbols-mode 1)))))
 #+end_src
 
+*** Astro
+
+#+begin_src emacs-lisp :tangle init.el
+(setup web-mode
+  (:elpaca t)
+  (define-derived-mode astro-mode web-mode "astro")
+  (setq auto-mode-alist
+        (append '((".*\\.astro\\'" . astro-mode))
+                auto-mode-alist)))
+#+end_src
+
 *** Gleam
 
 #+begin_src emacs-lisp :tangle init.el
