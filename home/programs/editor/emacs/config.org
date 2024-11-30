@@ -492,8 +492,7 @@ OS、環境判定で使うための定数を追加。
 ** Theme
 
 #+begin_src emacs-lisp :tangle init.el
-(-setup modus-themes
-  (:disabled t)
+(setup modus-themes
   (:elpaca t)
   (:opt modus-themes-italic-constructs t
         modus-themes-bold-constructs t
@@ -509,14 +508,14 @@ OS、環境判定で使うための定数を追加。
           (string green-warmer)
           ;; (keyword cyan-cooler)
           ))
-  (load-theme 'modus-operandi-tritanopia t))
+  (load-theme 'modus-vivendi-tritanopia t))
 #+end_src
 
 *** ef-themes
 
 #+begin_src emacs-lisp :tangle init.el
-(setup ef-themes
-  ;; (:disasbled t)
+(-setup ef-themes
+  (:disasbled t)
   (:elpaca t)
   (ef-themes-select 'ef-melissa-light))
 #+end_src
@@ -891,7 +890,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup vundo
   (:elpaca t)
-  (:global "C-/" vundo))
+  (:global "C-x u" vundo))
 #+end_src
 
 *** undohist
@@ -1783,6 +1782,8 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
     (:hook lsp-deferred))
   (:with-mode scala-mode
     (:hook lsp-deferred))
+
+  (custom-set-faces '(nobreak-space ((t nil))))
 
   (defun corfu-lsp-setup ()
     (setq-local completion-styles '(orderless)
