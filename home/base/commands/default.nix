@@ -36,5 +36,7 @@
     ../../programs/commands/tbls.nix
     ../../programs/commands/jd-diff-patch.nix
     ../../programs/commands/ni.nix
+    ../../programs/commands/timewarrior.nix
+    ../../programs/commands/taskwarrior.nix
   ];
 }
