@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, homebrew-core, homebrew-cask, homebrew-bundle, sdkman-tap, ... }:
 
 {
   # Homebrew 自体を Nix でインストール
@@ -6,22 +6,23 @@
   nix-homebrew = {
     enable = true;
     enableRosetta = false;
-    autoMigrate = true;
     user = "${username}";
+    mutableTaps = false;
+
+    taps = {
+      "homebrew/homebrew-core" = homebrew-core;
+      "homebrew/homebrew-cask" = homebrew-cask;
+      "homebrew/homebrew-bundle" = homebrew-bundle;
+
+      "sdkman/homebrew-tap" = sdkman-tap;
+    };
   };
 
   homebrew = {
     enable = true;
 
-    onActivation = {
-      autoUpdate = true;
-    };
-
-    taps = [
-      "homebrew/services"
-      "sdkman/tap"
-    ];
-
-    caskArgs.language = "ja";
+  #   onActivation = {
+  #     autoUpdate = true;
+  #   };
   };
 }

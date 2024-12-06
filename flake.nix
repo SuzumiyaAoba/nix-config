@@ -4,10 +4,27 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    sdkman-tap = {
+      url = "github:sdkman/homebrew-tap";
+      flake = false;
     };
 
     home-manager = {
@@ -52,6 +69,10 @@
     , hyprland-plugins
     , purescript-overlay
     , hy3
+    , homebrew-core
+    , homebrew-cask
+    , homebrew-bundle
+    , sdkman-tap
     , ...
     }@inputs:
     let
@@ -63,6 +84,12 @@
 
       specialArgs = {
         inherit username;
+
+        inherit homebrew-core;
+        inherit homebrew-bundle;
+        inherit homebrew-cask;
+        inherit sdkman-tap;
+
         inherit hyprland-plugins;
         inherit hy3;
       };
@@ -139,6 +166,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./hosts/macos/work/home.nix;
               home-manager.extraSpecialArgs = specialArgs;
             }

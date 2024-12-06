@@ -4,7 +4,7 @@ let
 in
 {
   home = {
-    stateVersion = "24.05";
+    stateVersion = "24.11";
 
     sessionVariables = {
       EDITOR = "emacs";
