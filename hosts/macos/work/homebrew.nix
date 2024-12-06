@@ -4,8 +4,6 @@ let
   baseDir = ../../..;
 in
 {
-  nix-homebrew.mutableTaps = true;
-
   imports = builtins.map (f: baseDir + "/${f}") [
     "modules/darwin/homebrew.nix"
 
@@ -13,7 +11,6 @@ in
     "home/darwin/homebrew/aquaskk.nix"
 
     # GUI
-    "home/darwin/homebrew/google-chrome.nix"
 
     # CLI
     "home/darwin/homebrew/rancher.nix"
