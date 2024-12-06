@@ -22,6 +22,7 @@ in
     "home/darwin/base/gui/rectangle.nix"
     "home/darwin/base/gui/terminal-notifier.nix"
     "home/programs/editor/vscode"
+    "home/programs/tools/zotero.nix"
 
     # Editors
     "home/programs/editor/emacs"
