@@ -7,7 +7,6 @@
     enable = true;
     enableRosetta = false;
     user = "${username}";
-    mutableTaps = false;
 
     taps = {
       "homebrew/homebrew-core" = homebrew-core;
@@ -20,9 +19,5 @@
 
   homebrew = {
     enable = true;
-
-  #   onActivation = {
-  #     autoUpdate = true;
-  #   };
   };
 }
