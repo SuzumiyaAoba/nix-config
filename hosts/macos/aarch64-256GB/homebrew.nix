@@ -16,7 +16,7 @@ in
     "home/darwin/homebrew/brave-browser.nix"
 
     # CLI
-    "home/darwin/homebrew/rancher.nix"
+    # "home/darwin/homebrew/rancher.nix"
     "home/darwin/homebrew/sdkman.nix"
 
     "home/darwin/homebrew/gcc.nix"
