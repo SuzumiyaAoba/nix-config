@@ -136,13 +136,13 @@
 
           modules = [
             configuration
-            ./modules/darwin
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.users.${username} = import ./home/darwin/aarch64;
+              home-manager.users.${username} = import ./hosts/macos/work/home.nix;
               home-manager.extraSpecialArgs = specialArgs;
             }
+            nix-homebrew.darwinModules.nix-homebrew
             ./hosts/macos/work
           ];
         };

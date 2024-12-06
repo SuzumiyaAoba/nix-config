@@ -1,11 +1,10 @@
-{ pkgs, username, ... }:
+{ ... }:
 
 {
-  users.users.${username} = {
-    home = "/Users/${username}";
-  };
-
   imports = [
-    ../../../modules/darwin
+    ./configuration.nix
+    ./homebrew.nix
+
+    ./../../../modules/darwin/system.nix
   ];
 }
