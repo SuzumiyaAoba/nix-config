@@ -11,6 +11,7 @@ in
     "home/darwin/homebrew/aquaskk.nix"
 
     # GUI
+    "home/darwin/homebrew/gas-mask.nix"
 
     # CLI
     "home/darwin/homebrew/rancher.nix"
