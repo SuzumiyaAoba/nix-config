@@ -5,8 +5,10 @@
     defaults = {
       dock = {
         autohide = true;
+      };
 
-        slow-motion-allowed = true;
+      universalaccess = {
+        reduceMotion = true;
       };
 
       finder = {
