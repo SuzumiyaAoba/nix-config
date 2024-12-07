@@ -1410,6 +1410,11 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 *** [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter]]
 
 #+begin_src emacs-lisp :tangle init.el
+(setup treesit
+  (add-to-list 'treesit-language-source-alist '(kotlin . ("https://github.com/fwcd/tree-sitter-kotlin"))))
+#+end_src
+
+#+begin_src emacs-lisp :tangle init.el
 (setup treesit-auto
   (:elpaca t)
   (:opt treesit-auto-install t)
@@ -1917,6 +1922,13 @@ https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
     (:hook (lambda ()
              (setq indent-tabs-mode t)
              (setq tab-width 4)))))
+#+end_src
+
+*** Kotlin
+
+#+begin_src emacs-lisp :tangle init.el
+(setup kotlin-mode
+  (:elpaca t))
 #+end_src
 
 *** Nix
