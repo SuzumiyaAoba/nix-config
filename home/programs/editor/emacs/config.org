@@ -1743,6 +1743,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
 #+begin_src emacs-lisp :tangle init.el
 (setup lsp-mode
   (:elpaca t)
+  (:bind "M-RET" lsp-execute-code-action)
   (:opt lsp-headerline-breadcrumb-enable nil
         lsp-enable-symbol-highlighting nil
 
