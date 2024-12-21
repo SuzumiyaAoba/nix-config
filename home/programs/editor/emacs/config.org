@@ -1747,7 +1747,7 @@ see: https://github.com/meatcar/emacs.d?tab=readme-ov-file#fast-scroll
         lsp-log-io nil
 
         lsp-diagnostics-provider :flymake
-        lsp-completion-provider :capf
+        lsp-completion-provider :none
 
         lsp-ui-doc-enable t
         lsp-ui-doc-include-signature t
@@ -2110,141 +2110,12 @@ https://github.com/NixOS/nix-mode
 
 ** Keybindings
 
-*** puni
-
 #+begin_src emacs-lisp :tangle init.el
-(setup puni
-  (:elpaca t))
-#+end_src
-
-*** Meow
-
-#+begin_src emacs-lisp :tangle init.el
-(-setup meow
+(-setup evil
   (:disabled t)
   (:elpaca t)
-  (:load-after puni)
-  (:require meow)
-
-  (:opt meow-use-clipboard t)
-
-  (defun replace-char ()
-    (interactive)
-    (let ((mychar (read-char "replace with:")))
-      (if (= ?\C-\[ mychar)
-          (message "Cancelled replace")
-        (delete-char 1)
-        (insert mychar))))
-
-  (defun replace-char-or-meow-replace ()
-    (interactive)
-    (if (use-region-p)
-        (meow-change)
-      (replace-char)))
-
-  (defun puni-expand-region-kill-region (arg)
-    (interactive "p")
-    (puni-expand-region)
-    (call-interactively 'kill-region))
-
-  (defun puni-mark-list-around-point-kill-region (arg)
-      (interactive "p")
-      (puni-mark-list-around-point)
-      (call-interactively 'kill-region))
-
-  (defun meow-setup ()
-    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-
-    (meow-motion-overwrite-define-key '("h" . backward-char))
-    (meow-leader-define-key '("h" . "H-h"))
-    (meow-motion-overwrite-define-key '("j" . next-line))
-    (meow-leader-define-key '("j" . "H-j"))
-    (meow-motion-overwrite-define-key '("k" . previous-line))
-    (meow-leader-define-key '("k" . "H-k"))
-    (meow-motion-overwrite-define-key '("l" . forward-char))
-    (meow-leader-define-key '("l" . "H-l"))
-
-    (meow-motion-overwrite-define-key '(", ," . avy-goto-char))
-    (meow-leader-define-key '("," . "H-,"))
-
-    ;; INSERT state
-    (meow-define-keys 'insert
-      )
-
-    ;; NORMAL state
-    (meow-normal-define-key
-     '("h" . backward-char)
-     '("j" . next-line)
-     '("k" . previous-line)
-     '("l" . forward-char)
-
-     '("w" . meow-next-word)
-     '("b" . meow-back-word)
-
-     '("0" . move-beginning-of-line)
-     '("$" . move-end-of-line)
-
-     '("g g" . beginning-of-buffer)
-     '("G" . end-of-buffer)
-
-     '("C-f" . scroll-up)
-     '("C-b" . scroll-down)
-
-     '("o" . meow-open-below)
-
-     '("y" . kill-ring-save)
-     '("p" . meow-yank)
-
-     '("x" . puni-forward-delete-char)
-     '("d $" . meow-kill)
-     '("d d" . meow-kill-whole-line)
-     '("d D" . puni-kill-line)
-     '("d w" . puni-expand-region-kill-region)
-     '("d \"" . puni-mark-list-around-point-kill-region)
-     '("d r" . kill-region)
-
-     '("I" . meow-open-above)
-     '("O" . meow-open-above)
-     '("c w" . (lambda (arg)
-                  (interactive "p")
-                  (puni-expand-region-kill-region arg)
-                  (meow-insert-mode)))
-     '("c \"" . (lambda (arg)
-                 (interactive "p")
-                 (puni-mark-list-around-point-kill-region arg)
-                 (meow-insert-mode)))
-
-     '("r" . replace-char-or-meow-replace)
-     '("R" . meow-replace)
-
-     '("u" . undo-tree-undo)
-     '("C-r" . undo-tree-redo)
-     '("U" . undo-tree-visualize)
-
-     '("v" . set-mark-command)
-     '("V" . meow-line)
-     '("C-v" . rectangle-mark-mode)
-
-     '(": w" . save-buffer)
-     '(": g" . meow-goto-line)
-
-     '("/" . consult-line)
-
-     ;; basic
-     '(", ," . avy-goto-char)
-     '(", c" . comment-line)
-     '(", g" . consult-ripgrep)
-     '(", f" . consult-projectile-find-file)
-
-     ;; puni
-     '(". l" . puni-mark-list-around-point)
-     '(". w" . meow-mark-word)
-     '(". x" . puni-mark-sexp-around-point)
-     '(". ." . puni-expand-region)
-     ))
-
-  (meow-setup)
-  (meow-global-mode 1))
+  (:opt evil-disable-insert-state-bindings t)
+  (evil-mode 1))
 #+end_src
 
 ** Finalization
@@ -2253,7 +2124,7 @@ https://github.com/NixOS/nix-mode
 
 GC が利用できるメモリの上限を無制限から戻す。
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
 (setq gc-cons-threshold 100 * 1024 * 1024) ;; 100 mb
 #+end_src
 

@@ -4,7 +4,7 @@ let
 in
 {
   home = {
-    stateVersion = "24.11";
+    stateVersion = "25.05";
 
     sessionVariables = {
       EDITOR = "emacs";
@@ -70,9 +70,10 @@ in
     "home/programs/commands/timewarrior.nix"
     "home/programs/commands/taskwarrior.nix"
     "home/programs/commands/bugwarrior.nix"
+    "home/programs/commands/docker.nix"
 
     # LLM
     "home/programs/commands/ollama.nix"
-    # "home/programs/commands/open-webui.nix"
+    "home/programs/commands/open-webui.nix"
   ];
 }
