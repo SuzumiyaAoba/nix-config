@@ -23,6 +23,7 @@ in
     "home/darwin/base/gui/terminal-notifier.nix"
     "home/programs/editor/vscode"
     "home/programs/tools/zotero.nix"
+    "home/programs/tools/lmstudio.nix"
 
     # Editors
     "home/programs/editor/emacs"
