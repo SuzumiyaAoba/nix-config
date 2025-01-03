@@ -273,6 +273,38 @@
         "type": "github"
       }
     },
+    "homebrew-arm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730216603,
+        "narHash": "sha256-PSErABfp1QBN76g/ziJ6oYWR6QhWPwtnWyrN0RsxGsg=",
+        "owner": "osx-cross",
+        "repo": "homebrew-arm",
+        "rev": "879dc7a05049626af550abb148ac6b3511560142",
+        "type": "github"
+      },
+      "original": {
+        "owner": "osx-cross",
+        "repo": "homebrew-arm",
+        "type": "github"
+      }
+    },
+    "homebrew-avr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730628900,
+        "narHash": "sha256-2WTEN8KwUCgD/r3zJHSfICg5Jedd5QvOPdG5dJLeFRk=",
+        "owner": "osx-cross",
+        "repo": "homebrew-avr",
+        "rev": "abf69c7a70b20f6701322e8b6da19aeb27f378a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "osx-cross",
+        "repo": "homebrew-avr",
+        "type": "github"
+      }
+    },
     "homebrew-bundle": {
       "flake": false,
       "locked": {
@@ -318,6 +350,22 @@
       "original": {
         "owner": "homebrew",
         "repo": "homebrew-core",
+        "type": "github"
+      }
+    },
+    "homebrew-qmk": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730517136,
+        "narHash": "sha256-GBmPdjFWiyIMlO8fhIeMbrSb/pAOxvC7iDU0CzbLT+M=",
+        "owner": "qmk",
+        "repo": "homebrew-qmk",
+        "rev": "2b4d7c37d171220b2a3f646d50432764216e43a6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "qmk",
+        "repo": "homebrew-qmk",
         "type": "github"
       }
     },
@@ -973,9 +1021,12 @@
         "emacs-lsp-booster": "emacs-lsp-booster",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
+        "homebrew-arm": "homebrew-arm",
+        "homebrew-avr": "homebrew-avr",
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "homebrew-qmk": "homebrew-qmk",
         "hy3": "hy3",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",

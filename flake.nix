@@ -26,6 +26,18 @@
       url = "github:sdkman/homebrew-tap";
       flake = false;
     };
+    homebrew-qmk = {
+      url = "github:qmk/homebrew-qmk";
+      flake = false;
+    };
+    homebrew-arm = {
+      url = "github:osx-cross/homebrew-arm";
+      flake = false;
+    };
+    homebrew-avr = {
+      url = "github:osx-cross/homebrew-avr";
+      flake = false;
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -73,6 +85,9 @@
     , homebrew-cask
     , homebrew-bundle
     , sdkman-tap
+    , homebrew-qmk
+    , homebrew-arm
+    , homebrew-avr
     , ...
     }@inputs:
     let
@@ -89,6 +104,9 @@
         inherit homebrew-bundle;
         inherit homebrew-cask;
         inherit sdkman-tap;
+        inherit homebrew-qmk;
+        inherit homebrew-arm;
+        inherit homebrew-avr;
 
         inherit hyprland-plugins;
         inherit hy3;
