@@ -4,9 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
-    darwin = {
-      url = "github:LnL7/nix-darwin";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -49,6 +48,11 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-lsp-booster.url = "github:slotThe/emacs-lsp-booster-flake";
 
+    emacs-flake = {
+      url = "github:SuzumiyaAoba/emacs-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     xremap.url = "github:xremap/nix-flake";
 
     hyprland.url = "github:hyprwm/Hyprland?ref=v0.39.1";
@@ -71,11 +75,12 @@
   outputs =
     { self
     , nixpkgs
-    , darwin
+    , nix-darwin
     , home-manager
     , nix-homebrew
     , emacs-overlay
     , emacs-lsp-booster
+    , emacs-flake
     , xremap
     , hyprland
     , hyprland-plugins
@@ -99,6 +104,8 @@
 
       specialArgs = {
         inherit username;
+
+        inherit emacs-flake;
 
         inherit homebrew-core;
         inherit homebrew-bundle;
@@ -130,7 +137,7 @@
     in
     {
       darwinConfigurations = {
-        private-aarch64-256GB = darwin.lib.darwinSystem {
+        private-aarch64-256GB = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
 
@@ -148,7 +155,7 @@
           ];
         };
 
-        private-aarch64-1TB = darwin.lib.darwinSystem {
+        private-aarch64-1TB = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
 
@@ -163,10 +170,15 @@
             }
             nix-homebrew.darwinModules.nix-homebrew
             ./hosts/macos/aarch64-1TB
+            ({ pkgs, ... }: {
+              environment.systemPackages = [
+                emacs-flake.packages.aarch64-darwin.default
+              ];
+            })
           ];
         };
 
-        private-aarch64 = darwin.lib.darwinSystem {
+        private-aarch64 = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
 
@@ -193,7 +205,7 @@
           ];
         };
 
-        work = darwin.lib.darwinSystem {
+        work = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;
 
