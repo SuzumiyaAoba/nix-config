@@ -32,18 +32,87 @@
         TrackpadThreeFingerDrag = true;
         TrackpadThreeFingerTapGesture = 2;
       };
+
+      CustomUserPreferences = {
+        # https://apple.stackexchange.com/questions/91679/is-there-a-way-to-set-an-application-shortcut-in-the-keyboard-preference-pane-vi
+        "com.apple.symbolichotkeys" = {
+          AppleSymbolicHotKeys = {
+            # Disable select the previous input source
+            "60" = {
+              enabled = false;
+            };
+            # Select the next source in the Input Menu
+            "61" = {
+              enabled = true;
+              value = {
+                parameters = [32 49 1048576];
+                type = "standard";
+              };
+            };
+            # Disable Spotlight Search
+            "64" = {
+              enabled = false;
+            };
+            # Disable Finder search window
+            "65" = {
+              enabled = false;
+            };
+            # Spaces Left - Control, Left
+            "79" = {
+              enabled = true;
+              value = {
+                parameters = [65535 123 8650752];
+                type = "standard";
+              };
+            };
+            # Spaces Right - Control, Right
+            "81" = {
+              enabled = true;
+              value = {
+                parameters = [65535 124 8650752];
+                type = "standard";
+              };
+            };
+            # Switch to Space 1 - Control, 1
+            "118" = {
+              enabled = true;
+              value = {
+                parameters = [65535 18 262144];
+                type = "standard";
+              };
+            };
+            # Switch to Space 2 - Control, 2
+            "119" = {
+              enabled = true;
+              value = {
+                parameters = [65535 19 262144];
+                type = "standard";
+              };
+            };
+            # Switch to Space 3 - Control, 3
+            "120" = {
+              enabled = true;
+              value = {
+                parameters = [65535 20 262144];
+                type = "standard";
+              };
+            };
+            # Switch to Space 4 - Control, 4
+            "121" = {
+              enabled = true;
+              value = {
+                parameters = [65535 21 262144];
+                type = "standard";
+              };
+            };
+          };
+        };
+      };
     };
 
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
-
-      userKeyMapping = [
-        # {
-        #   HIDKeyboardModifierMappingSrc = ;
-        #   HIDKeyboardModifierMappingDst = ;
-        # }
-      ];
     };
 
     activationScripts.postActivation.text = ''
