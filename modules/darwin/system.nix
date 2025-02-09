@@ -7,9 +7,10 @@
         autohide = true;
       };
 
-      # universalaccess = {
-      #   reduceMotion = true;
-      # };
+      # https://github.com/LnL7/nix-darwin/issues/1049#issuecomment-2323300537
+      universalaccess = {
+        reduceMotion = true;
+      };
 
       finder = {
         ShowStatusBar = true;

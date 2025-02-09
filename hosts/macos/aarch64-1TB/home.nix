@@ -25,7 +25,7 @@ in
     # "home/programs/tools/lmstudio.nix"
 
     # Editors
-    "home/programs/editor/emacs"
+    # "home/programs/editor/emacs"
 
     # IDE
     # "home/programs/ide/jetbrains.nix"
