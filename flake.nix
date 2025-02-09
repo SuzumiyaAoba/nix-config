@@ -148,6 +148,24 @@
           ];
         };
 
+        private-aarch64-1TB = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          inherit specialArgs;
+
+          modules = [
+            configuration
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./hosts/macos/aarch64-1TB/home.nix;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+            nix-homebrew.darwinModules.nix-homebrew
+            ./hosts/macos/aarch64-1TB
+          ];
+        };
+
         private-aarch64 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           inherit specialArgs;

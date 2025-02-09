@@ -15,6 +15,10 @@ env = { NIX_DARWIN_CONFIG = "private-aarch64" }
 extend = "darwin:apply"
 env = { NIX_DARWIN_CONFIG = "private-aarch64-256GB" }
 
+[tasks."private-aarch64-1TB:apply"]
+extend = "darwin:apply"
+env = { NIX_DARWIN_CONFIG = "private-aarch64-1TB" }
+
 [tasks."darwin:apply"]
 script = '''
   NIXPKGS_ALLOW_BROKEN=1 NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#${NIX_DARWIN_CONFIG} --impure

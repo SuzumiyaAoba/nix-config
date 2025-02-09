@@ -7,9 +7,9 @@
         autohide = true;
       };
 
-      universalaccess = {
-        reduceMotion = true;
-      };
+      # universalaccess = {
+      #   reduceMotion = true;
+      # };
 
       finder = {
         ShowStatusBar = true;
