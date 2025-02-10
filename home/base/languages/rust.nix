@@ -11,6 +11,6 @@
     cargo-nextest
     cargo-udeps
     cargo-sort
-    cargo-vet
+    # cargo-vet
   ];
 }

@@ -2,6 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    python312Packages.bugwarrior
+    # python312Packages.bugwarrior
   ];
 }
