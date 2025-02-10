@@ -1,7 +1,0 @@
-{ pkgs, config, username, ... }:
-
-{
-  users.users.${username} = {
-    home = "/Users/${username}";
-  };
-}

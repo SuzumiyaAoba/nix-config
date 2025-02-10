@@ -21,9 +21,6 @@ in
     "home/darwin/base/gui/rectangle.nix"
     "home/programs/editor/vscode"
 
-    # Editors
-    "home/programs/editor/emacs"
-
     # IDE
     "home/programs/ide/jetbrains.nix"
 

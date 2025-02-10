@@ -23,10 +23,7 @@ in
     "home/darwin/base/gui/terminal-notifier.nix"
     "home/programs/editor/vscode"
     "home/programs/tools/zotero.nix"
-    "home/programs/tools/lmstudio.nix"
-
-    # Editors
-    "home/programs/editor/emacs"
+    # "home/programs/tools/lmstudio.nix"
 
     # IDE
     "home/programs/ide/jetbrains.nix"
@@ -50,6 +47,7 @@ in
     "home/programs/programming/scala.nix"
 
     # commands
+    "home/programs/commands/emacs-lsp-booster.nix"
     "home/programs/commands/ast-grep.nix"
     "home/programs/commands/atuin.nix"
     "home/programs/commands/bat.nix"
