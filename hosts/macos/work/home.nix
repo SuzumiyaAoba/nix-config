@@ -38,6 +38,7 @@ in
     "home/base/languages/javascript.nix"
 
     # commands
+    "home/programs/commands/emacs-lsp-booster.nix"
     "home/programs/commands/ast-grep.nix"
     "home/programs/commands/atuin.nix"
     "home/programs/commands/bat.nix"
