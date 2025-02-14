@@ -3,8 +3,6 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  services.nix-daemon.enable = true;
-
   users.users.${username} = {
     home = "/Users/${username}";
   };

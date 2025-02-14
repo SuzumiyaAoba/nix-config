@@ -120,7 +120,7 @@
       configuration = { pkgs, ... }: {
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
-        system.stateVersion = 4;
+        system.stateVersion = 5;
 
         nix.settings = {
           experimental-features = [ "nix-command" "flakes" ];
