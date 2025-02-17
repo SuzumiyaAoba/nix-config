@@ -17,11 +17,6 @@
       ".dir-locals.el"
     ];
 
-    # see: https://github.com/nix-community/home-manager/issues/6472
-    signing = {
-      format = "ssh";
-    };
-
     extraConfig = {
       merge = {
         conflictStyle = "diff3";
