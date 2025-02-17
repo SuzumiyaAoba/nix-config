@@ -97,11 +97,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1739788390,
-        "narHash": "sha256-IFqv47c22Ae8dv4MxzxyPhehKV4JI+Y9EqNSfUN6lv8=",
+        "lastModified": 1739807143,
+        "narHash": "sha256-QRu3uplWqV9ubqewQY9sTzockYGieSdTQDXfKzXVKKU=",
         "owner": "SuzumiyaAoba",
         "repo": "emacs-config",
-        "rev": "1adb8a6810485915ff1b2a93e6eedb3869523628",
+        "rev": "6086ab404d866514cb04601db0718469cc7ee29f",
         "type": "github"
       },
       "original": {
@@ -297,11 +297,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739784506,
-        "narHash": "sha256-9t05KCMChtDJyFnxi1WsZKrHN0UpE7WRjjejqcVIz1g=",
+        "lastModified": 1739802995,
+        "narHash": "sha256-kZv0upOigS/4sUEgZuZd6/uO6s8X8oYOLk9/sGMsl+c=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "30b9cd6f1a69921e59e71df1214604be62636284",
+        "rev": "9d0d48f4c3d2fb1a8c8607da143bb567a741d914",
         "type": "github"
       },
       "original": {
@@ -379,11 +379,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1739788178,
-        "narHash": "sha256-WTAoWan4pPGwdvpD2rYP1v/XeZqHj5im7xtWSJ3K/rQ=",
+        "lastModified": 1739807283,
+        "narHash": "sha256-+FnJqVnckGKIY0dtrBaZPOq6N8CNTxshZMKoEl/DjOA=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "e96f475c7931f2df7824d3ab72ec6639e122cd36",
+        "rev": "001874bcccf86bc9e833a8fcb85b23b538581d12",
         "type": "github"
       },
       "original": {
@@ -395,11 +395,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1739784809,
-        "narHash": "sha256-lajEZWxFKZSIaE9i4XClfCOdEfR5qKYvgRqogOUYdFA=",
+        "lastModified": 1739804803,
+        "narHash": "sha256-6LvoNXhbCzY92X7LOM7TafdXqProvEQQ0i02DBW6uu0=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "5662596b92e4bb8188d08f499e1a63dab3b8cf0f",
+        "rev": "a2abb29891dfa464594a3f1d538489adfcd09e31",
         "type": "github"
       },
       "original": {
@@ -1208,11 +1208,11 @@
         "slimlock": "slimlock"
       },
       "locked": {
-        "lastModified": 1737706839,
-        "narHash": "sha256-mU0XkGmUJ6Bm5eXgLwyv/8JDMXgPKC7yhUsf8fjlFlA=",
+        "lastModified": 1739795788,
+        "narHash": "sha256-PG4lO49fvWHpQoCN3mIGflisXF+5vEf91ceV9hsWTLU=",
         "owner": "thomashoneyman",
         "repo": "purescript-overlay",
-        "rev": "b35e8081d24086302e2dbee99f42f8c59aeed2ba",
+        "rev": "f754c2ef94cef46e5d5223c25d3f361e1f6cb509",
         "type": "github"
       },
       "original": {
