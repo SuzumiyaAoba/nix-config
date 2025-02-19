@@ -57,5 +57,6 @@ in
     "home/programs/commands/sheldon"
     "home/programs/commands/timewarrior.nix"
     "home/programs/commands/taskwarrior.nix"
+    "home/programs/commands/mysql.nix"
   ];
 }
