@@ -33,6 +33,7 @@ in
 
     # terminal & shell
     "home/programs/terminal/wezterm"
+    "home/programs/terminal/ghostty"
     "home/programs/shell/zsh"
     "home/programs/shell/starship"
     "home/programs/shell/tmux.nix"
