@@ -32,5 +32,7 @@ return {
 
   -- see: https://github.com/wez/wezterm/issues/6005
   front_end = "WebGpu",
+
+  window_close_confirmation = 'NeverPrompt',
 }
 
