@@ -34,5 +34,6 @@ return {
   front_end = "WebGpu",
 
   window_close_confirmation = 'NeverPrompt',
+  macos_forward_to_ime_modifier_mask = "SHIFT|CTRL",
 }
 
