@@ -72,6 +72,7 @@ in
     "home/programs/commands/bugwarrior.nix"
     "home/programs/commands/docker.nix"
     "home/programs/commands/global.nix"
+    "home/programs/commands/gitu.nix"
 
     # LLM
     "home/programs/commands/ollama.nix"
