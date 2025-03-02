@@ -153,6 +153,8 @@
             ({ pkgs, ... }: {
               environment.systemPackages = [
                 emacs-flake.packages.aarch64-darwin.default
+                emacs-flake.packages.aarch64-darwin.emacsclient
+                emacs-flake.packages.aarch64-darwin.emacseditor
               ];
             })
           ];
@@ -199,6 +201,8 @@
             ({ pkgs, ... }: {
               environment.systemPackages = [
                 emacs-flake.packages.aarch64-darwin.default
+                emacs-flake.packages.aarch64-darwin.emacsclient
+                emacs-flake.packages.aarch64-darwin.emacseditor
               ];
             })
           ];
