@@ -45,9 +45,6 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-lsp-booster.url = "github:slotThe/emacs-lsp-booster-flake";
-
     emacs-flake = {
       url = "github:SuzumiyaAoba/emacs-config";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,8 +75,6 @@
     , nix-darwin
     , home-manager
     , nix-homebrew
-    , emacs-overlay
-    , emacs-lsp-booster
     , emacs-flake
     , xremap
     , hyprland
@@ -127,8 +122,6 @@
         };
 
         nixpkgs.overlays = [
-          emacs-overlay.overlays.emacs
-          emacs-lsp-booster.overlays.default
           purescript-overlay.overlays.default
         ];
       };
@@ -220,7 +213,6 @@
             ./hosts/nixos
             ./hosts/nixos/hardware/trigkey.nix
             ./modules/nixos/configuration.nix
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ emacs-overlay.overlays.emacs ]; })
             ./modules/nixos
             home-manager.nixosModules.home-manager
             {
