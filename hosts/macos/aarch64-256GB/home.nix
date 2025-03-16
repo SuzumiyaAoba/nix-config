@@ -74,6 +74,9 @@ in
     "home/programs/commands/global.nix"
     "home/programs/commands/gitu.nix"
 
+    # database
+    "home/programs/database/duckdb.nix"
+
     # LLM
     "home/programs/commands/ollama.nix"
     "home/programs/commands/open-webui.nix"

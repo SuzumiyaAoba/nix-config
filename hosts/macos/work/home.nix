@@ -57,7 +57,9 @@ in
     "home/programs/commands/sheldon"
     "home/programs/commands/timewarrior.nix"
     "home/programs/commands/taskwarrior.nix"
-    "home/programs/commands/mysql.nix"
-    "home/programs/commands/oracle.nix"
+
+    "home/programs/database/oracle.nix"
+    "home/programs/database/mysql.nix"
+    "home/programs/database/duckdb.nix"
   ];
 }
