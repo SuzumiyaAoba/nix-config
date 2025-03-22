@@ -1,4 +1,4 @@
-setopt no_beep
+setopt beep # Enable beep sound for certain commands.  Useful for feedback.
 
 export LANG=ja_JP.UTF-8
 
