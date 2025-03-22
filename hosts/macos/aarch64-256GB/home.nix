@@ -80,5 +80,6 @@ in
     # LLM
     "home/programs/commands/ollama.nix"
     "home/programs/commands/open-webui.nix"
+    "home/programs/commands/aider.nix"
   ];
 }
