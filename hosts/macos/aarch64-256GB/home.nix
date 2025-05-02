@@ -73,6 +73,7 @@ in
     "home/programs/commands/docker.nix"
     "home/programs/commands/global.nix"
     "home/programs/commands/gitu.nix"
+    "home/programs/commands/tokei.nix"
 
     # database
     "home/programs/database/duckdb.nix"
