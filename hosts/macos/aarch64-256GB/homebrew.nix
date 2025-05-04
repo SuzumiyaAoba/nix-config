@@ -20,6 +20,7 @@ in
     "home/darwin/homebrew/google-chrome.nix"
     "home/darwin/homebrew/1password.nix"
     "home/darwin/homebrew/brave-browser.nix"
+    "home/darwin/homebrew/shortcat.nix"
 
     # CLI
     # "home/darwin/homebrew/rancher.nix"

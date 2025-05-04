@@ -1,6 +1,5 @@
 window:
   # decorations: None
-
   padding:
     x: 8
     y: 4
@@ -11,10 +10,10 @@ window:
 
 font:
   normal:
-    family: 'HackGen Console NF'
+    family: "HackGen Console NF"
     style: Regular
   bold:
-    family: 'HackGen Console NF'
+    family: "HackGen Console NF"
     style: Bold
   size: 16.0
   offset:

@@ -27,4 +27,3 @@ $ makers private:apply
 ```console
 $ nix --extra-experimental-features nix-command --extra-experimental-features flakes fmt
 ```
-
