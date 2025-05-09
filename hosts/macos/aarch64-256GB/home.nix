@@ -75,6 +75,7 @@ in
     "home/programs/commands/gitu.nix"
     "home/programs/commands/tokei.nix"
     "home/programs/commands/ttyd.nix"
+    "home/programs/commands/clive"
 
     # database
     "home/programs/database/duckdb.nix"
@@ -83,9 +84,5 @@ in
     "home/programs/commands/ollama.nix"
     "home/programs/commands/open-webui.nix"
     "home/programs/commands/aider.nix"
-  ];
-
-  home.packages = with pkgs; [
-    (callPackage ../../../home/programs/commands/clive.nix {})
   ];
 }
