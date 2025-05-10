@@ -76,6 +76,7 @@ in
     "home/programs/commands/tokei.nix"
     "home/programs/commands/ttyd.nix"
     "home/programs/commands/clive"
+    "home/programs/commands/vhs.nix"
 
     # database
     "home/programs/database/duckdb.nix"
