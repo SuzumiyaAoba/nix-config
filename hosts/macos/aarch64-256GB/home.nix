@@ -77,6 +77,7 @@ in
     "home/programs/commands/ttyd.nix"
     "home/programs/commands/clive"
     "home/programs/commands/vhs.nix"
+    "home/programs/commands/gh.nix"
 
     # database
     "home/programs/database/duckdb.nix"

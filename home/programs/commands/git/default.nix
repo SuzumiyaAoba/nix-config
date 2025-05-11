@@ -7,7 +7,7 @@
     aliases = {
       tree = "log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by %C(cyan ul)%an%Creset %x09%C(auto)%s %d'";
       logd = "log -p --ext-diff";
-      delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main'|xargs git branch -d; git fetch --prune; };f";
+      delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main|master'|xargs git branch -d; git fetch --prune; };f";
     };
 
     ignores = [
