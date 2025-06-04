@@ -92,8 +92,7 @@
     }@inputs:
     let
       systems = [ "x86_64-linux" "aarch64-darwin" ];
-      username = builtins.getEnv "USER";
-      # username = "suzumiyaaoba";
+      username = "suzumiyaaoba";
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
@@ -116,6 +115,7 @@
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
         system.stateVersion = 5;
+        system.primaryUser = username;
 
         nix.settings = {
           experimental-features = [ "nix-command" "flakes" ];

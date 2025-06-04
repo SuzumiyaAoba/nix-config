@@ -19,6 +19,6 @@ stdenvNoCC.mkDerivation rec {
     description = "Automates terminal operations.";
     homepage = "https://github.com/koki-develop/clive/releases/tag/v0.12.9";
     license = licenses.mit;
-    platforms = platforms.aarch64-darwin;
+    platforms = platforms.all;
   };
 }
