@@ -2,11 +2,11 @@
 
 {
   home.packages = with pkgs; [
-    volta
+    # volta
     deno
     bun
     esbuild
   ];
 
-  home.sessionPath = [ "$HOME/.volta/bin" ];
+  # home.sessionPath = [ "$HOME/.volta/bin" ];
 }
