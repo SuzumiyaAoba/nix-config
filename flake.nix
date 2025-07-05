@@ -123,7 +123,7 @@
 
         nixpkgs.overlays = [
           purescript-overlay.overlays.default
-        ];
+        ] ++ (import ./overlays { inherit nixpkgs; });
       };
     in
     {
