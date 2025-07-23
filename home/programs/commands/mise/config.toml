@@ -1,2 +1,6 @@
 [tools]
 node = '22'
+
+"npm:yarn" = "latest"
+
+"npm:@anthropic-ai/claude-code" = "latest"
