@@ -1,5 +1,5 @@
 { ... }:
 
 [
-  (import ./jq.nix)
+  # (import ./jq.nix)
 ]
