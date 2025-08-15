@@ -59,6 +59,7 @@ in
     "home/programs/commands/taskwarrior.nix"
     "home/programs/commands/tokei.nix"
     "home/programs/commands/mise"
+    "home/programs/mkcert.nix"
 
     "home/programs/database/oracle.nix"
     "home/programs/database/mysql.nix"
