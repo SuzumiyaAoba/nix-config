@@ -79,6 +79,7 @@ in
     "home/programs/commands/vhs.nix"
     "home/programs/commands/gh.nix"
     "home/programs/commands/mise"
+    "home/programs/commands/uv.nix"
 
     # database
     "home/programs/database/duckdb.nix"
