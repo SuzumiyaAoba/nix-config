@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     # volta
+    nodejs
     deno
     bun
     esbuild
