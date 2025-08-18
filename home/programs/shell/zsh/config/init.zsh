@@ -15,3 +15,5 @@ eval "$(sheldon source)"
 
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"
+
+export PATH="$HOME/.local/bin:$PATH"

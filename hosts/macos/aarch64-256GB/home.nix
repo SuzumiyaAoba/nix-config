@@ -46,6 +46,7 @@ in
     "home/base/languages/rust.nix"
     # "home/programs/programming/coq.nix"
     "home/programs/programming/scala.nix"
+    "home/programs/programming/nix.nix"
 
     # commands
     "home/programs/commands/emacs-lsp-booster.nix"
