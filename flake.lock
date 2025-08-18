@@ -97,11 +97,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1755480279,
-        "narHash": "sha256-BIVEPGSOPXw4yOCAbq+3QziJFzMosDHcE48dEEqRu/I=",
+        "lastModified": 1755481004,
+        "narHash": "sha256-TeM2YQ+tU1z5KqsZ64m5g6o6o4uH/RWRODe0Y3b8R4Y=",
         "owner": "SuzumiyaAoba",
         "repo": "emacs-config",
-        "rev": "3315eb892985733e989a9c60c8f244d67be6e0f3",
+        "rev": "c10792fb97ff1b167420d3273d792aecd71bf0e0",
         "type": "github"
       },
       "original": {
@@ -343,11 +343,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1755479605,
-        "narHash": "sha256-UMcs7wLtWxF0+yw8SGmGxehEspirvx60lGPJkONFh90=",
+        "lastModified": 1755480455,
+        "narHash": "sha256-cIMlCE5M5Zq1DjfS9mV4AepUv/hn9nrFj0klK7C784c=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "d818f351cb0696fa5831f3f0aa7670adf7e46380",
+        "rev": "e1e54f7a14ae909bfefc1f0928c1f70fbfb31c84",
         "type": "github"
       },
       "original": {
