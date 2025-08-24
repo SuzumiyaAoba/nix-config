@@ -2,21 +2,20 @@
 delib.host {
   name = "desktop";
 
-  system = "x86_64-linux"; # !!! REPLACEME
+  system = "aarch64-darwin";
 
-  # useHomeManagerModule = false;
-  home.home.stateVersion = "24.05"; # !!! REPLACEME
+  home.home.stateVersion = "25.05";
 
   # If you're not using NixOS, you can remove this entire block.
-  nixos = {
-    system.stateVersion = "24.05"; # !!! REPLACEME
+  # nixos = {
+  #   system.stateVersion = "25.05";
 
-    # nixos-generate-config --show-hardware-config
-    # other generated code here...
-  };
+  #   # nixos-generate-config --show-hardware-config
+  #   # other generated code here...
+  # };
 
   # If you're not using Nix-Darwin, you can remove this entire block.
   darwin = {
-    system.stateVersion = 6; # !!! REPLACEME
+    system.stateVersion = 6;
   };
 }

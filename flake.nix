@@ -26,18 +26,18 @@
         moduleSystem:
         denix.lib.configurations {
           inherit moduleSystem;
-          homeManagerUser = "sjohn"; # !!! REPLACEME
+          homeManagerUser = "suzumiyaaoba"; # !!! REPLACEME
 
           paths = [
             ./hosts
             ./modules
-            ./rices
           ];
 
           extensions = with denix.lib.extensions; [
             args
             (base.withConfig {
               args.enable = true;
+              rices.enable = false;
             })
           ];
 
@@ -49,7 +49,7 @@
     {
       # If you're not using NixOS, Home Manager, or Nix-Darwin,
       # you can safely remove the corresponding lines below.
-      nixosConfigurations = mkConfigurations "nixos";
+      # nixosConfigurations = mkConfigurations "nixos";
       homeConfigurations = mkConfigurations "home";
       darwinConfigurations = mkConfigurations "darwin";
     };

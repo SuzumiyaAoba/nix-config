@@ -4,8 +4,8 @@ delib.module {
 
   options.constants = with delib; {
     #!!! REPLACEME
-    username = readOnly (strOption "sjohn");
-    userfullname = readOnly (strOption "John Smith");
-    useremail = readOnly (strOption "johnsmith@example.com");
+    username = readOnly (strOption "suzumiyaaoba");
+    userfullname = readOnly (strOption "SuzumiyaAoba");
+    useremail = readOnly (strOption "SuzumiyaAoba@gmail.com");
   };
 }
