@@ -1,0 +1,9 @@
+[settings]
+idiomatic_version_file_enable_tools = ['node', 'java']
+
+[tools]
+node = '22'
+
+"npm:yarn" = "latest"
+
+"npm:@anthropic-ai/claude-code" = "latest"

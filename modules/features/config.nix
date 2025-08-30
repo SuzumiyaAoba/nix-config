@@ -1,0 +1,24 @@
+{ delib, ... }:
+delib.module {
+  name = "features.config";
+
+  options = delib.singleEnableOption true;
+
+  home.ifEnabled = {
+    # zsh
+    home.file.".config/zsh".source = ../../.config/zsh;
+
+    # sheldom
+    home.file.".config/sheldon".source = ../../.config/sheldon;
+
+    # wezterm
+    home.file.".config/wezterm/config.lua".source = ../../.config/wezterm/config.lua;
+    home.file.".config/wezterm/keybinds.lua".source = ../../.config/wezterm/keybinds.lua;
+
+    # mise
+    home.file.".config/mise".source = ../../.config/mise;
+
+    # starship
+    home.file.".config/starship".source = ../../.config/starship;
+  };
+}
