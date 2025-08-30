@@ -15,6 +15,8 @@
       "*.swp"
       ".DS_Store"
       ".dir-locals.el"
+      ".claude/settings.local.json"
+      ".mise.local.toml"
     ];
 
     extraConfig = {
