@@ -17,10 +17,15 @@
       inputs.home-manager.follows = "home-manager";
       inputs.nix-darwin.follows = "nix-darwin";
     };
+
+    emacs-flake = {
+      url = "github:SuzumiyaAoba/emacs-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { denix, ... }@inputs:
+    { denix, emacs-flake, ... }@inputs:
     let
       mkConfigurations =
         moduleSystem:
@@ -43,6 +48,7 @@
 
           specialArgs = {
             inherit inputs;
+            inherit emacs-flake;
           };
         };
     in

@@ -19,6 +19,6 @@ delib.module {
     home.file.".config/mise".source = ../../.config/mise;
 
     # starship
-    home.file.".config/starship".source = ../../.config/starship;
+    home.file.".config/starship.toml".source = ../../.config/starship.toml;
   };
 }
