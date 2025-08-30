@@ -4,6 +4,9 @@ delib.host {
 
   system = "aarch64-darwin";
 
+  homeManagerUser = "suzumiyaaoba";
+  useHomeManagerModule = true;
+
   home.home.stateVersion = "25.05";
 
   # If you're not using NixOS, you can remove this entire block.

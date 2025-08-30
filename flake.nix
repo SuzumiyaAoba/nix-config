@@ -31,7 +31,6 @@
         moduleSystem:
         denix.lib.configurations {
           inherit moduleSystem;
-          homeManagerUser = "suzumiyaaoba"; # !!! REPLACEME
 
           paths = [
             ./hosts
