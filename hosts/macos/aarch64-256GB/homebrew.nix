@@ -23,7 +23,7 @@ in
     "home/darwin/homebrew/shortcat.nix"
 
     # CLI
-    # "home/darwin/homebrew/rancher.nix"
+    "home/darwin/homebrew/rancher.nix"
     "home/darwin/homebrew/sdkman.nix"
 
     "home/darwin/homebrew/gcc.nix"
