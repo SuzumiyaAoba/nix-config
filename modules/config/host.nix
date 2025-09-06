@@ -2,11 +2,14 @@
 delib.module {
   name = "host";
 
-  options = with delib; {
-    host = {
-      isPrivate = boolOption false;
-      enableOllama = boolOption false;
+  options = with delib; let
+    host = { config, ... }: {
+      options = {
+        isPrivate = boolOption false;
+      };
     };
+  in {
+    host = hostOption host;
   };
 
   myconfig.always = { cfg, ... }: {
