@@ -4,7 +4,7 @@ delib.module {
 
   options = delib.singleEnableOption true;
 
-  home.ifEnabled = {
+  home.ifEnabled = { myconfig, cfg, ... }: {
     home.packages = with pkgs; [
       ollama
     ];

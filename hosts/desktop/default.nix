@@ -4,5 +4,11 @@ delib.host {
 
   type = "desktop";
 
+  homeManagerUser = "suzumiyaaoba";
+  useHomeManagerModule = true;
+
+  myconfig.host.isPrivate = true;
+  myconfig.host.enableOllama = true;
+
   features.config.enable = true;
 }

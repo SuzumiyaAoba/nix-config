@@ -8,7 +8,7 @@ delib.module {
     home.packages = with pkgs; [
       hackgen-nf-font
       monaspace
-      iosevka
+      # iosevka  # 一時的に無効化 - Node.jsビルドエラーのため
       _0xproto
       (callPackage ../../pkgs/fonts/explex.nix { })
       (callPackage ../../pkgs/fonts/cascadia-next.nix { })
