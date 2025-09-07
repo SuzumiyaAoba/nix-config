@@ -11,7 +11,9 @@ delib.host {
   useHomeManagerModule = true;
 
   myconfig.host.isPrivate = isPrivate;
-  myconfig.programs.ollama.enable = isPrivate;
+  myconfig.programs = {
+    ollama.enable = isPrivate;
+  };
 
   features.config.enable = true;
 }
