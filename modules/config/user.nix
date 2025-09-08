@@ -27,6 +27,10 @@ delib.module {
       inherit (myconfig.constants) username;
     in
     {
+      nixpkgs.config.allowUnfree = true;
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+        "oracle-instantclient"
+      ];
       users.users.${username} = {
         name = username;
         home = "/Users/${username}";

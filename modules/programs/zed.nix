@@ -6,7 +6,7 @@ delib.module {
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      sheldon
+      zed-editor
     ];
   };
 }
