@@ -2,6 +2,7 @@
 let
   isPrivate = true;
   common = import ../../lib/host-common.nix { inherit isPrivate; };
+  inherit (common) myconfig;
 in
 delib.host {
   name = "desktop";
@@ -11,7 +12,7 @@ delib.host {
   useHomeManagerModule = true;
 
   # shared attrs
-  inherit (common) myconfig;
+  inherit myconfig;
 
   features.config.enable = true;
 }
