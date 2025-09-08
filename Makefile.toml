@@ -10,10 +10,10 @@ script = '''
 
 [tasks."aarch64-darwin:desktop"]
 script = '''
-  sudo darwin-rebuild switch --flake .#desktop
+  sudo darwin-rebuild switch --flake .#desktop --override-input user-config path:./user.nix
 '''
 
 [tasks."aarch64-darwin:work"]
 script = '''
-  sudo darwin-rebuild switch --flake .#work
+  sudo darwin-rebuild switch --flake .#work --override-input user-config path:./user.nix
 '''
