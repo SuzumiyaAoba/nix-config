@@ -64,7 +64,7 @@
         inputs.treefmt-nix.lib.mkWrapper pkgs {
           projectRootFile = "flake.nix";
           programs = {
-            nixfmt-rfc-style.enable = true;
+            nixfmt.enable = true;
           };
           settings.global.excludes = [
             "result/**"
