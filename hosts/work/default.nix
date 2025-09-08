@@ -1,7 +1,7 @@
 { delib, ... }:
 let
   isPrivate = false;
-  common = import ../common.nix { inherit isPrivate; };
+  common = import ../../lib/host-common.nix { inherit isPrivate; };
 in
 delib.host {
   name = "work";
