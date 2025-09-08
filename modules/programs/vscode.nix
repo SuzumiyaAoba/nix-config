@@ -1,14 +1,12 @@
 { delib, ... }:
 delib.module {
-  name = "programs.starship";
+  name = "programs.vscode";
 
   options = delib.singleEnableOption true;
 
   home.ifEnabled = {
-    programs.starship = {
+    programs.vscode = {
       enable = true;
-
-      enableZshIntegration = true;
     };
   };
 }
