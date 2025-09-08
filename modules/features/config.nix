@@ -8,23 +8,28 @@ delib.module {
   options = delib.singleEnableOption true;
 
   home.ifEnabled = {
-    # nix
-    home.file.".config/nix/nix.conf".source = home/.config/nix/nix.conf;
+    home.file = {
+      # nix
+      ".config/nix/nix.conf".source = home + "/.config/nix/nix.conf";
 
-    # zsh
-    home.file.".config/zsh".source = home/.config/zsh;
+      # zsh
+      ".config/zsh".source = home + "/.config/zsh";
 
-    # sheldom
-    home.file.".config/sheldon".source = home/.config/sheldon;
+      # sheldom
+      ".config/sheldon".source = home + "/.config/sheldon";
 
-    # wezterm
-    home.file.".config/wezterm/config.lua".source = home/.config/wezterm/config.lua;
-    home.file.".config/wezterm/keybinds.lua".source = home/.config/wezterm/keybinds.lua;
+      # wezterm
+      ".config/wezterm/config.lua".source = home + "/.config/wezterm/config.lua";
+      ".config/wezterm/keybinds.lua".source = home + "/.config/wezterm/keybinds.lua";
 
-    # mise
-    home.file.".config/mise".source = home/.config/mise;
+      # mise
+      ".config/mise".source = home + "/.config/mise";
 
-    # starship
-    home.file.".config/starship.toml".source = home/.config/starship.toml;
+      # starship
+      ".config/starship.toml".source = home + "/.config/starship.toml";
+
+      # tig
+      ".tigrc".source = home + "/.tigrc";
+    };
   };
 }
