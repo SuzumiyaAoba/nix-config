@@ -9,5 +9,5 @@ delib.host {
   type = "desktop";
 
   inherit myconfig;
-  homeManagerUser = userConfig.username;
+  homeManagerUser = userConfig.homeManagerUser or userConfig.username;
 }

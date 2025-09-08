@@ -8,7 +8,7 @@ delib.host {
   name = "desktop";
   type = "desktop";
 
-  homeManagerUser = userConfig.username;
+  homeManagerUser = userConfig.homeManagerUser or userConfig.username;
   useHomeManagerModule = true;
 
   # shared attrs
