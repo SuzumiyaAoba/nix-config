@@ -1,6 +1,7 @@
-{ lib
-, stdenvNoCC
-, fetchurl
+{
+  lib,
+  stdenvNoCC,
+  fetchurl,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "cascadia-next";

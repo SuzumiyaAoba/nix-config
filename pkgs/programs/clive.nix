@@ -1,5 +1,6 @@
-{ lib
-, stdenvNoCC
+{
+  lib,
+  stdenvNoCC,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "clive";

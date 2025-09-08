@@ -1,4 +1,4 @@
-{ delib, pkgs, ...}:
+{ delib, pkgs, ... }:
 delib.module {
   name = "programs.jd-diff-patch";
 

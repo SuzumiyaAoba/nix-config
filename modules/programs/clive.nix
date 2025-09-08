@@ -6,7 +6,7 @@ delib.module {
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      (callPackage ../../pkgs/programs/clive.nix {})
+      (callPackage ../../pkgs/programs/clive.nix { })
     ];
   };
 }

@@ -1,4 +1,4 @@
-{ delib, emacs-flake, ...}:
+{ delib, emacs-flake, ... }:
 delib.module {
   name = "programs.emacs";
 

@@ -1,0 +1,14 @@
+[tasks.fmt]
+description = "Run formatter"
+command = "nix"
+args = ["fmt"]
+
+[tasks.update]
+script = '''
+  nix flake update
+  '''
+
+[tasks."aarch64-darwin:desktop"]
+script = '''
+  sudo darwin-rebuild switch --flake .#desktop
+'''
