@@ -52,6 +52,7 @@
         };
     in
     {
+      formatter = inputs.nixpkgs.lib.genAttrs [ "aarch64-darwin" ] (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
       # If you're not using NixOS, Home Manager, or Nix-Darwin,
       # you can safely remove the corresponding lines below.
       # nixosConfigurations = mkConfigurations "nixos";
