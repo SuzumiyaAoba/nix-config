@@ -6,7 +6,7 @@ delib.module {
 
   home.ifEnabled = {
     # nix
-    home.file.".config/nix.conf".source = ../../.config/nix.conf;
+    home.file.".config/nix/nix.conf".source = ../../.config/nix/nix.conf;
 
     # zsh
     home.file.".config/zsh".source = ../../.config/zsh;
