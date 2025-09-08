@@ -1,4 +1,4 @@
-{ delib, userConfig, ... }:
+{ delib, myconfig, ... }:
 let
   isPrivate = true;
   common = import ../../lib/host-common.nix { inherit isPrivate; };
@@ -7,7 +7,7 @@ delib.host {
   name = "desktop";
   type = "desktop";
 
-  homeManagerUser = userConfig.username or "suzumiyaaoba";
+  homeManagerUser = myconfig.constants.username;
   useHomeManagerModule = true;
 
   # shared attrs
