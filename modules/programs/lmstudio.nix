@@ -1,12 +1,12 @@
 { delib, pkgs, ... }:
 delib.module {
-  name = "programs.oracle";
+  name = "programs.lmstudio";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      oracle-instantclient
+      # lmstudio
     ];
   };
 }

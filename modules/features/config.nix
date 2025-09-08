@@ -30,6 +30,9 @@ delib.module {
 
       # tig
       ".tigrc".source = home + "/.tigrc";
+
+      # serena
+      ".serena".source = home + "/.serena";
     };
   };
 }
