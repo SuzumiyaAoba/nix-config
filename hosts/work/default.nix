@@ -1,4 +1,4 @@
-{ delib, ... }:
+{ delib, userConfig, ... }:
 let
   isPrivate = false;
   common = import ../../lib/host-common.nix { inherit isPrivate; };
@@ -8,4 +8,5 @@ delib.host {
   type = "desktop";
 
   inherit (common) myconfig;
+  homeManagerUser = userConfig.username or "suzumiyaaoba";
 }

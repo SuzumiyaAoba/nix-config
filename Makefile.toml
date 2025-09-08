@@ -12,3 +12,8 @@ script = '''
 script = '''
   sudo darwin-rebuild switch --flake .#desktop
 '''
+
+[tasks."aarch64-darwin:work"]
+script = '''
+  sudo darwin-rebuild switch --flake .#work
+'''

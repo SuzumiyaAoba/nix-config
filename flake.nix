@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    user-config = {
+      url = "path:./user.example.nix";
+      flake = false;
+    };
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,6 +56,7 @@
           specialArgs = {
             inherit inputs;
             inherit emacs-flake;
+            userConfig = import inputs.user-config;
           };
         };
     in
