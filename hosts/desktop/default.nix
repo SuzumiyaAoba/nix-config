@@ -1,6 +1,7 @@
 { delib, ... }:
 let
   isPrivate = true;
+  common = import ../common.nix { inherit isPrivate; };
 in
 delib.host {
   name = "desktop";
@@ -9,10 +10,8 @@ delib.host {
   homeManagerUser = "suzumiyaaoba";
   useHomeManagerModule = true;
 
-  myconfig.host.isPrivate = isPrivate;
-  myconfig.programs = {
-    ollama.enable = isPrivate;
-  };
+  # shared attrs
+  inherit (common) myconfig;
 
   features.config.enable = true;
 }
