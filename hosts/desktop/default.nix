@@ -4,7 +4,6 @@ let
 in
 delib.host {
   name = "desktop";
-
   type = "desktop";
 
   homeManagerUser = "suzumiyaaoba";
