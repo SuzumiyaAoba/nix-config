@@ -1,4 +1,4 @@
-{ delib, myconfig, ... }:
+{ delib, ... }:
 let
   isPrivate = true;
   common = import ../../lib/host-common.nix { inherit isPrivate; };
