@@ -1,4 +1,7 @@
 { delib, ... }:
+let
+  home = ../../home;
+in
 delib.module {
   name = "features.config";
 
@@ -6,22 +9,22 @@ delib.module {
 
   home.ifEnabled = {
     # nix
-    home.file.".config/nix/nix.conf".source = ../../.config/nix/nix.conf;
+    home.file.".config/nix/nix.conf".source = home/.config/nix/nix.conf;
 
     # zsh
-    home.file.".config/zsh".source = ../../.config/zsh;
+    home.file.".config/zsh".source = home/.config/zsh;
 
     # sheldom
-    home.file.".config/sheldon".source = ../../.config/sheldon;
+    home.file.".config/sheldon".source = home/.config/sheldon;
 
     # wezterm
-    home.file.".config/wezterm/config.lua".source = ../../.config/wezterm/config.lua;
-    home.file.".config/wezterm/keybinds.lua".source = ../../.config/wezterm/keybinds.lua;
+    home.file.".config/wezterm/config.lua".source = home/.config/wezterm/config.lua;
+    home.file.".config/wezterm/keybinds.lua".source = home/.config/wezterm/keybinds.lua;
 
     # mise
-    home.file.".config/mise".source = ../../.config/mise;
+    home.file.".config/mise".source = home/.config/mise;
 
     # starship
-    home.file.".config/starship.toml".source = ../../.config/starship.toml;
+    home.file.".config/starship.toml".source = home/.config/starship.toml;
   };
 }

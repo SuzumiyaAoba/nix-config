@@ -1,12 +1,12 @@
 { delib, pkgs, ... }:
 delib.module {
-  name = "programs.ollama";
+  name = "programs.tig";
 
-  options = delib.singleEnableOption false;
+  options = delib.singleEnableOption true;
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      ollama
+      tig
     ];
   };
 }
