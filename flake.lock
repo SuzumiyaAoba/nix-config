@@ -330,7 +330,8 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_3",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix",
+        "user-config": "user-config"
       }
     },
     "systems": {
@@ -382,6 +383,18 @@
         "repo": "treefmt-nix",
         "type": "github"
       }
+    },
+    "user-config": {
+      "flake": false,
+      "locked": {
+        "path": "./user.example.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "./user.example.nix",
+        "type": "path"
+      },
+      "parent": []
     }
   },
   "root": "root",

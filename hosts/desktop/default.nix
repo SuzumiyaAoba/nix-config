@@ -14,5 +14,9 @@ delib.host {
   # shared attrs
   inherit myconfig;
 
-  features.config.enable = true;
+  features = {
+    session.enable = true;
+    config.enable = true;
+    macos.enable = true;
+  };
 }

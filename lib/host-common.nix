@@ -7,4 +7,3 @@
   myconfig.programs.zotero.enable = isPrivate;
   myconfig.programs.lmstudio.enable = isPrivate;
 }
-

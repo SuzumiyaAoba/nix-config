@@ -13,9 +13,11 @@ delib.module {
     in
     {
       nixpkgs.config.allowUnfree = true;
-      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-        "oracle-instantclient"
-      ];
+      nixpkgs.config.allowUnfreePredicate =
+        pkg:
+        builtins.elem (pkgs.lib.getName pkg) [
+          "oracle-instantclient"
+        ];
       home = {
         inherit username;
         # If you don't need Nix-Darwin, or if you're using it exclusively,

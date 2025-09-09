@@ -4,4 +4,3 @@
   useremail = "SuzumiyaAoba@gmail.com";
   homeManagerUser = "suzumiyaaoba";
 }
-
