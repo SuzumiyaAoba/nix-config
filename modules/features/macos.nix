@@ -53,5 +53,7 @@ delib.module {
         sudo -u ${userConfig.username} defaults write com.apple.controlcenter.plist BatteryShowPercentage -bool true
       '';
     };
+
+    security.pam.services.sudo_local.touchIdAuth = true;
   };
 }
