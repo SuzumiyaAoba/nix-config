@@ -8,7 +8,7 @@ delib.host {
   name = "work";
   type = "desktop";
 
-  homeManagerUser = userConfig.homeManagerUser or userConfig.username;
+  homeManagerUser = userConfig.username;
   useHomeManagerModule = true;
 
   inherit myconfig;

@@ -71,7 +71,6 @@ The `user.nix` file should contain:
   username = "your-username";
   userfullname = "Your Full Name";
   useremail = "your@email.com";
-  homeManagerUser = "your-username";  # Usually same as username
 }
 ```
 
