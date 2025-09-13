@@ -33,6 +33,10 @@ delib.module {
 
       # serena
       ".serena".source = home + "/.serena";
+
+      # karabiner
+      ".config/karabiner/karabiner.json".source = home + "/.config/karabiner/karabiner.json";
+      ".config/karabiner/assets".source = home + "/.config/karabiner/assets";
     };
   };
 }

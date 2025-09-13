@@ -1,0 +1,33 @@
+{
+  "title": "Change CTRL+J on Alacritty",
+  "rules": [
+    {
+      "description": "Change CTRL+J to CTRL+^ on Alacritty",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": ["left_control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "equal_sign",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "io.alacritty"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
