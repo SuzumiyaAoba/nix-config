@@ -26,6 +26,20 @@
       inputs.nix-darwin.follows = "nix-darwin";
     };
 
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+
     emacs-flake = {
       url = "github:SuzumiyaAoba/emacs-config";
       inputs.nixpkgs.follows = "nixpkgs";

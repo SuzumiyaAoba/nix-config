@@ -17,6 +17,8 @@ delib.host {
   features = {
     session.enable = true;
     config.enable = true;
+
     macos.enable = true;
+    homebrew.enable = true;
   };
 }
