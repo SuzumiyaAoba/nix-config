@@ -474,11 +474,11 @@
     "user-config": {
       "flake": false,
       "locked": {
-        "path": "./user.nix",
+        "path": "./user.example.nix",
         "type": "path"
       },
       "original": {
-        "path": "./user.nix",
+        "path": "./user.example.nix",
         "type": "path"
       },
       "parent": []
