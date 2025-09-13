@@ -15,7 +15,7 @@ delib.module {
     let
       # homebrewディレクトリ内のすべての.nixファイルを動的に読み込み
       homebrewDir = ../homebrew;
-      
+
       # ディレクトリ内のファイルを読み込んでモジュールマップを作成
       # この方法はNixの評価時に安全に動作します
       homebrewModules = lib.mapAttrs' (name: type:
@@ -23,10 +23,9 @@ delib.module {
         then lib.nameValuePair (lib.removeSuffix ".nix" name) (homebrewDir + "/${name}")
         else lib.nameValuePair "" null
       ) (builtins.readDir homebrewDir);
-      
+
       # 有効なモジュールのみをフィルタリング
       validHomebrewModules = lib.filterAttrs (name: path: path != null) homebrewModules;
-      
     in
     {
       imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ] ++ (lib.attrValues validHomebrewModules);
@@ -34,6 +33,8 @@ delib.module {
       nix-homebrew = {
         enable = true;
         user = myconfig.constants.username;
+
+        enableRosetta = true;
 
         taps = {
           "homebrew/homebrew-core" = inputs.homebrew-core;
