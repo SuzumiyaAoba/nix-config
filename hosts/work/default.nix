@@ -8,6 +8,16 @@ delib.host {
   name = "work";
   type = "desktop";
 
-  inherit myconfig;
   homeManagerUser = userConfig.homeManagerUser or userConfig.username;
+  useHomeManagerModule = true;
+
+  inherit myconfig;
+
+  features = {
+    session.enable = true;
+    config.enable = true;
+
+    macos.enable = true;
+    homebrew.enable = true;
+  };
 }
