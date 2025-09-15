@@ -12,6 +12,11 @@ python3Packages.buildPythonApplication rec {
 
   pyproject = true;
 
+  nativeBuildInputs = with python3Packages; [
+    setuptools
+    wheel
+  ];
+
   propagatedBuildInputs = with python3Packages; [
     pytz
     rich
