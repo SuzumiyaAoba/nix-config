@@ -20,6 +20,10 @@ python3Packages.buildPythonApplication rec {
   propagatedBuildInputs = with python3Packages; [
     pytz
     rich
+    numpy
+    pydantic
+    pydantic-settings
+    pyyaml
   ];
 
   doCheck = false; # upstream has extensive tests; skip at build time for speed
