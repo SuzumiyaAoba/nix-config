@@ -15,6 +15,8 @@ delib.module {
       # zsh
       ".config/zsh".source = home + "/.config/zsh";
 
+      ".p10k.zsh".source = home + "/.p10k.zsh";
+
       # sheldom
       ".config/sheldon".source = home + "/.config/sheldon";
 

@@ -39,7 +39,7 @@ delib.module {
 
           export LOMBOK_JAR_PATH=${pkgs.lombok}/share/java/lombok.jar
 
-          # zprof
+          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         '';
       };
     };
