@@ -27,13 +27,14 @@ apply = ["defer"]
 
 [plugins.zsh-z]
 github = "agkozak/zsh-z"
+apply = ["defer"]
 
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
 
 [plugins.programs]
 local = "~/.config/zsh/programs"
-apply = ["defer"]
+# apply = ["defer"]
 
 [plugins.tmux]
 local = "~/.config/zsh/tmux"
