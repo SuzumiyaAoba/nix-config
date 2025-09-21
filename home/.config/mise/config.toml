@@ -8,3 +8,5 @@ node = '22'
 
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:bun" = "latest"
+
+"npm:pure-prompt" = "latest"
