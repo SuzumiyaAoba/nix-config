@@ -12,9 +12,9 @@ delib.module {
 
       mouse = true;
 
-      plugins = with pkgs; [
+      plugins = with pkgs.tmuxPlugins; [
         {
-          plugin = tmuxPlugins.catppuccin;
+          plugin = catppuccin;
           extraConfig = ''
             set -g @catppuccin_window_left_separator "█"
             set -g @catppuccin_window_right_separator "█ "
@@ -33,34 +33,34 @@ delib.module {
             set -g @catppuccin_status_connect_separator "yes"
           '';
         }
-        tmuxPlugins.pain-control
-        tmuxPlugins.extrakto
-        tmuxPlugins.fpp
-        tmuxPlugins.fuzzback
-        tmuxPlugins.fzf-tmux-url
+        pain-control
+        extrakto
+        fpp
+        fuzzback
+        fzf-tmux-url
         {
-          plugin = tmuxPlugins.jump;
+          plugin = jump;
           extraConfig = ''
             set -g @jump-key 'J'
           '';
         }
-        tmuxPlugins.open
+        open
         {
-          plugin = tmuxPlugins.sensible;
+          plugin = sensible;
           extraConfig = ''
             set -g default-shell "$SHELL"
             set -g default-command "$SHELL"
           '';
         }
         {
-          plugin = tmuxPlugins.tilish;
+          plugin = tilish;
           extraConfig = ''
             set -g @tilish-prefix 'M-space'
           '';
         }
-        tmuxPlugins.tmux-fzf
-        tmuxPlugins.tmux-thumbs
-        # tmuxPlugins.power-theme
+        tmux-fzf
+        tmux-thumbs
+        # power-theme
       ];
     };
   };
