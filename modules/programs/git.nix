@@ -30,6 +30,13 @@ delib.module {
           };
           alias = {
             delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main'|xargs git branch -d; git fetch --prune; };f";
+
+            dlog  = "-c diff.external=difft log --ext-diff";
+            dl    = "-c diff.external=difft log --ext-diff";
+            dshow = "-c diff.external=difft show --ext-diff";
+            ds    = "-c diff.external=difft show --ext-diff";
+            ddiff = "-c diff.external=difft diff";
+            dft   = "-c diff.external=difft diff";
           };
         };
 
@@ -38,10 +45,7 @@ delib.module {
         };
 
         difftastic = {
-          enable = true;
-
-          # display = "inline";
-          background = "dark";
+          enable = false;
         };
       };
     };
