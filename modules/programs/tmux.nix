@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.tmux";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.tmux = {

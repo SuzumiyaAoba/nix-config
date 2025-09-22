@@ -5,8 +5,10 @@ delib.module {
   options = delib.singleEnableOption true;
 
   home.ifEnabled = {
-    home.packages = with pkgs; [
-      zellij
-    ];
+    programs.zellij = {
+      enable = true;
+
+      enableZshIntegration = true;
+    };
   };
 }

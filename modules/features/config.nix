@@ -39,6 +39,9 @@ delib.module {
       # karabiner
       ".config/karabiner/karabiner.json".source = home + "/.config/karabiner/karabiner.json";
       ".config/karabiner/assets".source = home + "/.config/karabiner/assets";
+
+      # zellij
+      ".config/zellij".source = home + "/.config/zellij";
     };
   };
 }

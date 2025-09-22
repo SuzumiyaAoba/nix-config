@@ -1,0 +1,75 @@
+show_startup_tips false
+copy_on_select true
+
+default_layout "default"
+pane_frames true
+
+ui {
+  pane_frames {
+    hide_session_name true
+    rounded_corners false
+  }
+}
+
+theme "catppuccin-macchiato"
+
+keybinds clear-defaults=true {
+  normal {
+    bind "Ctrl t" { SwitchToMode "Tmux"; }
+  }
+  locked {
+  }
+  resize {
+  }
+  pane {
+    bind "Ctrl g" {                            SwitchToMode "Pane";   }
+    bind "f"      { ToggleFloatingPanes;       SwitchToMode "Normal"; }
+    bind "F"      { ToggleFocusFullscreen;     SwitchToMode "Normal"; }
+    bind "Space"  { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
+  }
+  move {
+  }
+  tab {
+  }
+  scroll {
+  }
+  search {
+  }
+  entersearch {
+  }
+  renametab {
+  }
+  session {
+  }
+  tmux {
+    bind "Ctrl g" {          SwitchToMode "Normal"; }
+
+    // パネル
+    bind "-"      { NewPane   "Down";      SwitchToMode "Normal"; }
+    bind "\\"     { NewPane   "Right";     SwitchToMode "Normal"; }
+    bind "j"      { MoveFocus "Down";      SwitchToMode "Normal"; }
+    bind "k"      { MoveFocus "Up";        SwitchToMode "Normal"; }
+    bind "h"      { MoveFocus "Left";      SwitchToMode "Normal"; }
+    bind "l"      { MoveFocus "Right";     SwitchToMode "Normal"; }
+    bind "o"      { FocusNextPane;         SwitchToMode "Normal"; }
+    bind "Space"  {                        SwitchToMode "Pane";   }
+
+    // タブ
+    bind "c"      { NewTab;          SwitchToMode "Normal"; }
+    bind "n"      { GoToNextTab;     SwitchToMode "Normal"; }
+    bind "p"      { GoToPreviousTab; SwitchToMode "Normal"; }
+    bind "x"      { CloseFocus;      SwitchToMode "Normal"; }
+  }
+}
+
+plugins {
+}
+
+load_plugins {
+}
+
+web_client {
+  font "monospace"
+}
+
+pane_frames false
