@@ -1,12 +1,3 @@
-if [[ "$TERM_PROGRAM" == 'vscode' ]]; then
-else
-  if [[ -z "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
-    # export ZELLIJ_AUTO_ATTACH=true
-    export ZELLIJ_AUTO_EXIT=true
-    eval "$(zellij setup --generate-auto-start zsh)"
-  fi
-fi
-
 function current_dir() {
     local current_dir=$PWD
     if [[ $current_dir == $HOME ]]; then
@@ -52,10 +43,21 @@ function set_pane_to_command_line() {
     change_pane_title $title
 }
 
-if [[ -n $ZELLIJ ]]; then
+if [[ "$TERM_PROGRAM" == 'vscode' || -n $CURSOR_TRACE_ID ]]; then
+else
+  if [[ -z "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
+    # export ZELLIJ_AUTO_ATTACH=true
+    export ZELLIJ_AUTO_EXIT=true
+    eval "$(zellij setup --generate-auto-start zsh)"
+  fi
+
+  if [[ -n $ZELLIJ ]]; then
     add-zsh-hook precmd set_tab_to_working_dir
     add-zsh-hook precmd set_pane_to_working_dir
 
     add-zsh-hook preexec set_tab_to_command_line
     add-zsh-hook preexec set_pane_to_command_line
+  fi
 fi
+
+

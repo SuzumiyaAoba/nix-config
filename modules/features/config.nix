@@ -42,6 +42,9 @@ delib.module {
 
       # zellij
       ".config/zellij".source = home + "/.config/zellij";
+
+      # Cursor
+      ".iterm2_shell_integration.zsh".source = home + "/.iterm2_shell_integration.zsh";
     };
   };
 }

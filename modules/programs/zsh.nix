@@ -40,13 +40,13 @@ delib.module {
           export LOMBOK_JAR_PATH=${pkgs.lombok}/share/java/lombok.jar
 
           POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-          if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+          if [[ "$TERM_PROGRAM" == "vscode" || -n $CURSOR_TRACE_ID ]]; then
             ZSH_THEME=""
           else
             ZSH_THEME="powerlevel10k/powerlevel10k"
           fi
 
-          if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+          if [[ "$TERM_PROGRAM" == "vscode" || -n $CURSOR_TRACE_ID ]]; then
             PROMPT='%n@%m:%~%# '
             RPROMPT=""
           else
