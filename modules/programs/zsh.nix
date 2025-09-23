@@ -39,7 +39,20 @@ delib.module {
 
           export LOMBOK_JAR_PATH=${pkgs.lombok}/share/java/lombok.jar
 
-          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+          if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+            ZSH_THEME=""
+          else
+            ZSH_THEME="powerlevel10k/powerlevel10k"
+          fi
+
+          if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+            PROMPT='%n@%m:%~%# '
+            RPROMPT=""
+          else
+            [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+            source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          fi
         '';
       };
     };
