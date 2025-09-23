@@ -20,6 +20,18 @@ keybinds clear-defaults=true {
   locked {
   }
   resize {
+    bind "Ctrl g" {                          SwitchToMode "Normal"; }
+    bind "m"      {                          SwitchToMode "Move";   }
+    bind "h"      { Resize "Increase Left";                         }
+    bind "j"      { Resize "Increase Down";                         }
+    bind "k"      { Resize "Increase Up";                           }
+    bind "l"      { Resize "Increase Right";                        }
+    bind "H"      { Resize "Decrease Left";                         }
+    bind "J"      { Resize "Decrease Down";                         }
+    bind "K"      { Resize "Decrease Up";                           }
+    bind "L"      { Resize "Decrease Right";                        }
+    bind "="      { Resize "Increase";                              }
+    bind "-"      { Resize "Decrease";                              }
   }
   pane {
     bind "Ctrl g" {                            SwitchToMode "Pane";   }
@@ -28,14 +40,44 @@ keybinds clear-defaults=true {
     bind "Space"  { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
   }
   move {
+    bind "Ctrl g" {                    SwitchToMode "Normal"; }
+    bind "r"      {                    SwitchToMode "Resize"; }
+    bind "n"      { MovePane;                                 }
+    bind "p"      { MovePaneBackwards;                        }
+    bind "h"      { MovePane "Left";                          }
+    bind "j"      { MovePane "Down";                          }
+    bind "k"      { MovePane "Up";                            }
+    bind "l"      { MovePane "Right";                         }
   }
   tab {
   }
   scroll {
+    bind "Ctrl g" { SwitchToMode "Normal";                     }
+    bind "/"      { SwitchToMode "EnterSearch"; SearchInput 0; }
+    bind "j"      { ScrollDown;                                }
+    bind "k"      { ScrollUp;                                  }
+    bind "Ctrl f" { PageScrollDown;                            }
+    bind "Ctrl b" { PageScrollUp;                              }
   }
   search {
+    bind "Ctrl g" {                                       SwitchToMode "Normal";      }
+    bind "/"      {                                       SwitchToMode "EnterSearch"; }
+    bind "n"      { Search "down";                                                    }
+    bind "Ctrl s" { Search "down";                                                    }
+    bind "N"      { Search "up";                                                      }
+    bind "Ctrl r" { Search "up";                                                      }
+    bind "Ctrl f" { PageScrollDown;                                                   }
+    bind "Ctrl b" { PageScrollUp;                                                     }
+    bind "j"      { ScrollDown;                                                       }
+    bind "k"      { ScrollUp;                                                         }
+    bind "c"      { SearchToggleOption "CaseSensitivity";                             }
+    bind "w"      { SearchToggleOption "Wrap";                                        }
+    bind "o"      { SearchToggleOption "WholeWord";                                   }
   }
   entersearch {
+    bind "Ctrl g" {                        SwitchToMode "Normal"; }
+    bind "Ctrl c" {                        SwitchToMode "Scroll"; }
+    bind "Enter"  { SwitchToMode "Search";                        }
   }
   renametab {
   }
@@ -44,7 +86,7 @@ keybinds clear-defaults=true {
   tmux {
     bind "Ctrl g" {          SwitchToMode "Normal"; }
 
-    // パネル
+    // Pagne
     bind "-"      { NewPane   "Down";      SwitchToMode "Normal"; }
     bind "\\"     { NewPane   "Right";     SwitchToMode "Normal"; }
     bind "j"      { MoveFocus "Down";      SwitchToMode "Normal"; }
@@ -52,13 +94,19 @@ keybinds clear-defaults=true {
     bind "h"      { MoveFocus "Left";      SwitchToMode "Normal"; }
     bind "l"      { MoveFocus "Right";     SwitchToMode "Normal"; }
     bind "o"      { FocusNextPane;         SwitchToMode "Normal"; }
-    bind "Space"  {                        SwitchToMode "Pane";   }
 
-    // タブ
+    // Tab
     bind "c"      { NewTab;          SwitchToMode "Normal"; }
     bind "n"      { GoToNextTab;     SwitchToMode "Normal"; }
     bind "p"      { GoToPreviousTab; SwitchToMode "Normal"; }
     bind "x"      { CloseFocus;      SwitchToMode "Normal"; }
+
+    // Switch to Mode
+    bind "Space"  {                  SwitchToMode "Pane";                       }
+    bind "m"      {                  SwitchToMode "Move";                       }
+    bind "r"      {                  SwitchToMode "Resize";                     }
+    bind "s"      {                  SwitchToMode "Scroll";                     }
+    bind "Ctrl s" {                  SwitchToMode "EnterSearch"; SearchInput 0; }
   }
 }
 
@@ -71,5 +119,3 @@ load_plugins {
 web_client {
   font "monospace"
 }
-
-pane_frames false
