@@ -1,3 +1,12 @@
+if [[ "$TERM_PROGRAM" == 'vscode' ]]; then
+else
+  if [[ -z "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
+    # export ZELLIJ_AUTO_ATTACH=true
+    export ZELLIJ_AUTO_EXIT=true
+    eval "$(zellij setup --generate-auto-start zsh)"
+  fi
+fi
+
 function current_dir() {
     local current_dir=$PWD
     if [[ $current_dir == $HOME ]]; then

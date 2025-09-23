@@ -2,7 +2,7 @@
 
 # ghq
 function ghq-fzf() {
-  local src=$(ghq list | fzf-tmux -p 80%)
+  local src=$(ghq list | fzf)
   if [ -n "$src" ]; then
     BUFFER="cd $(ghq root)/$src"
     zle accept-line

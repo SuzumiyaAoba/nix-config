@@ -10,3 +10,5 @@ node = '22'
 "npm:bun" = "latest"
 
 "npm:pure-prompt" = "latest"
+
+java = '17'
