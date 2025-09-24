@@ -25,20 +25,21 @@ apply = ["defer"]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
 
-[plugins.zsh-z]
-github = "agkozak/zsh-z"
-apply = ["defer"]
+# [plugins.zsh-z]
+# github = "agkozak/zsh-z"
+# apply = ["defer"]
 
-[plugins.oh-my-zsh]
-github = "ohmyzsh/ohmyzsh"
+# [plugins.oh-my-zsh]
+# github = "ohmyzsh/ohmyzsh"
+# apply = ["defer"]
 
 [plugins.programs]
 local = "~/.config/zsh/programs"
-# apply = ["defer"]
-
-[plugins.tmux]
-local = "~/.config/zsh/tmux"
 apply = ["defer"]
+
+# [plugins.tmux]
+# local = "~/.config/zsh/tmux"
+# apply = ["defer"]
 
 [templates]
 source = '''
