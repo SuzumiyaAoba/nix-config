@@ -7,11 +7,9 @@ select-word-style default
 zstyle ':zle:*' word-chars ' /=;@:{}[]()<>,|.'
 zstyle ':zle:*' word-style unspecified
 
-# export ZSH="$HOME/.local/share/sheldon/repos/github.com/ohmyzsh/ohmyzsh"
-
-# plugins=(git)
-
-eval "$(sheldon source)"
+# Plugin manager initialization is now handled by programs.zsh.initExtra in respective modules
+# Original sheldon initialization:
+# eval "$(sheldon source)"
 
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"

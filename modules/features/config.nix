@@ -17,8 +17,11 @@ delib.module {
 
       ".p10k.zsh".source = home + "/.p10k.zsh";
 
-      # sheldom
+      # sheldon
       ".config/sheldon".source = home + "/.config/sheldon";
+
+      # antidote
+      ".config/antidote".source = home + "/.config/antidote";
 
       # wezterm
       ".config/wezterm/config.lua".source = home + "/.config/wezterm/config.lua";

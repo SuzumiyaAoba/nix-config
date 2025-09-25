@@ -1,0 +1,4 @@
+romkatv/zsh-defer
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-syntax-highlighting kind:defer
+$HOME/.config/zsh/programs kind:defer
