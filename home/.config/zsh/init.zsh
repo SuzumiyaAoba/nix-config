@@ -13,5 +13,6 @@ zstyle ':zle:*' word-style unspecified
 
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"
+source "$HOME/.config/zsh/programs/init.zsh"
 
 export PATH="$HOME/.local/bin:$PATH"
