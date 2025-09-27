@@ -37,7 +37,7 @@ delib.module {
           ];
         in {
           merge = {
-            conflictStyle = "diff3";
+            conflictStyle = "zdiff3";
           };
           alias = {
             delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main'|xargs git branch -d; git fetch --prune; };f";

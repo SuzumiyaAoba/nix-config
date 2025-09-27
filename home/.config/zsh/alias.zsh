@@ -9,7 +9,7 @@ if [[ $(command -v rg) ]]; then
 fi
 
 function _grep_with_delta() {
-    rg --json -C 2 $1 | delta
+    rg --json -C 2 $1 | delta --hyperlinks --hyperlinks-file-link-format 'vscode://file/{path}:{line}'
 }
 
 ## emacs
