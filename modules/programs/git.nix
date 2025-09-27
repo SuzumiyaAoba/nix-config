@@ -1,4 +1,4 @@
-{ delib, ... }:
+{ delib, lib, ... }:
 delib.module {
   name = "programs.git";
 
@@ -24,7 +24,18 @@ delib.module {
           ".mise.local.toml"
         ];
 
-        extraConfig = {
+        extraConfig = let
+          deltaOptions = [
+            "core.pager=delta"
+            "interactive.diffFilter='delta --color-only'"
+            "delta.navigate=true"
+            "delta.dark=true"
+            "delta.line-numbers=true"
+            "delta.side-by-side=true"
+            "delta.hyperlinks=true"
+            "delta.hyperlinks-file-link-format='vscode://file/{path}:{line}'"
+          ];
+        in {
           merge = {
             conflictStyle = "diff3";
           };
@@ -37,6 +48,8 @@ delib.module {
             ds    = "-c diff.external=difft show --ext-diff";
             ddiff = "-c diff.external=difft diff";
             dft   = "-c diff.external=difft diff";
+
+            delta = "-c ${lib.concatStringsSep " -c " deltaOptions} diff";
           };
         };
 

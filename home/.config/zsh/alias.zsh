@@ -2,7 +2,15 @@
 if [[ $(command -v rg) ]]; then
   alias grep='rg'
   alias rg="rg --hidden --glob '!.git'"
+
+  if [[ $(command -v delta) ]]; then
+     alias dg=_grep_with_delta
+  fi
 fi
+
+function _grep_with_delta() {
+    rg --json -C 2 $1 | delta
+}
 
 ## emacs
 if [[ $(command -v emacs) ]]; then
