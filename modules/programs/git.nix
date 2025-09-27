@@ -49,7 +49,8 @@ delib.module {
             ddiff = "-c diff.external=difft diff";
             dft   = "-c diff.external=difft diff";
 
-            delta = "-c ${lib.concatStringsSep " -c " deltaOptions} diff";
+            delta  = "-c ${lib.concatStringsSep " -c " deltaOptions} diff";
+            dblame = "-c ${lib.concatStringsSep " -c " deltaOptions} blame";
           };
         };
 
