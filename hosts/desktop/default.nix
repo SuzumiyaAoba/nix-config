@@ -19,6 +19,6 @@ delib.host {
     config.enable = true;
 
     macos.enable = true;
-    homebrew.enable = false;
+    homebrew.enable = true;
   };
 }
