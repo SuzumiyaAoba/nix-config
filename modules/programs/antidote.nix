@@ -10,7 +10,7 @@ delib.module {
     ];
 
     programs.zsh = {
-      initExtra = ''
+      initContent = ''
         # Initialize antidote plugin manager
         if [[ -f "${pkgs.antidote}/share/antidote/antidote.zsh" ]]; then
           source "${pkgs.antidote}/share/antidote/antidote.zsh"

@@ -10,7 +10,7 @@ delib.module {
     ];
 
     programs.zsh = {
-      initExtra = ''
+      initContent = ''
         # Initialize sheldon plugin manager
         if command -v sheldon >/dev/null 2>&1; then
           eval "$(sheldon source)"
