@@ -47,6 +47,14 @@ delib.module {
         ];
       };
 
+      activationScripts.preActivation.text = ''
+        # Ensure Homebrew base dirs exist (for taps, etc.)
+        if [ ! -d /opt/homebrew/Library/Taps ]; then
+          mkdir -p /opt/homebrew/Library/Taps
+          chown -R ${userConfig.username}:staff /opt/homebrew
+        fi
+      '';
+
       activationScripts.postActivation.text = ''
         sudo -u ${userConfig.username} defaults write com.apple.controlcenter.plist Bluetooth -int 18
         sudo -u ${userConfig.username} defaults write com.apple.controlcenter.plist Sound -int 18
