@@ -40,6 +40,11 @@ delib.module {
           "homebrew/homebrew-core" = inputs.homebrew-core;
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
         };
+
+        # 既存のHomebrewディレクトリをクリーンアップ
+        onActivation = {
+          cleanup = "zap";
+        };
       };
 
       homebrew = {
