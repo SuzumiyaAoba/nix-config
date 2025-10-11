@@ -41,5 +41,22 @@ delib.module {
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
         };
       };
+
+      homebrew = {
+        enable = true;
+        onActivation = {
+          upgrade = true;
+          autoUpdate = true;
+          cleanup = "zap";
+        };
+        taps = builtins.attrNames config.nix-homebrew.taps;
+
+        brews = [
+          "grep"
+          "findutils"
+          "gnu-sed"
+          "gettext"
+        ];
+      };
     };
 }

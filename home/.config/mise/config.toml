@@ -5,6 +5,7 @@ idiomatic_version_file_enable_tools = ['node', 'java']
 node = '22'
 
 "npm:yarn" = "latest"
+"npm:pnpm" = "latest"
 
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:bun" = "latest"
