@@ -48,11 +48,13 @@ delib.module {
       };
 
       activationScripts.preActivation.text = ''
-        # Ensure Homebrew base dirs exist (for taps, etc.)
-        if [ ! -d /opt/homebrew/Library/Taps ]; then
-          mkdir -p /opt/homebrew/Library/Taps
-          chown -R ${userConfig.username}:staff /opt/homebrew
+        # Ensure Homebrew base dirs exist (without creating Taps preemptively)
+        if [ ! -d /opt/homebrew/Library ]; then
+          mkdir -p /opt/homebrew/Library
         fi
+        # If an empty Taps dir exists from a previous run, remove it to avoid mkdir errors downstream
+        rmdir /opt/homebrew/Library/Taps 2>/dev/null || true
+        chown -R ${userConfig.username}:staff /opt/homebrew
       '';
 
       activationScripts.postActivation.text = ''
