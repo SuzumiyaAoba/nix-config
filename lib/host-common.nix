@@ -17,6 +17,7 @@
     homebrew = {
       brave-browser.enable = isPrivate;
       "1password".enable = isPrivate;
+      lmstudio.enable = isPrivate;
     };
   };
 }
