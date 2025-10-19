@@ -8,6 +8,7 @@ node = '22'
 "npm:pnpm" = "latest"
 
 "npm:@anthropic-ai/claude-code" = "latest"
+"npm:@google/gemini-cli" = "latest"
 "npm:bun" = "latest"
 
 "npm:pure-prompt" = "latest"
