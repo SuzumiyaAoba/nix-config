@@ -10,6 +10,7 @@
       zotero.enable = isPrivate;
       lmstudio.enable = isPrivate;
       lean.enable = isPrivate;
+      latex.enable = isPrivate;
 
       snyk.enable = !isPrivate;
     };
