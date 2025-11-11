@@ -1,13 +1,13 @@
 { delib, pkgs, ... }:
 delib.module {
-  name = "programs.latex";
+  name = "programs.tectonic";
 
   options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      texliveFull
-      texlivePackages.xetex
+      tectonic
+      watchexec
     ];
   };
 }

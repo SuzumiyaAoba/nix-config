@@ -9,6 +9,8 @@ node = '22'
 
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@google/gemini-cli" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:opencode-ai" = "latest"
 "npm:bun" = "latest"
 
 "npm:pure-prompt" = "latest"

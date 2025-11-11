@@ -11,6 +11,7 @@
       lmstudio.enable = isPrivate;
       lean.enable = isPrivate;
       latex.enable = isPrivate;
+      tectonic.enable = isPrivate;
 
       snyk.enable = !isPrivate;
     };
