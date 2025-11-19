@@ -11,9 +11,6 @@ delib.module {
         enable = true;
         lfs.enable = true;
 
-        userName = myconfig.constants.username;
-        userEmail = myconfig.constants.useremail;
-
         ignores = [
           "*~"
           "*.swp"
@@ -24,7 +21,7 @@ delib.module {
           ".mise.local.toml"
         ];
 
-        extraConfig = let
+        settings = let
           deltaOptions = [
             "core.pager=delta"
             "interactive.diffFilter='delta --color-only'"
@@ -36,6 +33,10 @@ delib.module {
             "delta.hyperlinks-file-link-format='vscode://file/{path}:{line}'"
           ];
         in {
+          user = {
+            name = myconfig.constants.username;
+            email = myconfig.constants.useremail;
+          };
           merge = {
             conflictStyle = "zdiff3";
           };
@@ -53,14 +54,14 @@ delib.module {
             dblame = "-c ${lib.concatStringsSep " -c " deltaOptions} blame";
           };
         };
+      };
 
-        diff-so-fancy = {
-          enable = false;
-        };
+      programs.diff-so-fancy = {
+        enable = false;
+      };
 
-        difftastic = {
-          enable = false;
-        };
+      programs.difftastic = {
+        enable = false;
       };
     };
 }
