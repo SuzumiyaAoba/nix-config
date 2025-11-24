@@ -14,7 +14,6 @@ delib.module {
 
       # zsh
       ".config/zsh".source = home + "/.config/zsh";
-
       ".p10k.zsh".source = home + "/.p10k.zsh";
 
       # sheldon
@@ -22,6 +21,10 @@ delib.module {
 
       # antidote
       ".config/antidote".source = home + "/.config/antidote";
+
+      # NeoVim
+      ".config/nvim/init.lua".source = home + "/.config/nvim/init.lua";
+      ".config/nvim/lua".source = home + "/.config/nvim/lua";
 
       # wezterm
       ".config/wezterm/config.lua".source = home + "/.config/wezterm/config.lua";

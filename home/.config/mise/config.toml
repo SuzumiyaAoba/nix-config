@@ -12,6 +12,7 @@ node = '22'
 "npm:@openai/codex" = "latest"
 "npm:opencode-ai" = "latest"
 "npm:bun" = "latest"
+"npm:deno" = "latest"
 
 "npm:pure-prompt" = "latest"
 

@@ -1,12 +1,12 @@
 { delib, pkgs, ... }:
 delib.module {
-  name = "programs.neovim";
+  name = "programs.glab";
 
   options = delib.singleEnableOption true;
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      neovim
+      glab
     ];
   };
 }

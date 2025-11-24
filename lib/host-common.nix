@@ -4,8 +4,8 @@
 
   myconfig = {
     programs = {
-      ollama.enable = isPrivate;
-      aider.enable = isPrivate;
+      ollama.enable = false;
+      aider.enable = false;
       zed.enable = isPrivate;
       zotero.enable = isPrivate;
       lmstudio.enable = isPrivate;

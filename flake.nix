@@ -39,6 +39,10 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+    im-select-tap = {
+      url = "github:daipeihust/homebrew-tap";
+      flake = false;
+    };
 
     emacs-flake = {
       url = "github:SuzumiyaAoba/emacs-config";
