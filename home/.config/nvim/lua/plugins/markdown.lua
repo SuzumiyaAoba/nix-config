@@ -12,5 +12,12 @@ return {
   {
     "OXY2DEV/markview.nvim",
     lazy = false,
-  }
+    config = function()
+      vim.filetype.add({
+        extension = {
+          mdx = "markdown",
+        },
+      })
+    end,
+  },
 }

@@ -13,16 +13,16 @@ return {
       },
     },
   },
-  {
-    'nvimdev/lspsaga.nvim',
-    config = function()
-      require('lspsaga').setup({})
-    end,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter', -- optional
-      'nvim-tree/nvim-web-devicons',     -- optional
-    }
-  },
+  -- {
+  --   'nvimdev/lspsaga.nvim',
+  --   config = function()
+  --     require('lspsaga').setup({})
+  --   end,
+  --   dependencies = {
+  --     'nvim-treesitter/nvim-treesitter', -- optional
+  --     'nvim-tree/nvim-web-devicons',     -- optional
+  --   }
+  -- },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -40,8 +40,20 @@ return {
       },
       {
         "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
+        function()
+          -- nvim-tree を左に開く
+          vim.cmd("NvimTreeOpen")
+
+          -- nvim-tree ウィンドウへフォーカス
+          local tree_win = require("nvim-tree.view").get_winnr()
+          if tree_win then vim.api.nvim_set_current_win(tree_win) end
+
+          -- その下に trouble.symbols を開く
+          require("trouble").toggle("symbols", {
+            win = { position = "bottom" },
+          })
+        end,
+        desc = "Symbols below nvim-tree",
       },
       {
         "<leader>cl",

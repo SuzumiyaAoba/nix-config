@@ -1,5 +1,5 @@
 require("config.lazy")
-require("config.lsp")
+-- require("config.lsp")
 
 vim.opt.clipboard = "unnamedplus"
 
@@ -49,3 +49,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Emacs-like
 vim.keymap.set('!', '<M-.>', 'gd')
 vim.keymap.set('!', '<M-,>', '<C-o>')
+
+-- fold
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
