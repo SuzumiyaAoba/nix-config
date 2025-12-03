@@ -3,7 +3,7 @@ require("config.lazy")
 
 vim.opt.clipboard = "unnamedplus"
 
-vim.g.neovide_opacity = 0.95
+vim.g.neovide_opacity = 1
 
 -- タブ
 vim.o.expandtab = true
