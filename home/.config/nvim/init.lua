@@ -22,9 +22,6 @@ vim.opt.fileencodings = { "ucs-bom", "utf-8", "euc-jp", "cp932" }
 vim.opt.cursorline = true
 vim.opt.virtualedit = "onemore"
 
--- インデント
-vim.opt.smartindent = true
-
 -- 視覚ベル
 vim.opt.visualbell = true
 
