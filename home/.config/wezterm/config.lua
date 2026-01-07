@@ -14,7 +14,8 @@ return {
     -- "Explex Console",
     "Cascadia Next JP",
     "Cascadia Code NF",
-    "HackGen Console NF"
+    "Symbols Nerd Font Mono",
+    "HackGen Console NF",
   },
   font_size = 14,
 
