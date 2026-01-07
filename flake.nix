@@ -48,6 +48,11 @@
       url = "github:SuzumiyaAoba/emacs-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    moonbit-overlay = {
+      url = "github:moonbit-community/moonbit-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

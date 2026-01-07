@@ -12,6 +12,7 @@
       lean.enable = isPrivate;
       latex.enable = isPrivate;
       tectonic.enable = isPrivate;
+      moonbit.enable = isPrivate;
 
       snyk.enable = !isPrivate;
     };

@@ -1,5 +1,6 @@
 {
   delib,
+  inputs,
   pkgs,
   ...
 }:
@@ -17,6 +18,10 @@ delib.module {
         pkg:
         builtins.elem (pkgs.lib.getName pkg) [
           "oracle-instantclient"
+        ];
+      nixpkgs.overlays =
+        pkgs.lib.optionals myconfig.host.isPrivate [
+          inputs.moonbit-overlay.overlays.default
         ];
       home = {
         inherit username;
