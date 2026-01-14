@@ -10,6 +10,6 @@ return {
     { key = 'c', mods = 'SUPER', action = act.CopyTo 'Clipboard' },
     { key = 'v', mods = 'SUPER', action = act.PasteFrom 'Clipboard' },
     -- for Emacs
-    { key = "_", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    { key = "/", mods = "CTRL", action = wezterm.action.SendString '\x1f' },
   }
 }
