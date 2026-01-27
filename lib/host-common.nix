@@ -13,6 +13,7 @@
       latex.enable = isPrivate;
       tectonic.enable = isPrivate;
       moonbit.enable = isPrivate;
+      ffmpeg.enable = isPrivate;
 
       snyk.enable = !isPrivate;
     };

@@ -6,7 +6,7 @@ delib.module {
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      jetbrains.idea-ultimate
+      jetbrains.idea
       jetbrains.datagrip
       jetbrains.rider
       jetbrains.rust-rover
