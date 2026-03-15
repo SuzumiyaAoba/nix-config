@@ -5,12 +5,15 @@ delib.module {
   options = delib.singleEnableOption true;
 
   home.ifEnabled = {
-    home.packages = with pkgs; [
-      jetbrains.idea
-      jetbrains.datagrip
-      jetbrains.rider
-      jetbrains.rust-rover
-      jetbrains.goland
-    ];
+    home.packages =
+      (with pkgs; [
+        jetbrains.datagrip
+        jetbrains.rust-rover
+        jetbrains.goland
+      ])
+      ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+        pkgs.jetbrains.idea
+        pkgs.jetbrains.rider
+      ];
   };
 }
