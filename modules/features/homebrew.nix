@@ -18,17 +18,22 @@ delib.module {
 
       # ディレクトリ内のファイルを読み込んでモジュールマップを作成
       # この方法はNixの評価時に安全に動作します
-      homebrewModules = lib.mapAttrs' (name: type:
-        if type == "regular" && lib.hasSuffix ".nix" name
-        then lib.nameValuePair (lib.removeSuffix ".nix" name) (homebrewDir + "/${name}")
-        else lib.nameValuePair "" null
+      homebrewModules = lib.mapAttrs' (
+        name: type:
+        if type == "regular" && lib.hasSuffix ".nix" name then
+          lib.nameValuePair (lib.removeSuffix ".nix" name) (homebrewDir + "/${name}")
+        else
+          lib.nameValuePair "" null
       ) (builtins.readDir homebrewDir);
 
       # 有効なモジュールのみをフィルタリング
       validHomebrewModules = lib.filterAttrs (name: path: path != null) homebrewModules;
     in
     {
-      imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ] ++ (lib.attrValues validHomebrewModules);
+      imports = [
+        inputs.nix-homebrew.darwinModules.nix-homebrew
+      ]
+      ++ (lib.attrValues validHomebrewModules);
 
       nix-homebrew = {
         enable = true;
@@ -40,6 +45,7 @@ delib.module {
           "homebrew/homebrew-core" = inputs.homebrew-core;
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
           "daipeihust/homebrew-tap" = inputs.im-select-tap;
+          "nikitabobko/homebrew-tap" = inputs.aerospace-tap;
         };
       };
 
@@ -47,9 +53,12 @@ delib.module {
         enable = true;
         onActivation = {
           upgrade = true;
-          autoUpdate = true;
+          # Nix store 上の tap を Homebrew が更新しようとして
+          # Permission denied になるのを避ける
+          autoUpdate = false;
           cleanup = "zap";
         };
+        global.autoUpdate = false;
         taps = builtins.attrNames config.nix-homebrew.taps;
 
         brews = [
@@ -57,6 +66,10 @@ delib.module {
           "findutils"
           "gnu-sed"
           "gettext"
+        ];
+
+        casks = lib.optionals myconfig.host.isPrivate [
+          "intellij-idea"
         ];
       };
     };
