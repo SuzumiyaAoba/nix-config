@@ -4,7 +4,7 @@
 
   myconfig = {
     programs = {
-      ollama.enable = false;
+      ollama.enable = isPrivate;
       aider.enable = false;
       zed.enable = isPrivate;
       zotero.enable = isPrivate;
