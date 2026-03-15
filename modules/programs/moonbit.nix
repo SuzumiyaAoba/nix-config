@@ -9,7 +9,9 @@ let
   pkgsForMoon = pkgs.extend (
     final: prev: {
       tinycc = prev.tinycc.overrideAttrs (old: {
-        meta = (old.meta or { }) // { broken = false; };
+        meta = (old.meta or { }) // {
+          broken = false;
+        };
       });
     }
   );
@@ -24,23 +26,22 @@ let
     };
     minVersion = "0.6.28";
   };
-  toolchainsPinned =
-    moonbitBinPinned.legacyPackages.toolchains.pinned.overrideAttrs (old: {
-      # Keep the bundled tcc (no tinycc dependency), but keep moon-patched.
-      installPhase = ''
-        runHook preInstall
+  toolchainsPinned = moonbitBinPinned.legacyPackages.toolchains.pinned.overrideAttrs (old: {
+    # Keep the bundled tcc (no tinycc dependency), but keep moon-patched.
+    installPhase = ''
+      runHook preInstall
 
-        mkdir -p $out
-        cp -a ./* $out/
-        chmod +x $out/bin/*
-        chmod +x $out/bin/internal/tcc
+      mkdir -p $out
+      cp -a ./* $out/
+      chmod +x $out/bin/*
+      chmod +x $out/bin/internal/tcc
 
-        cp ${moonbitBinPinned.legacyPackages."moon-patched".pinned}/bin/moon $out/bin/moon
-        cp ${moonbitBinPinned.legacyPackages."moon-patched".pinned}/bin/moonrun $out/bin/moonrun
+      cp ${moonbitBinPinned.legacyPackages."moon-patched".pinned}/bin/moon $out/bin/moon
+      cp ${moonbitBinPinned.legacyPackages."moon-patched".pinned}/bin/moonrun $out/bin/moonrun
 
-        runHook postInstall
-      '';
-    });
+      runHook postInstall
+    '';
+  });
   corePinned = moonbitBinPinned.legacyPackages.core.pinned;
   moonbitPinned = pkgsForMoon.callPackage "${overlaySrc}/lib/bundle.nix" {
     toolchains = toolchainsPinned;

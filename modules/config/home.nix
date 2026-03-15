@@ -19,10 +19,9 @@ delib.module {
         builtins.elem (pkgs.lib.getName pkg) [
           "oracle-instantclient"
         ];
-      nixpkgs.overlays =
-        pkgs.lib.optionals myconfig.host.isPrivate [
-          inputs.moonbit-overlay.overlays.default
-        ];
+      nixpkgs.overlays = pkgs.lib.optionals myconfig.host.isPrivate [
+        inputs.moonbit-overlay.overlays.default
+      ];
       home = {
         inherit username;
         # If you don't need Nix-Darwin, or if you're using it exclusively,
