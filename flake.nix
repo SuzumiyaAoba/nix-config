@@ -43,6 +43,10 @@
       url = "github:daipeihust/homebrew-tap";
       flake = false;
     };
+    aerospace-tap = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
 
     emacs-flake = {
       url = "github:SuzumiyaAoba/emacs-config";
