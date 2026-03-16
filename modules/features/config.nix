@@ -46,9 +46,6 @@ delib.module {
       ".config/karabiner/karabiner.json".source = home + "/.config/karabiner/karabiner.json";
       ".config/karabiner/assets".source = home + "/.config/karabiner/assets";
 
-      # AeroSpace
-      ".config/aerospace/aerospace.toml".source = home + "/.config/aerospace/aerospace.toml";
-
       # zellij
       ".config/zellij".source = home + "/.config/zellij";
 
