@@ -47,7 +47,6 @@
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
     };
-
     emacs-flake = {
       url = "github:SuzumiyaAoba/emacs-config";
       inputs.nixpkgs.follows = "nixpkgs";

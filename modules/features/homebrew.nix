@@ -68,7 +68,7 @@ delib.module {
           "gettext"
         ];
 
-        casks = lib.optionals myconfig.host.isPrivate [
+        casks = [
           "intellij-idea"
         ];
       };

@@ -10,6 +10,7 @@ delib.module {
         {
           options = {
             isPrivate = boolOption false;
+            privateApplications = listOfOption str [ ];
           };
         };
     in

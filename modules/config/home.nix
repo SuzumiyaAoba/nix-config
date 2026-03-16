@@ -19,7 +19,7 @@ delib.module {
         builtins.elem (pkgs.lib.getName pkg) [
           "oracle-instantclient"
         ];
-      nixpkgs.overlays = pkgs.lib.optionals myconfig.host.isPrivate [
+      nixpkgs.overlays = [
         inputs.moonbit-overlay.overlays.default
       ];
       home = {

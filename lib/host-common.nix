@@ -1,27 +1,55 @@
-{ isPrivate, ... }:
 {
-  myconfig.host.isPrivate = isPrivate;
+  isPrivate,
+  privateApplications ? null,
+  ...
+}:
+let
+  privateApplicationTargets = {
+    ollama = "programs";
+    zotero = "programs";
+    lmstudio = "homebrew";
+    lean = "programs";
+    latex = "programs";
+    tectonic = "programs";
+    moonbit = "programs";
+    ffmpeg = "programs";
+    "brave-browser" = "homebrew";
+    "1password" = "homebrew";
+  };
+
+  defaultPrivateApplications = builtins.attrNames privateApplicationTargets;
+
+  enabledPrivateApplications =
+    if privateApplications != null then
+      privateApplications
+    else if isPrivate then
+      defaultPrivateApplications
+    else
+      [ ];
+
+  mkEnabledAttrs =
+    target:
+    builtins.listToAttrs (
+      map (name: {
+        inherit name;
+        value = {
+          enable = builtins.elem name enabledPrivateApplications;
+        };
+      }) (builtins.filter (name: privateApplicationTargets.${name} == target) defaultPrivateApplications)
+    );
+in
+{
+  myconfig.host = {
+    inherit isPrivate;
+    privateApplications = enabledPrivateApplications;
+  };
 
   myconfig = {
-    programs = {
-      ollama.enable = isPrivate;
+    programs = (mkEnabledAttrs "programs") // {
       aider.enable = false;
-      zed.enable = isPrivate;
-      zotero.enable = isPrivate;
-      lmstudio.enable = isPrivate;
-      lean.enable = isPrivate;
-      latex.enable = isPrivate;
-      tectonic.enable = isPrivate;
-      moonbit.enable = isPrivate;
-      ffmpeg.enable = isPrivate;
-
       snyk.enable = !isPrivate;
     };
 
-    homebrew = {
-      brave-browser.enable = isPrivate;
-      "1password".enable = isPrivate;
-      lmstudio.enable = isPrivate;
-    };
+    homebrew = mkEnabledAttrs "homebrew";
   };
 }

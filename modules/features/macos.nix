@@ -64,6 +64,15 @@ delib.module {
       '';
     };
 
+    services.jankyborders = {
+      enable = true;
+      style = "round";
+      width = 6.0;
+      hidpi = true;
+      active_color = "0xff89b4fa";
+      inactive_color = "0xff6c7086";
+    };
+
     security.pam.services.sudo_local.touchIdAuth = true;
   };
 }
