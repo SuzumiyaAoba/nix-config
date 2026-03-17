@@ -49,6 +49,9 @@ delib.module {
       # AeroSpace
       ".config/aerospace/aerospace.toml".source = home + "/.config/aerospace/aerospace.toml";
 
+      # Vimium
+      ".config/vimium".source = home + "/.config/vimium";
+
       # zellij
       ".config/zellij".source = home + "/.config/zellij";
 
