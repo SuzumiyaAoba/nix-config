@@ -45,6 +45,7 @@ delib.module {
           "homebrew/homebrew-core" = inputs.homebrew-core;
           "homebrew/homebrew-cask" = inputs.homebrew-cask;
           "daipeihust/homebrew-tap" = inputs.im-select-tap;
+          "nikitabobko/homebrew-tap" = inputs.aerospace-tap;
         };
       };
 
