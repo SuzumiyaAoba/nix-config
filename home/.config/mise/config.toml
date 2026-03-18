@@ -11,6 +11,7 @@ node = '22'
 "npm:@google/gemini-cli" = "latest"
 "npm:@openai/codex" = "latest"
 "npm:opencode-ai" = "latest"
+"npm:portless" = "latest"
 "npm:bun" = "latest"
 "npm:deno" = "latest"
 
