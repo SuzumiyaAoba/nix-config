@@ -104,7 +104,7 @@ on-mode-changed = []
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    alt-f = 'layout floating tiling'
+    alt-shift-enter = 'layout floating tiling'
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
 
