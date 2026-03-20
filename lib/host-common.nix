@@ -121,6 +121,7 @@ let
     "gas-mask"
     "google-chrome"
     "im-select"
+    "intellij-idea"
     "karabiner"
     "rancher"
     "raycast"
