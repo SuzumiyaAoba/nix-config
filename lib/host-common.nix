@@ -86,6 +86,7 @@ let
     "jd-diff-patch"
     "jetbrains"
     "jq"
+    "karabiner"
     "kustomize"
     "lazygit"
     "lua"
@@ -122,7 +123,6 @@ let
     "google-chrome"
     "im-select"
     "intellij-idea"
-    "karabiner"
     "rancher"
     "raycast"
   ];
