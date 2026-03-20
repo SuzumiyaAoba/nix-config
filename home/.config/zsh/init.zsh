@@ -7,9 +7,7 @@ select-word-style default
 zstyle ':zle:*' word-chars ' /=;@:{}[]()<>,|.'
 zstyle ':zle:*' word-style unspecified
 
-# Plugin manager initialization is now handled by programs.zsh.initExtra in respective modules
-# Original sheldon initialization:
-# eval "$(sheldon source)"
+# Zsh plugin loading is configured declaratively in modules/programs/zsh.nix.
 
 source "$HOME/.config/zsh/alias.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"

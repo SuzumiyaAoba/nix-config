@@ -26,14 +26,13 @@ delib.module {
         initContent = ''
           # zmodload zsh/zprof
 
-          ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
-          [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-          [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-          source "''${ZINIT_HOME}/zinit.zsh"
-
           if [[ $(uname -m) == 'arm64' ]]; then
             eval "$(/opt/homebrew/bin/brew shellenv)"
           fi
+
+          source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
+          zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+          zsh-defer source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
           source "$HOME/.config/zsh/init.zsh"
 
