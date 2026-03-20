@@ -9,9 +9,6 @@ delib.module {
 
   home.ifEnabled = {
     home.file = {
-      # nix
-      ".config/nix/nix.conf".source = home + "/.config/nix/nix.conf";
-
       # zsh
       ".config/zsh".source = home + "/.config/zsh";
       ".p10k.zsh".source = home + "/.p10k.zsh";
