@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.emacs";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   darwin.ifEnabled = {
     environment.systemPackages = [

@@ -1,8 +1,8 @@
 { delib, pkgs, ... }:
 delib.module {
-  name = "programs.atsuin";
+  name = "programs.atuin";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     home.packages = with pkgs; [

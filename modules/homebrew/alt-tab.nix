@@ -2,7 +2,7 @@
 delib.module {
   name = "homebrew.alt-tab";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   darwin.ifEnabled = {
     homebrew.casks = [

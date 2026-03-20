@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.zellij";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.zellij = {

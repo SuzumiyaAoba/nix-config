@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.ast-grep";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     home.packages = with pkgs; [

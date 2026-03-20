@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.java";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     home.packages = with pkgs; [

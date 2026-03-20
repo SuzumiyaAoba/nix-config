@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.bottom";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.bottom = {

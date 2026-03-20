@@ -2,7 +2,7 @@
 delib.module {
   name = "homebrew.raycast";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   darwin.ifEnabled = {
     homebrew.casks = [

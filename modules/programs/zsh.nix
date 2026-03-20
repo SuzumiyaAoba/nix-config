@@ -7,7 +7,7 @@
 delib.module {
   name = "programs.zsh";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled =
     { myconfig, ... }:

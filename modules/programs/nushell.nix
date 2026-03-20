@@ -2,7 +2,7 @@
 delib.module {
   name = "programs.nushell";
 
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   home.ifEnabled = {
     programs.nushell = {
