@@ -43,7 +43,7 @@ function set_pane_to_command_line() {
     change_pane_title $title
 }
 
-if [[ "$TERM_PROGRAM" == 'vscode' || -n $CURSOR_TRACE_ID ]]; then
+if [[ "$TERM_PROGRAM" == 'vscode' || -n $CURSOR_TRACE_ID || ! -t 0 || ! -t 1 ]]; then
 else
   if [[ -z "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
     # export ZELLIJ_AUTO_ATTACH=true
@@ -59,5 +59,4 @@ else
     add-zsh-hook preexec set_pane_to_command_line
   fi
 fi
-
 
