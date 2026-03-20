@@ -21,13 +21,6 @@ delib.module {
           ];
         };
       };
-
-      nixpkgs.config.allowUnfree = true;
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (pkgs.lib.getName pkg) [
-          "oracle-instantclient"
-        ];
       nixpkgs.overlays = [
         inputs.moonbit-overlay.overlays.default
       ];
