@@ -1,1 +1,4 @@
-{}
+{
+  "keyMappings": "# 半ページスクロール\nmap <c-f> scrollPageDown\nmap <c-b> scrollPageUp",
+  "settingsVersion": "2.4.2"
+}

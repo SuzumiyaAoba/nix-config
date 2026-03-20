@@ -1,4 +1,5 @@
 Vimium settings are managed in `vimium-options.json`.
+This file is a Vimium backup JSON for "Restore from backup", not a raw keymap-only file.
 
 Apply them from Vimium's Options page:
 
