@@ -5,12 +5,22 @@ delib.module {
   options =
     with delib;
     let
+      applicationSet =
+        { ... }:
+        {
+          options = {
+            programs = listOfOption str [ ];
+            homebrew = listOfOption str [ ];
+          };
+        };
+
       host =
         { config, ... }:
         {
           options = {
             isPrivate = boolOption false;
-            privateApplications = listOfOption str [ ];
+            privateApplications = submoduleOption applicationSet { };
+            workApplications = submoduleOption applicationSet { };
           };
         };
     in

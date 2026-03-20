@@ -1,6 +1,7 @@
 {
   isPrivate,
   privateApplications ? null,
+  workApplications ? null,
   ...
 }:
 let
@@ -125,47 +126,75 @@ let
     "raycast"
   ];
 
-  privateApplicationTargets = {
-    ollama = "programs";
-    zotero = "programs";
-    lmstudio = "homebrew";
-    lean = "programs";
-    latex = "programs";
-    tectonic = "programs";
-    moonbit = "programs";
-    ffmpeg = "programs";
-    "brave-browser" = "homebrew";
-    "1password" = "homebrew";
-  };
+  defaultApplicationsByProfile = {
+    private = {
+      programs = [
+        "ollama"
+        "zotero"
+        "lean"
+        "latex"
+        "tectonic"
+        "moonbit"
+        "ffmpeg"
+      ];
 
-  defaultPrivateApplications = builtins.attrNames privateApplicationTargets;
+      homebrew = [
+        "lmstudio"
+        "brave-browser"
+        "1password"
+      ];
+    };
+
+    work = {
+      programs = [
+        "snyk"
+      ];
+
+      homebrew = [ ];
+    };
+  };
 
   moduleNamesByTarget = {
     programs = collectModuleNames "programs";
     homebrew = collectModuleNames "homebrew";
   };
 
-  enabledPrivateApplications =
-    if privateApplications != null then
-      privateApplications
-    else if isPrivate then
-      defaultPrivateApplications
-    else
-      [ ];
+  enabledApplicationsByProfile = {
+    private =
+      if privateApplications != null then
+        privateApplications
+      else if isPrivate then
+        defaultApplicationsByProfile.private
+      else
+        {
+          programs = [ ];
+          homebrew = [ ];
+        };
+
+    work =
+      if workApplications != null then
+        workApplications
+      else if isPrivate then
+        {
+          programs = [ ];
+          homebrew = [ ];
+        }
+      else
+        defaultApplicationsByProfile.work;
+  };
+
+  enabledApplicationsForTarget = profile: target: enabledApplicationsByProfile.${profile}.${target};
 
   enabledModules = {
     programs =
       basePrograms
-      ++ (builtins.filter (
-        name: privateApplicationTargets.${name} == "programs"
-      ) enabledPrivateApplications)
-      ++ (if isPrivate then [ ] else [ "snyk" ]);
+      ++ (enabledApplicationsForTarget "private" "programs")
+      ++ (enabledApplicationsForTarget "work" "programs");
 
     homebrew =
       baseHomebrew
-      ++ (builtins.filter (
-        name: privateApplicationTargets.${name} == "homebrew"
-      ) enabledPrivateApplications);
+      ++ (enabledApplicationsForTarget "private" "homebrew")
+      ++ (enabledApplicationsForTarget "work" "homebrew");
   };
 
   mkExplicitEnableAttrs =
@@ -182,7 +211,8 @@ in
 {
   myconfig.host = {
     inherit isPrivate;
-    privateApplications = enabledPrivateApplications;
+    privateApplications = enabledApplicationsByProfile.private;
+    workApplications = enabledApplicationsByProfile.work;
   };
 
   myconfig = {
