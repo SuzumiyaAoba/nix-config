@@ -16,6 +16,8 @@ delib.module {
           "*.swp"
           ".DS_Store"
           ".dir-locals.el"
+          ".playwright-cli/"
+          ".claude/worktree/"
           "mise.local.toml"
           ".claude/settings.local.json"
           ".mise.local.toml"
