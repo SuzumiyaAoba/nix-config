@@ -4,20 +4,11 @@ local keybind = require "keybinds"
 
 return {
   font = wezterm.font_with_fallback {
-    -- "Monaspace Radon",
-    -- "Monospace Xenon",
-    -- "Monospace Krypton",
-    -- "Monospace Neon",
-    -- "Monaspace Argon",
-    -- "0xProto",
-    -- "Explex",
-    -- "Explex Console",
-    "Cascadia Next JP",
-    "Cascadia Code NF",
+    "UDEV Gothic",
     "Symbols Nerd Font Mono",
-    "HackGen Console NF",
   },
   font_size = 14,
+  allow_square_glyphs_to_overflow_width = "Never",
 
   -- default_prog = { "zellij" },
 
@@ -37,4 +28,3 @@ return {
   window_close_confirmation = 'NeverPrompt',
   macos_forward_to_ime_modifier_mask = "SHIFT|CTRL",
 }
-

@@ -16,6 +16,8 @@ delib.module {
       _0xproto
       (callPackage ../../pkgs/fonts/explex.nix { })
       (callPackage ../../pkgs/fonts/cascadia-next.nix { })
+      (callPackage ../../pkgs/fonts/udev-gothic.nix { })
+      (callPackage ../../pkgs/fonts/udev-gothic-jpdoc.nix { })
 
       nerd-fonts.symbols-only
       cascadia-code
