@@ -4,8 +4,24 @@
   pkgs,
   ...
 }:
+let
+  # Workaround: nixpkgs direnv build fails with CGO_ENABLED=0 and -linkmode=external
+  direnvOverlay = final: prev: {
+    direnv = prev.direnv.overrideAttrs (old: {
+      env = (old.env or { }) // {
+        CGO_ENABLED = 1;
+      };
+    });
+  };
+in
 delib.module {
   name = "home";
+
+  darwin.always = {
+    nixpkgs.overlays = [
+      direnvOverlay
+    ];
+  };
 
   home.always =
     { myconfig, ... }:
@@ -23,6 +39,7 @@ delib.module {
       };
       nixpkgs.overlays = [
         inputs.moonbit-overlay.overlays.default
+        direnvOverlay
       ];
       home = {
         inherit username;
