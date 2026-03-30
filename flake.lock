@@ -89,11 +89,11 @@
         "packlet": "packlet"
       },
       "locked": {
-        "lastModified": 1774838250,
-        "narHash": "sha256-FCV/QQTL7kGiOPExDnnG0f+5wqSXfoU4bDjyF0BVVO4=",
+        "lastModified": 1774841898,
+        "narHash": "sha256-gB9bsUDI7zNMoZTKl0wpSR9sqUCMnSdUsyEpvBf4Vzg=",
         "owner": "SuzumiyaAoba",
         "repo": "emacs-config",
-        "rev": "2cb9412651d489416f871091fbbe5d9d538c9e0f",
+        "rev": "9e1dbeb585227ae5434e89b5312c382fe231340b",
         "type": "github"
       },
       "original": {
@@ -201,11 +201,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1774836960,
-        "narHash": "sha256-IdXxsZ4W+NrxcXQ2HnHaMWO1cTejw8P9/gHapb8W+xg=",
+        "lastModified": 1774841696,
+        "narHash": "sha256-tuGFbuZquy6F+OduqwU6UakGpoBMpAwNCvVq+yeQwY0=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "e57795f7f1e3aa69d92803cf0d81539711a68dd2",
+        "rev": "f2a54bf837b718efd551afdb3668e6a3de87fa96",
         "type": "github"
       },
       "original": {
