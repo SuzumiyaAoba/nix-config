@@ -46,7 +46,7 @@ delib.module {
               conflictStyle = "zdiff3";
             };
             alias = {
-              delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main'|xargs git branch -d; git fetch --prune; };f";
+              delete-merged-branch = "!f() { base=\"$1\"; [ -n \"$base\" ] || base=HEAD; git for-each-ref --shell --merged=\"$base\" --format='branch=%(refname:short) worktree=%(worktreepath)' refs/heads | while read -r entry; do eval \"$entry\"; case \"$branch\" in \"$base\"|develop|main|master) continue ;; esac; [ -n \"$worktree\" ] && continue; git branch -d -- \"$branch\"; done; git fetch --prune; }; f";
 
               dlog = "-c diff.external=difft log --ext-diff";
               dl = "-c diff.external=difft log --ext-diff";
