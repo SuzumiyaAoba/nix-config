@@ -48,6 +48,9 @@ delib.module {
 
       # Cursor
       ".iterm2_shell_integration.zsh".source = home + "/.iterm2_shell_integration.zsh";
+
+      # Calude Code
+      ".claude/statusline.py".source = home + "/.claude/statusline.py";
     };
   };
 }
