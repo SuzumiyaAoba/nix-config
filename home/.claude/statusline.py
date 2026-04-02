@@ -81,13 +81,13 @@ current_dir = workspace.get('current_dir') or data.get('cwd') or os.getcwd()
 
 if worktree.get('name'):
     repo_dir = worktree.get('original_cwd') or workspace.get('project_dir') or current_dir
-    location = f"{directory_name(repo_dir)} ({BRANCH_ICON} {worktree['name']})"
+    location = f"{directory_name(repo_dir)} [{BRANCH_ICON} {worktree['name']}]"
 else:
     location = directory_name(current_dir)
 
     branch = git_branch(current_dir)
     if branch:
-        location = f'{location} ({BRANCH_ICON} {branch})'
+        location = f'{location} [{BRANCH_ICON} {branch}]'
 
 parts.append(location)
 print(f'{DIM}│{R}'.join(f' {p} ' for p in parts), end='')
