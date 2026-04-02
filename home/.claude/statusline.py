@@ -10,6 +10,7 @@ if sys.platform == 'win32':
 data = json.load(sys.stdin)
 
 BLOCKS = ' ▏▎▍▌▋▊▉█'
+BRANCH_ICON = ''
 R = '\033[0m'
 DIM = '\033[2m'
 
@@ -80,13 +81,13 @@ current_dir = workspace.get('current_dir') or data.get('cwd') or os.getcwd()
 
 if worktree.get('name'):
     repo_dir = worktree.get('original_cwd') or workspace.get('project_dir') or current_dir
-    location_parts = [directory_name(repo_dir), worktree['name']]
+    location = f"{directory_name(repo_dir)} ({BRANCH_ICON} {worktree['name']})"
 else:
-    location_parts = [directory_name(current_dir)]
+    location = directory_name(current_dir)
 
     branch = git_branch(current_dir)
     if branch:
-        location_parts.append(branch)
+        location = f'{location} ({BRANCH_ICON} {branch})'
 
-print(f'{DIM}│{R}'.join(f' {p} ' for p in parts))
-print(f'{DIM}│{R}'.join(f' {p} ' for p in location_parts), end='')
+parts.append(location)
+print(f'{DIM}│{R}'.join(f' {p} ' for p in parts), end='')
