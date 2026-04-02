@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Pattern 4: Fine-grained progress bar with true color gradient"""
-import json, sys
+import json
+import os
+import subprocess
+import sys
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
@@ -33,6 +36,29 @@ def fmt(label, pct):
     p = round(pct)
     return f'{label} {gradient(pct)}{bar(pct)} {p}%{R}'
 
+
+def directory_name(path):
+    norm = os.path.normpath(path or os.getcwd())
+    name = os.path.basename(norm)
+    return name or norm
+
+
+def git_branch(path):
+    try:
+        result = subprocess.run(
+            ['git', '-C', path, 'branch', '--show-current'],
+            capture_output=True,
+            check=False,
+            text=True,
+        )
+    except OSError:
+        return None
+
+    branch = result.stdout.strip()
+    if result.returncode != 0 or not branch:
+        return None
+    return branch
+
 model = data.get('model', {}).get('display_name', 'Claude')
 parts = [model]
 
@@ -48,4 +74,19 @@ week = data.get('rate_limits', {}).get('seven_day', {}).get('used_percentage')
 if week is not None:
     parts.append(fmt('7d', week))
 
-print(f'{DIM}│{R}'.join(f' {p} ' for p in parts), end='')
+workspace = data.get('workspace', {})
+worktree = data.get('worktree', {})
+current_dir = workspace.get('current_dir') or data.get('cwd') or os.getcwd()
+
+if worktree.get('name'):
+    repo_dir = worktree.get('original_cwd') or workspace.get('project_dir') or current_dir
+    location_parts = [directory_name(repo_dir), worktree['name']]
+else:
+    location_parts = [directory_name(current_dir)]
+
+    branch = git_branch(current_dir)
+    if branch:
+        location_parts.append(branch)
+
+print(f'{DIM}│{R}'.join(f' {p} ' for p in parts))
+print(f'{DIM}│{R}'.join(f' {p} ' for p in location_parts), end='')
