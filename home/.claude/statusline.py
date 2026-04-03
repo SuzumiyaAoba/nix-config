@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Pattern 4: Fine-grained progress bar with true color gradient"""
+from datetime import datetime
 import json
 import os
 import subprocess
 import sys
+
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
@@ -13,6 +15,7 @@ BLOCKS = ' ▏▎▍▌▋▊▉█'
 BRANCH_ICON = ''
 R = '\033[0m'
 DIM = '\033[2m'
+WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
 
 def gradient(pct):
     if pct < 50:
@@ -36,6 +39,19 @@ def bar(pct, width=10):
 def fmt(label, pct):
     p = round(pct)
     return f'{label} {gradient(pct)}{bar(pct)} {p}%{R}'
+
+
+def format_reset_label(label, resets_at, include_weekday=False):
+    if resets_at is None:
+        return label
+
+    reset_dt = datetime.fromtimestamp(resets_at)
+    time_text = reset_dt.strftime('%H:%M')
+    if not include_weekday:
+        return f'{label} ({time_text})'
+
+    weekday = WEEKDAYS[reset_dt.weekday()]
+    return f'{label} ({weekday} {time_text})'
 
 
 def directory_name(path):
@@ -67,13 +83,15 @@ ctx = data.get('context_window', {}).get('used_percentage')
 if ctx is not None:
     parts.append(fmt('ctx', ctx))
 
-five = data.get('rate_limits', {}).get('five_hour', {}).get('used_percentage')
+five_limit = data.get('rate_limits', {}).get('five_hour', {})
+five = five_limit.get('used_percentage')
 if five is not None:
-    parts.append(fmt('5h', five))
+    parts.append(fmt(format_reset_label('5h', five_limit.get('resets_at')), five))
 
-week = data.get('rate_limits', {}).get('seven_day', {}).get('used_percentage')
+week_limit = data.get('rate_limits', {}).get('seven_day', {})
+week = week_limit.get('used_percentage')
 if week is not None:
-    parts.append(fmt('7d', week))
+    parts.append(fmt(format_reset_label('7d', week_limit.get('resets_at'), include_weekday=True), week))
 
 workspace = data.get('workspace', {})
 worktree = data.get('worktree', {})
