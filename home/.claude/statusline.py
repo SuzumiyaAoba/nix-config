@@ -41,12 +41,18 @@ def fmt(label, pct):
     return f'{label} {gradient(pct)}{bar(pct)} {p}%{R}'
 
 
+def format_hour_label(dt):
+    hour = dt.hour % 12 or 12
+    meridiem = 'am' if dt.hour < 12 else 'pm'
+    return f'{hour}{meridiem}'
+
+
 def format_reset_label(label, resets_at, include_weekday=False):
     if resets_at is None:
         return label
 
     reset_dt = datetime.fromtimestamp(resets_at)
-    time_text = reset_dt.strftime('%H:%M')
+    time_text = format_hour_label(reset_dt)
     if not include_weekday:
         return f'{label} ({time_text})'
 
