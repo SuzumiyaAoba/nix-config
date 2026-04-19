@@ -11,4 +11,5 @@
   ../modules/homebrew/lmstudio.nix
   ../modules/homebrew/rancher.nix
   ../modules/homebrew/raycast.nix
+  ../modules/homebrew/vscode.nix
 ]

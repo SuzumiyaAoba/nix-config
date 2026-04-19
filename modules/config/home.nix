@@ -5,12 +5,14 @@
   ...
 }:
 let
-  # Workaround: nixpkgs direnv build fails with CGO_ENABLED=0 and -linkmode=external
   direnvOverlay = final: prev: {
-    direnv = prev.direnv.overrideAttrs (old: {
-      env = (old.env or { }) // {
-        CGO_ENABLED = 1;
-      };
+    direnv = prev.direnv.overrideAttrs (_old: {
+      # The fish test is killed on aarch64-darwin during local system builds.
+      doCheck = false;
+    });
+    mise = (prev.mise.override { direnv = final.direnv; }).overrideAttrs (_old: {
+      # Avoid rebuilding the full mise test suite for system activation builds.
+      doCheck = false;
     });
   };
 in

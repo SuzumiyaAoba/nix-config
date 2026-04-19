@@ -108,7 +108,6 @@ let
     "tree"
     "uv"
     "vhs"
-    "vscode"
     "wezterm"
     "zellij"
     "zoxide"
@@ -125,6 +124,7 @@ let
     "intellij-idea"
     "rancher"
     "raycast"
+    "vscode"
   ];
 
   defaultApplicationsByProfile = {

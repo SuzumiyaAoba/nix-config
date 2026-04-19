@@ -27,7 +27,7 @@ let
     minVersion = "0.6.28";
   };
   toolchainsPinned = moonbitBinPinned.legacyPackages.toolchains.pinned.overrideAttrs (old: {
-    # Keep the bundled tcc (no tinycc dependency), but keep moon-patched.
+    # Keep the bundled tcc and avoid depending on tinycc.
     installPhase = ''
       runHook preInstall
 
@@ -35,9 +35,6 @@ let
       cp -a ./* $out/
       chmod +x $out/bin/*
       chmod +x $out/bin/internal/tcc
-
-      cp ${moonbitBinPinned.legacyPackages."moon-patched".pinned}/bin/moon $out/bin/moon
-      cp ${moonbitBinPinned.legacyPackages."moon-patched".pinned}/bin/moonrun $out/bin/moonrun
 
       runHook postInstall
     '';
