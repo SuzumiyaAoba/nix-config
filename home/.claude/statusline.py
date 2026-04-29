@@ -41,18 +41,20 @@ def fmt(label, pct):
     return f'{label} {gradient(pct)}{bar(pct)} {p}%{R}'
 
 
-def format_hour_label(dt):
+def format_time_label(dt, include_minutes=False):
     hour = dt.hour % 12 or 12
     meridiem = 'am' if dt.hour < 12 else 'pm'
+    if include_minutes:
+        return f'{hour}:{dt.minute:02d}{meridiem}'
     return f'{hour}{meridiem}'
 
 
-def format_reset_label(label, resets_at, include_weekday=False):
+def format_reset_label(label, resets_at, include_weekday=False, include_minutes=False):
     if resets_at is None:
         return label
 
     reset_dt = datetime.fromtimestamp(resets_at)
-    time_text = format_hour_label(reset_dt)
+    time_text = format_time_label(reset_dt, include_minutes=include_minutes)
     if not include_weekday:
         return f'{label} ({time_text})'
 
@@ -92,12 +94,12 @@ if ctx is not None:
 five_limit = data.get('rate_limits', {}).get('five_hour', {})
 five = five_limit.get('used_percentage')
 if five is not None:
-    parts.append(fmt(format_reset_label('5h', five_limit.get('resets_at')), five))
+    parts.append(fmt(format_reset_label('5h', five_limit.get('resets_at'), include_minutes=True), five))
 
 week_limit = data.get('rate_limits', {}).get('seven_day', {})
 week = week_limit.get('used_percentage')
 if week is not None:
-    parts.append(fmt(format_reset_label('7d', week_limit.get('resets_at'), include_weekday=True), week))
+    parts.append(fmt(format_reset_label('7d', week_limit.get('resets_at'), include_weekday=True, include_minutes=True), week))
 
 workspace = data.get('workspace', {})
 worktree = data.get('worktree', {})
