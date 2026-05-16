@@ -86,9 +86,21 @@ keybinds clear-defaults=true {
   tmux {
     bind "Ctrl g" {          SwitchToMode "Normal"; }
 
-    // Pagne
-    bind "-"      { NewPane   "Down";      SwitchToMode "Normal"; }
-    bind "\\"     { NewPane   "Right";     SwitchToMode "Normal"; }
+    // Pane (Claude Code セッションのディレクトリを自動検出して分割)
+    bind "-" {
+      Run "bash" "-c" "bash ~/.config/zellij/scripts/claude-smart-split.sh down" {
+        floating true
+        close_on_exit true
+      }
+      SwitchToMode "Normal";
+    }
+    bind "\\" {
+      Run "bash" "-c" "bash ~/.config/zellij/scripts/claude-smart-split.sh right" {
+        floating true
+        close_on_exit true
+      }
+      SwitchToMode "Normal";
+    }
     bind "j"      { MoveFocus "Down";      SwitchToMode "Normal"; }
     bind "k"      { MoveFocus "Up";        SwitchToMode "Normal"; }
     bind "h"      { MoveFocus "Left";      SwitchToMode "Normal"; }
