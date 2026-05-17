@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # このスクリプトは新しいタイルドペイン内で実行される。
-# Claude Code セッションを選択し、そのディレクトリでシェルを起動する。
+# Claude Code セッションのディレクトリ一覧（重複排除）から選択し、
+# そのディレクトリでシェルを起動する。
 
 JOBS_DIR="$HOME/.claude/jobs"
 TARGET_CWD=""
@@ -11,21 +12,18 @@ is_claude_running() {
     pgrep -f "\.local/share/claude" > /dev/null 2>&1
 }
 
-collect_sessions() {
-    local state_files=()
+# セッション一覧から cwd を収集して重複排除・ソートして返す
+collect_unique_dirs() {
     while IFS= read -r f; do
-        [[ -f "$f" ]] && state_files+=("$f")
-    done < <(find "$JOBS_DIR" -name "state.json" -maxdepth 2 2>/dev/null)
-
-    [[ ${#state_files[@]} -eq 0 ]] && return
-
-    for f in "${state_files[@]}"; do
-        jq -r '"\(.updatedAt // "")\t\(.daemonShort // "")\t\(.name // "unnamed")\t\(.state // "")\t\(.cwd // "")"' \
-            "$f" 2>/dev/null
-    done | sort -r
+        [[ -f "$f" ]] || continue
+        jq -r '"\(.updatedAt // "")\t\(.cwd // "")"' "$f" 2>/dev/null
+    done < <(find "$JOBS_DIR" -name "state.json" -maxdepth 2 2>/dev/null) \
+        | sort -r \
+        | cut -f2 \
+        | awk '!seen[$0]++' \
+        | grep -v '^$'
 }
 
-# $() のネストを避けるためグローバル変数 TARGET_CWD を直接セットする
 detect_target_cwd() {
     # Claude Code の bash サブシェル内にいる場合はそのセッションを直接使う
     if [[ -n "${CLAUDECODE:-}" && -n "${CLAUDE_CODE_SESSION_ID:-}" ]]; then
@@ -40,41 +38,27 @@ detect_target_cwd() {
     is_claude_running || return 0
     [[ -d "$JOBS_DIR" ]] || return 0
 
-    local sessions
-    sessions=$(collect_sessions)
-    [[ -z "$sessions" ]] && return 0
+    local dirs
+    dirs=$(collect_unique_dirs)
+    [[ -z "$dirs" ]] && return 0
 
     local count
-    count=$(echo "$sessions" | wc -l | tr -d ' ')
+    count=$(echo "$dirs" | wc -l | tr -d ' ')
 
     if [[ "$count" -eq 1 ]]; then
-        TARGET_CWD=$(echo "$sessions" | cut -f5)
+        TARGET_CWD="$dirs"
     else
-        # fzf を $() の外で直接呼び出す（ネスト回避）
-        local display
-        display=$(echo "$sessions" | cut -f2- | awk -F'\t' '{
-            icon = ($3 == "running") ? "▶" : ($3 == "blocked") ? "⏸" : "○"
-            printf "%s  %-8s  %s [%s]  →  %s\n", icon, $1, $2, $3, $4
-        }')
-
         local tmpfile
         tmpfile=$(mktemp)
-        # fzf の結果をテンポラリファイルに書き出す
-        echo "$display" | fzf \
-            --prompt="Claude session > " \
+        echo "$dirs" | fzf \
+            --prompt="dir > " \
             --height=50% \
             --border=rounded \
-            --border-label=" Claude Code Sessions " \
-            --no-sort \
-            --ansi > "$tmpfile"
+            --border-label=" Claude Code " \
+            --no-sort > "$tmpfile"
 
-        local fzf_exit=$?
-        if [[ $fzf_exit -eq 0 ]]; then
-            local selected
-            selected=$(cat "$tmpfile")
-            if [[ -n "$selected" ]]; then
-                TARGET_CWD=$(echo "$selected" | sed 's/.*→  *//')
-            fi
+        if [[ $? -eq 0 ]]; then
+            TARGET_CWD=$(cat "$tmpfile")
         fi
         rm -f "$tmpfile"
     fi
