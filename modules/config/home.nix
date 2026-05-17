@@ -5,6 +5,16 @@
   ...
 }:
 let
+  ollamaOverlay = _final: prev: {
+    ollama = prev.ollama.overrideAttrs (old: {
+      postPatch =
+        builtins.replaceStrings
+          [ "rm model/models/nemotronh/model_omni_test.go" ]
+          [ "rm -f model/models/nemotronh/model_omni_test.go" ]
+          old.postPatch;
+    });
+  };
+
   direnvOverlay = final: prev: {
     direnv = prev.direnv.overrideAttrs (_old: {
       # The fish test is killed on aarch64-darwin during local system builds.
@@ -21,6 +31,7 @@ delib.module {
 
   darwin.always = {
     nixpkgs.overlays = [
+      ollamaOverlay
       direnvOverlay
     ];
   };
@@ -40,6 +51,7 @@ delib.module {
         };
       };
       nixpkgs.overlays = [
+        ollamaOverlay
         inputs.moonbit-overlay.overlays.default
         direnvOverlay
       ];
