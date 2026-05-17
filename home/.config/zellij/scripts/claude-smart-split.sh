@@ -12,11 +12,14 @@ is_claude_running() {
     pgrep -f "\.local/share/claude" > /dev/null 2>&1
 }
 
-# セッション一覧から cwd を収集して重複排除・ソートして返す
+# セッション一覧から cwd と worktreePath を収集して重複排除・ソートして返す
 collect_unique_dirs() {
     while IFS= read -r f; do
         [[ -f "$f" ]] || continue
-        jq -r '"\(.updatedAt // "")\t\(.cwd // "")"' "$f" 2>/dev/null
+        jq -r '
+            "\(.updatedAt // "")\t\(.cwd // "")",
+            (if .worktreePath != null then "\(.updatedAt // "")\t\(.worktreePath)" else empty end)
+        ' "$f" 2>/dev/null
     done < <(find "$JOBS_DIR" -name "state.json" -maxdepth 2 2>/dev/null) \
         | sort -r \
         | cut -f2 \
