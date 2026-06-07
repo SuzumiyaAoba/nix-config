@@ -115,8 +115,8 @@ let
   ];
 
   baseHomebrew = [
-    "aerospace"
-    "alt-tab"
+    # "aerospace"
+    # "alt-tab"
     "aquaskk"
     "gas-mask"
     "google-chrome"
