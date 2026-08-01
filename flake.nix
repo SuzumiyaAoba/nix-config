@@ -35,10 +35,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    im-select-tap = {
-      url = "github:daipeihust/homebrew-tap";
-      flake = false;
-    };
     aerospace-tap = {
       url = "github:nikitabobko/homebrew-tap";
       flake = false;

@@ -120,7 +120,6 @@ let
     "aquaskk"
     "gas-mask"
     "google-chrome"
-    "im-select"
     "intellij-idea"
     "rancher"
     "raycast"
