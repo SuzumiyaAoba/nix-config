@@ -132,6 +132,7 @@ let
       programs = [
         "ollama"
         "zotero"
+        "julia"
         "lean"
         "latex"
         "tectonic"
