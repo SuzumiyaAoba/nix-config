@@ -89,6 +89,7 @@ let
     "karabiner"
     "kustomize"
     "lazygit"
+    "leaf"
     "lua"
     "mise"
     "mkcert"
@@ -129,6 +130,7 @@ let
   defaultApplicationsByProfile = {
     private = {
       programs = [
+        "gauche"
         "ollama"
         "zotero"
         "julia"
