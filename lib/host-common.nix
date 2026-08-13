@@ -124,6 +124,7 @@ let
     "intellij-idea"
     "rancher"
     "raycast"
+    "rtk"
     "vscode"
   ];
 
