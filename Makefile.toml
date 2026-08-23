@@ -20,7 +20,5 @@ script = '''
 
 [tasks.gc]
 script = '''
-  sudo nix profile wipe-history --extra-experimental-features 'nix-command flakes' --profile /nix/var/nix/profiles/system --older-than 7d
-
-  sudo nix store gc --debug --extra-experimental-features 'nix-command flakes'
+  sudo nix-collect-garbage -d
 '''
