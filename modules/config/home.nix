@@ -30,6 +30,7 @@ delib.module {
   name = "home";
 
   darwin.always = {
+    nix.package = inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.nix;
     nixpkgs.overlays = [
       ollamaOverlay
       direnvOverlay

@@ -6,7 +6,7 @@ delib.module {
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      mysql80
+      mysql84
     ];
   };
 }
