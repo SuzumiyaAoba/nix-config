@@ -21,7 +21,6 @@
     };
     nix = {
       url = "github:NixOS/nix/2.35.2";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     denix = {
       url = "github:yunfachi/denix";
