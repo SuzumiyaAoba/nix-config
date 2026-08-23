@@ -146,6 +146,7 @@ let
         "lmstudio"
         "brave-browser"
         "1password"
+        "codexbar"
       ];
     };
 

@@ -39,6 +39,10 @@
       url = "github:nikitabobko/homebrew-tap";
       flake = false;
     };
+    steipete-tap = {
+      url = "github:steipete/homebrew-tap";
+      flake = false;
+    };
     emacs-flake = {
       url = "github:SuzumiyaAoba/emacs-config";
       inputs.nixpkgs.follows = "nixpkgs";

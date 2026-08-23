@@ -4,6 +4,7 @@
   ../modules/homebrew/alt-tab.nix
   ../modules/homebrew/aquaskk.nix
   ../modules/homebrew/brave-browser.nix
+  ../modules/homebrew/codexbar.nix
   ../modules/homebrew/gas-mask.nix
   ../modules/homebrew/google-chrome.nix
   ../modules/homebrew/intellij-idea.nix

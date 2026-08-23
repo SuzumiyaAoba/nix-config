@@ -418,8 +418,25 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_3",
+        "steipete-tap": "steipete-tap",
         "treefmt-nix": "treefmt-nix_2",
         "user-config": "user-config"
+      }
+    },
+    "steipete-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786739122,
+        "narHash": "sha256-pyziOhali2LqqMGiKdIX4Deox1T60+ciXiBl+YVqHro=",
+        "owner": "steipete",
+        "repo": "homebrew-tap",
+        "rev": "6eaa810ccd053a223d90724847f5e57292ad0bc8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "steipete",
+        "repo": "homebrew-tap",
+        "type": "github"
       }
     },
     "systems": {
