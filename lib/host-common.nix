@@ -110,7 +110,6 @@ let
     "uv"
     "vhs"
     "wezterm"
-    "zellij"
     "zoxide"
     "zsh"
   ];

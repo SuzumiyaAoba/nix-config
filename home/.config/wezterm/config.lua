@@ -2,6 +2,11 @@ local wezterm = require "wezterm"
 
 local keybind = require "keybinds"
 
+wezterm.on("update-status", function(window, _)
+  local key_table = window:active_key_table()
+  window:set_right_status(key_table and ("MODE: " .. key_table) or "")
+end)
+
 return {
   font = wezterm.font_with_fallback {
     "UDEV Gothic",
@@ -15,12 +20,13 @@ return {
   color_scheme = "Catppuccin Macchiato",
   window_background_opacity = 1,
 
-  enable_tab_bar = false,
+  enable_tab_bar = true,
 
   audible_bell = "Disabled",
 
   disable_default_key_bindings = true,
   keys = keybind.keys,
+  key_tables = keybind.key_tables,
 
   -- see: https://github.com/wez/wezterm/issues/6005
   front_end = "WebGpu",
