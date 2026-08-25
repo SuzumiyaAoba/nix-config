@@ -18,6 +18,7 @@ return {
       action = act.ActivateKeyTable {
         name = 'tmux',
         one_shot = false,
+        until_unknown = true,
       },
     },
   },
@@ -54,6 +55,7 @@ return {
         action = act.ActivateKeyTable {
           name = 'pane',
           one_shot = false,
+          until_unknown = true,
         },
       },
       {
@@ -61,6 +63,7 @@ return {
         action = act.ActivateKeyTable {
           name = 'move',
           one_shot = false,
+          until_unknown = true,
         },
       },
       {
@@ -68,6 +71,7 @@ return {
         action = act.ActivateKeyTable {
           name = 'resize',
           one_shot = false,
+          until_unknown = true,
         },
       },
       {
@@ -75,6 +79,7 @@ return {
         action = act.ActivateKeyTable {
           name = 'scroll',
           one_shot = false,
+          until_unknown = true,
         },
       },
       { key = 's', mods = 'CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
@@ -106,6 +111,7 @@ return {
           act.ActivateKeyTable {
             name = 'resize',
             one_shot = false,
+            until_unknown = true,
           },
         },
       },
@@ -131,6 +137,7 @@ return {
           act.ActivateKeyTable {
             name = 'move',
             one_shot = false,
+            until_unknown = true,
           },
         },
       },
