@@ -13,4 +13,5 @@
   ../modules/homebrew/raycast.nix
   ../modules/homebrew/rtk.nix
   ../modules/homebrew/vscode.nix
+  ../modules/homebrew/zed.nix
 ]

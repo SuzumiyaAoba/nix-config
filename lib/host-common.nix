@@ -146,6 +146,7 @@ let
         "brave-browser"
         "1password"
         "codexbar"
+        "zed"
       ];
     };
 
