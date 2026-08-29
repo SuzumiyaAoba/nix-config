@@ -17,7 +17,7 @@ return {
       mods = 'CTRL',
       action = act.ActivateKeyTable {
         name = 'tmux',
-        one_shot = false,
+        one_shot = true,
         until_unknown = true,
       },
     },
@@ -54,7 +54,7 @@ return {
         key = 'Space',
         action = act.ActivateKeyTable {
           name = 'pane',
-          one_shot = false,
+          one_shot = true,
           until_unknown = true,
         },
       },
@@ -62,7 +62,7 @@ return {
         key = 'm',
         action = act.ActivateKeyTable {
           name = 'move',
-          one_shot = false,
+          one_shot = true,
           until_unknown = true,
         },
       },
@@ -70,7 +70,7 @@ return {
         key = 'r',
         action = act.ActivateKeyTable {
           name = 'resize',
-          one_shot = false,
+          one_shot = true,
           until_unknown = true,
         },
       },
@@ -78,7 +78,7 @@ return {
         key = 's',
         action = act.ActivateKeyTable {
           name = 'scroll',
-          one_shot = false,
+          one_shot = true,
           until_unknown = true,
         },
       },
@@ -110,7 +110,7 @@ return {
           act.PopKeyTable,
           act.ActivateKeyTable {
             name = 'resize',
-            one_shot = false,
+            one_shot = true,
             until_unknown = true,
           },
         },
@@ -136,7 +136,7 @@ return {
           act.PopKeyTable,
           act.ActivateKeyTable {
             name = 'move',
-            one_shot = false,
+            one_shot = true,
             until_unknown = true,
           },
         },
