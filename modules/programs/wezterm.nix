@@ -5,7 +5,7 @@ delib.module {
   options = delib.singleEnableOption false;
 
   home.ifEnabled =
-    { myconfig, cfg, ... }:
+    { myconfig, ... }:
     {
       programs.wezterm = {
         enable = true;

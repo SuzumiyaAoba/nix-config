@@ -25,16 +25,15 @@ let
       doCheck = false;
     });
   };
+
+  mkOverlays = extraOverlays: [ ollamaOverlay ] ++ extraOverlays ++ [ direnvOverlay ];
 in
 delib.module {
   name = "home";
 
   darwin.always = {
     nix.package = inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.nix;
-    nixpkgs.overlays = [
-      ollamaOverlay
-      direnvOverlay
-    ];
+    nixpkgs.overlays = mkOverlays [ ];
   };
 
   home.always =
@@ -51,11 +50,7 @@ delib.module {
           ];
         };
       };
-      nixpkgs.overlays = [
-        ollamaOverlay
-        inputs.moonbit-overlay.overlays.default
-        direnvOverlay
-      ];
+      nixpkgs.overlays = mkOverlays [ inputs.moonbit-overlay.overlays.default ];
       home = {
         inherit username;
         # If you don't need Nix-Darwin, or if you're using it exclusively,

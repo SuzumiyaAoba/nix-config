@@ -10,7 +10,7 @@ delib.module {
   options = delib.singleEnableOption false;
 
   home.ifEnabled =
-    { myconfig, ... }:
+    { ... }:
     {
       home.sessionPath = lib.optionals pkgs.stdenv.isDarwin [
         "/opt/homebrew/bin"
@@ -82,14 +82,10 @@ delib.module {
             POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
             if [[ "$TERM_PROGRAM" == "vscode" || -n $CURSOR_TRACE_ID || ! -t 1 ]]; then
               ZSH_THEME=""
-            else
-              ZSH_THEME="powerlevel10k/powerlevel10k"
-            fi
-
-            if [[ "$TERM_PROGRAM" == "vscode" || -n $CURSOR_TRACE_ID || ! -t 1 ]]; then
               PROMPT='%n@%m:%~%# '
               RPROMPT=""
             else
+              ZSH_THEME="powerlevel10k/powerlevel10k"
               source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
               [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
             fi

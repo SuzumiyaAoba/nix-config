@@ -15,7 +15,7 @@ delib.module {
         };
 
       host =
-        { config, ... }:
+        { ... }:
         {
           options = {
             isPrivate = boolOption false;
