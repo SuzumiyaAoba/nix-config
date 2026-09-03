@@ -1,6 +1,7 @@
 {
   delib,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -32,6 +33,7 @@ delib.module {
   name = "home";
 
   darwin.always = {
+    home-manager.backupFileExtension = "backup";
     nix.package = inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.nix;
     nixpkgs.overlays = mkOverlays [ ];
   };
@@ -51,6 +53,10 @@ delib.module {
         };
       };
       nixpkgs.overlays = mkOverlays [ inputs.moonbit-overlay.overlays.default ];
+      targets.darwin = lib.optionalAttrs pkgs.stdenv.isDarwin {
+        copyApps.enable = true;
+        linkApps.enable = false;
+      };
       home = {
         inherit username;
         # If you don't need Nix-Darwin, or if you're using it exclusively,

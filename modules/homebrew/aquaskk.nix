@@ -1,4 +1,7 @@
 { delib, ... }:
+let
+  repoHome = ../../home;
+in
 delib.module {
   name = "homebrew.aquaskk";
 
@@ -8,5 +11,12 @@ delib.module {
     homebrew.casks = [
       "aquaskk"
     ];
+  };
+
+  home.ifEnabled = {
+    home.file."Library/Application Support/AquaSKK/BlacklistApps.plist".source =
+      repoHome + "/.config/aquaskk/BlacklistApps.plist";
+    home.file."Library/Application Support/AquaSKK/keymap.conf".source =
+      repoHome + "/.config/aquaskk/keymap.conf";
   };
 }

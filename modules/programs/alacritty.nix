@@ -10,7 +10,7 @@ delib.module {
 
       settings = {
         font = {
-          normal.family = "UDEV Gothic";
+          normal.family = "HackGen Console NF";
           size = 14;
         };
 
