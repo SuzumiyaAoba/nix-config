@@ -21,6 +21,9 @@ delib.module {
       ".config/wezterm/config.lua".source = home + "/.config/wezterm/config.lua";
       ".config/wezterm/keybinds.lua".source = home + "/.config/wezterm/keybinds.lua";
 
+      # zellij
+      ".config/zellij".source = home + "/.config/zellij";
+
       # mise
       ".config/mise".source = home + "/.config/mise";
 

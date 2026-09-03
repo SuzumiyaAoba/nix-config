@@ -5,8 +5,25 @@ delib.module {
   options = delib.singleEnableOption false;
 
   home.ifEnabled = {
-    home.packages = with pkgs; [
-      alacritty
-    ];
+    programs.alacritty = {
+      enable = true;
+
+      settings = {
+        font = {
+          normal.family = "UDEV Gothic";
+          size = 14;
+        };
+
+        terminal.shell.program = "${pkgs.zellij}/bin/zellij";
+
+        keyboard.bindings = [
+          {
+            key = "J";
+            mods = "Control";
+            action = "None";
+          }
+        ];
+      };
+    };
   };
 }
