@@ -16,7 +16,6 @@ delib.module {
   home.ifEnabled = {
     home.file."Library/Application Support/AquaSKK/BlacklistApps.plist".source =
       repoHome + "/.config/aquaskk/BlacklistApps.plist";
-    home.file."Library/Application Support/AquaSKK/keymap.conf".source =
-      repoHome + "/.config/aquaskk/keymap.conf";
+    home.file."Library/Application Support/AquaSKK/BlacklistApps.plist".force = true;
   };
 }
