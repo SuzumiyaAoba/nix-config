@@ -7,6 +7,7 @@ delib.module {
   home.ifEnabled = {
     programs.alacritty = {
       enable = true;
+      theme = "catppuccin_macchiato";
 
       settings = {
         font = {
