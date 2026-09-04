@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
+	<!-- AquaSKK は起動時のみ読み込むため、変更時は onChange で再起動する。 -->
 	<dict>
 		<key>bundleIdentifier</key>
 		<string>org.alacritty</string>

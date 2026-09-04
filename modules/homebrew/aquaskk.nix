@@ -14,8 +14,12 @@ delib.module {
   };
 
   home.ifEnabled = {
-    home.file."Library/Application Support/AquaSKK/BlacklistApps.plist".source =
-      repoHome + "/.config/aquaskk/BlacklistApps.plist";
-    home.file."Library/Application Support/AquaSKK/BlacklistApps.plist".force = true;
+    home.file."Library/Application Support/AquaSKK/BlacklistApps.plist" = {
+      source = repoHome + "/.config/aquaskk/BlacklistApps.plist";
+      force = true;
+      onChange = ''
+        /usr/bin/pkill -TERM -x AquaSKK >/dev/null 2>&1 || true
+      '';
+    };
   };
 }
