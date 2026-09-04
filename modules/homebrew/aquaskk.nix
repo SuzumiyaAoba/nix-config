@@ -21,5 +21,13 @@ delib.module {
         /usr/bin/pkill -TERM -x AquaSKK >/dev/null 2>&1 || true
       '';
     };
+
+    home.file."Library/Application Support/AquaSKK/keymap.conf" = {
+      source = repoHome + "/.config/aquaskk/keymap.conf";
+      force = true;
+      onChange = ''
+        /usr/bin/pkill -TERM -x AquaSKK >/dev/null 2>&1 || true
+      '';
+    };
   };
 }

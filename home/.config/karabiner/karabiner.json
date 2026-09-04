@@ -4,6 +4,36 @@
       "complex_modifications": {
         "rules": [
           {
+            "description": "Switch AquaSKK to ASCII in Alacritty without leaking l",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": ["^org\\.alacritty$"],
+                    "type": "frontmost_application_if"
+                  },
+                  {
+                    "input_sources": [
+                      {
+                        "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$",
+                        "input_source_id": "^jp\\.sourceforge\\.inputmethod\\.aquaskk$",
+                        "language": "^ja$"
+                      },
+                      {
+                        "input_source_id": "^jp\\.sourceforge\\.inputmethod\\.aquaskk\\.Hiragana$",
+                        "language": "^ja$"
+                      }
+                    ],
+                    "type": "input_source_if"
+                  }
+                ],
+                "from": { "key_code": "l" },
+                "to": [{ "key_code": "f18" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Exchange semicolon and colon",
             "manipulators": [
               {
