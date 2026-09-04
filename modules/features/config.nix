@@ -37,8 +37,7 @@ delib.module {
       ".serena".source = home + "/.serena";
 
       # karabiner
-      ".config/karabiner/karabiner.json".source = home + "/.config/karabiner/karabiner.json";
-      ".config/karabiner/assets".source = home + "/.config/karabiner/assets";
+      ".config/karabiner".source = home + "/.config/karabiner";
 
       # AeroSpace
       ".config/aerospace/aerospace.toml".source = home + "/.config/aerospace/aerospace.toml";

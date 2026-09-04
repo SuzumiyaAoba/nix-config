@@ -17,6 +17,14 @@ delib.module {
 
         terminal.shell.program = "${pkgs.zellij}/bin/zellij";
 
+        keyboard.bindings = [
+          {
+            key = "J";
+            mods = "Control";
+            action = "None";
+          }
+        ];
+
       };
     };
   };

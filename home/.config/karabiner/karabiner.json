@@ -15,12 +15,7 @@
                   {
                     "input_sources": [
                       {
-                        "input_mode_id": "^com\\.apple\\.inputmethod\\.Japanese$",
-                        "input_source_id": "^jp\\.sourceforge\\.inputmethod\\.aquaskk$",
-                        "language": "^ja$"
-                      },
-                      {
-                        "input_source_id": "^jp\\.sourceforge\\.inputmethod\\.aquaskk\\.Hiragana$",
+                        "input_source_id": "^jp\\.sourceforge\\.inputmethod\\.aquaskk",
                         "language": "^ja$"
                       }
                     ],

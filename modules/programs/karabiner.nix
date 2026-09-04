@@ -1,17 +1,12 @@
-{
-  delib,
-  lib,
-  pkgs,
-  ...
-}:
+{ delib, ... }:
 delib.module {
   name = "programs.karabiner";
 
   options = delib.singleEnableOption false;
 
-  home.ifEnabled = lib.mkIf pkgs.stdenv.isDarwin {
-    home.packages = with pkgs; [
-      karabiner-elements
+  darwin.ifEnabled = {
+    homebrew.casks = [
+      "karabiner-elements"
     ];
   };
 }
