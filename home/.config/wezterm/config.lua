@@ -15,12 +15,13 @@ return {
   font_size = 14,
   allow_square_glyphs_to_overflow_width = "Never",
 
-  -- default_prog = { "zellij" },
+  default_prog = { "zellij" },
 
   color_scheme = "Catppuccin Macchiato",
   window_background_opacity = 1,
 
-  enable_tab_bar = true,
+  -- Zellij owns tabs/panes now; let its zjstatus bar be the only tab bar.
+  enable_tab_bar = false,
 
   audible_bell = "Disabled",
 
