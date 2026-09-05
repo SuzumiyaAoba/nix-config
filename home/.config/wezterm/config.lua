@@ -28,9 +28,11 @@ return {
   keys = keybind.keys,
   key_tables = keybind.key_tables,
 
-  -- see: https://github.com/wez/wezterm/issues/6005
-  front_end = "WebGpu",
-
+  -- NOTE: previously forced to "WebGpu" as a workaround for
+  -- https://github.com/wez/wezterm/issues/6005 (texture corruption on an
+  -- old nixpkgs-packaged build). Claude Code / Codex's heavy TUI repaints
+  -- were triggering silent WebGpu/Metal crashes (no panic logged before
+  -- the process died), so falling back to the upstream default "OpenGL".
   window_close_confirmation = 'NeverPrompt',
   macos_forward_to_ime_modifier_mask = "SHIFT|CTRL",
 }
