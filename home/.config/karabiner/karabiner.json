@@ -2,62 +2,7 @@
   "profiles": [
     {
       "complex_modifications": {
-        "rules": [
-          {
-            "description": "Switch AquaSKK to ASCII in Alacritty without leaking l",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^org\\.alacritty$"],
-                    "type": "frontmost_application_if"
-                  },
-                  {
-                    "input_sources": [
-                      {
-                        "input_source_id": "^jp\\.sourceforge\\.inputmethod\\.aquaskk",
-                        "language": "^ja$"
-                      }
-                    ],
-                    "type": "input_source_if"
-                  }
-                ],
-                "from": { "key_code": "l" },
-                "to": [{ "key_code": "f18" }],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Exchange semicolon and colon",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "semicolon",
-                  "modifiers": { "optional": ["caps_lock"] }
-                },
-                "to": [
-                  {
-                    "key_code": "semicolon",
-                    "modifiers": ["left_shift"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "semicolon",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [{ "key_code": "semicolon" }],
-                "type": "basic"
-              }
-            ]
-          }
-        ]
+        "rules": []
       },
       "devices": [
         {
