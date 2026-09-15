@@ -125,6 +125,7 @@ let
     "rancher"
     "raycast"
     "rtk"
+    "tgrep"
     "vscode"
   ];
 
