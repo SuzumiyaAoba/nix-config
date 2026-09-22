@@ -16,6 +16,7 @@ in
 delib.module {
   name = "unfree";
 
-  home.always = unfreeConfig;
+  # With home-manager.useGlobalPkgs the Home Manager side shares the
+  # system pkgs, so the predicate only needs to be set on darwin.
   darwin.always = unfreeConfig;
 }
