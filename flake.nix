@@ -58,7 +58,7 @@
   };
 
   outputs =
-    { denix, emacs-flake, ... }@inputs:
+    { denix, ... }@inputs:
     let
       mkConfigurations =
         moduleSystem:
@@ -80,7 +80,6 @@
 
           specialArgs = {
             inherit inputs;
-            inherit emacs-flake;
             userConfig = import inputs.user-config;
           };
         };

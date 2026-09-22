@@ -27,15 +27,30 @@ let
     });
   };
 
-  mkOverlays = extraOverlays: [ ollamaOverlay ] ++ extraOverlays ++ [ direnvOverlay ];
+  overlays = [
+    ollamaOverlay
+    inputs.moonbit-overlay.overlays.default
+    direnvOverlay
+  ];
 in
 delib.module {
   name = "home";
 
   darwin.always = {
-    home-manager.backupFileExtension = "backup";
-    nix.package = inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.nix;
-    nixpkgs.overlays = mkOverlays [ ];
+    home-manager = {
+      backupFileExtension = "backup";
+      # Reuse the system pkgs so overlays are applied once.
+      useGlobalPkgs = true;
+    };
+    nix = {
+      package = inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.nix;
+      gc = {
+        automatic = true;
+        options = "--delete-older-than 30d";
+      };
+      optimise.automatic = true;
+    };
+    nixpkgs.overlays = overlays;
   };
 
   home.always =
@@ -52,7 +67,6 @@ delib.module {
           ];
         };
       };
-      nixpkgs.overlays = mkOverlays [ inputs.moonbit-overlay.overlays.default ];
       targets.darwin = lib.optionalAttrs pkgs.stdenv.isDarwin {
         copyApps.enable = true;
         linkApps.enable = false;

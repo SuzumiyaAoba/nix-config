@@ -1,6 +1,6 @@
 { delib, ... }:
 delib.module {
-  name = "session";
+  name = "features.session";
 
   options = delib.singleEnableOption true;
 

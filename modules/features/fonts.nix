@@ -1,6 +1,6 @@
 { delib, pkgs, ... }:
 delib.module {
-  name = "fonts";
+  name = "features.fonts";
 
   options = delib.singleEnableOption true;
 

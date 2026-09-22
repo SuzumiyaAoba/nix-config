@@ -1,11 +1,14 @@
 { delib, pkgs, ... }:
 let
   allowedUnfreePackages = [
+    "appcleaner"
+    "datagrip"
+    "goland"
     "oracle-instantclient"
+    "rust-rover"
   ];
 
   unfreeConfig = {
-    nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowUnfreePredicate =
       pkg: builtins.elem (pkgs.lib.getName pkg) allowedUnfreePackages;
   };

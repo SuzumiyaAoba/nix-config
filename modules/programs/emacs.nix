@@ -1,6 +1,6 @@
 {
   delib,
-  emacs-flake,
+  inputs,
   pkgs,
   ...
 }:
@@ -11,7 +11,7 @@ delib.module {
 
   darwin.ifEnabled =
     let
-      upstreamEmacs = emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      upstreamEmacs = inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
       patchedDdskkAutoloads =
         pkgs.runCommand "ddskk-autoloads-patched"
           {

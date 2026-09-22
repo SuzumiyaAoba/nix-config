@@ -1,6 +1,6 @@
 { delib, userConfig, ... }:
 delib.module {
-  name = "macos";
+  name = "features.macos";
 
   options = delib.singleEnableOption true;
 
