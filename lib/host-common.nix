@@ -5,47 +5,6 @@
   ...
 }:
 let
-  hasNixSuffix = name: builtins.match ".*\\.nix" name != null;
-
-  collectModuleFiles =
-    dir:
-    let
-      entries = builtins.readDir dir;
-    in
-    builtins.filter (path: path != null) (
-      map (
-        name:
-        let
-          type = entries.${name};
-          path = dir + "/${name}";
-        in
-        if type == "regular" && hasNixSuffix name then
-          path
-        else if type == "directory" && builtins.pathExists (path + "/default.nix") then
-          path + "/default.nix"
-        else
-          null
-      ) (builtins.attrNames entries)
-    );
-
-  moduleFiles = collectModuleFiles ../modules/programs ++ collectModuleFiles ../modules/homebrew;
-
-  collectModuleNames =
-    target:
-    builtins.filter (name: name != null) (
-      map (
-        path:
-        let
-          match = builtins.match ".*name[[:space:]]*=[[:space:]]*\"([^\"]+)\"[[:space:]]*;.*" (
-            builtins.readFile path
-          );
-          declared = if match == null then null else builtins.elemAt match 0;
-          scoped = if declared == null then null else builtins.match "${target}\\.([^\"]+)" declared;
-        in
-        if scoped == null then null else builtins.elemAt scoped 0
-      ) moduleFiles
-    );
-
   basePrograms = [
     "alacritty"
     "appcleaner"
@@ -161,11 +120,6 @@ let
     };
   };
 
-  moduleNamesByTarget = {
-    programs = collectModuleNames "programs";
-    homebrew = collectModuleNames "homebrew";
-  };
-
   enabledApplicationsByProfile = {
     private =
       if privateApplications != null then
@@ -204,26 +158,21 @@ let
       ++ (enabledApplicationsForTarget "work" "homebrew");
   };
 
-  mkExplicitEnableAttrs =
-    target: enabledNames:
+  # Every module under modules/programs and modules/homebrew declares
+  # `delib.singleEnableOption false`, so only the enabled ones need
+  # `enable = true` here. Unknown names fail at evaluation time.
+  mkEnableAttrs =
+    names:
     builtins.listToAttrs (
       map (name: {
         inherit name;
-        value = {
-          enable = builtins.elem name enabledNames;
-        };
-      }) moduleNamesByTarget.${target}
+        value.enable = true;
+      }) names
     );
 in
 {
-  myconfig.host = {
-    inherit isPrivate;
-    privateApplications = enabledApplicationsByProfile.private;
-    workApplications = enabledApplicationsByProfile.work;
-  };
-
   myconfig = {
-    programs = mkExplicitEnableAttrs "programs" enabledModules.programs;
-    homebrew = mkExplicitEnableAttrs "homebrew" enabledModules.homebrew;
+    programs = mkEnableAttrs enabledModules.programs;
+    homebrew = mkEnableAttrs enabledModules.homebrew;
   };
 }

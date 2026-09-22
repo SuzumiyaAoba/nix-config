@@ -101,10 +101,8 @@
           ];
         }
       );
-      # If you're not using NixOS, Home Manager, or Nix-Darwin,
-      # you can safely remove the corresponding lines below.
+      # If you're not using NixOS, you can safely remove the corresponding line below.
       # nixosConfigurations = mkConfigurations "nixos";
-      homeConfigurations = mkConfigurations "home";
       darwinConfigurations = mkConfigurations "darwin";
     };
 }

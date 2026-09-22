@@ -11,14 +11,5 @@ delib.host {
   homeManagerUser = userConfig.username;
   useHomeManagerModule = true;
 
-  # shared attrs
   inherit myconfig;
-
-  features = {
-    session.enable = true;
-    config.enable = true;
-
-    macos.enable = true;
-    homebrew.enable = true;
-  };
 }

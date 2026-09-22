@@ -14,8 +14,7 @@ delib.module {
     {
       imports = [
         inputs.nix-homebrew.darwinModules.nix-homebrew
-      ]
-      ++ (import ../../lib/homebrew-modules.nix);
+      ];
 
       nix-homebrew = {
         enable = true;

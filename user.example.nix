@@ -1,5 +1,5 @@
 {
-  username = "suzumiyaaoba";
-  userfullname = "SuzumiyaAoba";
-  useremail = "SuzumiyaAoba@gmail.com";
+  username = "your-username";
+  userfullname = "Your Name";
+  useremail = "you@example.com";
 }
