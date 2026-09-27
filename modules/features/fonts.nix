@@ -16,8 +16,8 @@ delib.module {
       _0xproto
       (callPackage ../../pkgs/fonts/explex.nix { })
       (callPackage ../../pkgs/fonts/cascadia-next.nix { })
+      # Includes the JPDOC/35/LG variants, so no separate jpdoc package is needed.
       (callPackage ../../pkgs/fonts/udev-gothic.nix { })
-      (callPackage ../../pkgs/fonts/udev-gothic-jpdoc.nix { })
 
       nerd-fonts.symbols-only
       cascadia-code

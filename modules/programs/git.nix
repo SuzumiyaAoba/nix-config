@@ -60,13 +60,5 @@ delib.module {
             };
           };
       };
-
-      programs.diff-so-fancy = {
-        enable = false;
-      };
-
-      programs.difftastic = {
-        enable = false;
-      };
     };
 }

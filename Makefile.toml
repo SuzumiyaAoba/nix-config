@@ -3,9 +3,20 @@ description = "Run formatter"
 command = "nix"
 args = ["fmt"]
 
+[tasks.check]
+description = "Evaluate and build both darwin configurations"
+command = "nix"
+args = ["flake", "check"]
+
 [tasks.update]
 script = '''
   nix flake update
+  '''
+
+# Homebrew taps churn constantly; update them separately from nixpkgs et al.
+[tasks.update-taps]
+script = '''
+  nix flake lock --update-input homebrew-core --update-input homebrew-cask --update-input aerospace-tap --update-input steipete-tap
   '''
 
 [tasks."aarch64-darwin:desktop"]

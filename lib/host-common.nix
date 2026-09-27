@@ -1,9 +1,4 @@
-{
-  isPrivate,
-  privateApplications ? null,
-  workApplications ? null,
-  ...
-}:
+{ isPrivate, ... }:
 let
   basePrograms = [
     "alacritty"
@@ -88,75 +83,41 @@ let
     "vscode"
   ];
 
-  defaultApplicationsByProfile = {
-    private = {
-      programs = [
-        "gauche"
-        "ollama"
-        "zotero"
-        "julia"
-        "lean"
-        "latex"
-        "tectonic"
-        "moonbit"
-        "ffmpeg"
-      ];
+  privatePrograms = [
+    "gauche"
+    "ollama"
+    "zotero"
+    "julia"
+    "lean"
+    "latex"
+    "tectonic"
+    "moonbit"
+    "ffmpeg"
+  ];
 
-      homebrew = [
-        "lmstudio"
-        "brave-browser"
-        "1password"
-        "codexbar"
-        "zed"
-      ];
-    };
+  privateHomebrew = [
+    "lmstudio"
+    "brave-browser"
+    "1password"
+    "codexbar"
+    "zed"
+  ];
 
-    work = {
-      programs = [
-        "snyk"
-      ];
+  workPrograms = [ "snyk" ];
 
-      homebrew = [ ];
-    };
-  };
+  workHomebrew = [ ];
 
-  enabledApplicationsByProfile = {
-    private =
-      if privateApplications != null then
-        privateApplications
-      else if isPrivate then
-        defaultApplicationsByProfile.private
-      else
-        {
-          programs = [ ];
-          homebrew = [ ];
-        };
-
-    work =
-      if workApplications != null then
-        workApplications
-      else if isPrivate then
-        {
-          programs = [ ];
-          homebrew = [ ];
-        }
-      else
-        defaultApplicationsByProfile.work;
-  };
-
-  enabledApplicationsForTarget = profile: target: enabledApplicationsByProfile.${profile}.${target};
-
-  enabledModules = {
-    programs =
-      basePrograms
-      ++ (enabledApplicationsForTarget "private" "programs")
-      ++ (enabledApplicationsForTarget "work" "programs");
-
-    homebrew =
-      baseHomebrew
-      ++ (enabledApplicationsForTarget "private" "homebrew")
-      ++ (enabledApplicationsForTarget "work" "homebrew");
-  };
+  enabledModules =
+    if isPrivate then
+      {
+        programs = basePrograms ++ privatePrograms;
+        homebrew = baseHomebrew ++ privateHomebrew;
+      }
+    else
+      {
+        programs = basePrograms ++ workPrograms;
+        homebrew = baseHomebrew ++ workHomebrew;
+      };
 
   # Every module under modules/programs and modules/homebrew declares
   # `delib.singleEnableOption false`, so only the enabled ones need

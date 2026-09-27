@@ -33,7 +33,9 @@ delib.module {
       homebrew = {
         enable = true;
         onActivation = {
-          upgrade = true;
+          # Upgrades run manually (`brew upgrade`) to keep darwin-rebuild fast
+          # and avoid surprise version bumps during system activation.
+          upgrade = false;
           # Nix store 上の tap を Homebrew が更新しようとして
           # Permission denied になるのを避ける
           autoUpdate = false;

@@ -1,7 +1,4 @@
 { delib, ... }:
-let
-  home = ../../home;
-in
 delib.module {
   name = "features.config";
 
@@ -10,46 +7,42 @@ delib.module {
   home.ifEnabled = {
     home.file = {
       # zsh
-      ".config/zsh".source = home + "/.config/zsh";
-      ".p10k.zsh".source = home + "/.p10k.zsh";
+      ".config/zsh".source = ../../home/.config/zsh;
+      ".p10k.zsh".source = ../../home/.p10k.zsh;
 
       # NeoVim
-      ".config/nvim/init.lua".source = home + "/.config/nvim/init.lua";
-      ".config/nvim/lua".source = home + "/.config/nvim/lua";
+      ".config/nvim".source = ../../home/.config/nvim;
 
       # wezterm
-      ".config/wezterm/config.lua".source = home + "/.config/wezterm/config.lua";
-      ".config/wezterm/keybinds.lua".source = home + "/.config/wezterm/keybinds.lua";
+      ".config/wezterm/config.lua".source = ../../home/.config/wezterm/config.lua;
+      ".config/wezterm/keybinds.lua".source = ../../home/.config/wezterm/keybinds.lua;
 
       # zellij
-      ".config/zellij".source = home + "/.config/zellij";
+      ".config/zellij".source = ../../home/.config/zellij;
 
       # mise
-      ".config/mise".source = home + "/.config/mise";
-
-      # starship
-      ".config/starship.toml".source = home + "/.config/starship.toml";
+      ".config/mise".source = ../../home/.config/mise;
 
       # tig
-      ".tigrc".source = home + "/.tigrc";
+      ".tigrc".source = ../../home/.tigrc;
 
       # serena
-      ".serena".source = home + "/.serena";
+      ".serena".source = ../../home/.serena;
 
       # karabiner
-      ".config/karabiner".source = home + "/.config/karabiner";
+      ".config/karabiner".source = ../../home/.config/karabiner;
 
       # AeroSpace
-      ".config/aerospace/aerospace.toml".source = home + "/.config/aerospace/aerospace.toml";
+      ".config/aerospace/aerospace.toml".source = ../../home/.config/aerospace/aerospace.toml;
 
       # Vimium
-      ".config/vimium".source = home + "/.config/vimium";
+      ".config/vimium".source = ../../home/.config/vimium;
 
-      # Cursor
-      ".iterm2_shell_integration.zsh".source = home + "/.iterm2_shell_integration.zsh";
+      # iTerm2 shell integration (also used by Cursor's terminal)
+      ".iterm2_shell_integration.zsh".source = ../../home/.iterm2_shell_integration.zsh;
 
       # Claude Code
-      ".claude/statusline.py".source = home + "/.claude/statusline.py";
+      ".claude/statusline.py".source = ../../home/.claude/statusline.py;
     };
   };
 }

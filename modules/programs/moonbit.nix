@@ -19,7 +19,7 @@ let
   pinnedVersion = versionsRaw.latest.version;
   pinnedRecord = versionsRaw.${pinnedVersion};
   moonbitBinPinned = import "${overlaySrc}/lib/moonbit-bin.nix" {
-    lib = pkgs.lib;
+    inherit (pkgs) lib;
     pkgs = pkgsForMoon;
     versions = {
       pinned = pinnedRecord;

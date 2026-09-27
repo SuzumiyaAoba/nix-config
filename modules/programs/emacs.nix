@@ -12,6 +12,8 @@ delib.module {
   darwin.ifEnabled =
     let
       upstreamEmacs = inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      # Ship a patched ddskk-autoloads.el that disables skk-isearch-really-early-advice,
+      # which breaks isearch under ddskk on this emacs build.
       patchedDdskkAutoloads =
         pkgs.runCommand "ddskk-autoloads-patched"
           {

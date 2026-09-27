@@ -18,9 +18,9 @@ delib.module {
           ShowPathbar = true;
           FXDefaultSearchScope = "SCcf";
           AppleShowAllFiles = true;
-          AppleShowAllExtensions = true;
         };
 
+        # AppleShowAllExtensions is set globally; Finder inherits it.
         NSGlobalDomain = {
           AppleShowAllExtensions = true;
         };
@@ -54,7 +54,11 @@ delib.module {
         fi
         # If an empty Taps dir exists from a previous run, remove it to avoid mkdir errors downstream
         rmdir /opt/homebrew/Library/Taps 2>/dev/null || true
-        chown -R ${userConfig.username}:staff /opt/homebrew
+        # Recursive chown is slow once Cellar grows; only run it when needed.
+        if [ "$(stat -f %u /opt/homebrew)" != "$(id -u ${userConfig.username})" ] \
+          || [ -n "$(find /opt/homebrew -maxdepth 3 ! -user ${userConfig.username} -print -quit 2>/dev/null)" ]; then
+          chown -R ${userConfig.username}:staff /opt/homebrew
+        fi
       '';
 
       activationScripts.postActivation.text = ''

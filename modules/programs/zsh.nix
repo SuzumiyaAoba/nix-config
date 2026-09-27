@@ -10,7 +10,7 @@ delib.module {
   options = delib.singleEnableOption false;
 
   home.ifEnabled =
-    { ... }:
+    _:
     {
       home.sessionPath = lib.optionals pkgs.stdenv.isDarwin [
         "/opt/homebrew/bin"

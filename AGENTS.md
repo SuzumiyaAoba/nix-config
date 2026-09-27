@@ -17,15 +17,15 @@ This repository manages macOS/Home Manager environments with Nix Flakes + Denix.
 ## Build, Test, and Development Commands
 Use these commands from repository root:
 
-- `nix flake check`: validate flake evaluation and checks.
+- `nix flake check`: evaluate the flake and build both Darwin systems (`checks.aarch64-darwin`).
 - `nix flake show`: list available outputs/targets.
-- `nix fmt`: format Nix files via `nixfmt` (treefmt wrapper).
+- `nix fmt`: format and lint Nix files via `nixfmt` + `deadnix` + `statix` (treefmt wrapper).
 - `nix build .#darwinConfigurations.desktop.system`: build desktop Darwin config.
 - `nix build .#darwinConfigurations.work.system`: build work Darwin config.
 - `sudo darwin-rebuild switch --flake .#desktop --override-input user-config path:./user.nix`: apply desktop config.
 - `sudo darwin-rebuild switch --flake .#work --override-input user-config path:./user.nix`: apply work config.
 
-If you use cargo-make, equivalent tasks are defined in `Makefile.toml` (e.g. `cargo make fmt`).
+If you use cargo-make, equivalent tasks are defined in `Makefile.toml` (e.g. `cargo make fmt`, `cargo make check`).
 
 ## Coding Style & Naming Conventions
 - Use `nix fmt` before committing; do not hand-align formatting.

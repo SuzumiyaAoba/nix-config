@@ -3,9 +3,12 @@
   inputs,
   lib,
   pkgs,
+  userConfig,
   ...
 }:
 let
+  # Some ollama revisions ship postPatch removing a test file that is absent
+  # in the fetched source; make the removal tolerant instead of patching it out.
   ollamaOverlay = _final: prev: {
     ollama = prev.ollama.overrideAttrs (old: {
       postPatch =
@@ -21,7 +24,7 @@ let
       # The fish test is killed on aarch64-darwin during local system builds.
       doCheck = false;
     });
-    mise = (prev.mise.override { direnv = final.direnv; }).overrideAttrs (_old: {
+    mise = (prev.mise.override { inherit (final) direnv; }).overrideAttrs (_old: {
       # Avoid rebuilding the full mise test suite for system activation builds.
       doCheck = false;
     });
@@ -44,6 +47,15 @@ delib.module {
     };
     nix = {
       package = inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.nix;
+      settings = {
+        # darwin-rebuild passes these itself, but root/daemon nix invocations
+        # read /etc/nix/nix.conf, so keep them enabled system-wide too.
+        "experimental-features" = [
+          "nix-command"
+          "flakes"
+        ];
+        trusted-users = [ userConfig.username ];
+      };
       gc = {
         automatic = true;
         options = "--delete-older-than 30d";

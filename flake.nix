@@ -94,12 +94,26 @@
           projectRootFile = "flake.nix";
           programs = {
             nixfmt.enable = true;
+            deadnix = {
+              enable = true;
+              # Module signatures intentionally take unused args ({ delib, pkgs, ... }:).
+              no-lambda-arg = true;
+              no-lambda-pattern-names = true;
+              no-underscore = true;
+            };
+            statix.enable = true;
           };
           settings.global.excludes = [
             "result/**"
           ];
         }
       );
+
+      # `nix flake check` evaluates these, so checking builds both systems.
+      checks.aarch64-darwin = {
+        desktop = inputs.self.darwinConfigurations.desktop.system;
+        work = inputs.self.darwinConfigurations.work.system;
+      };
       # If you're not using NixOS, you can safely remove the corresponding line below.
       # nixosConfigurations = mkConfigurations "nixos";
       darwinConfigurations = mkConfigurations "darwin";
