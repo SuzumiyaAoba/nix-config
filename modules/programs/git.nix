@@ -17,6 +17,7 @@ delib.module {
           ".DS_Store"
           ".dir-locals.el"
           ".env"
+          ".mdxr/"
           ".playwright-cli/"
           ".claude/worktree/"
           "mise.local.toml"
