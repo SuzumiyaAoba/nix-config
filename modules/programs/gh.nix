@@ -1,12 +1,6 @@
 { delib, pkgs, ... }:
-delib.module {
+import ../../lib/package-module.nix {
+  inherit delib;
   name = "programs.gh";
-
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled = {
-    home.packages = with pkgs; [
-      gh
-    ];
-  };
+  package = pkgs.gh;
 }

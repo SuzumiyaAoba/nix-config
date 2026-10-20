@@ -1,12 +1,6 @@
 { delib, pkgs, ... }:
-delib.module {
+import ../../lib/package-module.nix {
+  inherit delib;
   name = "programs.duckdb";
-
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled = {
-    home.packages = with pkgs; [
-      duckdb
-    ];
-  };
+  package = pkgs.duckdb;
 }

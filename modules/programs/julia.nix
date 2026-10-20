@@ -1,12 +1,6 @@
 { delib, pkgs, ... }:
-delib.module {
+import ../../lib/package-module.nix {
+  inherit delib;
   name = "programs.julia";
-
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled = {
-    home.packages = with pkgs; [
-      julia-bin
-    ];
-  };
+  package = pkgs.julia-bin;
 }

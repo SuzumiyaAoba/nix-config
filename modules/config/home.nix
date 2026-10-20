@@ -6,36 +6,6 @@
   userConfig,
   ...
 }:
-let
-  # Some ollama revisions ship postPatch removing a test file that is absent
-  # in the fetched source; make the removal tolerant instead of patching it out.
-  ollamaOverlay = _final: prev: {
-    ollama = prev.ollama.overrideAttrs (old: {
-      postPatch =
-        builtins.replaceStrings
-          [ "rm model/models/nemotronh/model_omni_test.go" ]
-          [ "rm -f model/models/nemotronh/model_omni_test.go" ]
-          old.postPatch;
-    });
-  };
-
-  direnvOverlay = final: prev: {
-    direnv = prev.direnv.overrideAttrs (_old: {
-      # The fish test is killed on aarch64-darwin during local system builds.
-      doCheck = false;
-    });
-    mise = (prev.mise.override { inherit (final) direnv; }).overrideAttrs (_old: {
-      # Avoid rebuilding the full mise test suite for system activation builds.
-      doCheck = false;
-    });
-  };
-
-  overlays = [
-    ollamaOverlay
-    inputs.moonbit-overlay.overlays.default
-    direnvOverlay
-  ];
-in
 delib.module {
   name = "home";
 
@@ -62,7 +32,6 @@ delib.module {
       };
       optimise.automatic = true;
     };
-    nixpkgs.overlays = overlays;
   };
 
   home.always =

@@ -8,5 +8,7 @@ delib.module {
     home.packages = with pkgs; [
       lombok
     ];
+
+    home.sessionVariables.LOMBOK_JAR_PATH = "${pkgs.lombok}/share/java/lombok.jar";
   };
 }

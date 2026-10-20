@@ -1,12 +1,6 @@
 { delib, pkgs, ... }:
-delib.module {
+import ../../lib/package-module.nix {
+  inherit delib;
   name = "programs.oracle";
-
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled = {
-    home.packages = with pkgs; [
-      oracle-instantclient
-    ];
-  };
+  package = pkgs.oracle-instantclient;
 }

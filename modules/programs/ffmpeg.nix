@@ -1,12 +1,6 @@
 { delib, pkgs, ... }:
-delib.module {
+import ../../lib/package-module.nix {
+  inherit delib;
   name = "programs.ffmpeg";
-
-  options = delib.singleEnableOption false;
-
-  home.ifEnabled = {
-    home.packages = with pkgs; [
-      ffmpeg
-    ];
-  };
+  package = pkgs.ffmpeg;
 }

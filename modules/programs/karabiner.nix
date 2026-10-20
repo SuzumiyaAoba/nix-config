@@ -9,4 +9,6 @@ delib.module {
       "karabiner-elements"
     ];
   };
+
+  home.ifEnabled.xdg.configFile."karabiner".source = ../../home/.config/karabiner;
 }

@@ -5,6 +5,8 @@ delib.module {
   options = delib.singleEnableOption false;
 
   home.ifEnabled = {
+    xdg.configFile."nvim".source = ../../../home/.config/nvim;
+
     home.packages = with pkgs; [
       neovim
       neovide

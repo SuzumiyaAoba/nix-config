@@ -3,8 +3,7 @@ delib.host {
   name = "work";
   system = "aarch64-darwin";
 
-  # homeManagerUser is set in default.nix
-  useHomeManagerModule = true;
+  # homeManagerUser / useHomeManagerModule are set in default.nix
 
   home.home.stateVersion = "25.05";
 

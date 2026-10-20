@@ -9,4 +9,7 @@ delib.module {
       "nikitabobko/tap/aerospace"
     ];
   };
+
+  home.ifEnabled.xdg.configFile."aerospace/aerospace.toml".source =
+    ../../home/.config/aerospace/aerospace.toml;
 }

@@ -4,55 +4,14 @@
   pkgs,
   ...
 }:
-let
-  overlaySrc = inputs.moonbit-overlay;
-  pkgsForMoon = pkgs.extend (
-    final: prev: {
-      tinycc = prev.tinycc.overrideAttrs (old: {
-        meta = (old.meta or { }) // {
-          broken = false;
-        };
-      });
-    }
-  );
-  versionsRaw = import "${overlaySrc}/versions.nix" pkgs.lib;
-  pinnedVersion = versionsRaw.latest.version;
-  pinnedRecord = versionsRaw.${pinnedVersion};
-  moonbitBinPinned = import "${overlaySrc}/lib/moonbit-bin.nix" {
-    inherit (pkgs) lib;
-    pkgs = pkgsForMoon;
-    versions = {
-      pinned = pinnedRecord;
-    };
-    minVersion = "0.6.28";
-  };
-  toolchainsPinned = moonbitBinPinned.legacyPackages.toolchains.pinned.overrideAttrs (old: {
-    # Keep the bundled tcc and avoid depending on tinycc.
-    installPhase = ''
-      runHook preInstall
-
-      mkdir -p $out
-      cp -a ./* $out/
-      chmod +x $out/bin/*
-      chmod +x $out/bin/internal/tcc
-
-      runHook postInstall
-    '';
-  });
-  corePinned = moonbitBinPinned.legacyPackages.core.pinned;
-  moonbitPinned = pkgsForMoon.callPackage "${overlaySrc}/lib/bundle.nix" {
-    toolchains = toolchainsPinned;
-    core = corePinned;
-  };
-in
 delib.module {
   name = "programs.moonbit";
-
   options = delib.singleEnableOption false;
 
-  home.ifEnabled = {
-    home.packages = [
-      moonbitPinned
-    ];
-  };
+  home.ifEnabled.home.packages = [
+    (pkgs.callPackage ../../pkgs/programs/moonbit.nix {
+      inherit pkgs;
+      overlaySrc = inputs.moonbit-overlay;
+    })
+  ];
 }

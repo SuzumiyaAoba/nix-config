@@ -4,9 +4,15 @@ delib.module {
 
   options = delib.singleEnableOption true;
 
-  home.ifEnabled = {
+  home.ifEnabled = { myconfig, ... }: {
     home.sessionVariables = {
-      EDITOR = "emacs";
+      EDITOR =
+        if myconfig.programs.emacs.enable then
+          "emacs"
+        else if myconfig.programs.neovim.enable then
+          "nvim"
+        else
+          "vi";
       COLORTERM = "truecolor";
     };
   };

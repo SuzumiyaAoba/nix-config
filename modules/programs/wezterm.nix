@@ -1,4 +1,9 @@
-{ delib, pkgs, ... }:
+{
+  delib,
+  lib,
+  pkgs,
+  ...
+}:
 delib.module {
   name = "programs.wezterm";
 
@@ -7,6 +12,11 @@ delib.module {
   home.ifEnabled =
     { myconfig, ... }:
     {
+      xdg.configFile = {
+        "wezterm/config.lua".source = ../../home/.config/wezterm/config.lua;
+        "wezterm/keybinds.lua".source = ../../home/.config/wezterm/keybinds.lua;
+      };
+
       programs.wezterm = {
         enable = true;
         # enableZshIntegration = true;
@@ -21,7 +31,9 @@ delib.module {
 
           -- default_prog の zellij は home-manager profile 由来で
           -- 上記 PATH に含まれない場合があるため絶対パスで固定する
-          config.default_prog = { "${pkgs.zellij}/bin/zellij" }
+          ${lib.optionalString myconfig.programs.zellij.enable ''
+            config.default_prog = { "${pkgs.zellij}/bin/zellij" }
+          ''}
 
           return config
         '';

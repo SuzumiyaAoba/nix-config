@@ -1,4 +1,4 @@
-{ delib, ... }:
+{ delib, lib, ... }:
 delib.module {
   name = "homebrew.rancher";
 
@@ -9,4 +9,8 @@ delib.module {
       "rancher"
     ];
   };
+
+  home.ifEnabled.programs.zsh.initContent = lib.mkOrder 1060 ''
+    export PATH="$HOME/.rd/bin:$PATH"
+  '';
 }

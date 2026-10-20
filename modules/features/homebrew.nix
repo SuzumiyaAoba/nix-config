@@ -9,13 +9,12 @@ delib.module {
 
   options = delib.singleEnableOption true;
 
-  darwin.always =
+  # Imports must remain unconditional so their options are available.
+  darwin.always.imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
+
+  darwin.ifEnabled =
     { myconfig, ... }:
     {
-      imports = [
-        inputs.nix-homebrew.darwinModules.nix-homebrew
-      ];
-
       nix-homebrew = {
         enable = true;
         user = myconfig.constants.username;
@@ -51,5 +50,19 @@ delib.module {
           "gettext"
         ];
       };
+
+      system.activationScripts.preActivation.text = ''
+        # Ensure Homebrew base dirs exist (without creating Taps preemptively)
+        if [ ! -d /opt/homebrew/Library ]; then
+          mkdir -p /opt/homebrew/Library
+        fi
+        # If an empty Taps dir exists from a previous run, remove it to avoid mkdir errors downstream
+        rmdir /opt/homebrew/Library/Taps 2>/dev/null || true
+        # Recursive chown is slow once Cellar grows; only run it when needed.
+        if [ "$(stat -f %u /opt/homebrew)" != "$(id -u ${myconfig.constants.username})" ] \
+          || [ -n "$(find /opt/homebrew -maxdepth 3 ! -user ${myconfig.constants.username} -print -quit 2>/dev/null)" ]; then
+          chown -R ${myconfig.constants.username}:staff /opt/homebrew
+        fi
+      '';
     };
 }

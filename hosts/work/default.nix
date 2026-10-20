@@ -1,9 +1,4 @@
 { delib, userConfig, ... }:
-let
-  isPrivate = false;
-  common = import ../../lib/host-common.nix { inherit isPrivate; };
-  inherit (common) myconfig;
-in
 delib.host {
   name = "work";
   type = "desktop";
@@ -11,5 +6,9 @@ delib.host {
   homeManagerUser = userConfig.username;
   useHomeManagerModule = true;
 
-  inherit myconfig;
+  myconfig.features = {
+    base.enable = true;
+    development.enable = true;
+    work.enable = true;
+  };
 }

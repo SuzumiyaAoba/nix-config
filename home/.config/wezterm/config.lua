@@ -15,8 +15,6 @@ return {
   font_size = 14,
   allow_square_glyphs_to_overflow_width = "Never",
 
-  default_prog = { "zellij" },
-
   color_scheme = "Catppuccin Macchiato",
   window_background_opacity = 1,
 
