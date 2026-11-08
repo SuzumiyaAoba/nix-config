@@ -10,6 +10,7 @@ node = '22'
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@google/gemini-cli" = "latest"
 "npm:opencode-ai" = "latest"
+"npm:@suzumiyaaoba/mdxr" = "latest"
 "npm:portless" = "latest"
 "npm:bun" = "latest"
 "npm:deno" = "latest"

@@ -7,6 +7,7 @@ delib.module {
   myconfig.ifEnabled = {
     programs.ffmpeg.enable = lib.mkDefault true;
     programs.ollama.enable = lib.mkDefault true;
+    homebrew.omniwm.enable = lib.mkDefault true;
     programs.zotero.enable = lib.mkDefault true;
     homebrew."1password".enable = lib.mkDefault true;
     homebrew.brave-browser.enable = lib.mkDefault true;
