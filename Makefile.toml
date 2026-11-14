@@ -10,23 +10,37 @@ args = ["flake", "check"]
 
 [tasks.update]
 script = '''
-  nix flake update
-  '''
+  token="$(gh auth token)" || exit 1
+  NIX_CONFIG="access-tokens = github.com=${token}" nix flake update
+'''
 
 # Homebrew taps churn constantly; update them separately from nixpkgs et al.
 [tasks.update-taps]
 script = '''
-  nix flake lock --update-input homebrew-core --update-input homebrew-cask --update-input aerospace-tap --update-input steipete-tap
-  '''
+  token="$(gh auth token)" || exit 1
+  NIX_CONFIG="access-tokens = github.com=${token}" nix flake lock --update-input homebrew-core --update-input homebrew-cask --update-input aerospace-tap --update-input steipete-tap
+'''
 
 [tasks."aarch64-darwin:desktop"]
 script = '''
-  sudo darwin-rebuild switch --flake .#desktop --override-input user-config path:./user.nix
+  token="$(gh auth token)" || exit 1
+  printf '%s\n' "$token" | sudo /bin/sh -c '
+    IFS= read -r token || exit 1
+    export NIX_CONFIG="access-tokens = github.com=$token"
+    unset token
+    exec darwin-rebuild switch --flake .#desktop --override-input user-config path:./user.nix
+  '
 '''
 
 [tasks."aarch64-darwin:work"]
 script = '''
-  sudo darwin-rebuild switch --flake .#work --override-input user-config path:./user.nix
+  token="$(gh auth token)" || exit 1
+  printf '%s\n' "$token" | sudo /bin/sh -c '
+    IFS= read -r token || exit 1
+    export NIX_CONFIG="access-tokens = github.com=$token"
+    unset token
+    exec darwin-rebuild switch --flake .#work --override-input user-config path:./user.nix
+  '
 '''
 
 [tasks.gc]
