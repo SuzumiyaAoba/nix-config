@@ -33,6 +33,7 @@ delib.module {
     programs.tokei.enable = lib.mkDefault true;
     programs.uv.enable = lib.mkDefault true;
     programs.vhs.enable = lib.mkDefault true;
+    homebrew.apm.enable = lib.mkDefault true;
     homebrew.intellij-idea.enable = lib.mkDefault true;
     homebrew.rancher.enable = lib.mkDefault true;
     homebrew.rtk.enable = lib.mkDefault true;

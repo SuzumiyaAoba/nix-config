@@ -3,3 +3,5 @@ result-*
 user.nix
 .DS_Store
 .mdxr/
+
+nix-applications.html
